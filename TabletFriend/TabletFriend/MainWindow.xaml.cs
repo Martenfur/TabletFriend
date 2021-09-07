@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using WindowsInput.Events;
 
 namespace TabletFriend
 {
@@ -50,6 +51,7 @@ namespace TabletFriend
 
 		private void cock_Click(object sender, RoutedEventArgs e)
 		{
+			WindowsInput.Simulate.Events().Hold(KeyCode.Shift).Invoke();
 		}
 	}
 }

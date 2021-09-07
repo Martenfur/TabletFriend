@@ -6,4 +6,7 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="WindowsInput" Version="6.3.0" />
+  </ItemGroup>
 </Project>
