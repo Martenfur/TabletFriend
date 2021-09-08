@@ -1,0 +1,20 @@
+﻿button_size: 32
+
+buttons:
+	cut: 
+		action: A+Ctrl
+		icon: icons/cut.svg
+	spacer1:
+		spacer: true
+		size: 2,1
+	cut: 
+		action: A+Ctrl
+		text: Cut
+		icon: icons/cut.svg
+		size: 1,1
+	copy: 
+		action: toggle Ctrl
+	button:
+		actions:
+			- key A+Ctrl
+			- cmd dotnet new

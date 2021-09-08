@@ -10,4 +10,10 @@
     <PackageReference Include="WindowsInput" Version="6.3.0" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="layouts\test_layout.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

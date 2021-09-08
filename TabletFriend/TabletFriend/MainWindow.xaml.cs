@@ -6,10 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
-using TabletFriend.Data;
 using WindowsInput.Events;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace TabletFriend
 {
@@ -18,52 +15,13 @@ namespace TabletFriend
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-
-		static string y = @"button:
-  action: key A+Ctrl
-  actions:
-    - key A
-    - wait 1000
-  name: Button
-  icon: icons/cut.svg
-  position: 0,1
-  size: 1,1
-";
 		public MainWindow()
 		{
 			Topmost = true;
 			InitializeComponent();
 			MouseDown += OnMouseDown;
-
-
-			var vs = new Vector2[]
-			{ 
-				new Vector2(1, 1),	
-				new Vector2(2, 1),	
-				new Vector2(1, 1),	
-				new Vector2(1, 1),	
-				new Vector2(1, 2),	
-				new Vector2(2, 2),	
-			};
-
-			var pos = Packer.Pack(vs, 3);
-
-			var size = Packer.GetSize(pos, vs);
-			Width = size.X * 64;
-			Height = size.Y * 64;
-
-			for(var i = 0; i < pos.Length; i += 1)
-			{
-				var b = new Button() 
-				{ 
-					Width = 64 * vs[i].X,
-					Height = 64 * vs[i].Y,
-				};
-			
-				Canvas.SetTop(b, 64 * pos[i].Y);
-				Canvas.SetLeft(b, 64 * pos[i].X);
-				Stacke.Children.Add(b);
-			}
+		
+			LoadYaml();
 		}
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)
@@ -101,6 +59,44 @@ namespace TabletFriend
 		private void cock_Click(object sender, RoutedEventArgs e)
 		{
 			WindowsInput.Simulate.Events().Hold(KeyCode.Shift).Invoke();
+		}
+
+
+		private void CreateButtons(Vector2[] vs)
+		{
+			var pos = Packer.Pack(vs, 3);
+
+			var size = Packer.GetSize(pos, vs);
+			Width = size.X * buttonSize;
+			Height = size.Y * buttonSize;
+
+			for (var i = 0; i < pos.Length; i += 1)
+			{
+				var b = new Button()
+				{
+					Width = buttonSize * vs[i].X,
+					Height = buttonSize * vs[i].Y,
+				};
+
+				Canvas.SetTop(b, buttonSize * pos[i].Y);
+				Canvas.SetLeft(b, buttonSize * pos[i].X);
+				Stacke.Children.Add(b);
+			}
+		}
+
+		private int buttonSize = 64;
+
+		private void LoadYaml()
+		{
+			var layout = LayoutImporter.Import("layouts/test_layout.yaml");
+			buttonSize = layout.ButtonSize;
+			var list = new List<Vector2>();
+			foreach(var button in layout.Buttons)
+			{
+				list.Add(button.Value.Size);
+			}
+
+			CreateButtons(list.ToArray());
 		}
 	}
 }
