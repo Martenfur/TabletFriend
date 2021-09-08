@@ -12,6 +12,9 @@ buttons:
 			- wait 500
 			- type ARRG ARRG!!!!!
 			- wait 500
+			- hold Shift
+			- type foxes
+			- type foxes
 		size: 4,1
 		text: Chain
 	spacer1:

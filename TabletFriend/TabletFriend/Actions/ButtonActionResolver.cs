@@ -10,6 +10,8 @@ namespace TabletFriend.Actions
 		private const string _toggleKeyword = "toggle ";
 		private const string _cmdKeyword = "cmd ";
 		private const string _waitKeyword = "wait ";
+		private const string _holdKeyword = "hold ";
+		private const string _releaseKeyword = "release ";
 
 
 		public static ButtonAction Resolve(string actionString)
@@ -36,9 +38,23 @@ namespace TabletFriend.Actions
 			{
 				return ResolveWaitAction(actionString.Substring(_waitKeyword.Length));
 			}
+			if (actionString.StartsWith(_holdKeyword))
+			{
+				return ResolveHoldAction(actionString.Substring(_holdKeyword.Length));
+			}
+			if (actionString.StartsWith(_releaseKeyword))
+			{
+				return ResolveReleaseAction(actionString.Substring(_releaseKeyword.Length));
+			}
 
 			return new KeyAction(StringToKeyCode(actionString));
 		}
+
+		private static ButtonAction ResolveHoldAction(string actionString) =>
+			new HoldAction(StringToKeyCode(actionString));
+		
+		private static ButtonAction ResolveReleaseAction(string actionString) =>
+			new ReleaseAction(StringToKeyCode(actionString));
 
 		private static ButtonAction ResolveTypeAction(string actionString) =>
 			new TypeAction(actionString.Trim());
