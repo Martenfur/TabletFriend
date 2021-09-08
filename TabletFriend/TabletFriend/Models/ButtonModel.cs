@@ -13,6 +13,11 @@ namespace TabletFriend.Models
 		public Vector2 Position = Vector2.Zero;
 		public Vector2 Size = Vector2.One;
 
+		/// <summary>
+		/// If true, the button is considered a spacer. All actions will be ignored.
+		/// </summary>
+		public bool Spacer;
+
 		public ButtonModel(ButtonData data)
 		{
 			Text = data.Text ?? "";
@@ -22,6 +27,8 @@ namespace TabletFriend.Models
 			{
 				Size = ModelConverter.ConvertVector2(data.Size);
 			}
+
+			Spacer = data.Spacer;
 		}
 	}
 }

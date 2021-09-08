@@ -5,8 +5,10 @@ namespace TabletFriend.Data
 	{
 		public string Action;
 		public string[] Actions;
-		public string Text = "";
+		public string Text;
 		public string Icon;
-		public string Size = "1,2";
+		public string Size;
+
+		public bool Spacer;
 	}
 }

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace TabletFriend
 {
-	public class LayoutCreator
+	public class Packer
 	{
 		/// <summary>
 		/// Packs rectangle of given sizes into a column of given width. Returns an array of rectangle positions.
@@ -44,7 +43,7 @@ namespace TabletFriend
 			return positions;
 		}
 
-		
+
 		private static bool CheckCollision(Vector2 position, Vector2 size, int[,] grid)
 		{
 			if (position.X + size.X > grid.GetLength(0))

@@ -31,12 +31,6 @@ namespace TabletFriend
 ";
 		public MainWindow()
 		{
-			var deserializer = new DeserializerBuilder()
-				.WithNamingConvention(UnderscoredNamingConvention.Instance)
-				.Build();
-
-			//yml contains a string containing your YAML
-			//var p = deserializer.Deserialize<Dictionary<string, ButtonData>>(y);
 			Topmost = true;
 			InitializeComponent();
 			MouseDown += OnMouseDown;
@@ -52,9 +46,9 @@ namespace TabletFriend
 				new Vector2(2, 2),	
 			};
 
-			var pos = LayoutCreator.Pack(vs, 3);
+			var pos = Packer.Pack(vs, 3);
 
-			var size = LayoutCreator.GetSize(pos, vs);
+			var size = Packer.GetSize(pos, vs);
 			Width = size.X * 64;
 			Height = size.Y * 64;
 
@@ -65,6 +59,7 @@ namespace TabletFriend
 					Width = 64 * vs[i].X,
 					Height = 64 * vs[i].Y,
 				};
+			
 				Canvas.SetTop(b, 64 * pos[i].Y);
 				Canvas.SetLeft(b, 64 * pos[i].X);
 				Stacke.Children.Add(b);
@@ -90,7 +85,9 @@ namespace TabletFriend
 				GWL_EXSTYLE,
 				GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE
 			);
+
 		}
+
 
 		private const int GWL_EXSTYLE = -20;
 		private const int WS_EX_NOACTIVATE = 0x08000000;
