@@ -62,41 +62,10 @@ namespace TabletFriend
 		}
 
 
-		private void CreateButtons(Vector2[] vs)
-		{
-			var pos = Packer.Pack(vs, 3);
-
-			var size = Packer.GetSize(pos, vs);
-			Width = size.X * buttonSize;
-			Height = size.Y * buttonSize;
-
-			for (var i = 0; i < pos.Length; i += 1)
-			{
-				var b = new Button()
-				{
-					Width = buttonSize * vs[i].X,
-					Height = buttonSize * vs[i].Y,
-				};
-
-				Canvas.SetTop(b, buttonSize * pos[i].Y);
-				Canvas.SetLeft(b, buttonSize * pos[i].X);
-				Stacke.Children.Add(b);
-			}
-		}
-
-		private int buttonSize = 64;
-
 		private void LoadYaml()
 		{
 			var layout = LayoutImporter.Import("layouts/test_layout.yaml");
-			buttonSize = layout.ButtonSize;
-			var list = new List<Vector2>();
-			foreach(var button in layout.Buttons)
-			{
-				list.Add(button.Value.Size);
-			}
-
-			CreateButtons(list.ToArray());
+			layout.Create(Stacke, this);
 		}
 	}
 }
