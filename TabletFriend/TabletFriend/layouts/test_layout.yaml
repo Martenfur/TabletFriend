@@ -1,4 +1,5 @@
-﻿button_size: 32
+﻿layout_width: 4
+button_size: 32
 
 buttons:
 	cut: 
@@ -7,11 +8,11 @@ buttons:
 	spacer1:
 		spacer: true
 		size: 2,1
-	cut: 
+	cut1: 
 		action: A+Ctrl
 		text: Cut
 		icon: icons/cut.svg
-		size: 1,1
+		size: 1,3
 	copy: 
 		action: toggle Ctrl
 	button:
