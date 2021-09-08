@@ -1,21 +1,33 @@
 ﻿layout_width: 4
-button_size: 32
+button_size: 64
 
 buttons:
-	cut: 
-		action: A+Ctrl
-		icon: icons/cut.svg
+	chain: 
+		actions: 
+			- A
+			- wait 500
+			- B
+			- wait 500
+			- C
+			- wait 500
+			- type ARRG ARRG!!!!!
+			- wait 500
+		size: 4,1
+		text: Chain
 	spacer1:
 		spacer: true
-		size: 2,1
-	cut1: 
-		action: A+Ctrl
-		text: Cut
-		icon: icons/cut.svg
-		size: 1,3
+		size: 4,1
 	copy: 
-		action: toggle Ctrl
-	button:
-		actions:
-			- key A+Ctrl
-			- cmd dotnet new
+		action: Control+C
+		text: Copy
+		size: 2,1	
+	paste: 
+		action: Control+V
+		text: Paste
+		size: 2,1
+	spacer2:
+		spacer: true
+	cut:
+		action: Control+X
+		text: Cut
+		size: 2,1

@@ -56,11 +56,6 @@ namespace TabletFriend
 		[DllImport("user32.dll")]
 		public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
 
-		private void cock_Click(object sender, RoutedEventArgs e)
-		{
-			WindowsInput.Simulate.Events().Hold(KeyCode.Shift).Invoke();
-		}
-
 
 		private void LoadYaml()
 		{

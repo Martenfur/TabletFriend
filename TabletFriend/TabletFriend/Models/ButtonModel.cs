@@ -1,11 +1,12 @@
 ﻿using System.Numerics;
+using TabletFriend.Actions;
 using TabletFriend.Data;
 
 namespace TabletFriend.Models
 {
 	public class ButtonModel
 	{
-		public string[] Actions;
+		public ButtonAction Action;
 		
 		public string Text;
 		public string Icon;
@@ -29,6 +30,15 @@ namespace TabletFriend.Models
 			}
 
 			Spacer = data.Spacer;
+
+			if (data.Actions == null || data.Actions.Length == 0)
+			{
+				Action = ButtonActionResolver.Resolve(data.Action);
+			}
+			else
+			{ 
+				Action = new BatchAction(ButtonActionResolver.Resolve(data.Actions));
+			}
 		}
 	}
 }

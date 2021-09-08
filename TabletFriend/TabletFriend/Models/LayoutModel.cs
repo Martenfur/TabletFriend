@@ -50,21 +50,27 @@ namespace TabletFriend.Models
 
 			for (var i = 0; i < positions.Length; i += 1)
 			{
-				if (Buttons[i].Spacer)
+				var button = Buttons[i];
+				if (button.Spacer)
 				{
 					continue;
 				}
 
-				var button = new Button()
+				var uiButton = new Button()
 				{
 					Width = ButtonSize * sizes[i].X,
 					Height = ButtonSize * sizes[i].Y,
-					Content = Buttons[i].Text,
+					Content = button.Text,
 				};
+				if (button.Action != null)
+				{
+					uiButton.Click += (e, o) => _ = button.Action.Invoke();
+				}
 
-				Canvas.SetTop(button, ButtonSize * positions[i].Y);
-				Canvas.SetLeft(button, ButtonSize * positions[i].X);
-				canvas.Children.Add(button);
+
+				Canvas.SetTop(uiButton, ButtonSize * positions[i].Y);
+				Canvas.SetLeft(uiButton, ButtonSize * positions[i].X);
+				canvas.Children.Add(uiButton);
 			}
 		}
 
