@@ -55,15 +55,16 @@ namespace TabletFriend.Models
 					continue;
 				}
 
-				var b = new Button()
+				var button = new Button()
 				{
 					Width = ButtonSize * sizes[i].X,
 					Height = ButtonSize * sizes[i].Y,
+					Content = Buttons[i].Text,
 				};
 
-				Canvas.SetTop(b, ButtonSize * positions[i].Y);
-				Canvas.SetLeft(b, ButtonSize * positions[i].X);
-				canvas.Children.Add(b);
+				Canvas.SetTop(button, ButtonSize * positions[i].Y);
+				Canvas.SetLeft(button, ButtonSize * positions[i].X);
+				canvas.Children.Add(button);
 			}
 		}
 
