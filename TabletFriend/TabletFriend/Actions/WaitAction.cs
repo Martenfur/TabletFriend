@@ -12,9 +12,7 @@ namespace TabletFriend.Actions
 		}
 
 
-		public override async Task Invoke()
-		{
+		public override async Task Invoke() =>
 			await Task.Delay(_delay);
-		}
 	}
 }

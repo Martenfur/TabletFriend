@@ -13,9 +13,7 @@ namespace TabletFriend.Actions
 			_keys = keys;
 		}
 
-		public override async Task Invoke()
-		{
+		public override async Task Invoke() =>
 			await Simulate.Events().ClickChord(_keys).Invoke();
-		}
 	}
 }
