@@ -30,7 +30,7 @@ namespace TabletFriend.Actions
 			}
 			if (actionString.StartsWith(_cmdKeyword))
 			{
-				return null;
+				return ResolveCmdAction(actionString.Substring(_cmdKeyword.Length));
 			}
 			if (actionString.StartsWith(_waitKeyword))
 			{
@@ -42,6 +42,9 @@ namespace TabletFriend.Actions
 
 		private static ButtonAction ResolveTypeAction(string actionString) =>
 			new TypeAction(actionString.Trim());
+		
+		private static ButtonAction ResolveCmdAction(string actionString) =>
+			new CmdAction(actionString.Trim());
 
 		private static ButtonAction ResolveWaitAction(string actionString) =>
 			new WaitAction(int.Parse(actionString));

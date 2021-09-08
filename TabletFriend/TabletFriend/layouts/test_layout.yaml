@@ -31,3 +31,7 @@ buttons:
 		action: Control+X
 		text: Cut
 		size: 2,1
+	cmd:
+		action: cmd calc.exe
+		text: Cmd
+		size: 1,1

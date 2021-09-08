@@ -6,16 +6,16 @@ namespace TabletFriend.Actions
 {
 	public class KeyAction : ButtonAction
 	{
-		public readonly KeyCode[] Keys;
+		private readonly KeyCode[] _keys;
 
 		public KeyAction(KeyCode[] keys)
 		{
-			Keys = keys;
+			_keys = keys;
 		}
 
 		public override async Task Invoke()
 		{
-			await Simulate.Events().ClickChord(Keys).Invoke();
+			await Simulate.Events().ClickChord(_keys).Invoke();
 		}
 	}
 }
