@@ -5,13 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TabletFriend"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="200"
+        Title="MainWindow" Height="300" Width="200" 
         AllowsTransparency="True" WindowStyle="None">
 
 	<Window.Background>
 		<SolidColorBrush Opacity="0.5" Color="Gray"/>
 	</Window.Background>
-	<Grid>
-		<Button Name="cock" Width="100" Height="100" Click="cock_Click"></Button>
-	</Grid>
+	<Canvas Name="Stacke"></Canvas>
 </Window>

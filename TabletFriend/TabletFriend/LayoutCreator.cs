@@ -40,17 +40,6 @@ namespace TabletFriend
 				positions[i] = cursor;
 			}
 
-			// TODO: Remove. Debug only.
-			var res = "";
-			for (var y = 0; y < grid.GetLength(1); y += 1)
-			{
-				for (var x = 0; x < grid.GetLength(0); x += 1)
-				{
-					res += grid[(int)x, y] + ",";
-				}
-				res += Environment.NewLine;
-			}
-
 
 			return positions;
 		}
@@ -85,6 +74,27 @@ namespace TabletFriend
 					grid[(int)x, (int)y] = i;
 				}
 			}
+		}
+
+
+		public static Vector2 GetSize(Vector2[] positions, Vector2[] sizes)
+		{ 
+			var size = Vector2.Zero;
+
+			for(var i = 0; i < positions.Length; i += 1)
+			{ 
+				var w = positions[i].X + sizes[i].X;
+				var h = positions[i].Y + sizes[i].Y;
+				if (w > size.X)
+				{
+					size.X = w;
+				}
+				if (h > size.Y)
+				{
+					size.Y = h;
+				}
+			}
+			return size;
 		}
 	}
 }
