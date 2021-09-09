@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,13 +7,17 @@ using TabletFriend.Data;
 
 namespace TabletFriend.Models
 {
-	public class LayoutModel
+	public class LayoutModel : IDisposable
 	{
 		public const int MinLayoutWidth = 1;
 		public const int MinButtonSize = 8;
+		public const int MinMargin = 0;
 
 		public int LayoutWidth = MinLayoutWidth;
 		public int ButtonSize = MinButtonSize;
+		public int Margin = MinMargin;
+
+		public int CellSize => ButtonSize + Margin;
 
 		public List<ButtonModel> Buttons = new List<ButtonModel>();
 
@@ -30,7 +35,13 @@ namespace TabletFriend.Models
 				ButtonSize = MinButtonSize;
 			}
 
-			foreach(var button in data.Buttons)
+			Margin = data.Margin;
+			if (Margin < MinMargin)
+			{
+				Margin = MinMargin;
+			}
+
+			foreach (var button in data.Buttons)
 			{
 				Buttons.Add(new ButtonModel(button.Value));
 			}
@@ -45,8 +56,17 @@ namespace TabletFriend.Models
 			var size = Packer.GetSize(positions, sizes);
 
 
-			window.Width = size.X * ButtonSize;
-			window.Height = size.Y * ButtonSize;
+			window.Width = size.X * CellSize + Margin;
+			window.Height = size.Y * CellSize + Margin;
+
+			if (window.Width < window.Height)
+			{
+				window.MaxWidth = window.Width;
+			}
+			else
+			{
+				window.MaxHeight = window.Height;
+			}
 
 			for (var i = 0; i < positions.Length; i += 1)
 			{
@@ -58,8 +78,8 @@ namespace TabletFriend.Models
 
 				var uiButton = new Button()
 				{
-					Width = ButtonSize * sizes[i].X,
-					Height = ButtonSize * sizes[i].Y,
+					Width = CellSize * sizes[i].X - Margin,
+					Height = CellSize * sizes[i].Y - Margin,
 					Content = button.Text,
 				};
 				if (button.Action != null)
@@ -68,18 +88,25 @@ namespace TabletFriend.Models
 				}
 
 
-				Canvas.SetTop(uiButton, ButtonSize * positions[i].Y);
-				Canvas.SetLeft(uiButton, ButtonSize * positions[i].X);
+				Canvas.SetTop(uiButton, CellSize * positions[i].Y + Margin);
+				Canvas.SetLeft(uiButton, CellSize * positions[i].X + Margin);
 				canvas.Children.Add(uiButton);
 			}
 		}
 
+		public void Dispose()
+		{
+			foreach (var button in Buttons)
+			{
+				button.Dispose();
+			}
+		}
 
 		private Vector2[] GetSizeArray()
 		{
 			var sizes = new Vector2[Buttons.Count];
 			var i = 0;
-			foreach(var button in Buttons)
+			foreach (var button in Buttons)
 			{
 				sizes[i] = button.Size;
 				i += 1;
