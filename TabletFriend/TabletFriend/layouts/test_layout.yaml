@@ -38,3 +38,7 @@ buttons:
 		action: cmd calc.exe
 		text: Cmd
 		size: 1,1
+	shift:
+		action: toggle LShift
+		text: Shift
+		size: 2,1

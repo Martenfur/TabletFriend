@@ -28,7 +28,7 @@ namespace TabletFriend.Actions
 			}
 			if (actionString.StartsWith(_toggleKeyword))
 			{
-				return null;
+				return ResolveToggleAction(actionString.Substring(_toggleKeyword.Length));
 			}
 			if (actionString.StartsWith(_cmdKeyword))
 			{
@@ -50,15 +50,18 @@ namespace TabletFriend.Actions
 			return new KeyAction(StringToKeyCode(actionString));
 		}
 
+		private static ButtonAction ResolveToggleAction(string actionString) =>
+			new ToggleAction(StringToKeyCode(actionString)[0]);
+
 		private static ButtonAction ResolveHoldAction(string actionString) =>
 			new HoldAction(StringToKeyCode(actionString));
-		
+
 		private static ButtonAction ResolveReleaseAction(string actionString) =>
 			new ReleaseAction(StringToKeyCode(actionString));
 
 		private static ButtonAction ResolveTypeAction(string actionString) =>
 			new TypeAction(actionString.Trim());
-		
+
 		private static ButtonAction ResolveCmdAction(string actionString) =>
 			new CmdAction(actionString.Trim());
 
