@@ -1,10 +1,11 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using TabletFriend.Actions;
 using TabletFriend.Data;
 
 namespace TabletFriend.Models
 {
-	public class ButtonModel
+	public class ButtonModel : IDisposable
 	{
 		public ButtonAction Action;
 		
@@ -39,6 +40,12 @@ namespace TabletFriend.Models
 			{ 
 				Action = new BatchAction(ButtonActionResolver.Resolve(data.Actions));
 			}
+		}
+
+		public void Dispose()
+		{
+			Action.Dispose();
+			// TODO: Put icon dispose here also.
 		}
 	}
 }
