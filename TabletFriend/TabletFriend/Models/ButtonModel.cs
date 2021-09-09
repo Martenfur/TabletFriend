@@ -44,7 +44,7 @@ namespace TabletFriend.Models
 
 		public void Dispose()
 		{
-			Action.Dispose();
+			Action?.Dispose();
 			// TODO: Put icon dispose here also.
 		}
 	}

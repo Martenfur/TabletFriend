@@ -15,13 +15,16 @@ namespace TabletFriend
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private LayoutManager _manager;
+
 		public MainWindow()
 		{
 			Topmost = true;
 			InitializeComponent();
 			MouseDown += OnMouseDown;
 		
-			LoadYaml();
+			_manager = new LayoutManager(Stacke, this);
+			_manager.LoadLayout(_manager._layouts[0]);
 		}
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)
@@ -55,12 +58,5 @@ namespace TabletFriend
 
 		[DllImport("user32.dll")]
 		public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-
-
-		private void LoadYaml()
-		{
-			var layout = LayoutImporter.Import("layouts/test_layout.yaml");
-			layout.Create(Stacke, this);
-		}
 	}
 }

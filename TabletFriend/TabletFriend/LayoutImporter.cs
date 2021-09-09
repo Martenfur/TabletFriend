@@ -14,9 +14,19 @@ namespace TabletFriend
 
 		public static LayoutModel Import(string path)
 		{
-			var layout = File.ReadAllText(path)
-				.Replace("	", "  "); // The thing doesn't like tabs.
+			string layout = null;
 
+			for (var i = 0; i < 10; i += 1)
+			{
+				try
+				{
+					layout = File.ReadAllText(path)
+						.Replace("	", "  "); // The thing doesn't like tabs.
+					break;
+				}
+				catch
+				{ }
+			}
 			var data = _deserializer.Deserialize<LayoutData>(layout);
 			return new LayoutModel(data);
 		}

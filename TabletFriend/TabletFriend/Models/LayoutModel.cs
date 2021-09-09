@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 using TabletFriend.Data;
 
 namespace TabletFriend.Models
@@ -20,6 +22,8 @@ namespace TabletFriend.Models
 		public int CellSize => ButtonSize + Margin;
 
 		public List<ButtonModel> Buttons = new List<ButtonModel>();
+
+
 
 		public LayoutModel(LayoutData data)
 		{
@@ -50,11 +54,15 @@ namespace TabletFriend.Models
 
 		public void Create(Canvas canvas, Window window)
 		{
+			canvas.Children.Clear();
+
 			var sizes = GetSizeArray();
 			var positions = Packer.Pack(sizes, LayoutWidth);
 
 			var size = Packer.GetSize(positions, sizes);
 
+			window.MaxWidth = double.PositiveInfinity;
+			window.MaxHeight = double.PositiveInfinity;
 
 			window.Width = size.X * CellSize + Margin;
 			window.Height = size.Y * CellSize + Margin;
@@ -81,6 +89,7 @@ namespace TabletFriend.Models
 					Width = CellSize * sizes[i].X - Margin,
 					Height = CellSize * sizes[i].Y - Margin,
 					Content = button.Text,
+					Opacity = 0.7
 				};
 				if (button.Action != null)
 				{
