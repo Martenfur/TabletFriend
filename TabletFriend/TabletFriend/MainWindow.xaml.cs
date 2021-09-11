@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
-using WindowsInput.Events;
 
 namespace TabletFriend
 {
@@ -15,7 +11,9 @@ namespace TabletFriend
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private LayoutManager _manager;
+		private LayoutManager _layout;
+		private TrayManager _tray;
+		private FileManager _file;
 
 		public MainWindow()
 		{
@@ -23,8 +21,12 @@ namespace TabletFriend
 			InitializeComponent();
 			MouseDown += OnMouseDown;
 		
-			_manager = new LayoutManager(Stacke, this);
-			_manager.LoadLayout(_manager._layouts[0]);
+			_file = new FileManager();
+
+			_layout = new LayoutManager(Stacke, this, _file);
+			_layout.LoadLayout(_file.Layouts[0]);
+
+			_tray = new TrayManager(_file);
 		}
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)
