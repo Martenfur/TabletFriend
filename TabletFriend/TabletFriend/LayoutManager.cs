@@ -19,17 +19,20 @@ namespace TabletFriend
 		{
 			_canvas = canvas;
 			_window = window;
-			file.OnChanged += OnChanged;
+			EventBeacon.Subscribe("files_changed", OnChanged);
 		}
 
-		private void OnChanged(object sender, FileSystemEventArgs e)
+		private void OnChanged(object[] args)
 		{
-			if (e.FullPath == AppState.CurrentLayoutPath)
+			var sender = args[0];
+			var fileSystemArgs = (FileSystemEventArgs)args[1];
+
+			if (fileSystemArgs.FullPath == AppState.CurrentLayoutPath)
 			{
 				Application.Current.Dispatcher.Invoke(
 					delegate
 					{
-						LoadLayout(e.FullPath);
+						LoadLayout(fileSystemArgs.FullPath);
 					}
 				);
 			}

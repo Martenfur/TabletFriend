@@ -9,8 +9,6 @@ namespace TabletFriend
 		private const string _layoutExtension = "*.yaml";
 		private FileSystemWatcher _watcher;
 
-		public event FileSystemEventHandler OnChanged;
-
 		public FileManager()
 		{
 			_watcher = new FileSystemWatcher(AppState.LayoutRoot);
@@ -33,7 +31,7 @@ namespace TabletFriend
 		private void InternalOnChanged(object sender, FileSystemEventArgs args)
 		{
 			RefreshLayoutList();
-			OnChanged?.Invoke(sender, args);
+			EventBeacon.SendEvent("files_changed", sender, args);
 		}
 
 
