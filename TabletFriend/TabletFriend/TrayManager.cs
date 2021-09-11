@@ -12,11 +12,8 @@ namespace TabletFriend
 
 		public event Action<string> OnLayoutChanged;
 
-		private FileManager _file;
-
 		public TrayManager(FileManager file)
 		{
-			_file = file;
 			//file.OnChanged += OnChanged;
 
 			_icon = new TaskbarIcon();
@@ -32,7 +29,7 @@ namespace TabletFriend
 		{
 			var startInfo = new ProcessStartInfo()
 			{
-				Arguments = _file.LayoutRoot,
+				Arguments = AppState.LayoutRoot,
 				FileName = "explorer.exe"
 			};
 			Process.Start(startInfo);

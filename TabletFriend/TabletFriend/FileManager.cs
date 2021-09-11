@@ -4,10 +4,7 @@ using System.IO;
 namespace TabletFriend
 {
 	public class FileManager
-    {
-        public readonly string LayoutRoot = Path.Combine(Environment.CurrentDirectory, "layouts");
-		
-		public string[] Layouts;
+	{
 
 		private const string _layoutExtension = "*.yaml";
 		private FileSystemWatcher _watcher;
@@ -16,7 +13,7 @@ namespace TabletFriend
 
 		public FileManager()
 		{
-			_watcher = new FileSystemWatcher(LayoutRoot);
+			_watcher = new FileSystemWatcher(AppState.LayoutRoot);
 			_watcher.NotifyFilter = NotifyFilters.LastWrite
 				| NotifyFilters.Size
 				| NotifyFilters.LastWrite
@@ -32,17 +29,16 @@ namespace TabletFriend
 			RefreshLayoutList();
 		}
 
-		
+
 		private void InternalOnChanged(object sender, FileSystemEventArgs args)
-		{ 
+		{
 			RefreshLayoutList();
 			OnChanged?.Invoke(sender, args);
 		}
 
 
 		public void RefreshLayoutList() =>
-			Layouts = Directory.GetFiles(LayoutRoot, _layoutExtension);
-
+			AppState.Layouts = Directory.GetFiles(AppState.LayoutRoot, _layoutExtension);
 
 	}
 }

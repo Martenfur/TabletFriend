@@ -52,7 +52,7 @@ namespace TabletFriend.Models
 		}
 
 
-		public void Create(Canvas canvas, Window window)
+		public void CreateUI(Canvas canvas, Window window)
 		{
 			canvas.Children.Clear();
 

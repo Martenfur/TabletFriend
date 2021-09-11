@@ -24,7 +24,7 @@ namespace TabletFriend
 			_file = new FileManager();
 
 			_layout = new LayoutManager(Stacke, this, _file);
-			_layout.LoadLayout(_file.Layouts[0]);
+			_layout.LoadLayout(AppState.Layouts[0]);
 
 			_tray = new TrayManager(_file);
 		}

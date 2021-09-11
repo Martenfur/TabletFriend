@@ -12,9 +12,6 @@ namespace TabletFriend
 {
 	public class LayoutManager
 	{
-		private LayoutModel _currentLayout;
-		private string _currentLayoutPath;
-
 		private readonly Canvas _canvas;
 		private readonly Window _window;
 
@@ -27,7 +24,7 @@ namespace TabletFriend
 
 		private void OnChanged(object sender, FileSystemEventArgs e)
 		{
-			if (e.FullPath == _currentLayoutPath)
+			if (e.FullPath == AppState.CurrentLayoutPath)
 			{
 				Application.Current.Dispatcher.Invoke(
 					delegate
@@ -40,14 +37,14 @@ namespace TabletFriend
 
 		public void LoadLayout(string path)
 		{
-			if (_currentLayout != null)
+			if (AppState.CurrentLayout != null)
 			{
-				_currentLayout.Dispose();
+				AppState.CurrentLayout.Dispose();
 			}
 			var layout = LayoutImporter.Import(path);
-			_currentLayout = layout;
-			_currentLayout.Create(_canvas, _window);
-			_currentLayoutPath = path;
+			AppState.CurrentLayout = layout;
+			AppState.CurrentLayout.CreateUI(_canvas, _window);
+			AppState.CurrentLayoutPath = path;
 		}
 	}
 }
