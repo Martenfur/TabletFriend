@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:TabletFriend"
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="200" 
-        AllowsTransparency="True" WindowStyle="None">
+        AllowsTransparency="True" WindowStyle="None"
+		ShowInTaskbar="False">
 
 	<Window.Background>
 		<SolidColorBrush Opacity="0.5" Color="Gray"/>
