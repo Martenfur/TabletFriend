@@ -23,10 +23,10 @@ namespace TabletFriend
 		
 			_file = new FileManager();
 
-			_layout = new LayoutManager(Stacke, this, _file);
+			_layout = new LayoutManager(Stacke, this);
 			_layout.LoadLayout(AppState.Layouts[0]);
 
-			_tray = new TrayManager(_file);
+			_tray = new TrayManager();
 		}
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)

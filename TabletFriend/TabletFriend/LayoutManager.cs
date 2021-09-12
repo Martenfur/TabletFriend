@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using TabletFriend.Models;
 
 namespace TabletFriend
 {
@@ -15,7 +9,7 @@ namespace TabletFriend
 		private readonly Canvas _canvas;
 		private readonly Window _window;
 
-		public LayoutManager(Canvas canvas, Window window, FileManager file)
+		public LayoutManager(Canvas canvas, Window window)
 		{
 			_canvas = canvas;
 			_window = window;

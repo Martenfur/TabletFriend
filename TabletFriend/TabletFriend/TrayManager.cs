@@ -1,6 +1,7 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,17 +13,40 @@ namespace TabletFriend
 
 		public event Action<string> OnLayoutChanged;
 
-		public TrayManager(FileManager file)
+		public TrayManager()
 		{
-			//file.OnChanged += OnChanged;
-
+			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
 			_icon = new TaskbarIcon();
 			_icon.Visibility = Visibility.Visible;
-			
+
 			_icon.ContextMenu = new ContextMenu();
 			_layoutsMenu = AddMenuItem("layouts");
+			OnUpdateLayoutList();
+
 			AddMenuItem("open layouts directory...", OnOpenLayoutsDirectory);
 			AddMenuItem("quit", OnQuit);
+		}
+
+		private void OnUpdateLayoutList(object[] obj = null)
+		{
+			Application.Current.Dispatcher.Invoke(
+				delegate
+				{
+					_layoutsMenu.Items.Clear();
+					foreach (var layout in AppState.Layouts)
+					{
+						_layoutsMenu.Items.Add(
+							new MenuItem()
+							{
+								Header = Path.GetFileNameWithoutExtension(layout),
+								DataContext = layout,
+								IsCheckable = true,
+								IsChecked = layout == AppState.CurrentLayoutPath
+							}
+						);
+					}
+				}
+			);
 		}
 
 		private void OnOpenLayoutsDirectory(object sender, RoutedEventArgs e)
@@ -51,12 +75,12 @@ namespace TabletFriend
 
 		private MenuItem _layoutsMenu;
 		public void AddLayout(string layout, bool current)
-		{ 
+		{
 			_layoutsMenu.Items.Add(new MenuItem() { Header = layout, IsCheckable = true, IsChecked = current });
 		}
 
 		public void ClearLayouts() =>
 			_layoutsMenu.Items.Clear();
-		
+
 	}
 }

@@ -8,6 +8,8 @@ namespace TabletFriend
 	{
 		public static readonly string LayoutRoot = Path.Combine(Environment.CurrentDirectory, "layouts");
 
+		public const string LayoutExtension = "*.yaml";
+
 		public static string[] Layouts;
 
 		public static LayoutModel CurrentLayout;

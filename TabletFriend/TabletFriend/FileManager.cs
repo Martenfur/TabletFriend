@@ -5,8 +5,6 @@ namespace TabletFriend
 {
 	public class FileManager
 	{
-
-		private const string _layoutExtension = "*.yaml";
 		private FileSystemWatcher _watcher;
 
 		public FileManager()
@@ -35,8 +33,11 @@ namespace TabletFriend
 		}
 
 
-		public void RefreshLayoutList() =>
-			AppState.Layouts = Directory.GetFiles(AppState.LayoutRoot, _layoutExtension);
+		public void RefreshLayoutList()
+		{
+			EventBeacon.SendEvent("update_layout_list");
+			AppState.Layouts = Directory.GetFiles(AppState.LayoutRoot, AppState.LayoutExtension);
+		}
 
 	}
 }
