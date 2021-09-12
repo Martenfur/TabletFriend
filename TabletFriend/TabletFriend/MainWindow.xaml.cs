@@ -12,6 +12,7 @@ namespace TabletFriend
 	public partial class MainWindow : Window
 	{
 		private LayoutManager _layout;
+		private LayoutListManager _layoutList;
 		private TrayManager _tray;
 		private FileManager _file;
 
@@ -25,8 +26,10 @@ namespace TabletFriend
 
 			_layout = new LayoutManager(Stacke, this);
 			_layout.LoadLayout(AppState.Layouts[0]);
+			_layoutList = new LayoutListManager();
 
-			_tray = new TrayManager();
+
+			_tray = new TrayManager(_layoutList);
 		}
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)

@@ -14,8 +14,10 @@ namespace TabletFriend
 			_canvas = canvas;
 			_window = window;
 			EventBeacon.Subscribe("files_changed", OnChanged);
+			EventBeacon.Subscribe("change_layout", OnChangeLayout);
 		}
 
+		
 		private void OnChanged(object[] args)
 		{
 			var sender = args[0];
@@ -32,6 +34,13 @@ namespace TabletFriend
 			}
 		}
 
+		private void OnChangeLayout(object[] obj)
+		{
+			var path = (string)obj[0];
+			LoadLayout(path);
+		}
+
+
 		public void LoadLayout(string path)
 		{
 			if (AppState.CurrentLayout != null)
@@ -43,5 +52,6 @@ namespace TabletFriend
 			AppState.CurrentLayout.CreateUI(_canvas, _window);
 			AppState.CurrentLayoutPath = path;
 		}
+
 	}
 }
