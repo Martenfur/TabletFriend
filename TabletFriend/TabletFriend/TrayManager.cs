@@ -11,7 +11,7 @@ namespace TabletFriend
 	{
 		private TaskbarIcon _icon;
 
-		public event Action<string> OnLayoutChanged;
+		private MenuItem _layoutsMenu;
 
 		public TrayManager()
 		{
@@ -26,6 +26,7 @@ namespace TabletFriend
 			AddMenuItem("open layouts directory...", OnOpenLayoutsDirectory);
 			AddMenuItem("quit", OnQuit);
 		}
+
 
 		private void OnUpdateLayoutList(object[] obj = null)
 		{
@@ -49,19 +50,6 @@ namespace TabletFriend
 			);
 		}
 
-		private void OnOpenLayoutsDirectory(object sender, RoutedEventArgs e)
-		{
-			var startInfo = new ProcessStartInfo()
-			{
-				Arguments = AppState.LayoutRoot,
-				FileName = "explorer.exe"
-			};
-			Process.Start(startInfo);
-		}
-
-		private void OnQuit(object sender, RoutedEventArgs e) =>
-			Application.Current.Shutdown();
-
 		private MenuItem AddMenuItem(string header, RoutedEventHandler click = null)
 		{
 			var item = new MenuItem() { Header = header };
@@ -73,14 +61,20 @@ namespace TabletFriend
 			return item;
 		}
 
-		private MenuItem _layoutsMenu;
-		public void AddLayout(string layout, bool current)
+
+		private void OnOpenLayoutsDirectory(object sender, RoutedEventArgs e)
 		{
-			_layoutsMenu.Items.Add(new MenuItem() { Header = layout, IsCheckable = true, IsChecked = current });
+			var startInfo = new ProcessStartInfo()
+			{
+				Arguments = AppState.LayoutRoot,
+				FileName = "explorer.exe"
+			};
+			Process.Start(startInfo);
 		}
 
-		public void ClearLayouts() =>
-			_layoutsMenu.Items.Clear();
+
+		private void OnQuit(object sender, RoutedEventArgs e) =>
+			Application.Current.Shutdown();
 
 	}
 }
