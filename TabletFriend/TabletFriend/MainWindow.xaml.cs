@@ -30,7 +30,10 @@ namespace TabletFriend
 
 
 			_tray = new TrayManager(_layoutList);
+
+			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
 		}
+
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)
 		{
@@ -39,6 +42,7 @@ namespace TabletFriend
 				DragMove();
 			}
 		}
+
 
 		protected override void OnSourceInitialized(EventArgs e)
 		{
@@ -51,7 +55,23 @@ namespace TabletFriend
 				GWL_EXSTYLE,
 				GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE
 			);
+		}
 
+
+		private void OnToggleMinimize(object[] obj)
+		{
+			// Regular minimize doesn't work without the taaskbar icon.
+			// The window just derps out and stays at the bottom left corner.
+			// There are workarounds, btu they make an icon flash in the taskbar
+			// for a split second. This is the best solution I found.
+			if (Visibility == Visibility.Collapsed)
+			{
+				Visibility = Visibility.Visible;
+			}
+			else
+			{
+				Visibility = Visibility.Collapsed;
+			}
 		}
 
 
