@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -50,10 +46,29 @@ namespace TabletFriend
 			var item = (MenuItem)sender;
 			foreach(MenuItem otherItem in Menu.Items)
 			{
-				otherItem.IsChecked = false;
+				otherItem.IsChecked = otherItem.DataContext == item.DataContext;
 			}
-			item.IsChecked = true;
 			EventBeacon.SendEvent("change_layout", item.DataContext);
+		}
+
+		public MenuItem[] CloneMenu()
+		{
+			var items = new List<MenuItem>();
+
+			foreach(MenuItem item in Menu.Items)
+			{
+				var newItem = new MenuItem()
+				{
+					Header = item.Header,
+					DataContext = item.DataContext,
+					IsCheckable = item.IsCheckable,
+					IsChecked = item.IsChecked,
+				};
+				items.Add(newItem);
+				newItem.Click += OnClick;
+			}
+
+			return items.ToArray();
 		}
 	}
 }

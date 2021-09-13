@@ -18,22 +18,36 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
+
 			Topmost = true;
 			InitializeComponent();
 			MouseDown += OnMouseDown;
-		
+
 			_file = new FileManager();
 
 			_layout = new LayoutManager(Stacke, this);
 			_layout.LoadLayout(AppState.Layouts[0]);
 			_layoutList = new LayoutListManager();
+			ContextMenu = new System.Windows.Controls.ContextMenu();
 
+			OnUpdateLayoutList();
 
 			_tray = new TrayManager(_layoutList);
 
 			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
+			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
+			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
 		}
 
+		private void OnUpdateLayoutList(object[] obj = null)
+		{
+			ContextMenu.Items.Clear();
+			var items = _layoutList.CloneMenu();
+			foreach (var item in items)
+			{
+				ContextMenu.Items.Add(item);
+			}
+		}
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)
 		{
