@@ -89,6 +89,10 @@ namespace TabletFriend.Models
 					Content = button.Text,
 					Opacity = 0.7
 				};
+				if (button.Icon != null)
+				{
+					uiButton.Content = button.Icon;
+				}
 				if (button.Action != null)
 				{
 					uiButton.Click += (e, o) => _ = button.Action.Invoke();

@@ -1,5 +1,5 @@
 ﻿layout_width: 4
-button_size: 64
+button_size: 32
 margin: 4
 
 buttons:
@@ -24,7 +24,21 @@ buttons:
 	copy: 
 		action: Control+C
 		text: Copy
-		size: 2,1	
+		size: 2,1
+		icon: layouts/icons/cam.png
+
+	copy1: 
+		action: Control+C
+		text: Copy
+		size: 2,1
+		icon: layouts/icons/cam22.png
+		icon_stretch: fill
+	copy2: 
+		action: Control+C
+		text: Copy
+		size: 2,1
+		icon: layouts/icons/cam.png
+		icon_stretch: fit
 	paste: 
 		action: Control+V
 		text: Paste
