@@ -21,6 +21,9 @@ buttons:
 	spacer1:
 		spacer: true
 		size: 4,1
+	swap: 
+		action: layout layouts/swap.yaml
+		text: Swap
 	copy: 
 		action: Ctrl+C
 		text: Copy

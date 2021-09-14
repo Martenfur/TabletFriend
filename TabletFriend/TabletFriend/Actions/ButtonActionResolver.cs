@@ -12,6 +12,7 @@ namespace TabletFriend.Actions
 		private const string _waitKeyword = "wait ";
 		private const string _holdKeyword = "hold ";
 		private const string _releaseKeyword = "release ";
+		private const string _layoutKeyword = "layout ";
 
 
 		public static ButtonAction Resolve(string actionString)
@@ -46,6 +47,10 @@ namespace TabletFriend.Actions
 			{
 				return ResolveReleaseAction(actionString.Substring(_releaseKeyword.Length));
 			}
+			if (actionString.StartsWith(_layoutKeyword))
+			{
+				return ResolveLayoutAction(actionString.Substring(_layoutKeyword.Length));
+			}
 
 			return new KeyAction(StringToKeyCode(actionString));
 		}
@@ -67,6 +72,9 @@ namespace TabletFriend.Actions
 
 		private static ButtonAction ResolveWaitAction(string actionString) =>
 			new WaitAction(int.Parse(actionString));
+
+		private static ButtonAction ResolveLayoutAction(string actionString) =>
+			new LayoutAction(actionString);
 
 		public static ButtonAction[] Resolve(string[] actionStrings)
 		{

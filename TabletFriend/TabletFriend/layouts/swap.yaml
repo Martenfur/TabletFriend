@@ -1,0 +1,8 @@
+﻿layout_width: 4
+button_size: 64
+margin: 4
+
+buttons:
+	swap: 
+		action: layout layouts/test_layout.yaml
+		text: Swap
