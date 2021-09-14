@@ -22,31 +22,31 @@ buttons:
 		spacer: true
 		size: 4,1
 	copy: 
-		action: Control+C
+		action: Ctrl+C
 		text: Copy
 		size: 2,1
 		icon: layouts/icons/cam.png
 
 	copy1: 
-		action: Control+C
+		action: Ctrl+C
 		text: Copy
 		size: 2,1
 		icon: layouts/icons/cam22.png
 		icon_stretch: fill
 	copy2: 
-		action: Control+C
+		action: Ctrl+C
 		text: Copy
 		size: 2,1
 		icon: layouts/icons/cam.png
 		icon_stretch: fit
 	paste: 
-		action: Control+V
+		action: Ctrl + V
 		text: Paste
 		size: 2,1
 	spacer2:
 		spacer: true
 	cut:
-		action: Control+X
+		action: Win+E
 		text: Cut
 		size: 2,1
 	cmd:
@@ -54,6 +54,10 @@ buttons:
 		text: Cmd
 		size: 1,1
 	shift:
-		action: toggle LShift
+		action: toggle Shift
 		text: Shift
+		size: 2,1
+	ctrl:
+		action: toggle Ctrl
+		text: Ctrl
 		size: 2,1
