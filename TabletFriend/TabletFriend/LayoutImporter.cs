@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Windows;
 using TabletFriend.Data;
 using TabletFriend.Models;
 using YamlDotNet.Serialization;
@@ -15,6 +17,18 @@ namespace TabletFriend
 		public static LayoutModel Import(string path)
 		{
 			string layout = null;
+
+			if (!File.Exists(path))
+			{
+				MessageBox.Show(
+					"Layout file '" + path + "' does not exist!",
+					"Layout not found!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
+
+				return null;
+			}
 
 			for (var i = 0; i < 10; i += 1)
 			{
