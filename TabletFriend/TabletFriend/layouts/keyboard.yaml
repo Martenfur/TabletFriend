@@ -1,0 +1,95 @@
+﻿layout_width: 10
+button_size: 32
+margin: 2
+
+buttons:
+	q:
+		action: q
+		text: q
+	w:
+		action: w
+		text: w
+	e:
+		action: e
+		text: e
+	r:
+		action: r
+		text: r
+	t:
+		action: t
+		text: t
+	y:
+		action: y
+		text: y
+	u:
+		action: u
+		text: u
+	i:
+		action: i
+		text: i
+	o:
+		action: o
+		text: o
+	p:
+		action: p
+		text: p
+
+	a:
+		action: a
+		text: a
+	s:
+		action: s
+		text: s
+	d:
+		action: d
+		text: d
+	f:
+		action: f
+		text: f
+	g:
+		action: g
+		text: g
+	h:
+		action: h
+		text: h
+	j:
+		action: j
+		text: j
+	k:
+		action: k
+		text: k
+	l:
+		action: l
+		text: l
+	spacer:
+		spacer: true
+
+	shift:
+		action: toggle shift
+		size: 1,1
+		text: Shift
+	z:
+		action: z
+		text: z
+	x:
+		action: x
+		text: x
+	c:
+		action: c
+		text: c
+	v:
+		action: v
+		text: v
+	b:
+		action: b
+		text: b
+	n:
+		action: n
+		text: n
+	m:
+		action: m
+		text: m
+
+	space:
+		action: space
+		size: 10,1

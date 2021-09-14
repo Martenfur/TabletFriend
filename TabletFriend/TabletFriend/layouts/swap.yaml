@@ -4,5 +4,5 @@ margin: 4
 
 buttons:
 	swap: 
-		action: layout layouts/test_layout00.yaml
+		action: layout layouts/test_layout.yaml
 		text: Swap
