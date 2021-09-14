@@ -41,12 +41,17 @@ namespace TabletFriend
 
 		private void OnUpdateLayoutList(object[] obj = null)
 		{
-			ContextMenu.Items.Clear();
-			var items = _layoutList.CloneMenu();
-			foreach (var item in items)
-			{
-				ContextMenu.Items.Add(item);
-			}
+			Application.Current.Dispatcher.Invoke(
+				() =>
+				{
+					ContextMenu.Items.Clear();
+					var items = _layoutList.CloneMenu();
+					foreach (var item in items)
+					{
+						ContextMenu.Items.Add(item);
+					}
+				}
+			);
 		}
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)
