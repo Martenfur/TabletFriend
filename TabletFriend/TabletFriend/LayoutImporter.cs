@@ -41,8 +41,22 @@ namespace TabletFriend
 				catch
 				{ }
 			}
-			var data = _deserializer.Deserialize<LayoutData>(layout);
-			return new LayoutModel(data);
+
+			try
+			{
+				var data = _deserializer.Deserialize<LayoutData>(layout);
+				return new LayoutModel(data);
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show(
+					"Cannot load '" + path + "': " + e.Message,
+					"Load failure!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
+			}
+			return null;
 		}
 	}
 }
