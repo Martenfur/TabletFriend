@@ -15,9 +15,18 @@ namespace TabletFriend
 			Menu = new MenuItem() { Header = "layouts" };
 
 			OnUpdateLayoutList();
+			EventBeacon.Subscribe("change_layout", OnChangeLayout);
 			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
 		}
 
+		private void OnChangeLayout(object[] obj)
+		{
+			var path = Path.GetFullPath((string)obj[0]);
+			foreach (MenuItem otherItem in Menu.Items)
+			{
+				otherItem.IsChecked = (string)otherItem.DataContext == path;
+			}
+		}
 
 		private void OnUpdateLayoutList(object[] obj = null)
 		{
@@ -44,10 +53,6 @@ namespace TabletFriend
 		private void OnClick(object sender, RoutedEventArgs e)
 		{
 			var item = (MenuItem)sender;
-			foreach(MenuItem otherItem in Menu.Items)
-			{
-				otherItem.IsChecked = otherItem.DataContext == item.DataContext;
-			}
 			EventBeacon.SendEvent("change_layout", item.DataContext);
 		}
 
