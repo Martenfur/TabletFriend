@@ -87,15 +87,44 @@ namespace TabletFriend.Actions
 
 		private static KeyCode[] StringToKeyCode(string keyString)
 		{
-			var args = keyString.Split("+");
+			var args = keyString.Replace(" ", "").Split("+");
 			var keysList = new List<KeyCode>();
 
 			foreach (var arg in args)
 			{
-				keysList.Add(Enum.Parse<KeyCode>(arg));
+				keysList.Add(Enum.Parse<KeyCode>(Translate(arg)));
 			}
 
 			return keysList.ToArray();
 		}
+
+		private static string Translate(string inputKey)
+		{ 
+			if (_translationTable.TryGetValue(inputKey, out var outputKey))
+			{
+				return outputKey;
+			}
+			return inputKey;
+		}
+
+		/// <summary>
+		/// Some enum entries don't look very pretty, so we translate them.
+		/// </summary>
+		private static Dictionary<string, string> _translationTable = new Dictionary<string, string>()
+		{
+			{ "Win", nameof(KeyCode.LWin) },
+			{ "Shift", nameof(KeyCode.LShift) },
+			{ "Ctrl", nameof(KeyCode.LControl) },
+			{ "0", nameof(KeyCode.D0) },
+			{ "1", nameof(KeyCode.D1) },
+			{ "2", nameof(KeyCode.D2) },
+			{ "3", nameof(KeyCode.D3) },
+			{ "4", nameof(KeyCode.D4) },
+			{ "5", nameof(KeyCode.D5) },
+			{ "6", nameof(KeyCode.D6) },
+			{ "7", nameof(KeyCode.D7) },
+			{ "8", nameof(KeyCode.D8) },
+			{ "9", nameof(KeyCode.D9) },
+		};
 	}
 }
