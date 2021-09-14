@@ -95,19 +95,29 @@ namespace TabletFriend.Actions
 
 		private static KeyCode[] StringToKeyCode(string keyString)
 		{
-			var args = keyString.Replace(" ", "").Split("+");
-			var keysList = new List<KeyCode>();
-
-			foreach (var arg in args)
+			try
 			{
-				keysList.Add(Enum.Parse<KeyCode>(Translate(arg)));
-			}
+				var args = keyString.Replace(" ", "").Split("+");
+				var keysList = new List<KeyCode>();
 
-			return keysList.ToArray();
+				foreach (var arg in args)
+				{
+					keysList.Add(Enum.Parse<KeyCode>(Translate(arg), true));
+				}
+
+				return keysList.ToArray();
+			}
+			catch (Exception e)
+			{
+				throw new FormatException(
+					"Error parsing '" + keyString + "'. Command or key combination may be invalid. "
+					+ Environment.NewLine + e.Message
+				);
+			}
 		}
 
 		private static string Translate(string inputKey)
-		{ 
+		{
 			if (_translationTable.TryGetValue(inputKey, out var outputKey))
 			{
 				return outputKey;
@@ -118,8 +128,9 @@ namespace TabletFriend.Actions
 		/// <summary>
 		/// Some enum entries don't look very pretty, so we translate them.
 		/// </summary>
-		private static Dictionary<string, string> _translationTable = new Dictionary<string, string>()
+		private static Dictionary<string, string> _translationTable = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
 		{
+			{ "Windows", nameof(KeyCode.LWin) },
 			{ "Win", nameof(KeyCode.LWin) },
 			{ "Shift", nameof(KeyCode.LShift) },
 			{ "Ctrl", nameof(KeyCode.LControl) },

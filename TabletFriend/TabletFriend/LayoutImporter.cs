@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Windows;
 using TabletFriend.Data;
 using TabletFriend.Models;
 using YamlDotNet.Serialization;
@@ -16,6 +18,18 @@ namespace TabletFriend
 		{
 			string layout = null;
 
+			if (!File.Exists(path))
+			{
+				MessageBox.Show(
+					"Layout file '" + path + "' does not exist!",
+					"Layout not found!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
+
+				return null;
+			}
+
 			for (var i = 0; i < 10; i += 1)
 			{
 				try
@@ -27,8 +41,22 @@ namespace TabletFriend
 				catch
 				{ }
 			}
-			var data = _deserializer.Deserialize<LayoutData>(layout);
-			return new LayoutModel(data);
+
+			try
+			{
+				var data = _deserializer.Deserialize<LayoutData>(layout);
+				return new LayoutModel(data);
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show(
+					"Cannot load '" + path + "': " + e.Message,
+					"Load failure!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
+			}
+			return null;
 		}
 	}
 }

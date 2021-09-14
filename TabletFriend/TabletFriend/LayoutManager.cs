@@ -48,6 +48,12 @@ namespace TabletFriend
 				AppState.CurrentLayout.Dispose();
 			}
 			var layout = LayoutImporter.Import(path);
+
+			if (layout == null)
+			{
+				return;
+			}
+
 			AppState.CurrentLayout = layout;
 			AppState.CurrentLayout.CreateUI(_canvas, _window);
 			AppState.CurrentLayoutPath = path;
