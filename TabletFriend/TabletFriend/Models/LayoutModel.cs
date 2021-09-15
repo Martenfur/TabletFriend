@@ -17,6 +17,10 @@ namespace TabletFriend.Models
 		public int ButtonSize = MinButtonSize;
 		public int Margin = MinMargin;
 
+		public double WindowRounding = 2;
+		public Color WindowColor = Colors.White;
+
+
 		public int CellSize => ButtonSize + Margin;
 
 		public List<ButtonModel> Buttons = new List<ButtonModel>();
@@ -43,6 +47,16 @@ namespace TabletFriend.Models
 				Margin = MinMargin;
 			}
 
+			if (data.WindowRounding != null)
+			{
+				WindowRounding = double.Parse(data.WindowRounding, CultureInfo.InvariantCulture);
+			}
+
+			if (data.WindowColor != null)
+			{
+				WindowColor = (Color)ColorConverter.ConvertFromString(data.WindowColor);
+			}
+
 			foreach (var button in data.Buttons)
 			{
 				Buttons.Add(new ButtonModel(button.Value));
@@ -52,7 +66,8 @@ namespace TabletFriend.Models
 
 		public void CreateUI(MainWindow window)
 		{
-			canvas.Children.Clear();
+			window.MainCanvas.Children.Clear();
+			window.MainBorder.CornerRadius = new CornerRadius(WindowRounding);
 
 			var sizes = GetSizeArray();
 			var positions = Packer.Pack(sizes, LayoutWidth);
@@ -64,6 +79,8 @@ namespace TabletFriend.Models
 
 			window.Width = size.X * CellSize + Margin;
 			window.Height = size.Y * CellSize + Margin;
+
+			window.MainBorder.Background = new SolidColorBrush(WindowColor);
 
 			if (window.Width < window.Height)
 			{

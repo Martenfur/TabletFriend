@@ -1,6 +1,8 @@
 ﻿layout_width: 10
-button_size: 32
-margin: 2
+button_size: 48
+margin: 4
+window_rounding: 4
+window_color: "#ff0000"
 
 buttons:
 	q:
@@ -66,7 +68,7 @@ buttons:
 
 	shift:
 		action: toggle shift
-		size: 1,1
+		size: 2,1
 		text: Shift
 	z:
 		action: z
