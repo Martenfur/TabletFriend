@@ -56,8 +56,11 @@ namespace TabletFriend
 		}
 
 
-		private void OnQuit(object sender, RoutedEventArgs e) =>
+		private void OnQuit(object sender, RoutedEventArgs e)
+		{
+			_icon.Dispose(); 
 			Environment.Exit(0);
+		}
 
 	}
 }
