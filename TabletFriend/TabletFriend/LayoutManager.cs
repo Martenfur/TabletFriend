@@ -6,12 +6,10 @@ namespace TabletFriend
 {
 	public class LayoutManager
 	{
-		private readonly Canvas _canvas;
-		private readonly Window _window;
+		private readonly MainWindow _window;
 
-		public LayoutManager(Canvas canvas, Window window)
+		public LayoutManager(MainWindow window)
 		{
-			_canvas = canvas;
 			_window = window;
 			EventBeacon.Subscribe("files_changed", OnChanged);
 			EventBeacon.Subscribe("change_layout", OnChangeLayout);
@@ -55,7 +53,7 @@ namespace TabletFriend
 			}
 
 			AppState.CurrentLayout = layout;
-			AppState.CurrentLayout.CreateUI(_canvas, _window);
+			AppState.CurrentLayout.CreateUI(_window);
 			AppState.CurrentLayoutPath = path;
 		}
 

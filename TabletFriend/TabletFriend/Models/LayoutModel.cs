@@ -50,7 +50,7 @@ namespace TabletFriend.Models
 		}
 
 
-		public void CreateUI(Canvas canvas, Window window)
+		public void CreateUI(MainWindow window)
 		{
 			canvas.Children.Clear();
 
@@ -101,7 +101,7 @@ namespace TabletFriend.Models
 
 				Canvas.SetTop(uiButton, CellSize * positions[i].Y + Margin);
 				Canvas.SetLeft(uiButton, CellSize * positions[i].X + Margin);
-				canvas.Children.Add(uiButton);
+				window.MainCanvas.Children.Add(uiButton);
 			}
 		}
 
