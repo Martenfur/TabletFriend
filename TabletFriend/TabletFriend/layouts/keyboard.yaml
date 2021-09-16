@@ -1,29 +1,43 @@
 ﻿layout_width: 10
-button_size: 32
-margin: 2
+theme:
+	button_size: 48
+	margin: 8
+	rounding: 8
+	default_style: default
+
+	primary_color: "#e91e63"
+	secondary_color: "#fff"
+	background_color: "#FFFFFF"
 
 buttons:
 	q:
 		action: q
 		text: q
+		style: none
 	w:
 		action: w
 		text: w
+		style: outlined
 	e:
 		action: e
 		text: e
+		style: circular
 	r:
 		action: r
 		text: r
+		style: shy
 	t:
 		action: t
 		text: t
+		style: default
 	y:
 		action: y
 		text: y
+		style: accent
 	u:
 		action: u
 		text: u
+		style: circular_accent
 	i:
 		action: i
 		text: i
@@ -66,8 +80,9 @@ buttons:
 
 	shift:
 		action: toggle shift
-		size: 1,1
+		size: 2,1
 		text: Shift
+		style: outlined
 	z:
 		action: z
 		text: z
@@ -93,3 +108,4 @@ buttons:
 	space:
 		action: space
 		size: 10,1
+		style: outlined

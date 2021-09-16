@@ -4,13 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TabletFriend"
+		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="200" 
         AllowsTransparency="True" WindowStyle="None"
-		ShowInTaskbar="False">
-
-	<Window.Background>
-		<SolidColorBrush Opacity="0.5" Color="Gray"/>
-	</Window.Background>
-	<Canvas Name="Stacke"></Canvas>
+		ShowInTaskbar="False"
+		Background="Transparent"
+		UseLayoutRounding="True">
+	<Border Name="MainBorder">
+		<Canvas Name="MainCanvas"></Canvas>
+	</Border>
 </Window>

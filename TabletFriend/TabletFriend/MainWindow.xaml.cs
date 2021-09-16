@@ -18,14 +18,13 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
-
 			Topmost = true;
 			InitializeComponent();
 			MouseDown += OnMouseDown;
 
 			_file = new FileManager();
 
-			_layout = new LayoutManager(Stacke, this);
+			_layout = new LayoutManager(this);
 			_layout.LoadLayout(AppState.Layouts[0]);
 			_layoutList = new LayoutListManager();
 			ContextMenu = new System.Windows.Controls.ContextMenu();

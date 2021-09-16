@@ -12,30 +12,40 @@ namespace TabletFriend.Models
 	public class ButtonModel : IDisposable
 	{
 		public ButtonAction Action;
-		
-		public string Text;
+
+		public string Text = "";
 		public Image Icon;
 
 		public Vector2 Position = Vector2.Zero;
 		public Vector2 Size = Vector2.One;
 
+		public string Style;
+
+		public string Font;
+		public int FontSize;
+		public int FontWeight;
 
 		/// <summary>
 		/// If true, the button is considered a spacer. All actions will be ignored.
 		/// </summary>
 		public bool Spacer;
 
+
 		public ButtonModel(ButtonData data)
 		{
+			if (data == null)
+			{
+				return;
+			}
 			Text = data.Text ?? "";
 			if (!string.IsNullOrEmpty(data.Icon) && File.Exists(data.Icon))
 			{
 				Icon = new Image();
-				
+
 				Icon.Source = new BitmapImage(new Uri(Path.Combine(Environment.CurrentDirectory, data.Icon)));
 				Icon.Stretch = (Stretch)data.IconStretch;
 			}
-			
+
 			if (data.Size != null)
 			{
 				Size = ModelConverter.ConvertVector2(data.Size);
@@ -48,15 +58,20 @@ namespace TabletFriend.Models
 				Action = ButtonActionResolver.Resolve(data.Action);
 			}
 			else
-			{ 
+			{
 				Action = new BatchAction(ButtonActionResolver.Resolve(data.Actions));
 			}
+
+			Style = data.Style;
+
+			Font = data.Font;
+			FontSize = data.FontSize;
+			FontWeight = data.FontWeight;
 		}
 
 		public void Dispose()
 		{
 			Action?.Dispose();
-			// TODO: Put icon dispose here also.
 		}
 	}
 }
