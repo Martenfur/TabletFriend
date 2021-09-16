@@ -1,0 +1,51 @@
+﻿layout_width: 2
+theme:
+	button_size: 48
+	margin: 8
+	rounding: 8
+	default_style: default
+
+	primary_color: "#ccf48fb1"
+	secondary_color: "#ddffffff"
+	background_color: "#dd212121"
+
+buttons:
+	spacer:
+		size: 2,1
+		spacer: true
+	undo:
+		text: Undo
+		size: 2,1
+		style: accent
+	redo:
+		text: Redo
+		size: 2,1
+		style: accent
+	copy:
+		text: Copy
+		size: 2,1
+		style: outlined
+	paste:
+		text: Paste
+		style: shy
+	cut:
+		text: Cut
+		style: shy
+	flip:
+		text: Flip
+		style: circular_accent
+
+	shift:
+		text: Shift
+		style: circular
+	ctrl:
+		text: Ctrl
+		style: circular
+	alt:
+		text: Alt
+		style: circular
+
+	toggle:
+		text: Toggle
+		size: 2,1
+	

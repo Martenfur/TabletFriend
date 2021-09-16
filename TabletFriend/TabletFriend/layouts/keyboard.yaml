@@ -2,9 +2,12 @@
 theme:
 	button_size: 48
 	margin: 8
-	window_rounding: 8
-	window_color: "#ffffff80"
+	rounding: 8
 	default_style: default
+
+	primary_color: "#e91e63"
+	secondary_color: "#fff"
+	background_color: "#FFFFFF"
 
 buttons:
 	q:
