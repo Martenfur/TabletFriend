@@ -23,30 +23,6 @@ namespace TabletFriend
 		}
 
 
-		private static readonly Dictionary<string, string> _styleTranslationTable = new Dictionary<string, string>()
-		{
-			{ "none", null },
-			{ "default", "MaterialDesignFlatButton" },
-			{ "accent", "MaterialDesignRaisedAccentButton" },
-			{ "circular_accent", "MaterialDesignFloatingActionMiniButton" },
-			{ "outlined", "MaterialDesignOutlinedButton" },
-			{ "circular", "MaterialDesignIconButton" },
-			{ "shy", "MaterialDesignToolButton" },
-		};
-
-		/// <summary>
-		/// Translates friendly style name to the one used by msterisl design internally.
-		/// </summary>
-		public static string TranslateFriendlyStyleName(string style)
-		{
-			if (style != null && _styleTranslationTable.TryGetValue(style, out var styleName))
-			{
-				return styleName;
-			}
-			return style;
-		}
-
-
 		public static Color StringToColor(string hexColor)
 		{
 			// TODO: Change the format from ARGB to RGBA.

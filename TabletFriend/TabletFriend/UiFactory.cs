@@ -60,15 +60,15 @@ namespace TabletFriend
 			var uiButton = new Button();
 			uiButton.Width = theme.CellSize * size.X - theme.Margin;
 			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
+			
 			uiButton.Content = button.Text;
-
+			
 			var style = button.Style;
 			if (style == null)
 			{
 				style = theme.DefaultStyle;
 			}
-			style = Utils.TranslateFriendlyStyleName(style);
-
+			
 			if (style == null)
 			{
 				uiButton.Style = null;
@@ -86,7 +86,7 @@ namespace TabletFriend
 			{
 				uiButton.Click += (e, o) => _ = button.Action.Invoke();
 			}
-
+			
 			Canvas.SetTop(uiButton, theme.CellSize * position.Y + theme.Margin);
 			Canvas.SetLeft(uiButton, theme.CellSize * position.X + theme.Margin);
 			window.MainCanvas.Children.Add(uiButton);

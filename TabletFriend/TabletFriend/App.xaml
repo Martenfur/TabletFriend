@@ -12,7 +12,38 @@
 			<!--PRIMARY-->
 			<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#795548"/>
 			<SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#D7CCC8"/>
-			<SolidColorBrush x:Key="MaterialDesignToolForeground" Color="#5D4037"/>
+			<SolidColorBrush x:Key="MaterialDesignToolForeground" Color="#795548"/>
+			<Style x:Key="default" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignFlatButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style x:Key="accent" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style x:Key="circular_accent" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style x:Key="outlined" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style x:Key="circular" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignIconButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style x:Key="shy" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignToolButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			
 		</ResourceDictionary>
 
 	</Application.Resources>
