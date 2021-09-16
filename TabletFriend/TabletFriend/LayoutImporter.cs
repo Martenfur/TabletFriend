@@ -45,6 +45,10 @@ namespace TabletFriend
 			try
 			{
 				var data = _deserializer.Deserialize<LayoutData>(layout);
+				if (data == null)
+				{
+					throw new Exception("Failed to parse yaml!");
+				}
 				return new LayoutModel(data);
 			}
 			catch (Exception e)

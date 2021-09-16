@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Numerics;
-using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Media;
 using TabletFriend.Data;
 
 namespace TabletFriend.Models
@@ -20,11 +20,12 @@ namespace TabletFriend.Models
 		public double WindowRounding = 2;
 		public Color WindowColor = Colors.White;
 
+		public string DefaultStyle;
 
 		public int CellSize => ButtonSize + Margin;
 
-		public List<ButtonModel> Buttons = new List<ButtonModel>();
 
+		public List<ButtonModel> Buttons = new List<ButtonModel>();
 
 
 		public LayoutModel(LayoutData data)
@@ -57,70 +58,14 @@ namespace TabletFriend.Models
 				WindowColor = (Color)ColorConverter.ConvertFromString(data.WindowColor);
 			}
 
+			DefaultStyle = data.DefaultStyle;
+
 			foreach (var button in data.Buttons)
 			{
 				Buttons.Add(new ButtonModel(button.Value));
 			}
 		}
 
-
-		public void CreateUI(MainWindow window)
-		{
-			window.MainCanvas.Children.Clear();
-			window.MainBorder.CornerRadius = new CornerRadius(WindowRounding);
-
-			var sizes = GetSizeArray();
-			var positions = Packer.Pack(sizes, LayoutWidth);
-
-			var size = Packer.GetSize(positions, sizes);
-
-			window.MaxWidth = double.PositiveInfinity;
-			window.MaxHeight = double.PositiveInfinity;
-
-			window.Width = size.X * CellSize + Margin;
-			window.Height = size.Y * CellSize + Margin;
-
-			window.MainBorder.Background = new SolidColorBrush(WindowColor);
-
-			if (window.Width < window.Height)
-			{
-				window.MaxWidth = window.Width;
-			}
-			else
-			{
-				window.MaxHeight = window.Height;
-			}
-
-			for (var i = 0; i < positions.Length; i += 1)
-			{
-				var button = Buttons[i];
-				if (button.Spacer)
-				{
-					continue;
-				}
-
-				var uiButton = new Button()
-				{
-					Width = CellSize * sizes[i].X - Margin,
-					Height = CellSize * sizes[i].Y - Margin,
-					Content = button.Text,
-					Opacity = 0.7
-				};
-				if (button.Icon != null)
-				{
-					uiButton.Content = button.Icon;
-				}
-				if (button.Action != null)
-				{
-					uiButton.Click += (e, o) => _ = button.Action.Invoke();
-				}
-
-
-				Canvas.SetTop(uiButton, CellSize * positions[i].Y + Margin);
-				Canvas.SetLeft(uiButton, CellSize * positions[i].X + Margin);
-				window.MainCanvas.Children.Add(uiButton);
-			}
-		}
 
 		public void Dispose()
 		{
@@ -130,16 +75,5 @@ namespace TabletFriend.Models
 			}
 		}
 
-		private Vector2[] GetSizeArray()
-		{
-			var sizes = new Vector2[Buttons.Count];
-			var i = 0;
-			foreach (var button in Buttons)
-			{
-				sizes[i] = button.Size;
-				i += 1;
-			}
-			return sizes;
-		}
 	}
 }

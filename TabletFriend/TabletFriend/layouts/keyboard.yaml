@@ -1,31 +1,39 @@
 ﻿layout_width: 10
 button_size: 48
-margin: 4
-window_rounding: 4
-window_color: "#ff0000"
+margin: 8
+window_rounding: 8
+window_color: #ff0000
+default_style: default
 
 buttons:
 	q:
 		action: q
 		text: q
+		style: none
 	w:
 		action: w
 		text: w
+		style: outlined
 	e:
 		action: e
 		text: e
+		style: circular
 	r:
 		action: r
 		text: r
+		style: shy
 	t:
 		action: t
 		text: t
+		style: default
 	y:
 		action: y
 		text: y
+		style: accent
 	u:
 		action: u
 		text: u
+		style: circular_accent
 	i:
 		action: i
 		text: i
@@ -70,6 +78,7 @@ buttons:
 		action: toggle shift
 		size: 2,1
 		text: Shift
+		style: outlined
 	z:
 		action: z
 		text: z
@@ -95,3 +104,4 @@ buttons:
 	space:
 		action: space
 		size: 10,1
+		style: outlined

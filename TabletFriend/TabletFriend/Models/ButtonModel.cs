@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using System.Windows.Controls;
@@ -18,6 +19,8 @@ namespace TabletFriend.Models
 
 		public Vector2 Position = Vector2.Zero;
 		public Vector2 Size = Vector2.One;
+
+		public string Style;
 
 
 		/// <summary>
@@ -51,6 +54,8 @@ namespace TabletFriend.Models
 			{ 
 				Action = new BatchAction(ButtonActionResolver.Resolve(data.Actions));
 			}
+
+			Style = data.Style;
 		}
 
 		public void Dispose()

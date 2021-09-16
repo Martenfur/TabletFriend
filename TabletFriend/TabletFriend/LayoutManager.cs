@@ -53,7 +53,7 @@ namespace TabletFriend
 			}
 
 			AppState.CurrentLayout = layout;
-			AppState.CurrentLayout.CreateUI(_window);
+			UiFactory.CreateUI(AppState.CurrentLayout, _window);
 			AppState.CurrentLayoutPath = path;
 		}
 

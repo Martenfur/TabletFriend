@@ -9,6 +9,7 @@ namespace TabletFriend.Data
 		public int Margin;
 		public string WindowRounding;
 		public string WindowColor;
+		public string DefaultStyle;
 
 		public Dictionary<string, ButtonData> Buttons;
 	}

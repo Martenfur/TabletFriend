@@ -4,6 +4,16 @@
              xmlns:local="clr-namespace:TabletFriend"
              StartupUri="MainWindow.xaml">
 	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<!--PRIMARY-->
+			<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#795548"/>
+			<SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#D7CCC8"/>
+			<SolidColorBrush x:Key="MaterialDesignToolForeground" Color="#5D4037"/>
+		</ResourceDictionary>
 
 	</Application.Resources>
 </Application>
