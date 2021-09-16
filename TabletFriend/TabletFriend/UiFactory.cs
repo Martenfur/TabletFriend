@@ -8,7 +8,7 @@ namespace TabletFriend
 {
 	public static class UiFactory
 	{
-		public static void CreateUI(LayoutModel layout, MainWindow window)
+		public static void CreateUi(LayoutModel layout, MainWindow window)
 		{
 			var theme = layout.Theme;
 
@@ -44,11 +44,11 @@ namespace TabletFriend
 				{
 					continue;
 				}
-				CreateUIButton(layout, window, button, positions[i], sizes[i]);
+				CreateButton(layout, window, button, positions[i], sizes[i]);
 			}
 		}
 
-		public static void CreateUIButton(LayoutModel layout, MainWindow window, ButtonModel button, Vector2 position, Vector2 size)
+		private static void CreateButton(LayoutModel layout, MainWindow window, ButtonModel button, Vector2 position, Vector2 size)
 		{
 			var theme = layout.Theme;
 
