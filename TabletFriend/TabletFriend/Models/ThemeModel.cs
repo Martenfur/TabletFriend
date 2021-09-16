@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Numerics;
+﻿using System.Globalization;
 using System.Windows.Media;
 using TabletFriend.Data;
 
@@ -10,15 +7,15 @@ namespace TabletFriend.Models
 	public class ThemeModel
 	{
 		public const int MinButtonSize = 8;
-		public const int MinMargin = 0;
+		public const int MinMargin = 4;
 
-		public int ButtonSize = MinButtonSize;
+		public int ButtonSize = 48;
 		public int Margin = MinMargin;
 
-		public double WindowRounding = 2;
+		public double WindowRounding = 4;
 		public Color WindowColor = Colors.White;
 
-		public string DefaultStyle;
+		public string DefaultStyle = "default";
 
 		public int CellSize => ButtonSize + Margin;
 
