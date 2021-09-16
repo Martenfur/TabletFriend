@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -61,8 +62,27 @@ namespace TabletFriend
 			uiButton.Width = theme.CellSize * size.X - theme.Margin;
 			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
 			
-			uiButton.Content = button.Text;
-			
+			var font = layout.Theme.DefaultFont;
+			var fontSize = layout.Theme.DefaultFontSize;
+			var fontWeight = layout.Theme.DefaultFontWeight;
+
+			var text = new TextBlock();
+			text.Text = button.Text;
+			if (fontSize > 0)
+			{
+				text.FontSize = fontSize;
+			}
+			if (font != null)
+			{
+				text.FontFamily = new FontFamily(font);
+			}
+			if (fontWeight > 0)
+			{
+				text.FontWeight = FontWeight.FromOpenTypeWeight(Math.Min(999, fontWeight));
+			}
+
+			uiButton.Content = text;
+
 			var style = button.Style;
 			if (style == null)
 			{

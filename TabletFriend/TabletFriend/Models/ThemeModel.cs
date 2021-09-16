@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Windows.Media;
 using TabletFriend.Data;
 
@@ -7,10 +8,10 @@ namespace TabletFriend.Models
 	public class ThemeModel
 	{
 		public const int MinButtonSize = 8;
-		public const int MinMargin = 4;
+		public const int MinMargin = 0;
 
 		public int ButtonSize = 48;
-		public int Margin = MinMargin;
+		public int Margin = 4;
 
 		public double Rounding = 4;
 
@@ -21,6 +22,10 @@ namespace TabletFriend.Models
 		public Color PrimaryColor = Colors.White;
 		public Color SecondaryColor = Colors.White;
 		public Color BackgroundColor = Colors.White;
+
+		public string DefaultFont;
+		public int DefaultFontSize;
+		public int DefaultFontWeight;
 
 		public ThemeModel(ThemeData data)
 		{
@@ -60,6 +65,10 @@ namespace TabletFriend.Models
 			}
 
 			DefaultStyle = data.DefaultStyle;
+
+			DefaultFont = data.DefaultFont;
+			DefaultFontSize = data.DefaultFontSize;
+			DefaultFontWeight = data.DefaultFontWeight;
 		}
 	}
 }

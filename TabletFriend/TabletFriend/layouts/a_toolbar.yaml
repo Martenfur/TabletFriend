@@ -1,7 +1,7 @@
 ﻿layout_width: 2
 theme:
-	button_size: 48
-	margin: 8
+	button_size: 40
+	margin: 0
 	rounding: 8
 	default_style: default
 
@@ -9,17 +9,21 @@ theme:
 	secondary_color: "#ddffffff"
 	background_color: "#dd212121"
 
+	default_font: consolas
+	default_font_size: 8
+	default_font_weight: 900
+
 buttons:
 	spacer:
 		size: 2,1
 		spacer: true
 	undo:
 		text: Undo
-		size: 2,1
+		size: 1,1
 		style: accent
 	redo:
 		text: Redo
-		size: 2,1
+		size: 1,1
 		style: accent
 	copy:
 		text: Copy
@@ -30,6 +34,7 @@ buttons:
 		style: shy
 	cut:
 		text: Cut
+		icon_stretch: none
 		style: shy
 	flip:
 		text: Flip

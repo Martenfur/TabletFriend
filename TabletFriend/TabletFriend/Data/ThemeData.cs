@@ -11,5 +11,9 @@ namespace TabletFriend.Data
 		public string PrimaryColor;
 		public string SecondaryColor;
 		public string BackgroundColor;
+
+		public string DefaultFont;
+		public int DefaultFontSize;
+		public int DefaultFontWeight;
 	}
 }
