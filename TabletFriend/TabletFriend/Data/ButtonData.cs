@@ -12,5 +12,9 @@ namespace TabletFriend.Data
 		public string Style;
 
 		public bool Spacer;
+
+		public string Font;
+		public int FontSize;
+		public int FontWeight;
 	}
 }

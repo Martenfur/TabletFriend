@@ -62,9 +62,21 @@ namespace TabletFriend
 			uiButton.Width = theme.CellSize * size.X - theme.Margin;
 			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
 			
-			var font = layout.Theme.DefaultFont;
-			var fontSize = layout.Theme.DefaultFontSize;
-			var fontWeight = layout.Theme.DefaultFontWeight;
+			var font = button.Font;
+			if (font == null)
+			{ 
+				font = layout.Theme.DefaultFont;
+			}
+			var fontSize = button.FontSize;
+			if (fontSize == 0)
+			{
+				fontSize = layout.Theme.DefaultFontSize;
+			}
+			var fontWeight = button.FontWeight;
+			if (fontWeight == 0)
+			{
+				fontWeight = layout.Theme.DefaultFontWeight;
+			}
 
 			var text = new TextBlock();
 			text.Text = button.Text;
