@@ -12,12 +12,15 @@ namespace TabletFriend.Models
 		public int ButtonSize = 48;
 		public int Margin = MinMargin;
 
-		public double WindowRounding = 4;
-		public Color WindowColor = Colors.White;
+		public double Rounding = 4;
 
 		public string DefaultStyle = "default";
 
 		public int CellSize => ButtonSize + Margin;
+
+		public Color PrimaryColor = Colors.White;
+		public Color SecondaryColor = Colors.White;
+		public Color BackgroundColor = Colors.White;
 
 		public ThemeModel(ThemeData data)
 		{
@@ -38,14 +41,22 @@ namespace TabletFriend.Models
 				Margin = MinMargin;
 			}
 
-			if (data.WindowRounding != null)
+			if (data.Rounding != null)
 			{
-				WindowRounding = double.Parse(data.WindowRounding, CultureInfo.InvariantCulture);
+				Rounding = double.Parse(data.Rounding, CultureInfo.InvariantCulture);
 			}
 
-			if (data.WindowColor != null)
+			if (data.PrimaryColor != null)
 			{
-				WindowColor = Utils.StringToColor(data.WindowColor);
+				PrimaryColor = Utils.StringToColor(data.PrimaryColor);
+			}
+			if (data.SecondaryColor != null)
+			{
+				SecondaryColor = Utils.StringToColor(data.SecondaryColor);
+			}
+			if (data.BackgroundColor != null)
+			{
+				BackgroundColor = Utils.StringToColor(data.BackgroundColor);
 			}
 
 			DefaultStyle = data.DefaultStyle;

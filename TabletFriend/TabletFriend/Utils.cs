@@ -46,6 +46,7 @@ namespace TabletFriend
 			return style;
 		}
 
+
 		public static Color StringToColor(string hexColor)
 		{
 			// TODO: Change the format from ARGB to RGBA.

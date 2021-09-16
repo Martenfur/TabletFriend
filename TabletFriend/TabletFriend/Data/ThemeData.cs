@@ -5,8 +5,11 @@ namespace TabletFriend.Data
 	{
 		public int ButtonSize;
 		public int Margin;
-		public string WindowRounding;
-		public string WindowColor;
+		public string Rounding;
 		public string DefaultStyle;
+
+		public string PrimaryColor;
+		public string SecondaryColor;
+		public string BackgroundColor;
 	}
 }

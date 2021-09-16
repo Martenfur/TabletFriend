@@ -14,7 +14,7 @@ namespace TabletFriend.Models
 	{
 		public ButtonAction Action;
 		
-		public string Text;
+		public string Text = "";
 		public Image Icon;
 
 		public Vector2 Position = Vector2.Zero;
@@ -30,6 +30,10 @@ namespace TabletFriend.Models
 
 		public ButtonModel(ButtonData data)
 		{
+			if (data == null)
+			{
+				return;
+			}
 			Text = data.Text ?? "";
 			if (!string.IsNullOrEmpty(data.Icon) && File.Exists(data.Icon))
 			{
