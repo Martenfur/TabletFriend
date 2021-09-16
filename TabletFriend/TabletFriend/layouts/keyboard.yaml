@@ -1,9 +1,10 @@
 ﻿layout_width: 10
-button_size: 48
-margin: 8
-window_rounding: 8
-window_color: #ff0000
-default_style: default
+theme:
+	button_size: 48
+	margin: 8
+	window_rounding: 8
+	window_color: "#ffffff80"
+	default_style: default
 
 buttons:
 	q:

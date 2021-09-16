@@ -10,20 +10,9 @@ namespace TabletFriend.Models
 	public class LayoutModel : IDisposable
 	{
 		public const int MinLayoutWidth = 1;
-		public const int MinButtonSize = 8;
-		public const int MinMargin = 0;
-
 		public int LayoutWidth = MinLayoutWidth;
-		public int ButtonSize = MinButtonSize;
-		public int Margin = MinMargin;
 
-		public double WindowRounding = 2;
-		public Color WindowColor = Colors.White;
-
-		public string DefaultStyle;
-
-		public int CellSize => ButtonSize + Margin;
-
+		public ThemeModel Theme;
 
 		public List<ButtonModel> Buttons = new List<ButtonModel>();
 
@@ -36,30 +25,8 @@ namespace TabletFriend.Models
 				LayoutWidth = MinLayoutWidth;
 			}
 
-			ButtonSize = data.ButtonSize;
-			if (ButtonSize < MinButtonSize)
-			{
-				ButtonSize = MinButtonSize;
-			}
-
-			Margin = data.Margin;
-			if (Margin < MinMargin)
-			{
-				Margin = MinMargin;
-			}
-
-			if (data.WindowRounding != null)
-			{
-				WindowRounding = double.Parse(data.WindowRounding, CultureInfo.InvariantCulture);
-			}
-
-			if (data.WindowColor != null)
-			{
-				WindowColor = (Color)ColorConverter.ConvertFromString(data.WindowColor);
-			}
-
-			DefaultStyle = data.DefaultStyle;
-
+			Theme = new ThemeModel(data.Theme);
+			
 			foreach (var button in data.Buttons)
 			{
 				Buttons.Add(new ButtonModel(button.Value));

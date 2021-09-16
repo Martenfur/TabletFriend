@@ -11,7 +11,7 @@
 		ShowInTaskbar="False"
 		Background="Transparent"
 		UseLayoutRounding="True">
-	<Border Name ="MainBorder" Background="{StaticResource MaterialDesignDarkBackground}">
+	<Border Name="MainBorder" Background="{StaticResource MaterialDesignBackground}">
 		<Canvas Name="MainCanvas"></Canvas>
 	</Border>
 </Window>

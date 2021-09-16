@@ -10,8 +10,10 @@ namespace TabletFriend
 	{
 		public static void CreateUI(LayoutModel layout, MainWindow window)
 		{
+			var theme = layout.Theme;
+
 			window.MainCanvas.Children.Clear();
-			window.MainBorder.CornerRadius = new CornerRadius(layout.WindowRounding);
+			window.MainBorder.CornerRadius = new CornerRadius(theme.WindowRounding);
 
 			var sizes = layout.Buttons.GetSizes();
 			var positions = Packer.Pack(sizes, layout.LayoutWidth);
@@ -21,10 +23,10 @@ namespace TabletFriend
 			window.MaxWidth = double.PositiveInfinity;
 			window.MaxHeight = double.PositiveInfinity;
 
-			window.Width = size.X * layout.CellSize + layout.Margin;
-			window.Height = size.Y * layout.CellSize + layout.Margin;
+			window.Width = size.X * theme.CellSize + theme.Margin;
+			window.Height = size.Y * theme.CellSize + theme.Margin;
 
-			window.MainBorder.Background = new SolidColorBrush(layout.WindowColor);
+			window.MainBorder.Background = new SolidColorBrush(theme.WindowColor);
 
 			if (window.Width < window.Height)
 			{
@@ -48,15 +50,17 @@ namespace TabletFriend
 
 		public static void CreateUIButton(LayoutModel layout, MainWindow window, ButtonModel button, Vector2 position, Vector2 size)
 		{
+			var theme = layout.Theme;
+
 			var uiButton = new Button();
-			uiButton.Width = layout.CellSize * size.X - layout.Margin;
-			uiButton.Height = layout.CellSize * size.Y - layout.Margin;
+			uiButton.Width = theme.CellSize * size.X - theme.Margin;
+			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
 			uiButton.Content = button.Text;
 
 			var style = button.Style;
 			if (style == null)
 			{
-				style = layout.DefaultStyle;
+				style = theme.DefaultStyle;
 			}
 			style = Utils.TranslateFriendlyStyleName(style);
 
@@ -78,8 +82,8 @@ namespace TabletFriend
 				uiButton.Click += (e, o) => _ = button.Action.Invoke();
 			}
 
-			Canvas.SetTop(uiButton, layout.CellSize * position.Y + layout.Margin);
-			Canvas.SetLeft(uiButton, layout.CellSize * position.X + layout.Margin);
+			Canvas.SetTop(uiButton, theme.CellSize * position.Y + theme.Margin);
+			Canvas.SetLeft(uiButton, theme.CellSize * position.X + theme.Margin);
 			window.MainCanvas.Children.Add(uiButton);
 		}
 	}

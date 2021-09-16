@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
+using System.Windows.Media;
 using TabletFriend.Models;
 
 namespace TabletFriend
@@ -43,6 +44,12 @@ namespace TabletFriend
 				return styleName;
 			}
 			return style;
+		}
+
+		public static Color StringToColor(string hexColor)
+		{
+			// TODO: Change the format from ARGB to RGBA.
+			return (Color)ColorConverter.ConvertFromString(hexColor);
 		}
 	}
 }
