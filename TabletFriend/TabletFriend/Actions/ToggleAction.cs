@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WindowsInput;
 using WindowsInput.Events;
@@ -26,26 +27,32 @@ namespace TabletFriend.Actions
 
 		}
 
+		private long _inputLocked;
+
 		public override async Task Invoke()
 		{
+			Interlocked.Exchange(ref _inputLocked, 1);
+
 			if (!_held)
 			{
 				await Simulate.Events().Hold(_key).Invoke();
-				_held = true;
 			}
 			else
 			{
 				await Simulate.Events().Release(_key).Invoke();
-				_held = false;
 			}
+			_held = !_held;
+
+			Interlocked.Exchange(ref _inputLocked, 0);
 		}
 
 		private void KeyEvent(object sender, EventSourceEventArgs<KeyboardEvent> e)
 		{
-			if (e.Data?.KeyUp?.Key == _key)
+			if (Interlocked.Read(ref _inputLocked) == 0 && e.Data?.KeyUp?.Key == _key)
 			{
 				_held = false;
 			}
+
 		}
 
 		public override void Dispose()

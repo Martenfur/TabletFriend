@@ -46,9 +46,11 @@ buttons:
 	shift:
 		text: Shift
 		style: circular
+		action: toggle shift
 	ctrl:
 		text: Ctrl
 		style: circular
+		action: toggle ctrl
 	alt:
 		text: Alt
 		style: circular
