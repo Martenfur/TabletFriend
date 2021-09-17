@@ -38,7 +38,7 @@ namespace TabletFriend
 					{
 						var item = new MenuItem()
 						{
-							Header = Path.GetFileNameWithoutExtension(layout),
+							Header = Path.GetFileNameWithoutExtension(layout).Replace("_", " "),
 							DataContext = layout,
 							IsCheckable = true,
 							IsChecked = layout == AppState.CurrentLayoutPath
