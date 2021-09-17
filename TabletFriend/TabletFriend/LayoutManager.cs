@@ -18,17 +18,12 @@ namespace TabletFriend
 
 		private void OnChanged(object[] args)
 		{
-			var sender = args[0];
-			var fileSystemArgs = (FileSystemEventArgs)args[1];
-
-
 			Application.Current.Dispatcher.Invoke(
 				delegate
 				{
 					LoadLayout(AppState.CurrentLayoutPath);
 				}
 			);
-
 		}
 
 		private void OnChangeLayout(object[] obj)
