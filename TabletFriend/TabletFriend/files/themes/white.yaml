@@ -1,0 +1,9 @@
+button_size: 40
+margin: 8
+rounding: 8
+default_style: default
+
+primary_color: "#858585"
+secondary_color: "#111"
+background_color: "#ffffff"
+opacity: 0.7

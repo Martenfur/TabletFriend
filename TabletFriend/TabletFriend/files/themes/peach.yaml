@@ -1,0 +1,11 @@
+button_size: 40
+margin: 8
+rounding: 16
+default_style: accent
+
+default_font_weight: 800
+
+primary_color: "#ffab91"
+secondary_color: "#333"
+background_color: "#ffddc1"
+opacity: 0.9
