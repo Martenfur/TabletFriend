@@ -14,6 +14,8 @@ namespace TabletFriend.Models
 		public int Margin = 4;
 
 		public double Rounding = 4;
+		
+		public double Opacity = 0.8;
 
 		public string DefaultStyle = "default";
 
@@ -55,6 +57,10 @@ namespace TabletFriend.Models
 			if (data.Rounding != null)
 			{
 				Rounding = double.Parse(data.Rounding, CultureInfo.InvariantCulture);
+			}
+			if (data.Opacity != null)
+			{
+				Opacity = double.Parse(data.Opacity, CultureInfo.InvariantCulture);
 			}
 
 			if (data.PrimaryColor != null)
