@@ -1,6 +1,7 @@
 ﻿layout_width: 4
-button_size: 64
-margin: 4
+
+theme:
+	button_size: 64
 
 buttons:
 	swap: 

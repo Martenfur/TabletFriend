@@ -15,21 +15,20 @@ namespace TabletFriend
 			EventBeacon.Subscribe("change_layout", OnChangeLayout);
 		}
 
-		
+
 		private void OnChanged(object[] args)
 		{
 			var sender = args[0];
 			var fileSystemArgs = (FileSystemEventArgs)args[1];
 
-			if (fileSystemArgs.FullPath == AppState.CurrentLayoutPath)
-			{
-				Application.Current.Dispatcher.Invoke(
-					delegate
-					{
-						LoadLayout(fileSystemArgs.FullPath);
-					}
-				);
-			}
+
+			Application.Current.Dispatcher.Invoke(
+				delegate
+				{
+					LoadLayout(AppState.CurrentLayoutPath);
+				}
+			);
+
 		}
 
 		private void OnChangeLayout(object[] obj)

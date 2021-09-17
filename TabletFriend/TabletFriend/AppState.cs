@@ -6,7 +6,8 @@ namespace TabletFriend
 {
 	public static class AppState
 	{
-		public static readonly string LayoutRoot = Path.Combine(Environment.CurrentDirectory, "layouts");
+		public static readonly string FilesRoot = Path.Combine(Environment.CurrentDirectory, "files");
+		public static readonly string LayoutRoot = Path.Combine(Environment.CurrentDirectory, "files\\layouts");
 
 		public const string LayoutExtension = "*.yaml";
 

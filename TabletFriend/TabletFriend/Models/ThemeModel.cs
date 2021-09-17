@@ -14,6 +14,8 @@ namespace TabletFriend.Models
 		public int Margin = 4;
 
 		public double Rounding = 4;
+		
+		public double Opacity = 0.8;
 
 		public string DefaultStyle = "default";
 
@@ -34,13 +36,19 @@ namespace TabletFriend.Models
 				return;
 			}
 
-			ButtonSize = data.ButtonSize;
+			if (data.ButtonSize != null)
+			{
+				ButtonSize = data.ButtonSize.Value;
+			}
 			if (ButtonSize < MinButtonSize)
 			{
 				ButtonSize = MinButtonSize;
 			}
 
-			Margin = data.Margin;
+			if (data.Margin != null)
+			{
+				Margin = data.Margin.Value;
+			}
 			if (Margin < MinMargin)
 			{
 				Margin = MinMargin;
@@ -49,6 +57,10 @@ namespace TabletFriend.Models
 			if (data.Rounding != null)
 			{
 				Rounding = double.Parse(data.Rounding, CultureInfo.InvariantCulture);
+			}
+			if (data.Opacity != null)
+			{
+				Opacity = double.Parse(data.Opacity, CultureInfo.InvariantCulture);
 			}
 
 			if (data.PrimaryColor != null)
@@ -67,8 +79,14 @@ namespace TabletFriend.Models
 			DefaultStyle = data.DefaultStyle;
 
 			DefaultFont = data.DefaultFont;
-			DefaultFontSize = data.DefaultFontSize;
-			DefaultFontWeight = data.DefaultFontWeight;
+			if (data.DefaultFontSize != null)
+			{
+				DefaultFontSize = data.DefaultFontSize.Value;
+			}
+			if (data.DefaultFontWeight != null)
+			{
+				DefaultFontWeight = data.DefaultFontWeight.Value;
+			}
 		}
 	}
 }

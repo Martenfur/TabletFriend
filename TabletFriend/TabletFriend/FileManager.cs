@@ -9,7 +9,7 @@ namespace TabletFriend
 
 		public FileManager()
 		{
-			_watcher = new FileSystemWatcher(AppState.LayoutRoot);
+			_watcher = new FileSystemWatcher(AppState.FilesRoot);
 			_watcher.NotifyFilter = NotifyFilters.LastWrite
 				| NotifyFilters.Size
 				| NotifyFilters.LastWrite

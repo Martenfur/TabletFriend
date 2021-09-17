@@ -8,6 +8,8 @@ namespace TabletFriend.Data
 		
 		public ThemeData Theme;
 
+		public string ExternalTheme;
+
 		public Dictionary<string, ButtonData> Buttons;
 	}
 }

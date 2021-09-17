@@ -27,7 +27,8 @@ namespace TabletFriend
 			window.Width = size.X * theme.CellSize + theme.Margin;
 			window.Height = size.Y * theme.CellSize + theme.Margin;
 
-			
+			window.Opacity = theme.Opacity;
+
 			Application.Current.Resources["PrimaryHueMidBrush"] = new SolidColorBrush(theme.PrimaryColor);
 			Application.Current.Resources["PrimaryHueMidForegroundBrush"] = new SolidColorBrush(theme.SecondaryColor);
 			Application.Current.Resources["MaterialDesignToolForeground"] = new SolidColorBrush(theme.SecondaryColor);
