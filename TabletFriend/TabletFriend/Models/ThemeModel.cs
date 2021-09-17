@@ -34,13 +34,19 @@ namespace TabletFriend.Models
 				return;
 			}
 
-			ButtonSize = data.ButtonSize;
+			if (data.ButtonSize != null)
+			{
+				ButtonSize = data.ButtonSize.Value;
+			}
 			if (ButtonSize < MinButtonSize)
 			{
 				ButtonSize = MinButtonSize;
 			}
 
-			Margin = data.Margin;
+			if (data.Margin != null)
+			{
+				Margin = data.Margin.Value;
+			}
 			if (Margin < MinMargin)
 			{
 				Margin = MinMargin;
@@ -67,8 +73,14 @@ namespace TabletFriend.Models
 			DefaultStyle = data.DefaultStyle;
 
 			DefaultFont = data.DefaultFont;
-			DefaultFontSize = data.DefaultFontSize;
-			DefaultFontWeight = data.DefaultFontWeight;
+			if (data.DefaultFontSize != null)
+			{
+				DefaultFontSize = data.DefaultFontSize.Value;
+			}
+			if (data.DefaultFontWeight != null)
+			{
+				DefaultFontWeight = data.DefaultFontWeight.Value;
+			}
 		}
 	}
 }

@@ -16,26 +16,41 @@ namespace TabletFriend
 
 		public static LayoutModel Import(string path)
 		{
+			var data = Import<LayoutData>(path);
+			if (data.ExternalTheme != null && File.Exists(data.ExternalTheme))
+			{
+				if (data.Theme == null)
+				{
+					data.Theme = new ThemeData();
+				}
+				data.Theme.Merge(Import<ThemeData>(data.ExternalTheme));
+			}
+			return new LayoutModel(data);
+		}
+
+
+		private static T Import<T>(string path)
+		{
 			string layout = null;
 
 			if (!File.Exists(path))
 			{
 				MessageBox.Show(
-					"Layout file '" + path + "' does not exist!",
-					"Layout not found!",
+					"'" + path + "' does not exist!",
+					"File not found!",
 					MessageBoxButton.OK,
 					MessageBoxImage.Error
 				);
 
-				return null;
+				return default(T);
 			}
 
-			for (var i = 0; i < 10; i += 1)
+			for (var i = 0; i < 32; i += 1)
 			{
 				try
 				{
 					layout = File.ReadAllText(path)
-						.Replace("	", "  "); // The thing doesn't like tabs.
+						.Replace("\t", "  "); // The thing doesn't like tabs.
 					break;
 				}
 				catch
@@ -44,12 +59,12 @@ namespace TabletFriend
 
 			try
 			{
-				var data = _deserializer.Deserialize<LayoutData>(layout);
+				var data = _deserializer.Deserialize<T>(layout);
 				if (data == null)
 				{
 					throw new Exception("Failed to parse yaml!");
 				}
-				return new LayoutModel(data);
+				return data;
 			}
 			catch (Exception e)
 			{
@@ -60,7 +75,7 @@ namespace TabletFriend
 					MessageBoxImage.Error
 				);
 			}
-			return null;
+			return default(T);
 		}
 	}
 }
