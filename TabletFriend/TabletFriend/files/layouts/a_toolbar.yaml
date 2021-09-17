@@ -1,13 +1,13 @@
 ﻿layout_width: 2
-theme:
-	button_size: 40
-	margin: 8
-	rounding: 8
-	default_style: default
-
-	primary_color: "#ccf48fb1"
-	secondary_color: "#ddffffff"
-	background_color: "#dd212121"
+external_theme: files/themes/default.yaml
+#theme:
+	#button_size: 40
+	#margin: 8
+	#rounding: 8
+	#default_style: default
+	#primary_color: "#ccf48fb1"
+	#secondary_color: "#ddffffff"
+	#background_color: "#dd212121"
 
 	#default_font: consolas
 	#default_font_size: 14

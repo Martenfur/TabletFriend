@@ -18,6 +18,7 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
+			
 			Topmost = true;
 			InitializeComponent();
 			MouseDown += OnMouseDown;

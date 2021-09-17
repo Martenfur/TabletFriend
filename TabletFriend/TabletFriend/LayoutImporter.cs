@@ -16,16 +16,29 @@ namespace TabletFriend
 
 		public static LayoutModel Import(string path)
 		{
-			var data = Import<LayoutData>(path);
-			if (data.ExternalTheme != null && File.Exists(data.ExternalTheme))
+			try
 			{
-				if (data.Theme == null)
+				var data = Import<LayoutData>(path);
+				if (data.ExternalTheme != null && File.Exists(data.ExternalTheme))
 				{
-					data.Theme = new ThemeData();
+					if (data.Theme == null)
+					{
+						data.Theme = new ThemeData();
+					}
+					data.Theme.Merge(Import<ThemeData>(data.ExternalTheme));
 				}
-				data.Theme.Merge(Import<ThemeData>(data.ExternalTheme));
+				return new LayoutModel(data);
 			}
-			return new LayoutModel(data);
+			catch (Exception e)
+			{
+				MessageBox.Show(
+					"Cannot load '" + path + "': " + e.Message,
+					"Load failure!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
+			}
+			return null;
 		}
 
 
@@ -53,29 +66,18 @@ namespace TabletFriend
 						.Replace("\t", "  "); // The thing doesn't like tabs.
 					break;
 				}
-				catch
-				{ }
+				catch (Exception e)
+				{
+
+				}
 			}
 
-			try
+			var data = _deserializer.Deserialize<T>(layout);
+			if (data == null)
 			{
-				var data = _deserializer.Deserialize<T>(layout);
-				if (data == null)
-				{
-					throw new Exception("Failed to parse yaml!");
-				}
-				return data;
+				throw new Exception("Failed to parse yaml!");
 			}
-			catch (Exception e)
-			{
-				MessageBox.Show(
-					"Cannot load '" + path + "': " + e.Message,
-					"Load failure!",
-					MessageBoxButton.OK,
-					MessageBoxImage.Error
-				);
-			}
-			return default(T);
+			return data;
 		}
 	}
 }
