@@ -1,9 +1,13 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace TabletFriend
 {
@@ -20,9 +24,22 @@ namespace TabletFriend
 
 		private TaskbarIcon _icon;
 
+		private readonly string _iconPathBlack = Environment.CurrentDirectory + "/files/icons/tray/tray_black.ico";
+		private readonly string _iconPathWhite = Environment.CurrentDirectory + "/files/icons/tray/tray_white.ico";
+
 		public TrayManager(LayoutListManager layoutList)
 		{
 			_icon = new TaskbarIcon();
+
+			if (_isLightTheme)
+			{
+				_icon.Icon = new Icon(_iconPathBlack);
+			}
+			else
+			{ 
+				_icon.Icon = new Icon(_iconPathWhite);
+			}
+
 			_icon.Visibility = Visibility.Visible;
 			_icon.ContextMenu = new ContextMenu();
 			_icon.LeftClickCommand = new TrayCommand();
@@ -60,6 +77,19 @@ namespace TabletFriend
 		{
 			_icon.Dispose();
 			Environment.Exit(0);
+		}
+
+		private bool _isLightTheme
+		{
+			get
+			{
+				var key = Registry.GetValue(
+					@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", 
+					"SystemUsesLightTheme", 
+					0
+				);
+				return !(key == null || (int)key == 0);
+			}
 		}
 
 	}

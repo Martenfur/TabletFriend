@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,9 +32,13 @@ namespace TabletFriend
 
 			Application.Current.Resources["PrimaryHueMidBrush"] = new SolidColorBrush(theme.PrimaryColor);
 			Application.Current.Resources["PrimaryHueMidForegroundBrush"] = new SolidColorBrush(theme.SecondaryColor);
-			Application.Current.Resources["MaterialDesignToolForeground"] = new SolidColorBrush(theme.SecondaryColor);
+			Application.Current.Resources["PrimaryHueMidForegroundBrush"] = new SolidColorBrush(theme.SecondaryColor);
+
+			Application.Current.Resources["MaterialDesignPaper"] = new SolidColorBrush(theme.BackgroundColor);
+			Application.Current.Resources["MaterialDesignFont"] = new SolidColorBrush(theme.SecondaryColor);
+			Application.Current.Resources["MaterialDesignBody"] = new SolidColorBrush(theme.SecondaryColor);
+
 			window.MainBorder.Background = new SolidColorBrush(theme.BackgroundColor);
-			
 
 			if (window.Width < window.Height)
 			{
@@ -62,10 +67,10 @@ namespace TabletFriend
 			var uiButton = new Button();
 			uiButton.Width = theme.CellSize * size.X - theme.Margin;
 			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
-			
+
 			var font = button.Font;
 			if (font == null)
-			{ 
+			{
 				font = layout.Theme.DefaultFont;
 			}
 			var fontSize = button.FontSize;
@@ -96,12 +101,21 @@ namespace TabletFriend
 
 			uiButton.Content = text;
 
+			var ico = new PackIcon();
+			ico.Kind = PackIconKind.ContentSaveSettings;
+
+			uiButton.Content = ico;
+			if (button.Icon != null)
+			{
+				uiButton.Content = button.Icon;
+			}
+
 			var style = button.Style;
 			if (style == null)
 			{
 				style = theme.DefaultStyle;
 			}
-			
+
 			if (style == null)
 			{
 				uiButton.Style = null;
@@ -111,15 +125,11 @@ namespace TabletFriend
 				uiButton.Style = Application.Current.Resources[style] as Style;
 			}
 
-			if (button.Icon != null)
-			{
-				uiButton.Content = button.Icon;
-			}
 			if (button.Action != null)
 			{
 				uiButton.Click += (e, o) => _ = button.Action.Invoke();
 			}
-			
+
 			Canvas.SetTop(uiButton, theme.CellSize * position.Y + theme.Margin);
 			Canvas.SetLeft(uiButton, theme.CellSize * position.X + theme.Margin);
 			window.MainCanvas.Children.Add(uiButton);
