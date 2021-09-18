@@ -10,7 +10,9 @@ namespace TabletFriend
 	{
 		public double WindowX = 0;
 		public double WindowY = 0;
-		public string Layout = Path.Combine(Environment.CurrentDirectory, "files/layouts/a_toolbar.yaml");
+		public string Layout = "files/layouts/a_toolbar.yaml";
+
+		private string FullLayoutPath => Path.Combine(Environment.CurrentDirectory, Layout);
 
 
 		public Settings()
@@ -20,9 +22,9 @@ namespace TabletFriend
 
 		public void Apply()
 		{
-			if (AppState.CurrentLayout == null || Layout != AppState.CurrentLayoutPath)
+			if (AppState.CurrentLayout == null || FullLayoutPath != AppState.CurrentLayoutPath)
 			{
-				EventBeacon.SendEvent("change_layout", Layout);
+				EventBeacon.SendEvent("change_layout", FullLayoutPath);
 			}
 			Application.Current.MainWindow.Left = WindowX;
 			Application.Current.MainWindow.Top = WindowY;
@@ -31,7 +33,7 @@ namespace TabletFriend
 
 		private void OnUpdateSettings(object[] obj)
 		{
-			Layout = AppState.CurrentLayoutPath;
+			Layout = Path.GetRelativePath(Environment.CurrentDirectory, AppState.CurrentLayoutPath);
 			if (!double.IsNaN(Application.Current.MainWindow.Left))
 			{
 				WindowX = Application.Current.MainWindow.Left;
