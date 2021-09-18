@@ -101,10 +101,6 @@ namespace TabletFriend
 
 			uiButton.Content = text;
 
-			var ico = new PackIcon();
-			ico.Kind = PackIconKind.ContentSaveSettings;
-
-			uiButton.Content = ico;
 			if (button.Icon != null)
 			{
 				uiButton.Content = button.Icon;
