@@ -55,4 +55,6 @@ buttons:
 		action: ctrl+a
 		size: 4,2
 		icon: card_text
-	
+	swap: 
+		action: layout files/layouts/swap.yaml
+		text: Swap

@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace TabletFriend
 {
@@ -11,12 +9,12 @@ namespace TabletFriend
 		public LayoutManager(MainWindow window)
 		{
 			_window = window;
-			EventBeacon.Subscribe("files_changed", OnChanged);
+			EventBeacon.Subscribe("files_changed", OnFilesChanged);
 			EventBeacon.Subscribe("change_layout", OnChangeLayout);
 		}
 
 
-		private void OnChanged(object[] args)
+		private void OnFilesChanged(object[] args)
 		{
 			Application.Current.Dispatcher.Invoke(
 				delegate
@@ -28,8 +26,13 @@ namespace TabletFriend
 
 		private void OnChangeLayout(object[] obj)
 		{
+			var firstLoad = AppState.CurrentLayout == null;
 			var path = (string)obj[0];
 			LoadLayout(path);
+			if (!firstLoad)
+			{
+				EventBeacon.SendEvent("update_settings");
+			}
 		}
 
 

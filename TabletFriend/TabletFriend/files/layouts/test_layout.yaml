@@ -1,7 +1,6 @@
 ﻿layout_width: 4
 theme:
-	button_size: 32
-	margin: 4
+	default_style: accent
 
 buttons:
 	chain: 
@@ -29,19 +28,19 @@ buttons:
 		action: Ctrl+C
 		text: Copy
 		size: 2,1
-		icon: layouts/icons/cam.png
+		icon: files/icons/cam.png
 
 	copy1: 
 		action: Ctrl+C
 		text: Copy
 		size: 2,1
-		icon: layouts/icons/cam22.png
+		icon: files/icons/cam22.png
 		icon_stretch: fill
 	copy2: 
 		action: Ctrl+C
 		text: Copy
 		size: 2,1
-		icon: layouts/icons/cam.png
+		icon: files/icons/cam.png
 		icon_stretch: fit
 	paste: 
 		action: Ctrl + V

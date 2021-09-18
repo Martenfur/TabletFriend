@@ -10,10 +10,10 @@ namespace TabletFriend.Models
 		public const int MinButtonSize = 8;
 		public const int MinMargin = 0;
 
-		public int ButtonSize = 48;
-		public int Margin = 4;
+		public int ButtonSize = 40;
+		public int Margin = 8;
 
-		public double Rounding = 4;
+		public double Rounding = 8;
 		
 		public double Opacity = 0.8;
 
@@ -21,9 +21,9 @@ namespace TabletFriend.Models
 
 		public int CellSize => ButtonSize + Margin;
 
-		public Color PrimaryColor = Colors.White;
-		public Color SecondaryColor = Colors.White;
-		public Color BackgroundColor = Colors.White;
+		public Color PrimaryColor = Utils.StringToColor("#f48fb1");
+		public Color SecondaryColor = Utils.StringToColor("#fff0ff");
+		public Color BackgroundColor = Utils.StringToColor("#212531");
 
 		public string DefaultFont;
 		public int DefaultFontSize;
@@ -76,7 +76,10 @@ namespace TabletFriend.Models
 				BackgroundColor = Utils.StringToColor(data.BackgroundColor);
 			}
 
-			DefaultStyle = data.DefaultStyle;
+			if (data.DefaultStyle != null)
+			{
+				DefaultStyle = data.DefaultStyle;
+			}
 
 			DefaultFont = data.DefaultFont;
 			if (data.DefaultFontSize != null)

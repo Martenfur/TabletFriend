@@ -16,5 +16,7 @@ namespace TabletFriend
 		public static LayoutModel CurrentLayout;
 
 		public static string CurrentLayoutPath;
+
+		public static Settings Settings;
 	}
 }

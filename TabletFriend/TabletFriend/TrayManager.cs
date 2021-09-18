@@ -87,7 +87,7 @@ namespace TabletFriend
 		private void OnQuit(object sender, RoutedEventArgs e)
 		{
 			_icon.Dispose();
-			Environment.Exit(0);
+			Application.Current.Shutdown();
 		}
 
 		private bool _isLightTheme
