@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
@@ -34,10 +35,10 @@ namespace TabletFriend
 			ContextMenu = new System.Windows.Controls.ContextMenu();
 
 			OnUpdateLayoutList();
-
+			
 
 			_tray = new TrayManager(_layoutList);
-
+			
 			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
 			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
 			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
@@ -107,5 +108,11 @@ namespace TabletFriend
 		[DllImport("user32.dll")]
 		public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
 
+		protected override void OnClosing(CancelEventArgs e)
+		{
+			base.OnClosing(e);
+			EventBeacon.SendEvent("update_settings");
+			Environment.Exit(0);
+		}
 	}
 }
