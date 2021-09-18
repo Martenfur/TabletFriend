@@ -24,13 +24,17 @@ namespace TabletFriend
 			MouseDown += OnMouseDown;
 
 			_file = new FileManager();
+			
 
 			_layout = new LayoutManager(this);
-			_layout.LoadLayout(AppState.Layouts[0]);
+			Settings.Load();
+
+
 			_layoutList = new LayoutListManager();
 			ContextMenu = new System.Windows.Controls.ContextMenu();
 
 			OnUpdateLayoutList();
+
 
 			_tray = new TrayManager(_layoutList);
 
@@ -102,5 +106,6 @@ namespace TabletFriend
 
 		[DllImport("user32.dll")]
 		public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
 	}
 }
