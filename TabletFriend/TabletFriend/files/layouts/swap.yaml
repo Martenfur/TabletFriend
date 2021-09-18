@@ -5,5 +5,5 @@ theme:
 
 buttons:
 	swap: 
-		action: layout layouts/test_layout.yaml
+		action: layout files/layouts/a_toolbar.yaml
 		text: Swap
