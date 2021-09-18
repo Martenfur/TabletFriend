@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.IO;
 using System.Numerics;
 using System.Windows.Controls;
@@ -14,7 +15,7 @@ namespace TabletFriend.Models
 		public ButtonAction Action;
 
 		public string Text = "";
-		public Image Icon;
+		public object Icon;
 
 		public Vector2 Position = Vector2.Zero;
 		public Vector2 Size = Vector2.One;
@@ -38,12 +39,29 @@ namespace TabletFriend.Models
 				return;
 			}
 			Text = data.Text ?? "";
-			if (!string.IsNullOrEmpty(data.Icon) && File.Exists(data.Icon))
-			{
-				Icon = new Image();
 
-				Icon.Source = new BitmapImage(new Uri(Path.Combine(Environment.CurrentDirectory, data.Icon)));
-				Icon.Stretch = (Stretch)data.IconStretch;
+			if (!string.IsNullOrEmpty(data.Icon))
+			{
+				if (!string.IsNullOrEmpty(Path.GetExtension(data.Icon)) && File.Exists(data.Icon))
+				{
+					var ico = new Image();
+
+					ico.Source = new BitmapImage(new Uri(Path.Combine(Environment.CurrentDirectory, data.Icon)));
+					ico.Stretch = (Stretch)data.IconStretch;
+
+					Icon = ico;
+				}
+				else
+				{
+					var iconName = data.Icon.Replace("_", "").Replace("-", ""); // Sanitizing the icon.
+					if (Enum.TryParse<PackIconKind>(iconName, true, out var kind))
+					{
+						var ico = new PackIcon();
+						ico.Kind = kind;
+
+						Icon = ico;
+					}
+				}
 			}
 
 			if (data.Size != null)

@@ -1,61 +1,58 @@
-﻿layout_width: 2
-external_theme: files/themes/default.yaml
-#theme:
-	#button_size: 40
-	#margin: 8
-	#rounding: 8
-	#default_style: default
-	#primary_color: "#ccf48fb1"
-	#secondary_color: "#ddffffff"
-	#background_color: "#dd212121"
-
-	#default_font: consolas
-	#default_font_size: 14
-	#default_font_weight: 500
-
+﻿layout_width: 4
+external_theme: files/themes/aurora.yaml
+theme:
+	button_size: 20
 buttons:
 	spacer:
-		size: 2,1
+		size: 4,2
 		spacer: true
 	undo:
-		text: Undo
-		size: 1,1
+		action: ctrl+z
+		size: 2,2
 		style: accent
-		#font: comic sans ms
-		#font_size: 10
-		#font_weight: 100
+		icon: undo
 	redo:
-		text: Redo
-		size: 1,1
+		action: ctrl+y
+		size: 2,2
 		style: accent
+		icon: redo
 	copy:
-		text: Copy
-		size: 2,1
+		action: ctrl+c
+		size: 4,2
 		style: outlined
+		icon: content_copy
 	paste:
-		text: Paste
+		action: ctrl+v
+		size: 2,2
 		style: shy
+		icon: content_paste
 	cut:
-		text: Cut
+		action: ctrl+x
+		size: 2,2
 		icon_stretch: none
 		style: shy
+		icon: content_cut
 	flip:
-		text: Flip
+		size: 2,2
 		style: circular_accent
-
+		icon: flip_horizontal
 	shift:
+		action: toggle shift
+		size: 2,2
 		text: Shift
 		style: circular
-		action: toggle shift
 	ctrl:
+		action: toggle ctrl
+		size: 2,2
 		text: Ctrl
 		style: circular
-		action: toggle ctrl
 	alt:
+		action: toggle alt
+		size: 2,2
 		text: Alt
 		style: circular
-
-	toggle:
-		text: Toggle
-		size: 2,1
+	select_all:
+		action: ctrl+a
+		size: 4,2
+		icon: card_text
 	
