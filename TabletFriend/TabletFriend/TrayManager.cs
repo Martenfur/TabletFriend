@@ -46,9 +46,20 @@ namespace TabletFriend
 
 			_icon.ContextMenu.Items.Add(layoutList.Menu);
 			AddMenuItem("open layouts directory...", OnOpenLayoutsDirectory);
+			AddMenuItem("about", OnAbout);
 			AddMenuItem("quit", OnQuit);
 		}
 
+		private void OnAbout(object sender, RoutedEventArgs e)
+		{
+			var startInfo = new ProcessStartInfo()
+			{
+				Arguments = AppState.LayoutRoot,
+				FileName = "http://github.com/Martenfur/TabletFriend",
+				UseShellExecute = true,
+			};
+			Process.Start(startInfo);
+		}
 
 		private MenuItem AddMenuItem(string header, RoutedEventHandler click = null)
 		{
