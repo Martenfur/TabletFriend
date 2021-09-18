@@ -26,9 +26,13 @@ namespace TabletFriend
 
 		private void OnChangeLayout(object[] obj)
 		{
+			var firstLoad = AppState.CurrentLayout == null;
 			var path = (string)obj[0];
 			LoadLayout(path);
-			EventBeacon.SendEvent("update_settings");
+			if (!firstLoad)
+			{
+				EventBeacon.SendEvent("update_settings");
+			}
 		}
 
 
