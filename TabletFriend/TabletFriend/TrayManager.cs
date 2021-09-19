@@ -23,9 +23,9 @@ namespace TabletFriend
 
 
 		private TaskbarIcon _icon;
-
-		private readonly string _iconPathBlack = Environment.CurrentDirectory + "/files/icons/tray/tray_black.ico";
-		private readonly string _iconPathWhite = Environment.CurrentDirectory + "/files/icons/tray/tray_white.ico";
+		private MenuItem _autostartMenuItem;
+		private readonly string _iconPathBlack = AppState.CurrentDirectory + "/files/icons/tray/tray_black.ico";
+		private readonly string _iconPathWhite = AppState.CurrentDirectory + "/files/icons/tray/tray_white.ico";
 
 		public TrayManager(LayoutListManager layoutList)
 		{
@@ -45,9 +45,37 @@ namespace TabletFriend
 			_icon.LeftClickCommand = new TrayCommand();
 
 			_icon.ContextMenu.Items.Add(layoutList.Menu);
+
+			if (AppState.Settings.AddToAutostart)
+			{
+				_autostartMenuItem = AddMenuItem("remove from autostart", OnAutostartToggle);
+			}
+			else
+			{
+				_autostartMenuItem = AddMenuItem("add to autostart", OnAutostartToggle);
+			}
+
 			AddMenuItem("open layouts directory...", OnOpenLayoutsDirectory);
 			AddMenuItem("about", OnAbout);
 			AddMenuItem("quit", OnQuit);
+		}
+
+		private void OnAutostartToggle(object sender, RoutedEventArgs e)
+		{
+			AppState.Settings.AddToAutostart = !AppState.Settings.AddToAutostart;
+
+			if (AppState.Settings.AddToAutostart)
+			{
+				AutostartManager.SetAutostart();
+				_autostartMenuItem.Header = "remove from autostart";
+			}
+			else
+			{
+				AutostartManager.ResetAutostart();
+				_autostartMenuItem.Header = "add to autostart";
+			}
+			EventBeacon.SendEvent("update_settings");
+
 		}
 
 		private void OnAbout(object sender, RoutedEventArgs e)

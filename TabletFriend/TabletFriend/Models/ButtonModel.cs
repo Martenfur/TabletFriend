@@ -46,7 +46,7 @@ namespace TabletFriend.Models
 				{
 					var ico = new Image();
 
-					ico.Source = new BitmapImage(new Uri(Path.Combine(Environment.CurrentDirectory, data.Icon)));
+					ico.Source = new BitmapImage(new Uri(Path.Combine(AppState.CurrentDirectory, data.Icon)));
 					ico.Stretch = (Stretch)data.IconStretch;
 
 					Icon = ico;

@@ -8,11 +8,12 @@ namespace TabletFriend
 {
 	public class Settings
 	{
+		public bool AddToAutostart = true;
 		public double WindowX = 0;
 		public double WindowY = 0;
 		public string Layout = "files/layouts/a_toolbar.yaml";
 
-		private string FullLayoutPath => Path.Combine(Environment.CurrentDirectory, Layout);
+		private string FullLayoutPath => Path.Combine(AppState.CurrentDirectory, Layout);
 
 
 		public Settings()
@@ -33,7 +34,7 @@ namespace TabletFriend
 
 		private void OnUpdateSettings(object[] obj)
 		{
-			Layout = Path.GetRelativePath(Environment.CurrentDirectory, AppState.CurrentLayoutPath);
+			Layout = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentLayoutPath);
 			if (!double.IsNaN(Application.Current.MainWindow.Left))
 			{
 				WindowX = Application.Current.MainWindow.Left;
@@ -56,7 +57,7 @@ namespace TabletFriend
 
 
 		public static readonly string SettingsPath =
-			Path.Combine(Environment.CurrentDirectory, "settings.yaml");
+			Path.Combine(AppState.CurrentDirectory, "settings.yaml");
 
 		public static void Load()
 		{

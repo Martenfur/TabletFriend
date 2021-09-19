@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
@@ -19,7 +21,8 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
-			
+			Directory.SetCurrentDirectory(AppState.CurrentDirectory);
+
 			Topmost = true;
 			InitializeComponent();
 			MouseDown += OnMouseDown;
@@ -38,7 +41,18 @@ namespace TabletFriend
 			
 
 			_tray = new TrayManager(_layoutList);
-			
+
+
+
+			if (AppState.Settings.AddToAutostart)
+			{ 
+				AutostartManager.SetAutostart();
+			}
+			else
+			{ 
+				AutostartManager.ResetAutostart();
+			}
+
 			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
 			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
 			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
