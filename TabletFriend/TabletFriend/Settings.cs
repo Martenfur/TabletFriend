@@ -8,6 +8,7 @@ namespace TabletFriend
 {
 	public class Settings
 	{
+		public bool AddToAutostart = true;
 		public double WindowX = 0;
 		public double WindowY = 0;
 		public string Layout = "files/layouts/a_toolbar.yaml";

@@ -13,12 +13,21 @@ namespace TabletFriend
 
 		public static bool IsAutostartSet => (string)GetKey().GetValue(_key) == _appPath;
 
-		public static void SetAutostart() =>
-			GetKey().SetValue(_key, _appPath);
+		public static void SetAutostart()
+		{
+			if (!IsAutostartSet)
+			{
+				GetKey().SetValue(_key, _appPath);
+			}
+		}
 
-		public static void ResetAutostart() =>
-			GetKey().DeleteValue(_key);
-
+		public static void ResetAutostart()
+		{
+			if (IsAutostartSet)
+			{
+				GetKey().DeleteValue(_key);
+			}
+		}
 
 		private static RegistryKey GetKey() =>
 			Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);

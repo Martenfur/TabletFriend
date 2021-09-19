@@ -22,11 +22,6 @@ namespace TabletFriend
 		public MainWindow()
 		{
 			Directory.SetCurrentDirectory(AppState.CurrentDirectory);
-			
-			if (!AutostartManager.IsAutostartSet)
-			{ 
-				AutostartManager.SetAutostart();
-			}
 
 			Topmost = true;
 			InitializeComponent();
@@ -46,7 +41,18 @@ namespace TabletFriend
 			
 
 			_tray = new TrayManager(_layoutList);
-			
+
+
+
+			if (AppState.Settings.AddToAutostart)
+			{ 
+				AutostartManager.SetAutostart();
+			}
+			else
+			{ 
+				AutostartManager.ResetAutostart();
+			}
+
 			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
 			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
 			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
