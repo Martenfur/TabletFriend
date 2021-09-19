@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
@@ -19,7 +21,13 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
+			Directory.SetCurrentDirectory(AppState.CurrentDirectory);
 			
+			if (!AutostartManager.IsAutostartSet)
+			{ 
+				AutostartManager.SetAutostart();
+			}
+
 			Topmost = true;
 			InitializeComponent();
 			MouseDown += OnMouseDown;
