@@ -24,8 +24,8 @@ namespace TabletFriend
 
 		private TaskbarIcon _icon;
 
-		private readonly string _iconPathBlack = Environment.CurrentDirectory + "/files/icons/tray/tray_black.ico";
-		private readonly string _iconPathWhite = Environment.CurrentDirectory + "/files/icons/tray/tray_white.ico";
+		private readonly string _iconPathBlack = AppState.CurrentDirectory + "/files/icons/tray/tray_black.ico";
+		private readonly string _iconPathWhite = AppState.CurrentDirectory + "/files/icons/tray/tray_white.ico";
 
 		public TrayManager(LayoutListManager layoutList)
 		{
