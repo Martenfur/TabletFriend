@@ -46,6 +46,8 @@ namespace TabletFriend
 
 			_icon.ContextMenu.Items.Add(layoutList.Menu);
 
+			CreateDockingMenu();
+			
 			if (AppState.Settings.AddToAutostart)
 			{
 				_autostartMenuItem = AddMenuItem("remove from autostart", OnAutostartToggle);
@@ -58,6 +60,36 @@ namespace TabletFriend
 			AddMenuItem("open layouts directory...", OnOpenLayoutsDirectory);
 			AddMenuItem("about", OnAbout);
 			AddMenuItem("quit", OnQuit);
+		}
+
+
+		private void CreateDockingMenu()
+		{
+			var menu = AddMenuItem("docking");
+			
+			var item = new MenuItem() {Header = "none"};
+			item.Click += (sender, e) => OnDocking(sender, e, "none");
+			menu.Items.Add(item);
+			
+			item = new MenuItem() {Header = "left"};
+			item.Click += (sender, e) => OnDocking(sender, e, "left");
+			menu.Items.Add(item);
+
+			item = new MenuItem() {Header = "top"};
+			item.Click += (sender, e) => OnDocking(sender, e, "top");
+			menu.Items.Add(item);
+			
+			item = new MenuItem() {Header = "right"};
+			item.Click += (sender, e) => OnDocking(sender, e, "right");
+			menu.Items.Add(item);
+			
+			item = new MenuItem() {Header = "bottom"};
+			item.Click += (sender, e) => OnDocking(sender, e, "bottom");
+			menu.Items.Add(item);
+		}
+
+		private void OnDocking(object sender, RoutedEventArgs e, string mode)
+		{ 
 		}
 
 		private void OnAutostartToggle(object sender, RoutedEventArgs e)
