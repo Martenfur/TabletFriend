@@ -84,9 +84,9 @@ namespace TabletFriend
 
 		private void OnDockingChanged(object[] args)
 		{
-			var side = (ABEdge)args[0];
+			var side = (DockingMode)args[0];
 
-			if (side == ABEdge.Top)
+			if (side == DockingMode.Top)
 			{
 				AppState.CurrentLayout.LayoutWidth = 999;
 				UiFactory.CreateUi(AppState.CurrentLayout, this);
@@ -139,7 +139,7 @@ namespace TabletFriend
 		{
 			base.OnClosing(e);
 			EventBeacon.SendEvent("update_settings");
-			AppBarFunctions.SetAppBar(this, ABEdge.None);
+			AppBarFunctions.SetAppBar(this, DockingMode.None);
 			Environment.Exit(0);
 		}
 	}

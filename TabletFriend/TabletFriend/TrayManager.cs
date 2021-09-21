@@ -69,19 +69,19 @@ namespace TabletFriend
 			var menu = AddMenuItem("docking");
 			
 			var item = new MenuItem() {Header = "none"};
-			item.Click += (sender, e) => OnDocking(ABEdge.None);
+			item.Click += (sender, e) => OnDocking(DockingMode.None);
 			menu.Items.Add(item);
 			
 			item = new MenuItem() {Header = "left"};
-			item.Click += (sender, e) => OnDocking(ABEdge.Left);
+			item.Click += (sender, e) => OnDocking(DockingMode.Left);
 			menu.Items.Add(item);
 
 			item = new MenuItem() {Header = "top"};
-			item.Click += (sender, e) => OnDocking(ABEdge.Top);
+			item.Click += (sender, e) => OnDocking(DockingMode.Top);
 			menu.Items.Add(item);
 			
 			item = new MenuItem() {Header = "right"};
-			item.Click += (sender, e) => OnDocking(ABEdge.Right);
+			item.Click += (sender, e) => OnDocking(DockingMode.Right);
 			menu.Items.Add(item);
 			
 			// Bottom docking is broken as fuck. Maybe will fix it someday.
@@ -90,7 +90,7 @@ namespace TabletFriend
 			//menu.Items.Add(item);
 		}
 
-		private void OnDocking(ABEdge side) =>
+		private void OnDocking(DockingMode side) =>
 			EventBeacon.SendEvent("docking_changed", side);
 
 		private void OnAutostartToggle(object sender, RoutedEventArgs e)

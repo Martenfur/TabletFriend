@@ -12,7 +12,7 @@ using System.Windows.Threading;
 
 namespace WpfAppBar
 {
-	public enum ABEdge : int
+	public enum DockingMode : int
 	{
 		Left = 0,
 		Top,
@@ -28,7 +28,7 @@ namespace WpfAppBar
 			public int CallbackId { get; set; }
 			public bool IsRegistered { get; set; }
 			public Window Window { get; set; }
-			public ABEdge Edge { get; set; }
+			public DockingMode Edge { get; set; }
 			public WindowStyle OriginalStyle { get; set; }
 			public Point OriginalPosition { get; set; }
 			public Size OriginalSize { get; set; }
@@ -66,7 +66,7 @@ namespace WpfAppBar
 					CallbackId = 0,
 					Window = appbarWindow,
 					IsRegistered = false,
-					Edge = ABEdge.Top,
+					Edge = DockingMode.Top,
 					OriginalStyle = appbarWindow.WindowStyle,
 					OriginalPosition = new Point(appbarWindow.Left, appbarWindow.Top),
 					OriginalSize =
@@ -93,7 +93,7 @@ namespace WpfAppBar
 
 		}
 
-		public static void SetAppBar(Window appbarWindow, ABEdge edge)
+		public static void SetAppBar(Window appbarWindow, DockingMode edge)
 		{
 			var info = GetRegisterInfo(appbarWindow);
 			info.Edge = edge;
@@ -104,7 +104,7 @@ namespace WpfAppBar
 
 			int renderPolicy;
 
-			if (edge == ABEdge.None)
+			if (edge == DockingMode.None)
 			{
 				if (info.IsRegistered)
 				{
@@ -160,7 +160,7 @@ namespace WpfAppBar
 
 
 
-		private static void ABSetPos(ABEdge edge, Window appbarWindow)
+		private static void ABSetPos(DockingMode edge, Window appbarWindow)
 		{
 			var barData = new Interop.APPBARDATA();
 			barData.cbSize = Marshal.SizeOf(barData);
@@ -179,11 +179,11 @@ namespace WpfAppBar
 			var screenSizeInPixels =
 				toPixel.Transform(new Vector(SystemParameters.PrimaryScreenWidth, SystemParameters.PrimaryScreenHeight));
 
-			if (barData.uEdge == (int)ABEdge.Left || barData.uEdge == (int)ABEdge.Right)
+			if (barData.uEdge == (int)DockingMode.Left || barData.uEdge == (int)DockingMode.Right)
 			{
 				barData.rc.top = 0;
 				barData.rc.bottom = (int)screenSizeInPixels.Y;
-				if (barData.uEdge == (int)ABEdge.Left)
+				if (barData.uEdge == (int)DockingMode.Left)
 				{
 					barData.rc.left = 0;
 					barData.rc.right = (int)Math.Round(sizeInPixels.X);
@@ -198,7 +198,7 @@ namespace WpfAppBar
 			{
 				barData.rc.left = 0;
 				barData.rc.right = (int)screenSizeInPixels.X;
-				if (barData.uEdge == (int)ABEdge.Top)
+				if (barData.uEdge == (int)DockingMode.Top)
 				{
 					barData.rc.top = 0;
 					barData.rc.bottom = (int)Math.Round(sizeInPixels.Y);
