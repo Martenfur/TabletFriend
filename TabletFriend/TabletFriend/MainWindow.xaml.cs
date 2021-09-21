@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using WpfAppBar;
 
 namespace TabletFriend
 {
@@ -28,7 +28,7 @@ namespace TabletFriend
 			MouseDown += OnMouseDown;
 
 			_file = new FileManager();
-			
+
 
 			_layout = new LayoutManager(this);
 			Settings.Load();
@@ -38,24 +38,25 @@ namespace TabletFriend
 			ContextMenu = new System.Windows.Controls.ContextMenu();
 
 			OnUpdateLayoutList();
-			
+
 
 			_tray = new TrayManager(_layoutList);
 
 
 
 			if (AppState.Settings.AddToAutostart)
-			{ 
+			{
 				AutostartManager.SetAutostart();
 			}
 			else
-			{ 
+			{
 				AutostartManager.ResetAutostart();
 			}
 
 			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
 			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
 			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
+			EventBeacon.Subscribe("docking_changed", OnDockingChanged);
 		}
 
 		private void OnUpdateLayoutList(object[] obj = null)
@@ -79,6 +80,18 @@ namespace TabletFriend
 			{
 				DragMove();
 			}
+		}
+
+		private void OnDockingChanged(object[] args)
+		{
+			var side = (ABEdge)args[0];
+
+			if (side == ABEdge.Top)
+			{
+				AppState.CurrentLayout.LayoutWidth = 999;
+				UiFactory.CreateUi(AppState.CurrentLayout, this);
+			}
+			AppBarFunctions.SetAppBar(this, side);
 		}
 
 
@@ -126,6 +139,7 @@ namespace TabletFriend
 		{
 			base.OnClosing(e);
 			EventBeacon.SendEvent("update_settings");
+			AppBarFunctions.SetAppBar(this, ABEdge.None);
 			Environment.Exit(0);
 		}
 	}
