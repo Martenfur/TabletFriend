@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using WpfAppBar;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -12,9 +13,11 @@ namespace TabletFriend
 		public double WindowX = 0;
 		public double WindowY = 0;
 		public string Layout = "files/layouts/a_toolbar.yaml";
+		public DockingMode DockingMode = DockingMode.None;
 
 		private string FullLayoutPath => Path.Combine(AppState.CurrentDirectory, Layout);
 
+		// TODO: Add docking mode saving.
 
 		public Settings()
 		{
@@ -29,6 +32,8 @@ namespace TabletFriend
 			}
 			Application.Current.MainWindow.Left = WindowX;
 			Application.Current.MainWindow.Top = WindowY;
+			
+			EventBeacon.SendEvent("docking_changed", DockingMode);
 		}
 
 
