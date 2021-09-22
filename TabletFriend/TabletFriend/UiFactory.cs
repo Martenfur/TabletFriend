@@ -22,10 +22,12 @@ namespace TabletFriend
 			var positions = Packer.Pack(sizes, layout.LayoutWidth);
 
 			var size = Packer.GetSize(positions, sizes);
+
+
 			var rotateLayout = false;
+			var layoutVertical = size.Y > size.X;
 			if (AppState.Settings.DockingMode != DockingMode.None)
 			{
-				var layoutVertical = size.Y > size.X;
 				var dockingVertical = AppState.Settings.DockingMode == DockingMode.Left
 					|| AppState.Settings.DockingMode == DockingMode.Right;
 
@@ -46,6 +48,20 @@ namespace TabletFriend
 				window.Width = size.X * theme.CellSize + theme.Margin;
 				window.Height = size.Y * theme.CellSize + theme.Margin;
 			}
+
+			var offset = Vector2.Zero;
+			if (AppState.Settings.DockingMode != DockingMode.None)
+			{
+				if (AppState.Settings.DockingMode == DockingMode.Top || AppState.Settings.DockingMode == DockingMode.Bottom)
+				{
+					offset.X = (float)(SystemParameters.PrimaryScreenWidth - window.Width) / 2;
+				}
+				else
+				{
+					offset.Y = (float)(SystemParameters.PrimaryScreenHeight - window.Height) / 2;
+				}
+			}
+
 
 			window.Opacity = theme.Opacity;
 
@@ -80,11 +96,18 @@ namespace TabletFriend
 					buttonSize.Y = buffer;
 				}
 
-				CreateButton(layout, window, button, buttonPosition, buttonSize);
+				CreateButton(layout, window, button, buttonPosition, buttonSize, offset);
 			}
 		}
 
-		private static void CreateButton(LayoutModel layout, MainWindow window, ButtonModel button, Vector2 position, Vector2 size)
+		private static void CreateButton(
+			LayoutModel layout,
+			MainWindow window,
+			ButtonModel button,
+			Vector2 position,
+			Vector2 size,
+			Vector2 offset
+		)
 		{
 			var theme = layout.Theme;
 
@@ -150,8 +173,8 @@ namespace TabletFriend
 				uiButton.Click += (e, o) => _ = button.Action.Invoke();
 			}
 
-			Canvas.SetTop(uiButton, theme.CellSize * position.Y + theme.Margin);
-			Canvas.SetLeft(uiButton, theme.CellSize * position.X + theme.Margin);
+			Canvas.SetTop(uiButton, theme.CellSize * position.Y + theme.Margin + offset.Y);
+			Canvas.SetLeft(uiButton, theme.CellSize * position.X + theme.Margin + offset.X);
 			window.MainCanvas.Children.Add(uiButton);
 		}
 	}
