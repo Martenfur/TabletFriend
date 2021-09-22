@@ -45,8 +45,6 @@ namespace TabletFriend
 				}
 			}
 
-			window.MaxWidth = double.PositiveInfinity;
-			window.MaxHeight = double.PositiveInfinity;
 
 			window.Width = size.X * theme.CellSize + theme.Margin;
 			window.Height = size.Y * theme.CellSize + theme.Margin;
@@ -62,15 +60,6 @@ namespace TabletFriend
 			Application.Current.Resources["MaterialDesignBody"] = new SolidColorBrush(theme.SecondaryColor);
 
 			window.MainBorder.Background = new SolidColorBrush(theme.BackgroundColor);
-
-			if (window.Width < window.Height)
-			{
-				window.MaxWidth = window.Width;
-			}
-			else
-			{
-				window.MaxHeight = window.Height;
-			}
 
 			for (var i = 0; i < positions.Length; i += 1)
 			{

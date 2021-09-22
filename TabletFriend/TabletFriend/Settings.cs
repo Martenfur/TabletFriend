@@ -17,8 +17,6 @@ namespace TabletFriend
 
 		private string FullLayoutPath => Path.Combine(AppState.CurrentDirectory, Layout);
 
-		// TODO: Add docking mode saving.
-
 		public Settings()
 		{
 			EventBeacon.Subscribe("update_settings", OnUpdateSettings);
