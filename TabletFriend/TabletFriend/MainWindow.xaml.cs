@@ -76,7 +76,10 @@ namespace TabletFriend
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (e.ChangedButton == MouseButton.Left)
+			if (
+				e.ChangedButton == MouseButton.Left 
+				&& AppState.Settings.DockingMode == DockingMode.None
+			)
 			{
 				DragMove();
 			}
@@ -118,9 +121,11 @@ namespace TabletFriend
 			if (Visibility == Visibility.Collapsed)
 			{
 				Visibility = Visibility.Visible;
+				AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
 			}
 			else
 			{
+				AppBarFunctions.SetAppBar(this, DockingMode.None);
 				Visibility = Visibility.Collapsed;
 			}
 		}

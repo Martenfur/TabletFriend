@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using WpfAppBar;
 
 namespace TabletFriend
 {
@@ -28,7 +29,9 @@ namespace TabletFriend
 		{
 			var firstLoad = AppState.CurrentLayout == null;
 			var path = (string)obj[0];
+			AppBarFunctions.SetAppBar(Application.Current.MainWindow, DockingMode.None);
 			LoadLayout(path);
+			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
 			if (!firstLoad)
 			{
 				EventBeacon.SendEvent("update_settings");
