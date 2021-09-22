@@ -85,12 +85,12 @@ namespace TabletFriend
 		private void OnDockingChanged(object[] args)
 		{
 			var side = (DockingMode)args[0];
+			AppState.Settings.DockingMode = side;
 
-			if (side == DockingMode.Top)
-			{
-				AppState.CurrentLayout.LayoutWidth = 999;
-				UiFactory.CreateUi(AppState.CurrentLayout, this);
-			}
+			AppBarFunctions.SetAppBar(this, DockingMode.None);
+
+			UiFactory.CreateUi(AppState.CurrentLayout, this);
+			
 			AppBarFunctions.SetAppBar(this, side);
 		}
 

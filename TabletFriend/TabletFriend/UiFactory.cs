@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TabletFriend.Models;
+using WpfAppBar;
 
 namespace TabletFriend
 {
@@ -21,6 +22,28 @@ namespace TabletFriend
 			var positions = Packer.Pack(sizes, layout.LayoutWidth);
 
 			var size = Packer.GetSize(positions, sizes);
+
+			if (AppState.Settings.DockingMode != DockingMode.None)
+			{
+				var layoutVertical = size.Y > size.X;
+				var dockingVertical = AppState.Settings.DockingMode == DockingMode.Left
+					|| AppState.Settings.DockingMode == DockingMode.Right;
+
+				if (layoutVertical != dockingVertical)
+				{
+					if (layoutVertical)
+					{
+						// Converting vertical toolbars to horizontal.
+						positions = Packer.Pack(sizes, 999);
+					}
+					else
+					{
+						// Converting horizontal toolbars to vertical.
+						positions = Packer.Pack(sizes, 2);
+					}
+					size = Packer.GetSize(positions, sizes);
+				}
+			}
 
 			window.MaxWidth = double.PositiveInfinity;
 			window.MaxHeight = double.PositiveInfinity;

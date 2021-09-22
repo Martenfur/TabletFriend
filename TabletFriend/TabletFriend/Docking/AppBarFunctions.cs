@@ -84,7 +84,7 @@ namespace WpfAppBar
 
 			appbarWindow.WindowStyle = info.OriginalStyle;
 			appbarWindow.ResizeMode = info.OriginalResizeMode;
-			appbarWindow.Topmost = false;
+			//appbarWindow.Topmost = false;
 
 			var rect = new Rect(info.OriginalPosition.X, info.OriginalPosition.Y,
 				info.OriginalSize.Width, info.OriginalSize.Height);
