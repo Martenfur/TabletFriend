@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -85,16 +86,22 @@ namespace TabletFriend
 			}
 		}
 
-		private void OnDockingChanged(object[] args)
+		private void OnDockingChanged(params object[] args)
 		{
 			var side = (DockingMode)args[0];
-			AppState.Settings.DockingMode = side;
 
-			AppBarFunctions.SetAppBar(this, DockingMode.None);
+			if (side != DockingMode.None)
+			{
+				AppBarFunctions.SetAppBar(this, DockingMode.None);
+			}
+
+			AppState.Settings.DockingMode = side;
 
 			UiFactory.CreateUi(AppState.CurrentLayout, this);
 			
 			AppBarFunctions.SetAppBar(this, side);
+
+			EventBeacon.SendEvent("update_settings");
 		}
 
 
