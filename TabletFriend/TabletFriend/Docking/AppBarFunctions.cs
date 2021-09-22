@@ -111,7 +111,7 @@ namespace WpfAppBar
 					Interop.SHAppBarMessage((int)Interop.ABMsg.ABM_REMOVE, ref abd);
 					info.IsRegistered = false;
 				}
-				RestoreWindow(appbarWindow);
+				//RestoreWindow(appbarWindow);
 
 				// Restore normal desktop window manager attributes
 				renderPolicy = (int)Interop.DWMNCRenderingPolicy.UseWindowStyle;
