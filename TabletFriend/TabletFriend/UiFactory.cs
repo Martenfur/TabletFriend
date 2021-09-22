@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;

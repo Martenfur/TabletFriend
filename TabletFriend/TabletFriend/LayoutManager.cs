@@ -29,9 +29,8 @@ namespace TabletFriend
 		{
 			var firstLoad = AppState.CurrentLayout == null;
 			var path = (string)obj[0];
-			AppBarFunctions.SetAppBar(Application.Current.MainWindow, DockingMode.None);
+
 			LoadLayout(path);
-			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
 			if (!firstLoad)
 			{
 				EventBeacon.SendEvent("update_settings");
@@ -41,6 +40,7 @@ namespace TabletFriend
 
 		public void LoadLayout(string path)
 		{
+			AppBarFunctions.SetAppBar(Application.Current.MainWindow, DockingMode.None);
 			if (AppState.CurrentLayout != null)
 			{
 				AppState.CurrentLayout.Dispose();
@@ -55,6 +55,7 @@ namespace TabletFriend
 			AppState.CurrentLayout = layout;
 			UiFactory.CreateUi(AppState.CurrentLayout, _window);
 			AppState.CurrentLayoutPath = path;
+			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
 		}
 
 	}
