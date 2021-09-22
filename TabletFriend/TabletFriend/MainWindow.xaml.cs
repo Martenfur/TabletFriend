@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using TabletFriend.Docking;
 using WpfAppBar;
 
 namespace TabletFriend
@@ -66,6 +67,7 @@ namespace TabletFriend
 				() =>
 				{
 					ContextMenu.Items.Clear();
+					DockingMenuFactory.CreateDockingMenu(ContextMenu); 
 					var items = _layoutList.CloneMenu();
 					foreach (var item in items)
 					{

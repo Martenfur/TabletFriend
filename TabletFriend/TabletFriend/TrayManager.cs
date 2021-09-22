@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using TabletFriend.Docking;
 using WpfAppBar;
 
 namespace TabletFriend
@@ -47,7 +48,7 @@ namespace TabletFriend
 
 			_icon.ContextMenu.Items.Add(layoutList.Menu);
 
-			CreateDockingMenu();
+			DockingMenuFactory.CreateDockingMenu(_icon.ContextMenu);
 			
 			if (AppState.Settings.AddToAutostart)
 			{
@@ -63,35 +64,6 @@ namespace TabletFriend
 			AddMenuItem("quit", OnQuit);
 		}
 
-
-		private void CreateDockingMenu()
-		{
-			var menu = AddMenuItem("docking");
-			
-			var item = new MenuItem() {Header = "none"};
-			item.Click += (sender, e) => OnDocking(DockingMode.None);
-			menu.Items.Add(item);
-			
-			item = new MenuItem() {Header = "left"};
-			item.Click += (sender, e) => OnDocking(DockingMode.Left);
-			menu.Items.Add(item);
-
-			item = new MenuItem() {Header = "top"};
-			item.Click += (sender, e) => OnDocking(DockingMode.Top);
-			menu.Items.Add(item);
-			
-			item = new MenuItem() {Header = "right"};
-			item.Click += (sender, e) => OnDocking(DockingMode.Right);
-			menu.Items.Add(item);
-			
-			// Bottom docking is broken as fuck. Maybe will fix it someday.
-			//item = new MenuItem() {Header = "bottom"};
-			//item.Click += (sender, e) => OnDocking(ABEdge.Bottom);
-			//menu.Items.Add(item);
-		}
-
-		private void OnDocking(DockingMode side) =>
-			EventBeacon.SendEvent("docking_changed", side);
 
 		private void OnAutostartToggle(object sender, RoutedEventArgs e)
 		{

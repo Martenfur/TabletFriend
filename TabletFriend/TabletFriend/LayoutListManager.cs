@@ -56,6 +56,7 @@ namespace TabletFriend
 			EventBeacon.SendEvent("change_layout", item.DataContext);
 		}
 
+		
 		public MenuItem[] CloneMenu()
 		{
 			var items = new List<MenuItem>();
