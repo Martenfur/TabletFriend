@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TabletFriend.Models;
+using WpfAppBar;
 
 namespace TabletFriend
 {
@@ -22,32 +23,57 @@ namespace TabletFriend
 
 			var size = Packer.GetSize(positions, sizes);
 
-			window.MaxWidth = double.PositiveInfinity;
-			window.MaxHeight = double.PositiveInfinity;
 
-			window.Width = size.X * theme.CellSize + theme.Margin;
-			window.Height = size.Y * theme.CellSize + theme.Margin;
+			var rotateLayout = false;
+			var layoutVertical = size.Y > size.X;
+			if (AppState.Settings.DockingMode != DockingMode.None)
+			{
+				var dockingVertical = AppState.Settings.DockingMode == DockingMode.Left
+					|| AppState.Settings.DockingMode == DockingMode.Right;
+
+				if (layoutVertical != dockingVertical)
+				{
+					rotateLayout = true;
+				}
+			}
+
+
+			if (rotateLayout)
+			{
+				window.Height = size.X * theme.CellSize + theme.Margin;
+				window.Width = size.Y * theme.CellSize + theme.Margin;
+			}
+			else
+			{
+				window.Width = size.X * theme.CellSize + theme.Margin;
+				window.Height = size.Y * theme.CellSize + theme.Margin;
+			}
+
+			var offset = Vector2.Zero;
+			if (AppState.Settings.DockingMode != DockingMode.None)
+			{
+				if (AppState.Settings.DockingMode == DockingMode.Top || AppState.Settings.DockingMode == DockingMode.Bottom)
+				{
+					offset.X = (float)(SystemParameters.PrimaryScreenWidth - window.Width) / 2;
+				}
+				else
+				{
+					offset.Y = (float)(SystemParameters.PrimaryScreenHeight - window.Height) / 2;
+				}
+			}
+
 
 			window.Opacity = theme.Opacity;
 
 			Application.Current.Resources["PrimaryHueMidBrush"] = new SolidColorBrush(theme.PrimaryColor);
 			Application.Current.Resources["PrimaryHueMidForegroundBrush"] = new SolidColorBrush(theme.SecondaryColor);
 			Application.Current.Resources["MaterialDesignToolForeground"] = new SolidColorBrush(theme.SecondaryColor);
-	
+
 			Application.Current.Resources["MaterialDesignPaper"] = new SolidColorBrush(theme.BackgroundColor);
 			Application.Current.Resources["MaterialDesignFont"] = new SolidColorBrush(theme.SecondaryColor);
 			Application.Current.Resources["MaterialDesignBody"] = new SolidColorBrush(theme.SecondaryColor);
 
 			window.MainBorder.Background = new SolidColorBrush(theme.BackgroundColor);
-
-			if (window.Width < window.Height)
-			{
-				window.MaxWidth = window.Width;
-			}
-			else
-			{
-				window.MaxHeight = window.Height;
-			}
 
 			for (var i = 0; i < positions.Length; i += 1)
 			{
@@ -56,11 +82,32 @@ namespace TabletFriend
 				{
 					continue;
 				}
-				CreateButton(layout, window, button, positions[i], sizes[i]);
+				var buttonPosition = positions[i];
+				var buttonSize = sizes[i];
+
+				if (rotateLayout)
+				{
+					var buffer = buttonPosition.X;
+					buttonPosition.X = buttonPosition.Y;
+					buttonPosition.Y = buffer;
+
+					buffer = buttonSize.X;
+					buttonSize.X = buttonSize.Y;
+					buttonSize.Y = buffer;
+				}
+
+				CreateButton(layout, window, button, buttonPosition, buttonSize, offset);
 			}
 		}
 
-		private static void CreateButton(LayoutModel layout, MainWindow window, ButtonModel button, Vector2 position, Vector2 size)
+		private static void CreateButton(
+			LayoutModel layout,
+			MainWindow window,
+			ButtonModel button,
+			Vector2 position,
+			Vector2 size,
+			Vector2 offset
+		)
 		{
 			var theme = layout.Theme;
 
@@ -126,8 +173,8 @@ namespace TabletFriend
 				uiButton.Click += (e, o) => _ = button.Action.Invoke();
 			}
 
-			Canvas.SetTop(uiButton, theme.CellSize * position.Y + theme.Margin);
-			Canvas.SetLeft(uiButton, theme.CellSize * position.X + theme.Margin);
+			Canvas.SetTop(uiButton, theme.CellSize * position.Y + theme.Margin + offset.Y);
+			Canvas.SetLeft(uiButton, theme.CellSize * position.X + theme.Margin + offset.X);
 			window.MainCanvas.Children.Add(uiButton);
 		}
 	}

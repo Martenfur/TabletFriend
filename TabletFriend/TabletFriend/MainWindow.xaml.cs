@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using TabletFriend.Docking;
+using WpfAppBar;
 
 namespace TabletFriend
 {
@@ -28,7 +30,7 @@ namespace TabletFriend
 			MouseDown += OnMouseDown;
 
 			_file = new FileManager();
-			
+
 
 			_layout = new LayoutManager(this);
 			Settings.Load();
@@ -38,24 +40,25 @@ namespace TabletFriend
 			ContextMenu = new System.Windows.Controls.ContextMenu();
 
 			OnUpdateLayoutList();
-			
+
 
 			_tray = new TrayManager(_layoutList);
 
 
 
 			if (AppState.Settings.AddToAutostart)
-			{ 
+			{
 				AutostartManager.SetAutostart();
 			}
 			else
-			{ 
+			{
 				AutostartManager.ResetAutostart();
 			}
 
 			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
 			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
 			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
+			EventBeacon.Subscribe("docking_changed", OnDockingChanged);
 		}
 
 		private void OnUpdateLayoutList(object[] obj = null)
@@ -64,6 +67,7 @@ namespace TabletFriend
 				() =>
 				{
 					ContextMenu.Items.Clear();
+					DockingMenuFactory.CreateDockingMenu(ContextMenu); 
 					var items = _layoutList.CloneMenu();
 					foreach (var item in items)
 					{
@@ -75,10 +79,31 @@ namespace TabletFriend
 
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (e.ChangedButton == MouseButton.Left)
+			if (
+				e.ChangedButton == MouseButton.Left 
+				&& AppState.Settings.DockingMode == DockingMode.None
+			)
 			{
 				DragMove();
 			}
+		}
+
+		private void OnDockingChanged(params object[] args)
+		{
+			var side = (DockingMode)args[0];
+
+			if (side != DockingMode.None)
+			{
+				AppBarFunctions.SetAppBar(this, DockingMode.None);
+			}
+
+			AppState.Settings.DockingMode = side;
+
+			UiFactory.CreateUi(AppState.CurrentLayout, this);
+			
+			AppBarFunctions.SetAppBar(this, side);
+
+			EventBeacon.SendEvent("update_settings");
 		}
 
 
@@ -93,6 +118,8 @@ namespace TabletFriend
 				GWL_EXSTYLE,
 				GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE
 			);
+
+			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
 		}
 
 
@@ -105,9 +132,11 @@ namespace TabletFriend
 			if (Visibility == Visibility.Collapsed)
 			{
 				Visibility = Visibility.Visible;
+				AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
 			}
 			else
 			{
+				AppBarFunctions.SetAppBar(this, DockingMode.None);
 				Visibility = Visibility.Collapsed;
 			}
 		}
@@ -126,6 +155,7 @@ namespace TabletFriend
 		{
 			base.OnClosing(e);
 			EventBeacon.SendEvent("update_settings");
+			AppBarFunctions.SetAppBar(this, DockingMode.None);
 			Environment.Exit(0);
 		}
 	}

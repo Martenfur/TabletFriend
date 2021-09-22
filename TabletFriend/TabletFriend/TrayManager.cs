@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using TabletFriend.Docking;
+using WpfAppBar;
 
 namespace TabletFriend
 {
@@ -46,6 +48,8 @@ namespace TabletFriend
 
 			_icon.ContextMenu.Items.Add(layoutList.Menu);
 
+			DockingMenuFactory.CreateDockingMenu(_icon.ContextMenu);
+			
 			if (AppState.Settings.AddToAutostart)
 			{
 				_autostartMenuItem = AddMenuItem("remove from autostart", OnAutostartToggle);
@@ -59,6 +63,7 @@ namespace TabletFriend
 			AddMenuItem("about", OnAbout);
 			AddMenuItem("quit", OnQuit);
 		}
+
 
 		private void OnAutostartToggle(object sender, RoutedEventArgs e)
 		{

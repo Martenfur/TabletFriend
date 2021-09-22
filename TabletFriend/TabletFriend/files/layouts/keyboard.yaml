@@ -1,13 +1,10 @@
 ﻿layout_width: 10
+external_theme: files/themes/peach.yaml
 theme:
-	button_size: 48
+	button_size: 40
 	margin: 8
 	rounding: 8
 	default_style: default
-
-	primary_color: "#e91e63"
-	secondary_color: "#fff"
-	background_color: "#FFFFFF"
 
 buttons:
 	q:
