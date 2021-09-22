@@ -109,6 +109,8 @@ namespace TabletFriend
 				GWL_EXSTYLE,
 				GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE
 			);
+
+			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
 		}
 
 
