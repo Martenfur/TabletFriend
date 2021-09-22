@@ -22,7 +22,7 @@ namespace TabletFriend
 			var positions = Packer.Pack(sizes, layout.LayoutWidth);
 
 			var size = Packer.GetSize(positions, sizes);
-
+			var rotateLayout = false;
 			if (AppState.Settings.DockingMode != DockingMode.None)
 			{
 				var layoutVertical = size.Y > size.X;
@@ -31,30 +31,28 @@ namespace TabletFriend
 
 				if (layoutVertical != dockingVertical)
 				{
-					if (layoutVertical)
-					{
-						// Converting vertical toolbars to horizontal.
-						positions = Packer.Pack(sizes, 999);
-					}
-					else
-					{
-						// Converting horizontal toolbars to vertical.
-						positions = Packer.Pack(sizes, 2);
-					}
-					size = Packer.GetSize(positions, sizes);
+					rotateLayout = true;
 				}
 			}
 
 
-			window.Width = size.X * theme.CellSize + theme.Margin;
-			window.Height = size.Y * theme.CellSize + theme.Margin;
+			if (rotateLayout)
+			{
+				window.Height = size.X * theme.CellSize + theme.Margin;
+				window.Width = size.Y * theme.CellSize + theme.Margin;
+			}
+			else
+			{
+				window.Width = size.X * theme.CellSize + theme.Margin;
+				window.Height = size.Y * theme.CellSize + theme.Margin;
+			}
 
 			window.Opacity = theme.Opacity;
 
 			Application.Current.Resources["PrimaryHueMidBrush"] = new SolidColorBrush(theme.PrimaryColor);
 			Application.Current.Resources["PrimaryHueMidForegroundBrush"] = new SolidColorBrush(theme.SecondaryColor);
 			Application.Current.Resources["MaterialDesignToolForeground"] = new SolidColorBrush(theme.SecondaryColor);
-	
+
 			Application.Current.Resources["MaterialDesignPaper"] = new SolidColorBrush(theme.BackgroundColor);
 			Application.Current.Resources["MaterialDesignFont"] = new SolidColorBrush(theme.SecondaryColor);
 			Application.Current.Resources["MaterialDesignBody"] = new SolidColorBrush(theme.SecondaryColor);
@@ -68,7 +66,21 @@ namespace TabletFriend
 				{
 					continue;
 				}
-				CreateButton(layout, window, button, positions[i], sizes[i]);
+				var buttonPosition = positions[i];
+				var buttonSize = sizes[i];
+
+				if (rotateLayout)
+				{
+					var buffer = buttonPosition.X;
+					buttonPosition.X = buttonPosition.Y;
+					buttonPosition.Y = buffer;
+
+					buffer = buttonSize.X;
+					buttonSize.X = buttonSize.Y;
+					buttonSize.Y = buffer;
+				}
+
+				CreateButton(layout, window, button, buttonPosition, buttonSize);
 			}
 		}
 
