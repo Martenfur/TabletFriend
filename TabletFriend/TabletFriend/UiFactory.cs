@@ -15,8 +15,14 @@ namespace TabletFriend
 			var theme = layout.Theme;
 
 			window.MainCanvas.Children.Clear();
-			window.MainBorder.CornerRadius = new CornerRadius(theme.Rounding);
-
+			if (AppState.Settings.DockingMode == DockingMode.None)
+			{
+				window.MainBorder.CornerRadius = new CornerRadius(theme.Rounding);
+			}
+			else
+			{
+				window.MainBorder.CornerRadius = new CornerRadius(0);
+			}
 			var sizes = layout.Buttons.GetSizes();
 			var positions = Packer.Pack(sizes, layout.LayoutWidth);
 
