@@ -49,7 +49,7 @@ buttons:
 	# This is the most basic button.
 	undo:
 		# Action without any keyword will be interpreted as a key press. 
-		# See docs/keys.txt for the full list of allowed key names.
+		# See docs/keys.md for the full list of allowed key names.
 		action: ctrl+z
 		# This button is 2 cells wide and 1 cell tall. 
 		size: 2,1
@@ -106,6 +106,32 @@ buttons:
 		action: cmd calc.exe # cmd executes a command line command. For example, calc.exe will launch calculator app.
 		icon: calculator
 		style: circular
+
+
+	# Here's a bit of lesser known magic.
+	# There are actually 24 F keys, and if you cobine them with win key, inteseting stuff happens.
+	pen_click:
+		actions: 
+			# win+f20 maps to your Surface Pen eraser button click.
+			- win+f20
+		style: accent
+		icon: pencil_box
+		text: bluetooth button\nsingle click
+	pen_double_click:
+		actions: 
+			# win+f10 maps to your Surface Pen eraser button double click.
+			- win+f19
+		style: accent
+		icon: pencil_box_multiple
+		text: bluetooth button\ndouble click
+	pen_hold:
+		actions: 
+			# win+f18 maps to your Surface Pen eraser button hold.
+			- win+f18
+		style: accent
+		icon: pencil
+		text: bluetooth button\nhold
+		size: 2,1
 
 	swap:
 		# This button will load a different layout.
