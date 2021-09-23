@@ -35,6 +35,7 @@ namespace TabletFriend
 			_layout = new LayoutManager(this);
 			Settings.Load();
 
+			Installer.TryInstall();
 
 			_layoutList = new LayoutListManager();
 			ContextMenu = new System.Windows.Controls.ContextMenu();

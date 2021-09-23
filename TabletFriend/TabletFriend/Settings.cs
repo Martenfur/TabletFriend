@@ -14,6 +14,8 @@ namespace TabletFriend
 		public double WindowY = 0;
 		public string Layout = "files/layouts/a_toolbar.yaml";
 		public DockingMode DockingMode = DockingMode.None;
+		
+		public bool FirstLaunch = true;
 
 		private string FullLayoutPath => Path.Combine(AppState.CurrentDirectory, Layout);
 
@@ -37,6 +39,7 @@ namespace TabletFriend
 
 		private void OnUpdateSettings(object[] obj)
 		{
+			FirstLaunch = false;
 			Layout = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentLayoutPath);
 			if (!double.IsNaN(Application.Current.MainWindow.Left))
 			{
