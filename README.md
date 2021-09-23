@@ -35,7 +35,11 @@ Grab the latest release from [this page](http://nothing), unzip it... and that's
 
 Let's be honest - the default toolbars will probably not be enough for you. But that's ok. It's you who knows best what you need, this is why Toolbar Friend is a great toolbar constructor first and a great toolbar second.
 
-First, right-click the tray icon and press the 'open toolbar directory' button. This will open a directory with aa bunch of `.yaml` files. These files are your toolbars - you can open them with any text editor you like. I know, I know, editing some config files directly may seem scary - luckily, Tablet Friend makes it as easy and intuitive as possible. 
+First, right-click the tray icon and press the 'open toolbar directory' button. 
+
+![menu](docs/pics/menu.png)
+
+This will open a directory with aa bunch of `.yaml` files. These files are your toolbars - you can open them with any text editor you like. I know, I know, editing some config files directly may seem scary - luckily, Tablet Friend makes it as easy and intuitive as possible. 
 
 Let's make a new toolbar - create a file named `my_toolbar.yaml` in the `toolbars` directory, open it and paste this inside:
 
@@ -48,7 +52,7 @@ buttons:
 
 Yes, it's that simple. Let's break down what we just wrote: `buttons` is a collection of buttons. This is where all your buttons will go. `cut_button` is the name of your button. **Note that all button names should be unique.** Its `action` is ctrl+x press. And it will display `text` that says "cut" on it. Now, right-click Tablet Friend toolbar and choose "my toolbar" from the list. You don't need to relaunch the program - it updates everything automatically. If you did everything correctly, you will see this:
 
-[pic1]
+![s1](docs/pics/s1.png)
 
 With just four lines, we got ourselves a working button! But obviously, this is not enough for a functional toolbar. Let's add some more:
 
@@ -68,11 +72,9 @@ buttons:
 
 Now, press `Ctrl+S` and your toolbar will update automatically. Magic!
 
+![s2](docs/pics/s2.png)
+
 It is **VERY IMPORTANT** that you use tab characters `	` instead of spaces for your indents. Indents do matter, since they tell the config what should go where. You *can* use spaces if you really want to, but keep in mind that all the default layouts use tabs, and tabs and spaces **should never mix** in one config. 
-
-Anyway, now you'll have a layout that looks something like this:
-
-[pic 2]
 
 Paste button is wider that the others, because its `size` is 2 cells wide and 1 cell high. You also may wonder how do you specify button positions. That's the best thing - you don't. Instead of tediously calculating all the positions by hand, you let Tablet Friend handle this for you. 
 
@@ -84,7 +86,7 @@ layout_width: 4
 
 Press Ctrl+S and your layout will change to this:
 
-[pic]
+![s3](docs/pics/s3.png)
 
 Because there is enough space now, all buttons can fit on the same line. You can play around and see what happens at different button sizes, layout width and button amounts. This system is very intuitive once you get the hang of it.
 
@@ -106,11 +108,12 @@ buttons:
 		action: ctrl+v
 		text: paste
 		size: 2,1	
+		style: accent # Let's also change this button's style to something different.
  ```
 
 Press Ctrl+S and your toolbar will now have a line of space in-between the buttons:
 
-[pic]
+![s4](docs/pics/s4.png)
 
 `Spacer` stacks just like buttons, but instead of a button, it creates empty space. The only valid property for it is `size`. Using spacers, you can create absolutely any shape and layout you want. 
 
