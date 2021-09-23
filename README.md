@@ -52,7 +52,7 @@ Yes, it's that simple. Let's break down what we just wrote: `buttons` is a colle
 
 With just four lines, we got ourselves a working button! But obviously, this is not enough for a functional toolbar. Let's add some more:
 
-```yaml
+ ```yaml
 buttons:
 	cut_button:
 		action: ctrl+x
@@ -64,7 +64,7 @@ buttons:
 		action: ctrl+v
 		text: paste
 		size: 2,1	
-```
+ ```
 
 Now, press `Ctrl+S` and your toolbar will update automatically. Magic!
 
