@@ -40,7 +40,11 @@
 				   BasedOn="{StaticResource MaterialDesignToolButton}">
 				<Setter Property="Padding" Value="0 0 0 0"/>
 			</Style>
-			
+			<Style TargetType="{x:Type ToolTip}" x:Key="tool_tip" BasedOn="{StaticResource MaterialDesignToolTip}">
+				<Setter Property="Foreground" Value="{DynamicResource MaterialDesignFont}" />
+				<Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
+			</Style>
+
 		</ResourceDictionary>
 
 	</Application.Resources>

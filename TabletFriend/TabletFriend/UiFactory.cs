@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,8 +15,14 @@ namespace TabletFriend
 			var theme = layout.Theme;
 
 			window.MainCanvas.Children.Clear();
-			window.MainBorder.CornerRadius = new CornerRadius(theme.Rounding);
-
+			if (AppState.Settings.DockingMode == DockingMode.None)
+			{
+				window.MainBorder.CornerRadius = new CornerRadius(theme.Rounding);
+			}
+			else
+			{
+				window.MainBorder.CornerRadius = new CornerRadius(0);
+			}
 			var sizes = layout.Buttons.GetSizes();
 			var positions = Packer.Pack(sizes, layout.LayoutWidth);
 
@@ -112,6 +117,7 @@ namespace TabletFriend
 			var theme = layout.Theme;
 
 			var uiButton = new Button();
+
 			uiButton.Width = theme.CellSize * size.X - theme.Margin;
 			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
 
@@ -151,6 +157,15 @@ namespace TabletFriend
 			if (button.Icon != null)
 			{
 				uiButton.Content = button.Icon;
+				if (!string.IsNullOrEmpty(button.Text))
+				{
+					uiButton.ToolTip = new ToolTip()
+					{
+						Style = Application.Current.Resources["tool_tip"] as Style,
+						Content = button.Text,
+						HasDropShadow = true,
+					};
+				}
 			}
 
 			var style = button.Style;

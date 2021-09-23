@@ -11,31 +11,37 @@ buttons:
 		size: 2,2
 		style: accent
 		icon: undo
+		text: undo
 	redo:
 		action: ctrl+y
 		size: 2,2
 		style: accent
 		icon: redo
+		text: redo
 	copy:
 		action: ctrl+c
 		size: 4,2
 		style: outlined
 		icon: content_copy
+		text: copy
 	paste:
 		action: ctrl+v
 		size: 2,2
 		style: shy
 		icon: content_paste
+		text: paste
 	cut:
 		action: ctrl+x
 		size: 2,2
 		icon_stretch: none
 		style: shy
 		icon: content_cut
+		text: cut
 	flip:
 		size: 2,2
 		style: circular_accent
 		icon: flip_horizontal
+		text: flip
 	shift:
 		action: toggle shift
 		size: 2,2
@@ -55,6 +61,7 @@ buttons:
 		action: ctrl+a
 		size: 4,2
 		icon: card_text
+		text: select all
 	swap: 
 		action: layout files/layouts/swap.yaml
 		text: Swap
