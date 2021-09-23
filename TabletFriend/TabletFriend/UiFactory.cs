@@ -111,6 +111,7 @@ namespace TabletFriend
 			var theme = layout.Theme;
 
 			var uiButton = new Button();
+
 			uiButton.Width = theme.CellSize * size.X - theme.Margin;
 			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
 
@@ -150,6 +151,15 @@ namespace TabletFriend
 			if (button.Icon != null)
 			{
 				uiButton.Content = button.Icon;
+				if (!string.IsNullOrEmpty(button.Text))
+				{
+					uiButton.ToolTip = new ToolTip()
+					{
+						Style = Application.Current.Resources["tool_tip"] as Style,
+						Content = button.Text,
+						HasDropShadow = true,
+					};
+				}
 			}
 
 			var style = button.Style;
