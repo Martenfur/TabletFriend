@@ -2,9 +2,9 @@
 
 ![logo](icons/logo.png)
 
-### [DOWNLOAD][http://nothing]
+### [DOWNLOAD][https://github.com/Martenfur/TabletFriend/releases/latest]
 
-### [SAMPLE LAYOUT][http://nothing]
+### [SAMPLE LAYOUT][TabletFriend/TabletFriend/files/layouts/sample_layout.yaml]
 
 ### [VIDEO GUIDE][http://nothing]
 
@@ -29,17 +29,17 @@ Here's what Tablet Friend can do:
 
 ## Getting started
 
-Grab the latest release from [this page](http://nothing), unzip it... and that's it! No multistep installations, no hassle, you can start using the thing right away. 
+Grab the latest release from [this page](https://github.com/Martenfur/TabletFriend/releases/latest), unzip it... and that's it! No multistep installations, no hassle, you can start using the thing right away. 
 
 ## Making your own toolbars
 
-Let's be honest - the default toolbars will probably not be enough for you. But that's ok. It's you who knows best what you need, this is why Toolbar Friend is a great toolbar constructor first and a great toolbar second.
+Let's be honest - the default toolbars will probably not be enough for you. But that's ok. It's you who knows best what you need, this is why Tablet Friend is a great toolbar constructor first and a great toolbar second.
 
 First, right-click the tray icon and press the 'open toolbar directory' button. 
 
 ![menu](docs/pics/menu.png)
 
-This will open a directory with aa bunch of `.yaml` files. These files are your toolbars - you can open them with any text editor you like. I know, I know, editing some config files directly may seem scary - luckily, Tablet Friend makes it as easy and intuitive as possible. 
+This will open a directory with a bunch of `.yaml` files. These are your toolbars - you can open them with any text editor you like. I know, I know, editing some config files directly may seem scary - luckily, Tablet Friend makes it as easy and intuitive as possible. 
 
 Let's make a new toolbar - create a file named `my_toolbar.yaml` in the `toolbars` directory, open it and paste this inside:
 
@@ -54,7 +54,7 @@ Yes, it's that simple. Let's break down what we just wrote: `buttons` is a colle
 
 ![s1](docs/pics/s1.png)
 
-With just four lines, we got ourselves a working button! But obviously, this is not enough for a functional toolbar. Let's add some more:
+In just four lines, we got ourselves a working button! But obviously, this is not enough for a functional toolbar. Let's add some more:
 
  ```yaml
 buttons:
@@ -73,8 +73,6 @@ buttons:
 Now, press `Ctrl+S` and your toolbar will update automatically. Magic!
 
 ![s2](docs/pics/s2.png)
-
-It is **VERY IMPORTANT** that you use tab characters `	` instead of spaces for your indents. Indents do matter, since they tell the config what should go where. You *can* use spaces if you really want to, but keep in mind that all the default layouts use tabs, and tabs and spaces **should never mix** in one config. 
 
 Paste button is wider that the others, because its `size` is 2 cells wide and 1 cell high. You also may wonder how do you specify button positions. That's the best thing - you don't. Instead of tediously calculating all the positions by hand, you let Tablet Friend handle this for you. 
 
@@ -117,7 +115,9 @@ Press Ctrl+S and your toolbar will now have a line of space in-between the butto
 
 `Spacer` stacks just like buttons, but instead of a button, it creates empty space. The only valid property for it is `size`. Using spacers, you can create absolutely any shape and layout you want. 
 
-This, of course, are not all the features Tablet Friend offers. You can check out a more [advanced example](http://nothing) with all features listed.
+It is **VERY IMPORTANT** that you use tab characters `	`  instead of spaces for your indents. Indents do matter, since they tell the config what should go where. You *can* use spaces if you really want to, but keep in mind that all the default layouts use tabs, and tabs and spaces **should never mix** in one config. 
+
+This, of course, are not all the features Tablet Friend offers. You can check out a more [advanced example](TabletFriend/TabletFriend/files/layouts/sample_layout.yaml) with all features listed.
 
 
 
