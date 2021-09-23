@@ -38,7 +38,7 @@ namespace TabletFriend.Models
 			{
 				return;
 			}
-			Text = data.Text ?? "";
+			Text = (data.Text ?? "").Replace("\\n", Environment.NewLine);
 
 			if (!string.IsNullOrEmpty(data.Icon))
 			{
