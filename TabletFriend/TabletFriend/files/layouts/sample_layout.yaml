@@ -71,15 +71,8 @@ buttons:
 
 	paste:
 		action: ctrl+v
-		style: shy # This button will look different.
-		
-		# Instead of text, this button will have an icon.
-		# Tablet Friend has several thousand (yep, not a typo) icons built-in.
-		# You can browse the list over here: https://materialdesignicons.com/
-		# Just look up the names of the icons you like and type them here.
+		style: shy
 		icon: content_paste
-		# Since we already have an icon, text will be displayed as a tooltip.
-		# If you don't want tooltips, simply remove the text property.
 		text: paste
 
 	# This is a spacer. The only property it can have is size.
