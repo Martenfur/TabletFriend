@@ -123,4 +123,6 @@ This, of course, are not all the features Tablet Friend offers. You can check ou
 
 ## Making Tablet Friend better
 
-Tablet Friend is opensource, licensed under MIT and 100% free. You can help out the development by submitting your own toolbars to the [issues](https://github.com/Martenfur/TabletFriend/issues) board or helping out with the code.
+Tablet Friend is opensource, licensed under MIT and 100% free. You can help out the development by submitting your own toolbars to the [issues](https://github.com/Martenfur/TabletFriend/issues) board or helping out with the code. 
+
+If you have any questions, you can contact me at `chaifoxes@gmail.com`
