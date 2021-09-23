@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Timers;
+﻿using System.IO;
 
 namespace TabletFriend
 {
@@ -32,10 +29,6 @@ namespace TabletFriend
 			RefreshLayoutList();
 		}
 
-		private void OnElapsed(object sender, ElapsedEventArgs e)
-		{
-			Debug.WriteLine("UNBLOCKED");
-		}
 
 		private void OnChanged(object sender, FileSystemEventArgs args)
 		{
