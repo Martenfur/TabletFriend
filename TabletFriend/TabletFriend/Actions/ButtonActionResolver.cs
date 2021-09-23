@@ -97,7 +97,7 @@ namespace TabletFriend.Actions
 		{
 			try
 			{
-				var args = keyString.Replace(" ", "").Split("+");
+				var args = keyString.Replace(" ", "").Replace("_", "").Split("+");
 				var keysList = new List<KeyCode>();
 
 				foreach (var arg in args)
