@@ -39,12 +39,12 @@ First, right-click the tray icon and press the 'open toolbar directory' button. 
 
 Let's make a new toolbar - create a file named `my_toolbar.yaml` in the `toolbars` directory, open it and paste this inside:
 
-```yaml
+ ```yaml
 buttons:
 	cut_button:
 		action: ctrl+x
 		text: cut
-```
+ ```
 
 Yes, it's that simple. Let's break down what we just wrote: `buttons` is a collection of buttons. This is where all your buttons will go. `cut_button` is the name of your button. **Note that all button names should be unique.** Its `action` is ctrl+x press. And it will display `text` that says "cut" on it. Now, right-click Tablet Friend toolbar and choose "my toolbar" from the list. You don't need to relaunch the program - it updates everything automatically. If you did everything correctly, you will see this:
 
