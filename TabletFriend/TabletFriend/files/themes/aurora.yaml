@@ -8,4 +8,5 @@ default_font: consolas
 primary_color: "#b47cff"
 secondary_color: "#fff0ff"
 background_color: "#212531"
-opacity: 0.9
+min_opacity: 0.2
+max_opacity: 0.9

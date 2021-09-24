@@ -6,4 +6,5 @@ default_style: default
 primary_color: "#f48fb1"
 secondary_color: "#ffffff"
 background_color: "#212121"
-opacity: 0.8
+min_opacity: 0.2
+max_opacity: 0.9

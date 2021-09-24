@@ -11,8 +11,34 @@
 		ShowInTaskbar="False"
 		Background="Transparent"
 		UseLayoutRounding="True"
-		ResizeMode="NoResize">
+		ResizeMode="NoResize"
+		>
 	<Border Name="MainBorder">
 		<Canvas Name="MainCanvas"></Canvas>
 	</Border>
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="Window.MouseEnter">
+			<BeginStoryboard>
+				<Storyboard>
+					<DoubleAnimation 
+						Storyboard.TargetProperty="(Window.Opacity)" 
+						To="{Binding MaxOpacity, RelativeSource={RelativeSource FindAncestor, AncestorType=local:MainWindow}}" 
+						Duration="0:0:0.3"  />
+				</Storyboard>
+			</BeginStoryboard>
+		</EventTrigger>
+
+		<EventTrigger RoutedEvent="Window.MouseLeave">
+			<BeginStoryboard>
+				<Storyboard>
+					<DoubleAnimation 
+						BeginTime="0:0:5" 
+						Storyboard.TargetProperty="(Window.Opacity)" 
+						To="{Binding MinOpacity, RelativeSource={RelativeSource FindAncestor, AncestorType=local:MainWindow}}" 
+						Duration="0:0:0.5" >
+					</DoubleAnimation>
+				</Storyboard>
+			</BeginStoryboard>
+		</EventTrigger>
+	</Window.Triggers>
 </Window>

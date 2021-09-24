@@ -31,9 +31,11 @@ theme:
 	# - shy
 	# - none
 	default_style: default
+
 	# Toolbar opacity. 0 - fully transparent, 1 - fully opaque.
-	opacity: 0.8
-	
+	min_opacity: 0.2 # Used for when the window is unfocused.
+	max_opacity: 0.9 # Used for when the window is focued.
+
 	background_color: "#111" # Notice that color values are in quotes, since # is a comment character.
 	primary_color: "#2a2" # You can also use words for colors.
 	secondary_color: "#ffffff"

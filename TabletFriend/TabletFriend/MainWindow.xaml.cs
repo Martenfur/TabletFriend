@@ -62,6 +62,11 @@ namespace TabletFriend
 			EventBeacon.Subscribe("docking_changed", OnDockingChanged);
 		}
 
+		
+		public double MaxOpacity { get; set; } = 0.2;
+		public double MinOpacity { get; set; } = 0.2;
+
+
 		private void OnUpdateLayoutList(object[] obj = null)
 		{
 			Application.Current.Dispatcher.Invoke(

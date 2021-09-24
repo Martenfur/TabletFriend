@@ -6,7 +6,8 @@ namespace TabletFriend.Data
 		public int? ButtonSize;
 		public int? Margin;
 		public string Rounding;
-		public string Opacity;
+		public string MinOpacity;
+		public string MaxOpacity;
 		public string DefaultStyle;
 
 		public string PrimaryColor;
@@ -25,7 +26,8 @@ namespace TabletFriend.Data
 			ButtonSize = ButtonSize ?? data.ButtonSize;
 			Margin = Margin ?? data.Margin;
 			Rounding = Rounding ?? data.Rounding;
-			Opacity = Opacity ?? data.Opacity;
+			MinOpacity = MinOpacity ?? data.MinOpacity;
+			MaxOpacity = MaxOpacity ?? data.MaxOpacity;
 			DefaultStyle = DefaultStyle ?? data.DefaultStyle;
 
 			PrimaryColor = PrimaryColor ?? data.PrimaryColor;
