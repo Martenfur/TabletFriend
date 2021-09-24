@@ -70,6 +70,7 @@ namespace TabletFriend
 
 			window.MinOpacity = theme.MinOpacity;
 			window.MaxOpacity = theme.MaxOpacity;
+			window.BeginAnimation(UIElement.OpacityProperty, null);
 			window.Opacity = theme.MinOpacity;
 
 			Application.Current.Resources["PrimaryHueMidBrush"] = new SolidColorBrush(theme.PrimaryColor);

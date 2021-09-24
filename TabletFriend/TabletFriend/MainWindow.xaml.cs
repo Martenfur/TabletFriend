@@ -14,12 +14,20 @@ namespace TabletFriend
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow : Window, INotifyPropertyChanged
 	{
 		private LayoutManager _layout;
 		private LayoutListManager _layoutList;
 		private TrayManager _tray;
 		private FileManager _file;
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		private void OnPropertyChanged(string property)
+		{
+			// i hate bizdev i hate bizdev i hate bizdev i hate bizdev i hate bizdev i hate bizdev i hate bizdev i hate bizdev i hate bizdev i hate bizdev i hate bizdev i hate bizdev i hate bizdev i hate bizdev
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+		}
 
 		public MainWindow()
 		{
@@ -45,7 +53,7 @@ namespace TabletFriend
 
 			_tray = new TrayManager(_layoutList);
 
-
+			
 
 			if (AppState.Settings.AddToAutostart)
 			{
@@ -62,9 +70,29 @@ namespace TabletFriend
 			EventBeacon.Subscribe("docking_changed", OnDockingChanged);
 		}
 
-		
-		public double MaxOpacity { get; set; } = 0.2;
-		public double MinOpacity { get; set; } = 0.2;
+
+		private double _maxOpacity;
+		public double MaxOpacity
+		{
+			get => _maxOpacity;
+			set
+			{
+				_maxOpacity = value;
+				OnPropertyChanged(nameof(MaxOpacity));
+			}
+		}
+
+
+		private double _minOpacity;
+		public double MinOpacity
+		{
+			get => _minOpacity;
+			set
+			{
+				_minOpacity = value;
+				OnPropertyChanged(nameof(MinOpacity));
+			}
+		}
 
 
 		private void OnUpdateLayoutList(object[] obj = null)
@@ -73,7 +101,7 @@ namespace TabletFriend
 				() =>
 				{
 					ContextMenu.Items.Clear();
-					DockingMenuFactory.CreateDockingMenu(ContextMenu); 
+					DockingMenuFactory.CreateDockingMenu(ContextMenu);
 					var items = _layoutList.CloneMenu();
 					foreach (var item in items)
 					{
@@ -86,7 +114,7 @@ namespace TabletFriend
 		private void OnMouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (
-				e.ChangedButton == MouseButton.Left 
+				e.ChangedButton == MouseButton.Left
 				&& AppState.Settings.DockingMode == DockingMode.None
 			)
 			{
@@ -106,8 +134,25 @@ namespace TabletFriend
 			AppState.Settings.DockingMode = side;
 
 			UiFactory.CreateUi(AppState.CurrentLayout, this);
-			
+
 			AppBarFunctions.SetAppBar(this, side);
+
+			if (side != DockingMode.None)
+			{
+				MinOpacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				MaxOpacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				BeginAnimation(OpacityProperty, null);
+				Opacity = AppState.CurrentLayout.Theme.MaxOpacity;
+			}
+			else
+			{
+				MinOpacity = AppState.CurrentLayout.Theme.MinOpacity;
+				MaxOpacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				BeginAnimation(OpacityProperty, null);
+				Opacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				BeginAnimation(OpacityProperty, FadeOut);
+			}
+
 
 			EventBeacon.SendEvent("update_settings");
 		}

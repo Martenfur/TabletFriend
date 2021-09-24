@@ -23,7 +23,7 @@
 					<DoubleAnimation 
 						Storyboard.TargetProperty="(Window.Opacity)" 
 						To="{Binding MaxOpacity, RelativeSource={RelativeSource FindAncestor, AncestorType=local:MainWindow}}" 
-						Duration="0:0:0.3"  />
+						Duration="0:0:0.3" />
 				</Storyboard>
 			</BeginStoryboard>
 		</EventTrigger>
@@ -31,12 +31,12 @@
 		<EventTrigger RoutedEvent="Window.MouseLeave">
 			<BeginStoryboard>
 				<Storyboard>
-					<DoubleAnimation 
+					<DoubleAnimation x:Name="FadeOut"
 						BeginTime="0:0:5" 
 						Storyboard.TargetProperty="(Window.Opacity)" 
 						To="{Binding MinOpacity, RelativeSource={RelativeSource FindAncestor, AncestorType=local:MainWindow}}" 
-						Duration="0:0:0.5" >
-					</DoubleAnimation>
+						Duration="0:0:0.5" 
+					/>
 				</Storyboard>
 			</BeginStoryboard>
 		</EventTrigger>
