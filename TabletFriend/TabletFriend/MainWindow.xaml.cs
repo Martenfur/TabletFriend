@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -31,6 +32,8 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
+			SystemEvents.DisplaySettingsChanged += OnSizeChanged;
+
 			Directory.SetCurrentDirectory(AppState.CurrentDirectory);
 
 			Topmost = true;
@@ -68,6 +71,12 @@ namespace TabletFriend
 			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
 			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
 			EventBeacon.Subscribe("docking_changed", OnDockingChanged);
+		}
+
+
+		private void OnSizeChanged(object sender, EventArgs eventArgs)
+		{
+			UiFactory.CreateUi(AppState.CurrentLayout, this);
 		}
 
 
