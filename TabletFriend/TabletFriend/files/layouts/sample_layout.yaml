@@ -134,6 +134,13 @@ buttons:
 		icon: pencil
 		text: bluetooth button\nhold
 		size: 2,1
+	
+	# Left mouse click at a given location 
+	click:
+		action: click 0,0
+		text: Mouse Click\non 0,0
+		size: 2,2
+		style: accent
 
 	swap:
 		# This button will load a different layout.

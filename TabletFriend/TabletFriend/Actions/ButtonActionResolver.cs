@@ -9,6 +9,7 @@ namespace TabletFriend.Actions
 		private const string _typeKeyword = "type ";
 		private const string _toggleKeyword = "toggle ";
 		private const string _cmdKeyword = "cmd ";
+		private const string _clickKeyword = "click ";
 		private const string _waitKeyword = "wait ";
 		private const string _holdKeyword = "hold ";
 		private const string _releaseKeyword = "release ";
@@ -34,6 +35,10 @@ namespace TabletFriend.Actions
 			if (actionString.StartsWith(_cmdKeyword))
 			{
 				return ResolveCmdAction(actionString.Substring(_cmdKeyword.Length));
+			}
+			if (actionString.StartsWith(_clickKeyword))
+			{
+				return ResolveClickAction(actionString.Substring(_clickKeyword.Length));
 			}
 			if (actionString.StartsWith(_waitKeyword))
 			{
@@ -69,6 +74,9 @@ namespace TabletFriend.Actions
 
 		private static ButtonAction ResolveCmdAction(string actionString) =>
 			new CmdAction(actionString.Trim());
+
+		private static ButtonAction ResolveClickAction(string actionString) =>
+			new ClickAction(actionString.Trim());
 
 		private static ButtonAction ResolveWaitAction(string actionString) =>
 			new WaitAction(int.Parse(actionString));
