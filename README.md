@@ -10,7 +10,9 @@
 
 Hey there! Working without a keyboard is hard. When you are on a tablet, you realize how much you miss certain key combinations. Well, no more! Tablet Friend will make your life on Surface Pro or any other Windows tablet easier by providing a highly customizable set of on-screen toolbars.
 
-Whether you are an artist, a casual Windows tablet user or simply a touchscreen enjoyer, Tablet Friend is the perfect companion for getting stuff done. 
+Whether you are an artist, a casual Windows tablet fan or simply a touchscreen enjoyer, Tablet Friend is the perfect companion for getting stuff done. 
+
+![showoff](docs/pics/showoff.png)
 
 Here's what Tablet Friend can do:
 
