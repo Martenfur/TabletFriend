@@ -146,7 +146,8 @@ namespace WpfAppBar
 			// Set desktop window manager attributes to prevent window
 			// from being hidden when peeking at the desktop or when
 			// the 'show desktop' button is pressed
-			renderPolicy = (int)Interop.DWMNCRenderingPolicy.Enabled;
+			renderPolicy = (int)Interop.DWMNCRenderingPolicy.UseWindowStyle;
+			//renderPolicy = (int)Interop.DWMNCRenderingPolicy.Enabled; // From vanilla code, but works worse. No idea why. :D
 
 			Interop.DwmSetWindowAttribute(abd.hWnd, (int)Interop.DWMWINDOWATTRIBUTE.DWMA_EXCLUDED_FROM_PEEK, ref renderPolicy, sizeof(int));
 			Interop.DwmSetWindowAttribute(abd.hWnd, (int)Interop.DWMWINDOWATTRIBUTE.DWMA_DISALLOW_PEEK, ref renderPolicy, sizeof(int));

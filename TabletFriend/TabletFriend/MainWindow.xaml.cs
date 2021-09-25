@@ -135,11 +135,6 @@ namespace TabletFriend
 		{
 			var side = (DockingMode)args[0];
 
-			if (AppState.Settings.DockingMode == side)
-			{
-				return;
-			}
-
 			if (side != DockingMode.None && side != AppState.Settings.DockingMode)
 			{
 				AppBarFunctions.SetAppBar(this, DockingMode.None);
