@@ -134,6 +134,18 @@ buttons:
 		icon: pencil
 		text: bluetooth button\nhold
 		size: 2,1
+	
+	# Left mouse click at a given location 
+	click1:
+		action: click 0,0
+		text: Mouse\nClick 1
+		size: 2,2
+		style: accent
+	click2:
+		action: click 0,0
+		text: Mouse\nClick 2
+		size: 2,2
+		style: accent
 
 	docked_spacer:
 		spacer: true

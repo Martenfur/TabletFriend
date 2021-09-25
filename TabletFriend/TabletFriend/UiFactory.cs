@@ -1,6 +1,6 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +15,9 @@ namespace TabletFriend
 {
 	public static class UiFactory
 	{
+		private static System.Drawing.Point? _newClickCoordinates = null;
+		private static Rectangle _dragBoxFromMouseDown;
+
 		public static void CreateUi(LayoutModel layout, MainWindow window)
 		{
 			ToggleManager.ClearButtons();
@@ -209,7 +212,7 @@ namespace TabletFriend
 			}
 			if (font != null)
 			{
-				text.FontFamily = new FontFamily(font);
+				text.FontFamily = new System.Windows.Media.FontFamily(font);
 			}
 			if (fontWeight > 0)
 			{
@@ -265,11 +268,104 @@ namespace TabletFriend
 			if (button.Action != null)
 			{
 				uiButton.Click += (e, o) => _ = button.Action.Invoke();
+				if (button.Action is ClickAction)
+				{
+					uiButton.Name = button.Key;
+					uiButton.PreviewMouseLeftButtonUp += ClickActionButton_MouseUp;
+					uiButton.PreviewMouseLeftButtonDown += ClickActionButton_MouseDown;
+					uiButton.PreviewMouseMove += ClickActionButton_MouseMove;
+					uiButton.PreviewQueryContinueDrag += ClickActionButton_QueryContinueDrag;
+					uiButton.PreviewGiveFeedback += ClickActionButton_GiveFeedback;
+				}
 			}
 
 			Canvas.SetTop(uiButton, theme.CellSize * position.Y + theme.Margin + offset.Y);
 			Canvas.SetLeft(uiButton, theme.CellSize * position.X + theme.Margin + offset.X);
 			window.MainCanvas.Children.Add(uiButton);
+		}
+
+		private static void ClickActionButton_MouseDown(object sender, System.Windows.Input.MouseEventArgs e)
+		{
+			// Remember the point where the mouse down occurred. The DragSize indicates
+			// the size that the mouse can move before a drag event should be started.
+			System.Drawing.Size dragSize = System.Windows.Forms.SystemInformation.DragSize;
+			var x = System.Windows.Forms.Cursor.Position.X;
+			var y = System.Windows.Forms.Cursor.Position.Y;
+
+			System.Windows.Point mpos = e.GetPosition(null);
+			// Create a rectangle using the DragSize, with the mouse position being
+			// at the center of the rectangle.
+			_dragBoxFromMouseDown = new Rectangle(
+				new System.Drawing.Point(
+					x - (dragSize.Width / 2),
+					y - (dragSize.Height / 2)),
+				dragSize);
+		}
+
+        private static void ClickActionButton_MouseUp(object sender, System.Windows.Input.MouseEventArgs e)
+		{
+			// Reset the drag rectangle when the mouse button is raised.
+			_dragBoxFromMouseDown = Rectangle.Empty;
+		}
+
+		private static void ClickActionButton_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+		{
+			if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+			{
+				var x = System.Windows.Forms.Cursor.Position.X;
+				var y = System.Windows.Forms.Cursor.Position.Y;
+
+				// If the mouse moves outside the rectangle, start the drag.
+				if (_dragBoxFromMouseDown != Rectangle.Empty &&
+					!_dragBoxFromMouseDown.Contains(x, y))
+				{
+					_dragBoxFromMouseDown = Rectangle.Empty;
+					{
+						DataObject dataObj = new DataObject((sender as Button));
+						DragDrop.DoDragDrop((sender as Button), dataObj, DragDropEffects.None);
+						if(_newClickCoordinates.HasValue)
+                        {
+							var result = MessageBox.Show(
+								$"Save new click destination {_newClickCoordinates.Value}",
+								"Mouse Click Action",
+								MessageBoxButton.OKCancel);
+
+							if(result == MessageBoxResult.OK)
+                            {
+								var key = (sender as Button).Name;
+								LayoutManager.UpdateClickActionCoordinatesInCurrentLayoutFile(key, _newClickCoordinates.Value);
+							}
+
+							_newClickCoordinates = null;
+						}
+					}
+				}
+			}
+		}
+
+		private static void ClickActionButton_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+		{
+			System.Windows.Input.Mouse.SetCursor(System.Windows.Input.Cursors.Cross);
+			e.Handled = true;
+		}
+
+		private static void ClickActionButton_QueryContinueDrag(object sender, QueryContinueDragEventArgs e)
+		{
+            if (e.KeyStates == DragDropKeyStates.None)
+            {
+				var pointOnScreen = System.Windows.Forms.Cursor.Position;
+				var pointInMainWindow = Application.Current.MainWindow.PointFromScreen(
+					new System.Windows.Point(pointOnScreen.X, pointOnScreen.Y));
+				var rs = Application.Current.MainWindow.RenderSize;
+				var dropDestinationInsideOfMainWindow =
+					(pointInMainWindow.X > 0 && pointInMainWindow.X < rs.Width) &&
+					(pointInMainWindow.Y > 0 && pointInMainWindow.Y < rs.Height);
+
+				if (!dropDestinationInsideOfMainWindow)
+				{
+					_newClickCoordinates = pointOnScreen;
+				}
+            }
 		}
 	}
 }
