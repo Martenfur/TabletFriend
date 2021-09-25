@@ -71,7 +71,15 @@ namespace TabletFriend
 			window.MinOpacity = theme.MinOpacity;
 			window.MaxOpacity = theme.MaxOpacity;
 			window.BeginAnimation(UIElement.OpacityProperty, null);
-			window.Opacity = theme.MinOpacity;
+			window.Opacity = theme.MaxOpacity;
+			if (window.IsMouseOver)
+			{
+				window.BeginAnimation(UIElement.OpacityProperty, window.FadeIn);
+			}
+			else
+			{
+				window.BeginAnimation(UIElement.OpacityProperty, window.FadeOut);
+			}
 
 			Application.Current.Resources["PrimaryHueMidBrush"] = new SolidColorBrush(theme.PrimaryColor);
 			Application.Current.Resources["PrimaryHueMidForegroundBrush"] = new SolidColorBrush(theme.SecondaryColor);
