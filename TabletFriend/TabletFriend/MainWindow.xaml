@@ -17,17 +17,6 @@
 		<Canvas Name="MainCanvas"></Canvas>
 	</Border>
 	<Window.Triggers>
-		<EventTrigger RoutedEvent="Window.MouseMove">
-			<BeginStoryboard>
-				<Storyboard>
-					<DoubleAnimation 
-						Storyboard.TargetProperty="(Window.Opacity)" 
-						To="{Binding MaxOpacity, RelativeSource={RelativeSource FindAncestor, AncestorType=local:MainWindow}}" 
-						Duration="0:0:0.3" />
-				</Storyboard>
-			</BeginStoryboard>
-		</EventTrigger>
-
 		<EventTrigger RoutedEvent="Window.MouseEnter">
 			<BeginStoryboard>
 				<Storyboard>

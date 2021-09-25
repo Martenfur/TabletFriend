@@ -40,7 +40,6 @@ namespace TabletFriend
 
 		public void LoadLayout(string path)
 		{
-			AppBarFunctions.SetAppBar(Application.Current.MainWindow, DockingMode.None);
 			if (AppState.CurrentLayout != null)
 			{
 				AppState.CurrentLayout.Dispose();
