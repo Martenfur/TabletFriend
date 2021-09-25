@@ -102,6 +102,11 @@ namespace WpfAppBar
 			abd.cbSize = Marshal.SizeOf(abd);
 			abd.hWnd = new WindowInteropHelper(appbarWindow).Handle;
 
+			if (abd.hWnd.ToInt32() == 0)
+			{
+				return;
+			}
+
 			int renderPolicy;
 
 			if (edge == DockingMode.None)
