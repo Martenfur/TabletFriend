@@ -1,5 +1,5 @@
 ﻿layout_width: 4
-external_theme: files/themes/aurora.yaml
+external_theme: files/themes/default.yaml
 theme:
 	button_size: 14
 

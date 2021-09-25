@@ -1,40 +1,34 @@
-﻿layout_width: 10
-external_theme: files/themes/peach.yaml
+﻿layout_width: 11
+external_theme: files/themes/default.yaml
 theme:
 	button_size: 40
 	margin: 8
 	rounding: 8
 	default_style: default
+	min_opacity: 0.9
 
 buttons:
 	q:
 		action: q
 		text: q
-		style: none
 	w:
 		action: w
 		text: w
-		style: outlined
 	e:
 		action: e
 		text: e
-		style: circular
 	r:
 		action: r
 		text: r
-		style: shy
 	t:
 		action: t
 		text: t
-		style: default
 	y:
 		action: y
 		text: y
-		style: accent
 	u:
 		action: u
 		text: u
-		style: circular_accent
 	i:
 		action: i
 		text: i
@@ -44,6 +38,11 @@ buttons:
 	p:
 		action: p
 		text: p
+	backspace:
+		action: backspace
+		size: 1,1
+		style: accent
+		icon: backspace
 
 	a:
 		action: a
@@ -72,14 +71,13 @@ buttons:
 	l:
 		action: l
 		text: l
-	spacer:
-		spacer: true
-
-	shift:
-		action: toggle shift
+	enter:
+		action: enter
 		size: 2,1
-		text: Shift
-		style: outlined
+		style: accent
+		icon: subdirectory_arrow_left
+
+	shift: # You can put a reference to your button here and define it later.
 	z:
 		action: z
 		text: z
@@ -102,7 +100,56 @@ buttons:
 		action: m
 		text: m
 
+
+	up:
+	spacer_bottom:
+		spacer: true
+
+	shift:
+		action: toggle shift
+		size: 2,1
+		icon: apple_keyboard_shift
+		style: accent
+
+	ctrl:
+		action: toggle ctrl
+		size: 1,1
+		icon: apple_keyboard_control
+		style: accent
+
+	win:
+		action: toggle win
+		size: 1,1
+		icon: view_grid
+		style: accent
+
+	alt:
+		action: toggle alt
+		size: 1,1
+		icon: apple_keyboard_option
+		style: accent
+
+
 	space:
 		action: space
-		size: 10,1
-		style: outlined
+		size: 5,1
+		style: accent
+		icon: keyboard_space
+
+	left:
+		action: left
+		icon: chevron_left
+		style: accent
+	up:
+		action: up
+		icon: chevron_up
+		style: accent
+	down:
+		action: down
+		icon: chevron_down
+		style: accent
+	right:
+		action: right
+		icon: chevron_right
+		style: accent
+
