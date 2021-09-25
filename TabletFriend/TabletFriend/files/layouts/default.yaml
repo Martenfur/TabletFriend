@@ -1,0 +1,147 @@
+﻿layout_width: 6
+external_theme: files/themes/default.yaml
+theme:
+	button_size: 14
+
+buttons:
+	spacer_top:
+		size: 6,1
+		spacer: true
+
+	prev_desktop:
+		action: win+ctrl+left
+		size: 3,1
+		icon: chevron_triple_left
+		style: shy
+		text: previous desktop
+	next_desktop:
+		action: win+ctrl+right
+		size: 3,1
+		icon: chevron_triple_right
+		style: shy 
+		text: next desktop
+
+	undo:
+		action: ctrl+z
+		size: 3,2
+		style: accent
+		icon: undo
+		text: undo
+	redo:
+		action: ctrl+y
+		size: 3,2
+		style: accent
+		icon: redo
+		text: redo
+
+	copy:
+		action: ctrl+c
+		size: 2,2
+		style: outlined
+		icon: content_copy
+		text: copy
+	paste:
+		action: ctrl+v
+		size: 2,2
+		style: outlined
+		icon: content_paste
+		text: paste
+	cut:
+		action: ctrl+x
+		size: 2,2
+		icon_stretch: none
+		style: outlined
+		icon: content_cut
+		text: cut
+	enter:
+		action: enter
+		size: 3,2
+		style: outlined
+		icon: subdirectory_arrow_left
+	escape:
+		font_weight: 500
+		action: escape
+		size: 3,2
+		style: outlined
+		text: Esc
+
+
+	spacer1:
+		size: 6,1
+		spacer: true
+	shift:
+		action: toggle shift
+		size: 3,2
+		text: toggle shift
+		icon: apple_keyboard_shift
+		style: shy
+	space:
+		action: toggle space
+		size: 3,2
+		text: toggle space
+		icon: keyboard_space
+		style: shy
+	ctrl:
+		action: toggle ctrl
+		size: 3,2
+		text: toggle ctrl
+		icon: apple_keyboard_control
+		style: shy
+	alt:
+		action: toggle alt
+		size: 3,2
+		text: toggle alt
+		icon: apple_keyboard_option
+		style: shy
+	spacer2:
+		size: 6,1
+		spacer: true
+
+	left:
+		action: left
+		size: 2,2
+		icon: chevron_left
+	up:
+		action: up
+		size: 2,1
+		icon: chevron_up
+	right:
+		action: right
+		size: 2,2
+		icon: chevron_right
+	down:
+		action: down
+		size: 2,1
+		icon: chevron_down
+
+	spacer5:
+		size: 6,1
+		spacer: true
+	select_all:
+		action: ctrl+a
+		size: 2,2
+		icon: card_text
+		text: select all
+		style: outlined
+	save:
+		action: ctrl+s
+		size: 2,2
+		style: outlined
+		icon: content_save
+		text: save
+	new:
+		action: ctrl+n
+		size: 2,2
+		style: outlined
+		icon: file
+		text: new
+
+	spacer_bottom:
+		size: 2,1
+		spacer: true
+	default_mini:
+		action: layout files/layouts/default_mini.yaml
+		size: 2,1
+		icon: menu_up
+		style: shy
+		text: switch to mini

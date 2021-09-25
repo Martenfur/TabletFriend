@@ -12,7 +12,7 @@ namespace TabletFriend
 		public bool AddToAutostart = true;
 		public double WindowX = 0;
 		public double WindowY = 0;
-		public string Layout = "files/layouts/a_toolbar.yaml";
+		public string Layout = "files/layouts/default.yaml";
 		public DockingMode DockingMode = DockingMode.None;
 		
 		public bool FirstLaunch = true;

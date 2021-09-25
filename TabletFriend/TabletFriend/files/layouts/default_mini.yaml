@@ -1,0 +1,119 @@
+﻿layout_width: 4
+external_theme: files/themes/aurora.yaml
+theme:
+	button_size: 14
+
+buttons:
+	spacer_top:
+		size: 4,1
+		spacer: true
+
+	prev_desktop:
+		action: win+ctrl+left
+		size: 2,1
+		icon: chevron_triple_left
+		style: shy
+		text: previous desktop
+	next_desktop:
+		action: win+ctrl+right
+		size: 2,1
+		icon: chevron_triple_right
+		style: shy 
+		text: next desktop
+
+	undo:
+		action: ctrl+z
+		size: 2,2
+		style: accent
+		icon: undo
+		text: undo
+	redo:
+		action: ctrl+y
+		size: 2,2
+		style: accent
+		icon: redo
+		text: redo
+
+	copy:
+		action: ctrl+c
+		size: 2,2
+		style: outlined
+		icon: content_copy
+		text: copy
+	paste:
+		action: ctrl+v
+		size: 2,2
+		style: outlined
+		icon: content_paste
+		text: paste
+	cut:
+		action: ctrl+x
+		size: 2,2
+		icon_stretch: none
+		style: outlined
+		icon: content_cut
+		text: cut
+	select_all:
+		action: ctrl+a
+		size: 2,2
+		icon: card_text
+		text: select all
+		style: outlined
+	enter:
+		action: enter
+		size: 2,2
+		style: outlined
+		icon: subdirectory_arrow_left
+	escape:
+		font_weight: 500
+		action: escape
+		size: 2,2
+		style: outlined
+		text: Esc
+
+	shift:
+		action: toggle shift
+		size: 2,2
+		text: toggle shift
+		icon: apple_keyboard_shift
+		style: shy
+	space:
+		action: toggle space
+		size: 2,2
+		text: toggle space
+		icon: keyboard_space
+		style: shy
+	ctrl:
+		action: toggle ctrl
+		size: 2,2
+		text: toggle ctrl
+		icon: apple_keyboard_control
+		style: shy
+	alt:
+		action: toggle alt
+		size: 2,2
+		text: toggle alt
+		icon: apple_keyboard_option
+		style: shy
+
+	save:
+		action: ctrl+s
+		size: 2,2
+		style: outlined
+		icon: content_save
+		text: save
+	new:
+		action: ctrl+n
+		size: 2,2
+		style: outlined
+		icon: file
+		text: new
+	spacer_bottom:
+		size: 1,1
+		spacer: true
+	default_mini:
+		action: layout files/layouts/default.yaml
+		size: 2,1
+		icon: menu_down
+		style: shy
+		text: switch to full

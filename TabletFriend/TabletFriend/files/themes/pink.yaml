@@ -1,6 +1,6 @@
-button_size: 40
+button_size: 32
 margin: 8
-rounding: 8
+rounding: 16
 default_style: default
 
 primary_color: "#f48fb1"

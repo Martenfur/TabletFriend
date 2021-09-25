@@ -4,7 +4,7 @@ rounding: 16
 default_style: accent
 
 primary_color: "#847979"
-secondary_color: "#f7f0f5"
-background_color: "#323031"
+secondary_color: "#fff0ff"
+background_color: "#212121"
 min_opacity: 0.2
 max_opacity: 0.9

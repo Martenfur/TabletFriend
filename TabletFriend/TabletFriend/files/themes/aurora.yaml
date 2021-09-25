@@ -1,12 +1,9 @@
-button_size: 40
+button_size: 32
 margin: 8
-rounding: 8
-default_style: accent
-
-default_font: consolas
+rounding: 16
 
 primary_color: "#b47cff"
 secondary_color: "#fff0ff"
-background_color: "#212531"
+background_color: "#212521"
 min_opacity: 0.2
 max_opacity: 0.9

@@ -1,9 +1,0 @@
-﻿layout_width: 4
-
-theme:
-	button_size: 64
-
-buttons:
-	swap: 
-		action: layout files/layouts/a_toolbar.yaml
-		text: Swap
