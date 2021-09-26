@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Media;
 using TabletFriend.Data;
 
@@ -10,10 +9,10 @@ namespace TabletFriend.Models
 		public const int MinButtonSize = 8;
 		public const int MinMargin = 0;
 
-		public int ButtonSize = 40;
+		public int ButtonSize = 32;
 		public int Margin = 8;
 
-		public double Rounding = 8;
+		public double Rounding = 16;
 		
 		public double MinOpacity = 0.2;
 		public double MaxOpacity = 0.9;
@@ -22,9 +21,9 @@ namespace TabletFriend.Models
 
 		public int CellSize => ButtonSize + Margin;
 
-		public Color PrimaryColor = Utils.StringToColor("#f48fb1");
-		public Color SecondaryColor = Utils.StringToColor("#fff0ff");
-		public Color BackgroundColor = Utils.StringToColor("#212531");
+		public Color PrimaryColor = Utils.StringToColor("#847979");
+		public Color SecondaryColor = Utils.StringToColor("#f7f0f5");
+		public Color BackgroundColor = Utils.StringToColor("#323031");
 
 		public string DefaultFont;
 		public int DefaultFontSize;
