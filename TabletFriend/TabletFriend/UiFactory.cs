@@ -67,8 +67,14 @@ namespace TabletFriend
 				}
 			}
 
-
-			window.MinOpacity = theme.MinOpacity;
+			if (AppState.Settings.DockingMode != DockingMode.None)
+			{ 
+				window.MinOpacity = theme.MaxOpacity;
+			}
+			else
+			{ 
+				window.MinOpacity = theme.MinOpacity;
+			}
 			window.MaxOpacity = theme.MaxOpacity;
 			window.BeginAnimation(UIElement.OpacityProperty, null);
 			window.Opacity = theme.MaxOpacity;
