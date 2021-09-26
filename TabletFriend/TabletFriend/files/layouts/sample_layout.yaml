@@ -1,0 +1,143 @@
+﻿# This is a layout file. It defines what buttons do, how they look and how they are arranged. 
+# This may look a bit overwhelming at first, but you can remove any properties that you don't 
+# need and everything will work just fine. For example, you can remove all theme properties 
+# and simply use external themes.
+# You can also hot-reload the layouts and immediately preview your changes. 
+# Simply edit and save the layout, and the app will immediately display your changes.
+
+# Indentations DO matter, they determine the property hierarchy.
+
+# Max layout width measured in cells. The buttons do not have position properties - instead, they get stacked automatically
+# from left to right and from top to bottom. Layout width specifies how far left the buttons can be stacked. 
+layout_width: 2
+# External theme file. Contains the same fileds as 'theme' property. If 'theme' as any properties of its own, 
+# they override external theme.
+external_theme: files/themes/peach.yaml
+# Local theme.
+theme:
+	# 1x1 button size measured in pixels.
+	button_size: 40
+	# Space between the buttons measured in pixels.
+	margin: 8
+	# Determines how round the window will be.
+	rounding: 8
+	# Default button style. Applied when the button has no 'style' property.
+	# Allowed styles:
+	# - default
+	# - accent
+	# - circular_accent
+	# - circular
+	# - outlined
+	# - shy
+	# - none
+	default_style: default
+
+	# Toolbar opacity. 0 - fully transparent, 1 - fully opaque.
+	min_opacity: 0.2 # Used for when the window is unfocused.
+	max_opacity: 0.9 # Used for when the window is focued.
+
+	background_color: "#111" # Notice that color values are in quotes, since # is a comment character.
+	primary_color: "#2a2" # You can also use words for colors.
+	secondary_color: "#ffffff"
+	
+	default_font: consolas
+	default_font_size: 14
+	# Defines the boldness of the font. Allowed values are from 1 to 999.
+	default_font_weight: 500 
+
+# Button list of the layout. Note that all buttons should have different 
+# names - otherwise you'll end up with missing buttons.
+buttons:
+	# This is the most basic button.
+	undo:
+		# Action without any keyword will be interpreted as a key press. 
+		# See docs/keys.md for the full list of allowed key names.
+		action: ctrl+z
+		# This button is 2 cells wide and 1 cell tall. 
+		size: 2,1
+		# This text will be displayed on the button.
+		text: undo
+
+	copy:
+		action: ctrl+c
+		style: accent # This button will look different.
+		
+		# Instead of text, this button will have an icon.
+		# Tablet Friend has several thousand (yep, not a typo) icons built-in.
+		# You can browse the list over here: https://materialdesignicons.com/
+		# Just look up the names of the icons you like and type them here.
+		icon: content_copy
+		# Since we already have an icon, text will be displayed as a tooltip.
+		# If you don't want tooltips, simply remove the text property.
+		text: copy
+
+	paste:
+		action: ctrl+v
+		style: shy
+		icon: content_paste
+		text: paste
+
+	# This is a spacer. The only property it can have is size.
+	# Since you cannot specity positions directly, spacers exist
+	# to create empty space between the buttons. This spacer will 
+	# occupy 2 cells.
+	spacer1:
+		spacer: true
+		size: 2,1
+
+	shift:
+		action: toggle shift # Instead of pressing once, this button will be on toggle.
+		style: outlined
+		icon: apple_keyboard_shift
+		text: shift
+		size: 2,1
+
+	type:
+		actions: # Typing "actions" instead of "action" will make the button chain multiple actions. Any action can be used.
+		- type foxes # First, "foxes" will be typed.
+		- wait 1000 # Then, we'll wait for one second.
+		- space # Then, spacebar will be pressed. 
+		- type rule # Then, "rule" will be typed.
+		- hold shift # And finally, shift will be pressed for two seconds.
+		- wait 2000
+		- release shift
+		style: circular_accent
+		text: type
+
+	calc:
+		action: cmd calc.exe # cmd executes a command line command. For example, calc.exe will launch calculator app.
+		icon: calculator
+		style: circular
+
+
+	# Here's a bit of lesser known magic.
+	# There are actually 24 F keys, and if you cobine them with win key, inteseting stuff happens.
+	pen_click:
+		actions: 
+			# win+f20 maps to your Surface Pen eraser button click.
+			- win+f20
+		style: accent
+		icon: pencil_box
+		text: bluetooth button\nsingle click
+	pen_double_click:
+		actions: 
+			# win+f10 maps to your Surface Pen eraser button double click.
+			- win+f19
+		style: accent
+		icon: pencil_box_multiple
+		text: bluetooth button\ndouble click
+	pen_hold:
+		actions: 
+			# win+f18 maps to your Surface Pen eraser button hold.
+			- win+f18
+		style: accent
+		icon: pencil
+		text: bluetooth button\nhold
+		size: 2,1
+
+	swap:
+		# This button will load a different layout.
+		action: layout files/layouts/sample_layout2.yaml
+		text: Second\nlayout # \n puts text on a new line.
+		size: 2,2
+		style: default

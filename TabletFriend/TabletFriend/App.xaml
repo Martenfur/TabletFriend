@@ -1,0 +1,51 @@
+﻿<Application x:Class="TabletFriend.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TabletFriend"
+             StartupUri="MainWindow.xaml">
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<!--PRIMARY-->
+			<Style x:Key="default" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignFlatButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style x:Key="accent" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style x:Key="circular_accent" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style x:Key="outlined" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style x:Key="circular" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignIconButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style x:Key="shy" 
+				   TargetType="{x:Type ButtonBase}" 
+				   BasedOn="{StaticResource MaterialDesignToolButton}">
+				<Setter Property="Padding" Value="0 0 0 0"/>
+			</Style>
+			<Style TargetType="{x:Type ToolTip}" x:Key="tool_tip" BasedOn="{StaticResource MaterialDesignToolTip}">
+				<Setter Property="Foreground" Value="{DynamicResource MaterialDesignFont}" />
+				<Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
+			</Style>
+
+		</ResourceDictionary>
+
+	</Application.Resources>
+</Application>

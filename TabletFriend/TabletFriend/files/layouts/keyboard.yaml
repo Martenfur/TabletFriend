@@ -1,0 +1,155 @@
+﻿layout_width: 11
+external_theme: files/themes/default.yaml
+theme:
+	button_size: 40
+	margin: 8
+	rounding: 8
+	default_style: default
+	min_opacity: 0.9
+
+buttons:
+	q:
+		action: q
+		text: q
+	w:
+		action: w
+		text: w
+	e:
+		action: e
+		text: e
+	r:
+		action: r
+		text: r
+	t:
+		action: t
+		text: t
+	y:
+		action: y
+		text: y
+	u:
+		action: u
+		text: u
+	i:
+		action: i
+		text: i
+	o:
+		action: o
+		text: o
+	p:
+		action: p
+		text: p
+	backspace:
+		action: backspace
+		size: 1,1
+		style: accent
+		icon: backspace
+
+	a:
+		action: a
+		text: a
+	s:
+		action: s
+		text: s
+	d:
+		action: d
+		text: d
+	f:
+		action: f
+		text: f
+	g:
+		action: g
+		text: g
+	h:
+		action: h
+		text: h
+	j:
+		action: j
+		text: j
+	k:
+		action: k
+		text: k
+	l:
+		action: l
+		text: l
+	enter:
+		action: enter
+		size: 2,1
+		style: accent
+		icon: subdirectory_arrow_left
+
+	shift: # You can put a reference to your button here and define it later.
+	z:
+		action: z
+		text: z
+	x:
+		action: x
+		text: x
+	c:
+		action: c
+		text: c
+	v:
+		action: v
+		text: v
+	b:
+		action: b
+		text: b
+	n:
+		action: n
+		text: n
+	m:
+		action: m
+		text: m
+
+
+	up:
+	spacer_bottom:
+		spacer: true
+
+	shift:
+		action: toggle shift
+		size: 2,1
+		icon: apple_keyboard_shift
+		style: accent
+
+	ctrl:
+		action: toggle ctrl
+		size: 1,1
+		icon: apple_keyboard_control
+		style: accent
+
+	win:
+		action: toggle win
+		size: 1,1
+		icon: view_grid
+		style: accent
+
+	alt:
+		action: toggle alt
+		size: 1,1
+		icon: apple_keyboard_option
+		style: accent
+
+
+	space:
+		action: space
+		size: 5,1
+		style: accent
+		icon: keyboard_space
+
+	left:
+		action: left
+		icon: chevron_left
+		style: accent
+	up:
+		action: up
+		icon: chevron_up
+		style: accent
+	down:
+		action: down
+		icon: chevron_down
+		style: accent
+	right:
+		action: right
+		icon: chevron_right
+		style: accent
+

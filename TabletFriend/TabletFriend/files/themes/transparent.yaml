@@ -1,0 +1,10 @@
+button_size: 32
+margin: 8
+rounding: 8
+default_style: accent
+
+primary_color: "#777"
+secondary_color: "#ddd"
+background_color: "#05000000" # 05 alpha to make the window still draggable.
+min_opacity: 0.2
+max_opacity: 1
