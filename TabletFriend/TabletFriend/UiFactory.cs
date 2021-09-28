@@ -1,8 +1,11 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using TabletFriend.Actions;
 using TabletFriend.Models;
 using WpfAppBar;
 
@@ -68,11 +71,11 @@ namespace TabletFriend
 			}
 
 			if (AppState.Settings.DockingMode != DockingMode.None)
-			{ 
+			{
 				window.MinOpacity = theme.MaxOpacity;
 			}
 			else
-			{ 
+			{
 				window.MinOpacity = theme.MinOpacity;
 			}
 			window.MaxOpacity = theme.MaxOpacity;
@@ -133,8 +136,17 @@ namespace TabletFriend
 		{
 			var theme = layout.Theme;
 
-			var uiButton = new Button();
+			ButtonBase uiButton;
+			var isToggle = button.Action is ToggleAction;
 
+			if (isToggle)
+			{
+				uiButton = new ToggleButton();
+			}
+			else
+			{
+				uiButton = new Button();
+			}
 			uiButton.Width = theme.CellSize * size.X - theme.Margin;
 			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
 
@@ -191,13 +203,21 @@ namespace TabletFriend
 				style = theme.DefaultStyle;
 			}
 
-			if (style == null)
+			if (isToggle)
 			{
-				uiButton.Style = null;
+				uiButton.Style = Application.Current.Resources["toggle"] as Style;
+				((ToggleButton)uiButton).IsChecked = true;
 			}
 			else
 			{
-				uiButton.Style = Application.Current.Resources[style] as Style;
+				if (style == null)
+				{
+					uiButton.Style = null;
+				}
+				else
+				{
+					uiButton.Style = Application.Current.Resources[style] as Style;
+				}
 			}
 
 			if (button.Action != null)
