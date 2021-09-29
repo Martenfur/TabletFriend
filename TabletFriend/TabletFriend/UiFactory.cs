@@ -206,7 +206,11 @@ namespace TabletFriend
 			if (isToggle)
 			{
 				uiButton.Style = Application.Current.Resources["toggle"] as Style;
-				((ToggleButton)uiButton).IsChecked = true;
+				
+				if (isToggle)
+				{
+					ToggleManager.AddButton(((ToggleAction)button.Action).Key, (ToggleButton)uiButton);
+				}
 			}
 			else
 			{

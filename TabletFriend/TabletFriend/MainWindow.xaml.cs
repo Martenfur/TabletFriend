@@ -42,6 +42,7 @@ namespace TabletFriend
 
 			_file = new FileManager();
 
+			ToggleManager.Init();
 
 			_layout = new LayoutManager(this);
 			Settings.Load();
