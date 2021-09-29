@@ -134,6 +134,7 @@ namespace TabletFriend.Actions
 			{ "Win", nameof(KeyCode.LWin) },
 			{ "Shift", nameof(KeyCode.LShift) },
 			{ "Ctrl", nameof(KeyCode.LControl) },
+			{ "Alt", nameof(KeyCode.LAlt) },
 			{ "0", nameof(KeyCode.D0) },
 			{ "1", nameof(KeyCode.D1) },
 			{ "2", nameof(KeyCode.D2) },

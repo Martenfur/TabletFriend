@@ -76,25 +76,21 @@ buttons:
 		size: 2,2
 		text: toggle shift
 		icon: apple_keyboard_shift
-		style: shy
 	space:
 		action: toggle space
 		size: 2,2
 		text: toggle space
 		icon: keyboard_space
-		style: shy
 	ctrl:
 		action: toggle ctrl
 		size: 2,2
 		text: toggle ctrl
 		icon: apple_keyboard_control
-		style: shy
 	alt:
 		action: toggle alt
 		size: 2,2
 		text: toggle alt
 		icon: apple_keyboard_option
-		style: shy
 
 	save:
 		action: ctrl+s
