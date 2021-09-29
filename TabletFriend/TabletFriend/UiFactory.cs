@@ -134,6 +134,7 @@ namespace TabletFriend
 			Vector2 offset
 		)
 		{
+			ToggleManager.ClearButtons();
 			var theme = layout.Theme;
 
 			ButtonBase uiButton;
@@ -209,7 +210,13 @@ namespace TabletFriend
 				
 				if (isToggle)
 				{
-					ToggleManager.AddButton(((ToggleAction)button.Action).Key, (ToggleButton)uiButton);
+					var key = ((ToggleAction)button.Action).Key;
+					var toggle = (ToggleButton)uiButton;
+					if (ToggleManager.IsHeld(key))
+					{
+						toggle.IsChecked = true;
+					}
+					ToggleManager.AddButton(key, toggle);
 				}
 			}
 			else

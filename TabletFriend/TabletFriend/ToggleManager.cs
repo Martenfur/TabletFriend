@@ -53,7 +53,7 @@ namespace TabletFriend
 
 
 		public static void ClearButtons() =>
-			new Dictionary<KeyCode, List<ToggleButton>>();
+			_buttons = new Dictionary<KeyCode, List<ToggleButton>>();
 
 
 		public static bool IsHeld(KeyCode key) =>
