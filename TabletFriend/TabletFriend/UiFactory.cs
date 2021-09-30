@@ -45,16 +45,17 @@ namespace TabletFriend
 				}
 			}
 
+			var titlebarHeight = TitlebarManager.GetTitlebarHeight(theme);
 
 			if (rotateLayout)
 			{
-				window.Height = size.X * theme.CellSize + theme.Margin;
+				window.Height = size.X * theme.CellSize + theme.Margin + titlebarHeight;
 				window.Width = size.Y * theme.CellSize + theme.Margin;
 			}
 			else
 			{
 				window.Width = size.X * theme.CellSize + theme.Margin;
-				window.Height = size.Y * theme.CellSize + theme.Margin;
+				window.Height = size.Y * theme.CellSize + theme.Margin + titlebarHeight;
 			}
 
 			var offset = Vector2.Zero;
@@ -68,6 +69,10 @@ namespace TabletFriend
 				{
 					offset.Y = (float)(SystemParameters.PrimaryScreenHeight - window.Height) / 2;
 				}
+			}
+			else
+			{
+				offset.Y = (float)titlebarHeight;
 			}
 
 			if (AppState.Settings.DockingMode != DockingMode.None)
@@ -123,6 +128,9 @@ namespace TabletFriend
 
 				CreateButton(layout, window, button, buttonPosition, buttonSize, offset);
 			}
+
+
+			TitlebarManager.CreateTitlebar(window, theme);
 		}
 
 		private static void CreateButton(
@@ -207,7 +215,7 @@ namespace TabletFriend
 			if (isToggle)
 			{
 				uiButton.Style = Application.Current.Resources["toggle"] as Style;
-				
+
 				if (isToggle)
 				{
 					var key = ((ToggleAction)button.Action).Key;
