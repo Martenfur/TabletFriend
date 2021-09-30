@@ -24,6 +24,10 @@ namespace TabletFriend
 
 		private static double _maximizedWindowHeight;
 
+		/// <summary>
+		/// Blocks the first minimize to make the feel a little bit nicer.
+		/// </summary>
+		private static bool _grace = false;
 		public static double GetTitlebarHeight(ThemeModel theme)
 		{
 			if (AppState.Settings.DockingMode == DockingMode.None)
@@ -54,12 +58,11 @@ namespace TabletFriend
 			_window.MouseEnter += OnMouseEnter;
 			_window.MouseLeave += OnMouseLeave;
 
-			if (_minimizedMode && !_window.IsMouseOver)
-			{
-				Minimize();
-			}
+			_grace = true;
+			
 
 		}
+
 
 		private static void CreateButton()
 		{
@@ -71,11 +74,11 @@ namespace TabletFriend
 			uiButton.Style = Application.Current.Resources["shy"] as Style;
 			_ico = new PackIcon();
 			if (_minimizedMode)
-			{ 
+			{
 				_ico.Kind = _minimizedIcon;
 			}
 			else
-			{ 
+			{
 				_ico.Kind = _defaultIcon;
 			}
 			uiButton.Content = _ico;
@@ -89,10 +92,11 @@ namespace TabletFriend
 
 		private static void OnMouseLeave(object sender, MouseEventArgs e)
 		{
-			if (_minimizedMode)
+			if (_minimizedMode && !_grace)
 			{
 				Minimize();
 			}
+			_grace = false;
 		}
 
 		private static void OnMouseEnter(object sender, MouseEventArgs e)
@@ -101,6 +105,7 @@ namespace TabletFriend
 			{
 				Maximize();
 			}
+			_grace = false;
 		}
 
 		private static void OnClick(object sender, RoutedEventArgs e)
