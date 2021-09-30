@@ -1,6 +1,8 @@
 ﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using TabletFriend.Models;
 using WpfAppBar;
 
@@ -9,10 +11,11 @@ namespace TabletFriend
 	public static class TitlebarManager
 	{
 
-		private const PackIconKind _defaultIcon = PackIconKind.RhombusMedium;
-		private const PackIconKind _minimizedIcon = PackIconKind.CircleMedium;
+		private const PackIconKind _defaultIcon = PackIconKind.RhombusMediumOutline;
+		private const PackIconKind _minimizedIcon = PackIconKind.RhombusMedium;
 		private const double _baseTitlebarHeight = 12;
 
+		private static bool _minimizedMode = false;
 		private static bool _minimized = false;
 
 		private static PackIcon _ico;
@@ -35,44 +38,108 @@ namespace TabletFriend
 			_minimized = false;
 			_window = window;
 			_theme = theme;
+			_maximizedWindowHeight = _window.Height;
+
+			_window.MouseEnter -= OnMouseEnter;
+			_window.MouseLeave -= OnMouseLeave;
 
 			if (AppState.Settings.DockingMode != DockingMode.None)
 			{
 				return;
 			}
 
-			_maximizedWindowHeight = _window.Height;
 
+			CreateButton();
+
+			_window.MouseEnter += OnMouseEnter;
+			_window.MouseLeave += OnMouseLeave;
+
+			if (_minimizedMode && !_window.IsMouseOver)
+			{
+				Minimize();
+			}
+
+		}
+
+		private static void CreateButton()
+		{
 			var uiButton = new Button();
 
 			uiButton.Width = 32;
-			uiButton.Height = GetTitlebarHeight(theme);
+			uiButton.Height = GetTitlebarHeight(_theme);
 
 			uiButton.Style = Application.Current.Resources["shy"] as Style;
 			_ico = new PackIcon();
-			_ico.Kind = _defaultIcon;
-
+			if (_minimizedMode)
+			{ 
+				_ico.Kind = _minimizedIcon;
+			}
+			else
+			{ 
+				_ico.Kind = _defaultIcon;
+			}
 			uiButton.Content = _ico;
 			uiButton.Click += OnClick;
 
 			Canvas.SetTop(uiButton, 0);
 			Canvas.SetLeft(uiButton, (_window.Width - uiButton.Width) / 2);
 			_window.MainCanvas.Children.Add(uiButton);
+
+		}
+
+		private static void OnMouseLeave(object sender, MouseEventArgs e)
+		{
+			if (_minimizedMode)
+			{
+				Minimize();
+			}
+		}
+
+		private static void OnMouseEnter(object sender, MouseEventArgs e)
+		{
+			if (_minimizedMode)
+			{
+				Maximize();
+			}
 		}
 
 		private static void OnClick(object sender, RoutedEventArgs e)
 		{
-			if (_minimized)
+			if (_minimizedMode)
 			{
-				_window.Height = _maximizedWindowHeight;
+				Maximize();
 				_ico.Kind = _defaultIcon;
 			}
 			else
 			{
-				_window.Height = GetTitlebarHeight(_theme);
+				if (!_window.IsMouseOver)
+				{
+					Minimize();
+				}
 				_ico.Kind = _minimizedIcon;
 			}
-			_minimized = !_minimized;
+			_minimizedMode = !_minimizedMode;
 		}
+
+		private static void Minimize()
+		{
+			if (!_minimized)
+			{
+				_minimized = true;
+				_maximizedWindowHeight = _window.Height;
+				_window.Height = GetTitlebarHeight(_theme);
+			}
+		}
+
+		private static void Maximize()
+		{
+			if (_minimized)
+			{
+				_minimized = false;
+				_window.Height = _maximizedWindowHeight;
+			}
+		}
+
+
 	}
 }
