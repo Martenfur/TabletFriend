@@ -15,6 +15,7 @@ namespace TabletFriend
 	{
 		public static void CreateUi(LayoutModel layout, MainWindow window)
 		{
+			ToggleManager.ClearButtons();
 			var theme = layout.Theme;
 
 			window.MainCanvas.Children.Clear();
@@ -142,7 +143,6 @@ namespace TabletFriend
 			Vector2 offset
 		)
 		{
-			ToggleManager.ClearButtons();
 			var theme = layout.Theme;
 
 			ButtonBase uiButton;
@@ -215,17 +215,14 @@ namespace TabletFriend
 			if (isToggle)
 			{
 				uiButton.Style = Application.Current.Resources["toggle"] as Style;
-
-				if (isToggle)
+			
+				var key = ((ToggleAction)button.Action).Key;
+				var toggle = (ToggleButton)uiButton;
+				if (ToggleManager.IsHeld(key))
 				{
-					var key = ((ToggleAction)button.Action).Key;
-					var toggle = (ToggleButton)uiButton;
-					if (ToggleManager.IsHeld(key))
-					{
-						toggle.IsChecked = true;
-					}
-					ToggleManager.AddButton(key, toggle);
+					toggle.IsChecked = true;
 				}
+				ToggleManager.AddButton(key, toggle);
 			}
 			else
 			{
