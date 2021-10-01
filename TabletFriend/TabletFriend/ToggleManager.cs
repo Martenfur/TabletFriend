@@ -35,7 +35,7 @@ namespace TabletFriend
 		}
 
 
-		public static void DisableButtons(KeyCode key)
+		public static void DisableAllButtons(KeyCode key)
 		{
 			if (_buttons.TryGetValue(key, out var list))
 			{
@@ -47,6 +47,33 @@ namespace TabletFriend
 							button.IsChecked = false;
 						}
 					);
+				}
+			}
+		}
+
+
+		private static ToggleButton[] GetButtons(KeyCode key)
+		{
+			if (_buttons.TryGetValue(key, out var list))
+			{
+				return list.ToArray();
+			}
+			return null;
+		}
+
+
+		private static void SetButtons(KeyCode key, bool active)
+		{
+			var buttons = GetButtons(key);
+			if (buttons == null)
+			{
+				return;
+			}
+			foreach (var button in buttons)
+			{
+				if (button.IsChecked != active)
+				{
+					button.IsChecked = active;
 				}
 			}
 		}
@@ -76,11 +103,13 @@ namespace TabletFriend
 			{
 				await Simulate.Events().Hold(key).Invoke();
 				_heldKeys.Add(key);
+				SetButtons(key, true);
 			}
 			else
 			{
 				await Simulate.Events().Release(key).Invoke();
 				_heldKeys.Remove(key);
+				SetButtons(key, false);
 			}
 
 			Interlocked.Exchange(ref _inputLocked, 0);
@@ -90,12 +119,12 @@ namespace TabletFriend
 		{
 			var key = e.Data?.KeyUp?.Key;
 			if (!key.HasValue)
-			{ 
+			{
 				key = e.Data?.KeyDown?.Key;
 			}
 			if (Interlocked.Read(ref _inputLocked) == 0 && key.HasValue && IsHeld(key.Value))
 			{
-				DisableButtons(key.Value);
+				DisableAllButtons(key.Value);
 				_heldKeys.Remove(key.Value);
 			}
 		}
