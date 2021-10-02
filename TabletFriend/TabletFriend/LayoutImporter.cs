@@ -31,12 +31,13 @@ namespace TabletFriend
 			}
 			catch (Exception e)
 			{
-				MessageBox.Show(
-					"Cannot load '" + path + "': " + e.Message,
-					"Load failure!",
-					MessageBoxButton.OK,
-					MessageBoxImage.Error
-				);
+				// This is causing problems when the file is loaded several times over by the file watcher.
+				//MessageBox.Show(
+				//	"Cannot load '" + path + "': " + e.Message,
+				//	"Load failure!",
+				//	MessageBoxButton.OK,
+				//	MessageBoxImage.Error
+				//);
 			}
 			return null;
 		}
