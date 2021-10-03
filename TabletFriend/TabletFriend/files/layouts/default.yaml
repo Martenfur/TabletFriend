@@ -98,22 +98,22 @@ buttons:
 
 
 	left:
-		action: left
+		action: repeat left
 		size: 2,2
 		icon: chevron_left
 		visibility: undocked
 	up:
-		action: up
+		action: repeat up
 		size: 2,1
 		icon: chevron_up
 		visibility: undocked
 	right:
-		action: right
+		action: repeat right
 		size: 2,2
 		icon: chevron_right
 		visibility: undocked
 	down:
-		action: down
+		action: repeat down
 		size: 2,1
 		icon: chevron_down
 		visibility: undocked
@@ -124,7 +124,7 @@ buttons:
 		size: 2,2
 		visibility: docked
 	docked_up:
-		action: up
+		action: repeat up
 		size: 2,2
 		icon: chevron_up
 		visibility: docked
@@ -133,17 +133,17 @@ buttons:
 		size: 2,2
 		visibility: docked
 	docked_left:
-		action: left
+		action: repeat left
 		size: 2,2
 		icon: chevron_left
 		visibility: docked
 	docked_down:
-		action: down
+		action: repeat down
 		size: 2,2
 		icon: chevron_down
 		visibility: docked
 	docked_right:
-		action: right
+		action: repeat right
 		size: 2,2
 		icon: chevron_right
 		visibility: docked

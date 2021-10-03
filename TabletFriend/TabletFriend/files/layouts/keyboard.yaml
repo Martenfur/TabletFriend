@@ -1,7 +1,7 @@
 ﻿layout_width: 11
 external_theme: files/themes/default.yaml
 theme:
-	button_size: 40
+	button_size: 32
 	margin: 8
 	rounding: 8
 	default_style: default
@@ -9,67 +9,67 @@ theme:
 
 buttons:
 	q:
-		action: q
+		action: repeat q
 		text: q
 	w:
-		action: w
+		action: repeat w
 		text: w
 	e:
-		action: e
+		action: repeat e
 		text: e
 	r:
-		action: r
+		action: repeat r
 		text: r
 	t:
-		action: t
+		action: repeat t
 		text: t
 	y:
-		action: y
+		action: repeat y
 		text: y
 	u:
-		action: u
+		action: repeat u
 		text: u
 	i:
-		action: i
+		action: repeat i
 		text: i
 	o:
-		action: o
+		action: repeat o
 		text: o
 	p:
-		action: p
+		action: repeat p
 		text: p
 	backspace:
-		action: backspace
+		action: repeat backspace
 		size: 1,1
 		style: accent
 		icon: backspace
 
 	a:
-		action: a
+		action: repeat a
 		text: a
 	s:
-		action: s
+		action: repeat s
 		text: s
 	d:
-		action: d
+		action: repeat d
 		text: d
 	f:
-		action: f
+		action: repeat f
 		text: f
 	g:
-		action: g
+		action: repeat g
 		text: g
 	h:
-		action: h
+		action: repeat h
 		text: h
 	j:
-		action: j
+		action: repeat j
 		text: j
 	k:
-		action: k
+		action: repeat k
 		text: k
 	l:
-		action: l
+		action: repeat l
 		text: l
 	enter:
 		action: enter
@@ -79,37 +79,37 @@ buttons:
 
 	shift: # You can put a reference to your button here and define it later.
 	z:
-		action: z
+		action: repeat z
 		text: z
 	x:
-		action: x
+		action: repeat x
 		text: x
 	c:
-		action: c
+		action: repeat c
 		text: c
 	v:
-		action: v
+		action: repeat v
 		text: v
 	b:
-		action: b
+		action: repeat b
 		text: b
 	n:
-		action: n
+		action: repeat n
 		text: n
 	m:
-		action: m
+		action: repeat m
 		text: m
 
 
 	up:
-	spacer_bottom:
-		spacer: true
+	rshift:
+		action: toggle shift
+		icon: apple_keyboard_shift
 
 	shift:
 		action: toggle shift
 		size: 2,1
 		icon: apple_keyboard_shift
-		style: accent
 
 	ctrl:
 		action: toggle ctrl
@@ -131,25 +131,25 @@ buttons:
 
 
 	space:
-		action: space
+		action: repeat space
 		size: 5,1
 		style: accent
 		icon: keyboard_space
 
 	left:
-		action: left
+		action: repeat left
 		icon: chevron_left
 		style: accent
 	up:
-		action: up
+		action: repeat up
 		icon: chevron_up
 		style: accent
 	down:
-		action: down
+		action: repeat down
 		icon: chevron_down
 		style: accent
 	right:
-		action: right
+		action: repeat right
 		icon: chevron_right
 		style: accent
 

@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 using TabletFriend.Actions;
 using TabletFriend.Models;
@@ -112,7 +113,7 @@ namespace TabletFriend
 
 			var visibleButtons = new List<ButtonModel>();
 
-			foreach(var button in layout.Buttons)
+			foreach (var button in layout.Buttons)
 			{
 				if (button.IsVisible(isDocked))
 				{
@@ -163,6 +164,7 @@ namespace TabletFriend
 
 			ButtonBase uiButton;
 			var isToggle = button.Action is ToggleAction;
+			var isRepeat = button.Action is RepeatAction;
 
 			if (isToggle)
 			{
@@ -170,7 +172,15 @@ namespace TabletFriend
 			}
 			else
 			{
-				uiButton = new Button();
+				if (isRepeat)
+				{
+					uiButton = new RepeatButton();
+					Stylus.SetIsPressAndHoldEnabled(uiButton, false);
+				}
+				else
+				{
+					uiButton = new Button();
+				}
 			}
 			uiButton.Width = theme.CellSize * size.X - theme.Margin;
 			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
@@ -231,7 +241,7 @@ namespace TabletFriend
 			if (isToggle)
 			{
 				uiButton.Style = Application.Current.Resources["toggle"] as Style;
-			
+
 				var key = ((ToggleAction)button.Action).Key;
 				var toggle = (ToggleButton)uiButton;
 				if (ToggleManager.IsHeld(key))

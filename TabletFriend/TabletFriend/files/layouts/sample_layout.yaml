@@ -155,6 +155,13 @@ buttons:
 		# Makes the button be visible only in undocked mode. 
 		visibility: undocked
 
+	left:
+		# repeat action will make the button trigger continiously when pressed and held down.
+		action: repeat left
+		icon: chevron_left
+	right:
+		action: repeat right
+		icon: chevron_right
 
 	swap:
 		# This button will load a different layout.
