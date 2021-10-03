@@ -4,9 +4,6 @@ theme:
 	button_size: 14
 
 buttons:
-	spacer_top:
-		size: 4,1
-		spacer: true
 
 	prev_desktop:
 		action: win+ctrl+left
@@ -34,6 +31,11 @@ buttons:
 		icon: redo
 		text: redo
 
+	docked_spacer1:
+		spacer: true
+		visibility: docked
+		size: 4,1
+	
 	copy:
 		action: ctrl+c
 		size: 2,2
@@ -59,6 +61,12 @@ buttons:
 		icon: card_text
 		text: select all
 		style: outlined
+
+	docked_spacer2:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
 	enter:
 		action: enter
 		size: 2,2
@@ -70,6 +78,11 @@ buttons:
 		size: 2,2
 		style: outlined
 		text: Esc
+
+	docked_spacer3:
+		spacer: true
+		visibility: docked
+		size: 4,1
 
 	shift:
 		action: toggle shift
@@ -92,6 +105,95 @@ buttons:
 		text: toggle alt
 		icon: apple_keyboard_option
 
+	docked_spacer4:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+
+	left:
+		action: left
+		size: 1,2
+		icon: chevron_left
+		visibility: docked
+	up:
+		action: up
+		size: 2,1
+		icon: chevron_up
+		visibility: docked
+	right:
+		action: right
+		size: 1,2
+		icon: chevron_right
+		visibility: docked
+	down:
+		action: down
+		size: 2,1
+		icon: chevron_down
+		visibility: docked
+
+	docked_spacer5:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	dock_left:
+		action: win+left
+		size: 2,2
+		icon: dock_left
+		visibility: docked
+	dock_right:
+		action: win+right
+		size: 2,2
+		icon: dock_right
+		visibility: docked
+	dock_up:
+		action: win+up
+		size: 2,2
+		icon: dock_top
+		visibility: docked
+	dock_down:
+		action: win+down
+		size: 2,2
+		icon: dock_bottom
+		visibility: docked
+
+
+	docked_spacer6:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	play_pause:
+		action: media_play_pause
+		size: 4,2
+		style: outlined
+		icon: play_pause
+		visibility: docked
+	prev_track:
+		action: media_previous_track
+		size: 2,2
+		style: outlined
+		icon: skip_previous
+		visibility: docked
+	next_track:
+		action: media_next_track
+		size: 2,2
+		style: outlined
+		icon: skip_next
+		visibility: docked
+
+	docked_spacer7:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+
+	docked_spacer6:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
 	save:
 		action: ctrl+s
 		size: 2,2
@@ -104,6 +206,7 @@ buttons:
 		style: outlined
 		icon: file
 		text: new
+
 	spacer_bottom:
 		size: 1,1
 		spacer: true
