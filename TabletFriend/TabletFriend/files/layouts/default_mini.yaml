@@ -112,22 +112,22 @@ buttons:
 
 
 	left:
-		action: left
+		action: repeat left
 		size: 1,2
 		icon: chevron_left
 		visibility: docked
 	up:
-		action: up
+		action: repeat up
 		size: 2,1
 		icon: chevron_up
 		visibility: docked
 	right:
-		action: right
+		action: repeat right
 		size: 1,2
 		icon: chevron_right
 		visibility: docked
 	down:
-		action: down
+		action: repeat down
 		size: 2,1
 		icon: chevron_down
 		visibility: docked
