@@ -8,6 +8,7 @@
 - Added `visibility` attribute - now, some buttons can be present in either docked or undocked mode.
 - When updating, the installer will make a backup.
 - Toggle buttons now have visible state.
+- Added `repeat` action. Repeating buttons will continue triggering key presses if the button is being held down.
 
 ### Changed
 
