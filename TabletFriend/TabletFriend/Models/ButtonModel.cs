@@ -31,6 +31,7 @@ namespace TabletFriend.Models
 		/// </summary>
 		public bool Spacer;
 
+		public ButtonVisibility Visibility;
 
 		public ButtonModel(ButtonData data)
 		{
@@ -85,6 +86,8 @@ namespace TabletFriend.Models
 			Font = data.Font;
 			FontSize = data.FontSize;
 			FontWeight = data.FontWeight;
+
+			Visibility = data.Visibility;
 		}
 
 		public void Dispose()

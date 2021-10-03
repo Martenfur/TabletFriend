@@ -1,5 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,7 +20,10 @@ namespace TabletFriend
 			var theme = layout.Theme;
 
 			window.MainCanvas.Children.Clear();
-			if (AppState.Settings.DockingMode == DockingMode.None)
+
+			var isDocked = AppState.Settings.DockingMode != DockingMode.None;
+
+			if (!isDocked)
 			{
 				window.MainBorder.CornerRadius = new CornerRadius(theme.Rounding);
 			}
@@ -27,7 +31,7 @@ namespace TabletFriend
 			{
 				window.MainBorder.CornerRadius = new CornerRadius(0);
 			}
-			var sizes = layout.Buttons.GetSizes();
+			var sizes = layout.Buttons.GetSizes(isDocked);
 			var positions = Packer.Pack(sizes, layout.LayoutWidth);
 
 			var size = Packer.GetSize(positions, sizes);
@@ -106,9 +110,21 @@ namespace TabletFriend
 
 			window.MainBorder.Background = new SolidColorBrush(theme.BackgroundColor);
 
+			var visibleButtons = new List<ButtonModel>();
+
+			foreach(var button in layout.Buttons)
+			{
+				if (button.IsVisible(isDocked))
+				{
+					visibleButtons.Add(button);
+				}
+			}
+
 			for (var i = 0; i < positions.Length; i += 1)
 			{
-				var button = layout.Buttons[i];
+				var button = visibleButtons[i];
+
+
 				if (button.Spacer)
 				{
 					continue;
