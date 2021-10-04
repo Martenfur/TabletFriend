@@ -32,6 +32,8 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
+			UpdateChecker.Check();
+
 			SystemEvents.DisplaySettingsChanged += OnSizeChanged;
 
 			Directory.SetCurrentDirectory(AppState.CurrentDirectory);
