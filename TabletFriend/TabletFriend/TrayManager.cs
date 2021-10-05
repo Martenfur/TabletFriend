@@ -26,6 +26,7 @@ namespace TabletFriend
 
 		private TaskbarIcon _icon;
 		private MenuItem _autostartMenuItem;
+		private MenuItem _autoUpdateMenuItem;
 		private readonly string _iconPathBlack = AppState.CurrentDirectory + "/files/icons/tray/tray_black.ico";
 		private readonly string _iconPathWhite = AppState.CurrentDirectory + "/files/icons/tray/tray_white.ico";
 
@@ -59,6 +60,15 @@ namespace TabletFriend
 				_autostartMenuItem = AddMenuItem("add to autostart", OnAutostartToggle);
 			}
 
+			if (AppState.Settings.UpdateCheckingEnabled)
+			{
+				_autoUpdateMenuItem = AddMenuItem("don't check for updates", OnAutoUpdateToggle);
+			}
+			else
+			{
+				_autoUpdateMenuItem = AddMenuItem("check for updates", OnAutoUpdateToggle);
+			}
+
 			AddMenuItem("open layouts directory...", OnOpenLayoutsDirectory);
 			AddMenuItem("about", OnAbout);
 			AddMenuItem("quit", OnQuit);
@@ -80,7 +90,21 @@ namespace TabletFriend
 				_autostartMenuItem.Header = "add to autostart";
 			}
 			EventBeacon.SendEvent("update_settings");
+		}
 
+		private void OnAutoUpdateToggle(object sender, RoutedEventArgs e)
+		{
+			AppState.Settings.UpdateCheckingEnabled = !AppState.Settings.UpdateCheckingEnabled;
+
+			if (AppState.Settings.UpdateCheckingEnabled)
+			{
+				_autoUpdateMenuItem.Header = "don't check for updates";
+			}
+			else
+			{
+				_autoUpdateMenuItem.Header = "check for updates";
+			}
+			EventBeacon.SendEvent("update_settings");
 		}
 
 		private void OnAbout(object sender, RoutedEventArgs e)
