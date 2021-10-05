@@ -19,11 +19,27 @@ namespace TabletFriend
 
 		private const string _repoLink = "https://api.github.com/repos/Martenfur/TaletFriend/releases/latest";
 
-		private static string _downloadsPath => 
+		private static string _downloadsPath =>
 			Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads\\tablet_friend");
 
+		
 		public static async Task Check()
 		{
+			try
+			{ 
+				await UpdateCheckRoutine();
+			}
+			catch { }
+		}
+
+
+		private static async Task UpdateCheckRoutine()
+		{
+			if (!AppState.Settings.UpdateCheckingEnabled)
+			{
+				return;
+			}
+
 			var response = await Get(_repoLink);
 
 			var newVersion = new Version(response["name"].ToString());
@@ -34,7 +50,7 @@ namespace TabletFriend
 				return;
 			}
 			var result = MessageBox.Show(
-				"A new version of Tablet Friend is available." 
+				"A new version of Tablet Friend is available."
 				+ Environment.NewLine
 				+ Environment.NewLine
 				+ "v" + newVersion
@@ -54,7 +70,27 @@ namespace TabletFriend
 				return;
 			}
 
-			await DownloadUpdate(response, newVersion.ToString());
+			try
+			{
+				await DownloadUpdate(response, newVersion.ToString());
+			}
+			catch (Exception e)
+			{
+				 MessageBox.Show(
+					"DOWNLOAD FAILED:"
+					+ Environment.NewLine
+					+ Environment.NewLine
+					+ e.Message,
+					"Download failed!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
+
+				return;
+			}
+
+
+			Application.Current.Shutdown();
 		}
 
 		private static async Task DownloadUpdate(JObject response, string version)
@@ -78,14 +114,22 @@ namespace TabletFriend
 				}
 			}
 
+			MessageBox.Show(
+				"A new version of Tablet Friend has been downloaded. "
+				+ "Please unzip and install the new version. Tablet Friend will be closed.",
+				"Update!",
+				MessageBoxButton.OK,
+				MessageBoxImage.Information
+			);
+
 			var startInfo = new ProcessStartInfo()
 			{
 				Arguments = versionedDownloadsPath,
 				FileName = "explorer.exe"
 			};
 			Process.Start(startInfo);
-
 		}
+
 
 		private async static Task<JObject> Get(string uri)
 		{

@@ -17,6 +17,8 @@ namespace TabletFriend
 		
 		public bool FirstLaunch = true;
 
+		public bool UpdateCheckingEnabled = true;
+
 		private string FullLayoutPath => Path.Combine(AppState.CurrentDirectory, Layout);
 
 		public Settings()

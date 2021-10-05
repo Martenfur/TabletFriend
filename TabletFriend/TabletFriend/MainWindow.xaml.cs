@@ -32,8 +32,6 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
-			UpdateChecker.Check();
-
 			SystemEvents.DisplaySettingsChanged += OnSizeChanged;
 
 			Directory.SetCurrentDirectory(AppState.CurrentDirectory);
@@ -50,6 +48,9 @@ namespace TabletFriend
 			Settings.Load();
 
 			Installer.TryInstall();
+
+			_ = UpdateChecker.Check();
+
 
 			_layoutList = new LayoutListManager();
 			ContextMenu = new System.Windows.Controls.ContextMenu();
