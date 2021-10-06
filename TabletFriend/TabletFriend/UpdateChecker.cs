@@ -17,7 +17,7 @@ namespace TabletFriend
 
 		private static readonly HttpClient _client = new HttpClient();
 
-		private const string _repoLink = "https://api.github.com/repos/Martenfur/TaletFriend/releases/latest";
+		private const string _repoLink = "https://api.github.com/repos/Martenfur/TabletFriend/releases/latest";
 
 		private static string _downloadsPath =>
 			Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads\\tablet_friend");
