@@ -49,6 +49,9 @@ namespace TabletFriend
 
 			Installer.TryInstall();
 
+			_ = UpdateChecker.Check();
+
+
 			_layoutList = new LayoutListManager();
 			ContextMenu = new System.Windows.Controls.ContextMenu();
 
