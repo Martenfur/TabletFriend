@@ -6,7 +6,7 @@
 
 ### [SAMPLE LAYOUT](TabletFriend/TabletFriend/files/layouts/sample_layout.yaml)
 
-### [VIDEO GUIDE](http://nothing)
+### [VIDEO GUIDE](https://www.youtube.com/watch?v=rWkRrhrKmSY)
 
 Hey there! Working without a keyboard is hard. When you are on a tablet, you realize how much you miss certain key combinations. Well, no more! Tablet Friend will make your life on Surface Pro or any other Windows tablet easier by providing a highly customizable set of on-screen toolbars.
 
