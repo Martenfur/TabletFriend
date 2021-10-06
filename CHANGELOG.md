@@ -9,6 +9,8 @@
 - When updating, the installer will make a backup.
 - Toggle buttons now have visible state.
 - Added `repeat` action. Repeating buttons will continue triggering key presses if the button is being held down.
+- Added update checker.
+- Added a layout for Leonardo.
 
 ### Changed
 

@@ -1,0 +1,143 @@
+layout_width: 6
+external_theme: files/themes/default.yaml
+theme:
+	button_size: 14
+
+buttons:
+	escape_button:
+		action: escape
+		size: 6,2
+		style: outlined
+		text: esc
+	undo:
+		action: ctrl+z
+		size: 3,2
+		style: accent
+		icon: undo
+		text: undo
+	redo:
+		action: ctrl+y
+		size: 3,2
+		style: accent
+		icon: redo
+		text: redo
+	
+	spacer1:
+		size: 6,1
+		spacer: true
+	
+	brush:
+		action: b
+		size: 3,2
+		style: accent
+		icon: brush
+		text: brush
+	eraser:
+		action: e
+		size: 3,2
+		style: accent
+		icon: eraser 
+		text: eraser
+	brush_angle:
+		action: toggle a 
+		size: 3,2
+		style: accent
+		icon: angle-acute
+		text: brush angle
+	brush_size:
+		action: toggle d 
+		size: 3,2
+		style: accent
+		icon: laser-pointer
+		text: brush size
+	
+	spacer4:
+		size: 6,1
+		spacer: true
+		
+	magic_wand:
+		action: w
+		size: 6,2
+		style: accent
+		icon: auto-fix
+		text: magic wand tool
+	selection_tool:
+		action: k
+		size: 3,2
+		style: accent
+		icon: selection-drag
+		text: rectangle selection tool
+	lasso:
+		action: l 
+		size: 3,2
+		style: accent
+		icon: lasso
+		text: lasso selection tool
+	move:
+		action: v
+		size: 6,2
+		style: accent
+		icon: cursor-move
+		text: move
+	
+	spacer6: 
+		size: 6,1
+		spacer: true
+	hand: 
+		action: h
+		size: 3,2
+		style: accent
+		icon: hand
+		text: hand tool
+	rotate_tool:
+		action: o
+		size: 3,2
+		style: accent
+		icon: crop-rotate
+		text: rotate tool
+		
+	spacer7:
+		size: 6,1
+		spacer: true
+	paint_bucket_tool: 
+		action: u
+		size: 3,2
+		style: accent
+		icon: format-color-fill
+		text: paint bucket tool
+	gradient_tool:
+		action: g
+		size: 3,2
+		style: accent
+		icon: gradient-horizontal
+		text: gradient tool
+	
+	spacer2:
+		size: 6,1
+		spacer: true
+	shift:
+		action: toggle shift
+		size: 3,2
+		text: toggle shift
+		icon: apple_keyboard_shift
+		style: shy
+	space:
+		action: space
+		size: 3,2
+		text: toggle space
+		icon: keyboard_space
+		style: shy
+	
+	spacer3:
+		size: 6,1
+		spacer: true
+
+
+
+	spacer5:
+		size: 6,1
+		spacer: true
+
+	spacer_bottom:
+		size: 2,1
+		spacer: true
