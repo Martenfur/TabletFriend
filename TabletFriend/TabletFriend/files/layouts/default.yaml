@@ -4,9 +4,6 @@ theme:
 	button_size: 14
 
 buttons:
-	spacer_top:
-		size: 6,1
-		spacer: true
 
 	prev_desktop:
 		action: win+ctrl+left
@@ -34,6 +31,11 @@ buttons:
 		icon: redo
 		text: redo
 
+	docked_spacer1:
+		spacer: true
+		visibility: docked
+		size: 6,1
+
 	copy:
 		action: ctrl+c
 		size: 2,2
@@ -53,6 +55,7 @@ buttons:
 		style: outlined
 		icon: content_cut
 		text: cut
+
 	enter:
 		action: enter
 		size: 3,2
@@ -65,7 +68,6 @@ buttons:
 		style: outlined
 		text: Esc
 
-
 	spacer1:
 		size: 6,1
 		spacer: true
@@ -74,45 +76,127 @@ buttons:
 		size: 3,2
 		text: toggle shift
 		icon: apple_keyboard_shift
-		style: shy
 	space:
 		action: toggle space
 		size: 3,2
 		text: toggle space
 		icon: keyboard_space
-		style: shy
 	ctrl:
 		action: toggle ctrl
 		size: 3,2
 		text: toggle ctrl
 		icon: apple_keyboard_control
-		style: shy
 	alt:
 		action: toggle alt
 		size: 3,2
 		text: toggle alt
 		icon: apple_keyboard_option
-		style: shy
 	spacer2:
 		size: 6,1
 		spacer: true
 
+
+
 	left:
-		action: left
+		action: repeat left
 		size: 2,2
 		icon: chevron_left
+		visibility: undocked
 	up:
-		action: up
+		action: repeat up
 		size: 2,1
 		icon: chevron_up
+		visibility: undocked
 	right:
-		action: right
+		action: repeat right
 		size: 2,2
 		icon: chevron_right
+		visibility: undocked
 	down:
-		action: down
+		action: repeat down
 		size: 2,1
 		icon: chevron_down
+		visibility: undocked
+
+
+	arrows_spacer1:
+		spacer: true
+		size: 2,2
+		visibility: docked
+	docked_up:
+		action: repeat up
+		size: 2,2
+		icon: chevron_up
+		visibility: docked
+	arrows_spacer2:
+		spacer: true
+		size: 2,2
+		visibility: docked
+	docked_left:
+		action: repeat left
+		size: 2,2
+		icon: chevron_left
+		visibility: docked
+	docked_down:
+		action: repeat down
+		size: 2,2
+		icon: chevron_down
+		visibility: docked
+	docked_right:
+		action: repeat right
+		size: 2,2
+		icon: chevron_right
+		visibility: docked
+
+	docked_spacer2:
+		spacer: true
+		visibility: docked
+		size: 6,1
+
+	dock_left:
+		action: win+left
+		size: 2,4
+		icon: dock_left
+		visibility: docked
+	dock_up:
+		action: win+up
+		size: 2,2
+		icon: dock_top
+		visibility: docked
+	dock_right:
+		action: win+right
+		size: 2,4
+		icon: dock_right
+		visibility: docked
+	dock_down:
+		action: win+down
+		size: 2,2
+		icon: dock_bottom
+		visibility: docked
+
+	docked_spacer3:
+		spacer: true
+		visibility: docked
+		size: 6,1
+
+	prev_track:
+		action: media_previous_track
+		size: 2,2
+		style: shy
+		icon: skip_previous
+		visibility: docked
+	play_pause:
+		action: media_play_pause
+		size: 2,2
+		style: circular_accent
+		icon: play_pause
+		visibility: docked
+	next_track:
+		action: media_next_track
+		size: 2,2
+		style: shy
+		icon: skip_next
+		visibility: docked
 
 	spacer5:
 		size: 6,1

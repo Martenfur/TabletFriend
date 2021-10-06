@@ -10,18 +10,26 @@ namespace TabletFriend
 		/// <summary>
 		/// Returns the size array of button models.
 		/// </summary>
-		public static Vector2[] GetSizes(this List<ButtonModel> buttons)
+		public static Vector2[] GetSizes(this List<ButtonModel> buttons, bool isDocked)
 		{
-			var sizes = new Vector2[buttons.Count];
-			var i = 0;
+			var sizes = new List<Vector2>();
+
 			foreach (var button in buttons)
 			{
-				sizes[i] = button.Size;
-				i += 1;
+				if (button.IsVisible(isDocked))
+				{
+					sizes.Add(button.Size);
+				}
 			}
-			return sizes;
+			return sizes.ToArray();
 		}
 
+		public static bool IsVisible(this ButtonModel button, bool isDocked)
+		{
+			return button.Visibility == ButtonVisibility.Always
+				|| (button.Visibility == ButtonVisibility.Docked && isDocked)
+				|| (button.Visibility == ButtonVisibility.Undocked && !isDocked);
+		}
 
 		public static Color StringToColor(string hexColor)
 		{

@@ -42,11 +42,15 @@ namespace TabletFriend
 
 			_file = new FileManager();
 
+			ToggleManager.Init();
 
 			_layout = new LayoutManager(this);
 			Settings.Load();
 
 			Installer.TryInstall();
+
+			_ = UpdateChecker.Check();
+
 
 			_layoutList = new LayoutListManager();
 			ContextMenu = new System.Windows.Controls.ContextMenu();

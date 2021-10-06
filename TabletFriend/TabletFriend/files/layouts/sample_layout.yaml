@@ -135,6 +135,34 @@ buttons:
 		text: bluetooth button\nhold
 		size: 2,1
 
+	docked_spacer:
+		spacer: true
+		visibility: docked
+	docked:
+		style: accent
+		text: docked
+		size: 2,1
+		# Makes the button be visible only in docked mode. 
+		# Valid values:
+		# - always
+		# - undocked
+		# - docked
+		visibility: docked
+	undocked:
+		style: accent
+		text: undocked
+		size: 2,1
+		# Makes the button be visible only in undocked mode. 
+		visibility: undocked
+
+	left:
+		# repeat action will make the button trigger continiously when pressed and held down.
+		action: repeat left
+		icon: chevron_left
+	right:
+		action: repeat right
+		icon: chevron_right
+
 	swap:
 		# This button will load a different layout.
 		action: layout files/layouts/sample_layout2.yaml

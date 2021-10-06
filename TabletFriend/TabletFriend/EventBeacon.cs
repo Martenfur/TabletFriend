@@ -24,7 +24,7 @@ namespace TabletFriend
 		{
 			if (_subscribers.TryGetValue(tag, out var subscribers))
 			{
-				foreach (var subscriber in subscribers)
+				foreach (var subscriber in subscribers.ToArray())
 				{
 					subscriber?.Invoke(args);
 				}

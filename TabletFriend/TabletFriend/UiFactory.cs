@@ -1,8 +1,13 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
+using TabletFriend.Actions;
 using TabletFriend.Models;
 using WpfAppBar;
 
@@ -12,10 +17,14 @@ namespace TabletFriend
 	{
 		public static void CreateUi(LayoutModel layout, MainWindow window)
 		{
+			ToggleManager.ClearButtons();
 			var theme = layout.Theme;
 
 			window.MainCanvas.Children.Clear();
-			if (AppState.Settings.DockingMode == DockingMode.None)
+
+			var isDocked = AppState.Settings.DockingMode != DockingMode.None;
+
+			if (!isDocked)
 			{
 				window.MainBorder.CornerRadius = new CornerRadius(theme.Rounding);
 			}
@@ -23,7 +32,7 @@ namespace TabletFriend
 			{
 				window.MainBorder.CornerRadius = new CornerRadius(0);
 			}
-			var sizes = layout.Buttons.GetSizes();
+			var sizes = layout.Buttons.GetSizes(isDocked);
 			var positions = Packer.Pack(sizes, layout.LayoutWidth);
 
 			var size = Packer.GetSize(positions, sizes);
@@ -42,16 +51,17 @@ namespace TabletFriend
 				}
 			}
 
+			var titlebarHeight = TitlebarManager.GetTitlebarHeight(theme);
 
 			if (rotateLayout)
 			{
-				window.Height = size.X * theme.CellSize + theme.Margin;
+				window.Height = size.X * theme.CellSize + theme.Margin + titlebarHeight;
 				window.Width = size.Y * theme.CellSize + theme.Margin;
 			}
 			else
 			{
 				window.Width = size.X * theme.CellSize + theme.Margin;
-				window.Height = size.Y * theme.CellSize + theme.Margin;
+				window.Height = size.Y * theme.CellSize + theme.Margin + titlebarHeight;
 			}
 
 			var offset = Vector2.Zero;
@@ -66,13 +76,17 @@ namespace TabletFriend
 					offset.Y = (float)(SystemParameters.PrimaryScreenHeight - window.Height) / 2;
 				}
 			}
+			else
+			{
+				offset.Y = (float)titlebarHeight;
+			}
 
 			if (AppState.Settings.DockingMode != DockingMode.None)
-			{ 
+			{
 				window.MinOpacity = theme.MaxOpacity;
 			}
 			else
-			{ 
+			{
 				window.MinOpacity = theme.MinOpacity;
 			}
 			window.MaxOpacity = theme.MaxOpacity;
@@ -97,9 +111,21 @@ namespace TabletFriend
 
 			window.MainBorder.Background = new SolidColorBrush(theme.BackgroundColor);
 
+			var visibleButtons = new List<ButtonModel>();
+
+			foreach (var button in layout.Buttons)
+			{
+				if (button.IsVisible(isDocked))
+				{
+					visibleButtons.Add(button);
+				}
+			}
+
 			for (var i = 0; i < positions.Length; i += 1)
 			{
-				var button = layout.Buttons[i];
+				var button = visibleButtons[i];
+
+
 				if (button.Spacer)
 				{
 					continue;
@@ -120,6 +146,9 @@ namespace TabletFriend
 
 				CreateButton(layout, window, button, buttonPosition, buttonSize, offset);
 			}
+
+
+			TitlebarManager.CreateTitlebar(window, theme);
 		}
 
 		private static void CreateButton(
@@ -133,8 +162,26 @@ namespace TabletFriend
 		{
 			var theme = layout.Theme;
 
-			var uiButton = new Button();
+			ButtonBase uiButton;
+			var isToggle = button.Action is ToggleAction;
+			var isRepeat = button.Action is RepeatAction;
 
+			if (isToggle)
+			{
+				uiButton = new ToggleButton();
+			}
+			else
+			{
+				if (isRepeat)
+				{
+					uiButton = new RepeatButton();
+					Stylus.SetIsPressAndHoldEnabled(uiButton, false);
+				}
+				else
+				{
+					uiButton = new Button();
+				}
+			}
 			uiButton.Width = theme.CellSize * size.X - theme.Margin;
 			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
 
@@ -191,13 +238,28 @@ namespace TabletFriend
 				style = theme.DefaultStyle;
 			}
 
-			if (style == null)
+			if (isToggle)
 			{
-				uiButton.Style = null;
+				uiButton.Style = Application.Current.Resources["toggle"] as Style;
+
+				var key = ((ToggleAction)button.Action).Key;
+				var toggle = (ToggleButton)uiButton;
+				if (ToggleManager.IsHeld(key))
+				{
+					toggle.IsChecked = true;
+				}
+				ToggleManager.AddButton(key, toggle);
 			}
 			else
 			{
-				uiButton.Style = Application.Current.Resources[style] as Style;
+				if (style == null)
+				{
+					uiButton.Style = null;
+				}
+				else
+				{
+					uiButton.Style = Application.Current.Resources[style] as Style;
+				}
 			}
 
 			if (button.Action != null)

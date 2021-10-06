@@ -11,6 +11,8 @@ namespace TabletFriend.Data
 		public string Size;
 		public string Style;
 
+		public ButtonVisibility Visibility;
+
 		public bool Spacer;
 
 		public string Font;

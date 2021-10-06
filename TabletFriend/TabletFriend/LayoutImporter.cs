@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Windows;
 using TabletFriend.Data;
 using TabletFriend.Models;
@@ -66,9 +67,9 @@ namespace TabletFriend
 						.Replace("\t", "  "); // The thing doesn't like tabs.
 					break;
 				}
-				catch (Exception e)
+				catch
 				{
-
+					Thread.Sleep(100);
 				}
 			}
 
