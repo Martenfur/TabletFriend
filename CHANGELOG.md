@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+<hr/>
+
+## [v1.1.0] - 06.11.2021
+
 ### Added
 
 - Added the titlebar with the ability to minimize the window.

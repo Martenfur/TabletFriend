@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Windows;
 using TabletFriend.Data;
 using TabletFriend.Models;
@@ -31,13 +32,12 @@ namespace TabletFriend
 			}
 			catch (Exception e)
 			{
-				// This is causing problems when the file is loaded several times over by the file watcher.
-				//MessageBox.Show(
-				//	"Cannot load '" + path + "': " + e.Message,
-				//	"Load failure!",
-				//	MessageBoxButton.OK,
-				//	MessageBoxImage.Error
-				//);
+				MessageBox.Show(
+					"Cannot load '" + path + "': " + e.Message,
+					"Load failure!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
 			}
 			return null;
 		}
@@ -67,9 +67,9 @@ namespace TabletFriend
 						.Replace("\t", "  "); // The thing doesn't like tabs.
 					break;
 				}
-				catch (Exception e)
+				catch
 				{
-
+					Thread.Sleep(100);
 				}
 			}
 
