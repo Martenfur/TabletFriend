@@ -302,7 +302,7 @@ namespace TabletFriend
 				dragSize);
 		}
 
-        private static void ClickActionButton_MouseUp(object sender, System.Windows.Input.MouseEventArgs e)
+		private static void ClickActionButton_MouseUp(object sender, System.Windows.Input.MouseEventArgs e)
 		{
 			// Reset the drag rectangle when the mouse button is raised.
 			_dragBoxFromMouseDown = Rectangle.Empty;
@@ -323,15 +323,15 @@ namespace TabletFriend
 					{
 						DataObject dataObj = new DataObject((sender as Button));
 						DragDrop.DoDragDrop((sender as Button), dataObj, DragDropEffects.None);
-						if(_newClickCoordinates.HasValue)
-                        {
+						if (_newClickCoordinates.HasValue)
+						{
 							var result = MessageBox.Show(
 								$"Save new click destination {_newClickCoordinates.Value}",
 								"Mouse Click Action",
 								MessageBoxButton.OKCancel);
 
-							if(result == MessageBoxResult.OK)
-                            {
+							if (result == MessageBoxResult.OK)
+							{
 								var key = (sender as Button).Name;
 								LayoutManager.UpdateClickActionCoordinatesInCurrentLayoutFile(key, _newClickCoordinates.Value);
 							}
@@ -351,8 +351,8 @@ namespace TabletFriend
 
 		private static void ClickActionButton_QueryContinueDrag(object sender, QueryContinueDragEventArgs e)
 		{
-            if (e.KeyStates == DragDropKeyStates.None)
-            {
+			if (e.KeyStates == DragDropKeyStates.None)
+			{
 				var pointOnScreen = System.Windows.Forms.Cursor.Position;
 				var pointInMainWindow = Application.Current.MainWindow.PointFromScreen(
 					new System.Windows.Point(pointOnScreen.X, pointOnScreen.Y));
@@ -365,7 +365,7 @@ namespace TabletFriend
 				{
 					_newClickCoordinates = pointOnScreen;
 				}
-            }
+			}
 		}
 	}
 }
