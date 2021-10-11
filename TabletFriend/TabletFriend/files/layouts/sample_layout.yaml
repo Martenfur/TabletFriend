@@ -135,7 +135,8 @@ buttons:
 		text: bluetooth button\nhold
 		size: 2,1
 	
-	# Left mouse click at a given location 
+	# Left mouse click at a given location
+	# Drag and drop the button to specify new destination coordinates.
 	click1:
 		action: click 0,0
 		text: Mouse\nClick 1
