@@ -19,7 +19,11 @@ namespace TabletFriend.Actions
 
 		public ClickAction(string cmd)
 		{
-			Regex expression = new Regex(@"(?<x_coordinate>\d+)\s*,\s*(?<y_coordinate>\d+)");
+			// The regular expression extracts the coordinates from the given cmd string.
+			// Furthermore it validates the format of the string.
+			// The string has to consist of two numbers separated by a comma "," (white spaces are ignored) like e.g
+			// "10,20" or " 10,20 " or "10, 20" or "  10  , 20 "
+			Regex expression = new Regex(@"^\s*(?<x_coordinate>\d+)\s*,\s*(?<y_coordinate>\d+)\s*$");
 			Match match = expression.Match(cmd);
 			if (match.Success)
 			{
