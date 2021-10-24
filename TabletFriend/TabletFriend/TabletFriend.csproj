@@ -5,7 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>logo.ico</ApplicationIcon>
-	<Version>1.1.1</Version>
+	<Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

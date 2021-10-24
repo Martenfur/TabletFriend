@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added `hide` action which hides the toolbar.
+
 ### Fixed
 
 - Autostart now works properly.
