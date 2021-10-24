@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows;
 using WpfAppBar;
 
 namespace TabletFriend
@@ -57,5 +59,25 @@ namespace TabletFriend
 			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
 		}
 
+		public static void UpdateClickActionCoordinatesInCurrentLayoutFile(
+			string keyNameInLayoutFile,
+			System.Drawing.Point newCoordinates)
+		{
+			if (AppState.CurrentLayout != null)
+			{
+				var layout = AppState.CurrentLayoutPath;
+				var currentLayoutFileContent = File.ReadAllText(layout);
+				var pattern = @$"({keyNameInLayoutFile}:.*?action:.*?click)\s+(?<x_coordinate>\d+)\s*,\s*(?<y_coordinate>\d+)";
+				if (Regex.IsMatch(currentLayoutFileContent, pattern, RegexOptions.Singleline))
+				{
+					var updatedLayoutFileContent = Regex.Replace(
+						currentLayoutFileContent,
+						pattern,
+						@$"$1 {newCoordinates.X},{newCoordinates.Y}",
+						RegexOptions.Singleline);
+					File.WriteAllText(layout, updatedLayoutFileContent);
+				}
+			}
+		}
 	}
 }
