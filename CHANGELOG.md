@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [v1.2.0] - 24.10.2021
+
 ### Added
 
 - Added `hide` action which hides the toolbar.
@@ -12,7 +14,7 @@
 
 <hr/>
 
-## [v1.1.0] - 06.11.2021
+## [v1.1.0] - 06.10.2021
 
 ### Added
 
