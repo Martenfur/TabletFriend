@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Autostart now works properly.
+
 <hr/>
 
 ## [v1.1.0] - 06.11.2021
