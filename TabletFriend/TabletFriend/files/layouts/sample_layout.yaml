@@ -163,6 +163,13 @@ buttons:
 		action: repeat right
 		icon: chevron_right
 
+	hide:
+		# Hides the toolbar just like the tray icon press.
+		action: hide
+		size: 2,1
+		text: "hide"
+		visibility: docked
+
 	swap:
 		# This button will load a different layout.
 		action: layout files/layouts/sample_layout2.yaml

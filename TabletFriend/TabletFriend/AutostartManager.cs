@@ -9,7 +9,7 @@ namespace TabletFriend
 		private const string _key = "TabletFriend";
 
 		private static readonly string _appPath =
-			'"' + Path.ChangeExtension(Assembly.GetExecutingAssembly().Location, "exe") + '"';
+			'"' + Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "TabletFriend.exe") + '"';
 
 		public static bool IsAutostartSet => (string)GetKey().GetValue(_key) == _appPath;
 

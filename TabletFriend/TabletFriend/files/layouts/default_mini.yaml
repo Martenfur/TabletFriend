@@ -5,6 +5,14 @@ theme:
 
 buttons:
 
+	hide:
+		action: hide
+		size: 4,1
+		icon: minus
+		style: shy
+		text: "hide"
+		visibility: docked
+
 	prev_desktop:
 		action: win+ctrl+left
 		size: 2,1

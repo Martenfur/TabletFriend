@@ -14,6 +14,7 @@ namespace TabletFriend.Actions
 		private const string _releaseKeyword = "release ";
 		private const string _layoutKeyword = "layout ";
 		private const string _repeatKeyword = "repeat ";
+		private const string _hideKeyword = "hide";
 
 
 		public static ButtonAction Resolve(string actionString)
@@ -56,6 +57,10 @@ namespace TabletFriend.Actions
 			{
 				return ResolveRepeatAction(actionString.Substring(_repeatKeyword.Length));
 			}
+			if (actionString.StartsWith(_hideKeyword))
+			{
+				return ResolveHideAction();
+			}
 
 			return new KeyAction(StringToKeyCode(actionString));
 		}
@@ -83,6 +88,9 @@ namespace TabletFriend.Actions
 		
 		private static ButtonAction ResolveRepeatAction(string actionString) =>
 			new RepeatAction(StringToKeyCode(actionString));
+		
+		private static ButtonAction ResolveHideAction() =>
+			new HideAction();
 
 
 		public static ButtonAction[] Resolve(string[] actionStrings)
