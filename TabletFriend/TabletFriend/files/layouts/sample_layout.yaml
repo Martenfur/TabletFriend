@@ -91,6 +91,18 @@ buttons:
 		icon: apple_keyboard_shift
 		text: shift
 		size: 2,1
+  
+	shift2:
+		action: hold shift # shift is pressed while the button is pressed
+		action_release: release shift  # for multiple actions use actions_release
+		style: outlined
+		icon: apple_keyboard_shift
+		text: shift (while button is pressed)
+		size: 2,1
+
+	spacer2:
+		spacer: true
+		size: 2,1
 
 	type:
 		actions: # Typing "actions" instead of "action" will make the button chain multiple actions. Any action can be used.
