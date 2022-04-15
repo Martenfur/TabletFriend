@@ -10,11 +10,24 @@ using TabletFriend.Data;
 
 namespace TabletFriend.Models
 {
-	public class ButtonModel : IDisposable
+    public enum ButtonProcessedEvent
+    {
+        None,
+        Down,
+        Up
+
+    }
+    public class ButtonModel : IDisposable
 	{
 		public ButtonAction Action;
+		public ButtonAction ActionRelease;
 
-		public string Text = "";
+		/// <summary>
+		/// Logging of last processed event to avoid multiple invocations due to double triggered mouse and touch events when action(s)_release is used
+		/// </summary>
+        public ButtonProcessedEvent LastProcessedEvent { get; set; } = ButtonProcessedEvent.None; 
+
+        public string Text = "";
 		public object Icon;
 
 		public Vector2 Position = Vector2.Zero;
@@ -81,7 +94,16 @@ namespace TabletFriend.Models
 				Action = new BatchAction(ButtonActionResolver.Resolve(data.Actions));
 			}
 
-			Style = data.Style;
+            if (data.ActionsRelease == null || data.ActionsRelease.Length == 0)
+            {
+                ActionRelease = ButtonActionResolver.Resolve(data.ActionRelease);
+            }
+            else
+            {
+                ActionRelease = new BatchAction(ButtonActionResolver.Resolve(data.ActionsRelease));
+            }
+
+            Style = data.Style;
 
 			Font = data.Font;
 			FontSize = data.FontSize;
