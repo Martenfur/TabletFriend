@@ -4,10 +4,12 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Security.Cryptography.Pkcs;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using TabletFriend.Docking;
 using TabletFriend.TabletMode;
 using WpfAppBar;
@@ -34,10 +36,13 @@ namespace TabletFriend
 		private readonly LayoutListManager _layoutList;
 		private readonly ThemeListManager _themeList;
 
-		public TrayManager(LayoutListManager layoutList, ThemeListManager themeList)
+		private AppFocusMonitor _focusMonitor;
+		private MenuItem _focusedApp;
+		public TrayManager(LayoutListManager layoutList, ThemeListManager themeList, AppFocusMonitor focusMonitor)
 		{
 			_layoutList = layoutList;
 			_themeList = themeList;
+			_focusMonitor = focusMonitor;
 
 			_icon = new TaskbarIcon();
 
@@ -112,9 +117,20 @@ namespace TabletFriend
 
 			AddMenuItem("open layouts directory...", OnOpenLayoutsDirectory);
 			AddMenuItem("about", OnAbout);
+			_focusedApp = AddMenuItem("focused app: none");
+			_focusMonitor.OnAppChanged += OnAppChanged;
 			AddMenuItem("quit", OnQuit);
 		}
 
+		private void OnAppChanged(string app)
+		{
+			_focusedApp.Dispatcher.Invoke(
+				() =>
+				{
+					_focusedApp.Header = "focused app: " + app;
+				}
+			);	
+		}
 
 		private void OnAutostartToggle(object sender, RoutedEventArgs e)
 		{
@@ -182,6 +198,10 @@ namespace TabletFriend
 			if (click != null)
 			{
 				item.Click += click;
+			}
+			else
+			{
+				item.IsEnabled = false;
 			}
 			_icon.ContextMenu.Items.Add(item);
 			return item;

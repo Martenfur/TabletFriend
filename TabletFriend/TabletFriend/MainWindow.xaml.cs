@@ -62,10 +62,9 @@ namespace TabletFriend
 
 			OnUpdateLayoutList();
 
+			var focusMonitor = new AppFocusMonitor();
+			_tray = new TrayManager(_layoutList, _themeList, focusMonitor);
 
-			_tray = new TrayManager(_layoutList, _themeList);
-
-			
 
 			if (AppState.Settings.AddToAutostart)
 			{
