@@ -189,11 +189,11 @@ namespace TabletFriend
 
 		private void OnToggleMinimize(object[] obj)
 		{
-			// Regular minimize doesn't work without the taaskbar icon.
+			// Regular minimize doesn't work without the taskbar icon.
 			// The window just derps out and stays at the bottom left corner.
-			// There are workarounds, btu they make an icon flash in the taskbar
+			// There are workarounds, but they make an icon flash in the taskbar
 			// for a split second. This is the best solution I found.
-			if (Visibility == Visibility.Collapsed)
+			if (Visibility == Visibility.Collapsed || Visibility == Visibility.Hidden)
 			{
 				Visibility = Visibility.Visible;
 				AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
@@ -201,7 +201,7 @@ namespace TabletFriend
 			else
 			{
 				AppBarFunctions.SetAppBar(this, DockingMode.None);
-				Visibility = Visibility.Collapsed;
+				Visibility = Visibility.Hidden;
 			}
 		}
 

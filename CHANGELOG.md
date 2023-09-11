@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Now the app will start in hidden mode.
+
 ## [v1.2.0] - 24.10.2021
 
 ### Added
