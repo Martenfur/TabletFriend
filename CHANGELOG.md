@@ -5,6 +5,7 @@
 ### Changed
 
 - Now the app will start in hidden mode.
+- Updated to .NET7
 
 ## [v1.2.0] - 24.10.2021
 
