@@ -9,8 +9,6 @@ namespace TabletFriend.Models
 		public const int MinLayoutWidth = 1;
 		public int LayoutWidth = MinLayoutWidth;
 
-		public ThemeModel Theme;
-
 		public List<ButtonModel> Buttons = new List<ButtonModel>();
 
 
@@ -22,8 +20,6 @@ namespace TabletFriend.Models
 				LayoutWidth = MinLayoutWidth;
 			}
 
-			Theme = new ThemeModel(data.Theme);
-			
 			foreach (var button in data.Buttons)
 			{
 				Buttons.Add(new ButtonModel(button.Value));

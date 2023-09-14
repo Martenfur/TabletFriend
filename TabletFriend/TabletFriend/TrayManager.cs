@@ -30,7 +30,7 @@ namespace TabletFriend
 		private readonly string _iconPathBlack = AppState.CurrentDirectory + "/files/icons/tray/tray_black.ico";
 		private readonly string _iconPathWhite = AppState.CurrentDirectory + "/files/icons/tray/tray_white.ico";
 
-		public TrayManager(LayoutListManager layoutList)
+		public TrayManager(LayoutListManager layoutList, ThemeListManager themeList)
 		{
 			_icon = new TaskbarIcon();
 
@@ -48,6 +48,7 @@ namespace TabletFriend
 			_icon.LeftClickCommand = new TrayCommand();
 
 			_icon.ContextMenu.Items.Add(layoutList.Menu);
+			_icon.ContextMenu.Items.Add(themeList.Menu);
 
 			DockingMenuFactory.CreateDockingMenu(_icon.ContextMenu);
 			
@@ -111,7 +112,7 @@ namespace TabletFriend
 		{
 			var startInfo = new ProcessStartInfo()
 			{
-				Arguments = AppState.LayoutRoot,
+				Arguments = AppState.LayoutsRoot,
 				FileName = "http://github.com/Martenfur/TabletFriend",
 				UseShellExecute = true,
 			};
@@ -134,7 +135,7 @@ namespace TabletFriend
 		{
 			var startInfo = new ProcessStartInfo()
 			{
-				Arguments = AppState.LayoutRoot,
+				Arguments = AppState.LayoutsRoot,
 				FileName = "explorer.exe"
 			};
 			Process.Start(startInfo);

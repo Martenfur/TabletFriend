@@ -9,26 +9,40 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace TabletFriend
 {
-	public static class LayoutImporter
+	public static class Importer
 	{
 		private static readonly IDeserializer _deserializer = new DeserializerBuilder()
 			.WithNamingConvention(UnderscoredNamingConvention.Instance)
+			.IgnoreUnmatchedProperties()
 			.Build();
 
-		public static LayoutModel Import(string path)
+		public static LayoutModel ImportLayout(string path)
 		{
 			try
 			{
 				var data = Import<LayoutData>(path);
-				if (data.ExternalTheme != null && File.Exists(data.ExternalTheme))
-				{
-					if (data.Theme == null)
-					{
-						data.Theme = new ThemeData();
-					}
-					data.Theme.Merge(Import<ThemeData>(data.ExternalTheme));
-				}
+				
 				return new LayoutModel(data);
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show(
+					"Cannot load '" + path + "': " + e.Message,
+					"Load failure!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
+			}
+			return null;
+		}
+
+		public static ThemeModel ImportTheme(string path)
+		{
+			try
+			{
+				var data = Import<ThemeData>(path);
+
+				return new ThemeModel(data);
 			}
 			catch (Exception e)
 			{

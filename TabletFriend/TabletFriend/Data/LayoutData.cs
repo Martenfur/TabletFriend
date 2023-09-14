@@ -6,10 +6,6 @@ namespace TabletFriend.Data
 	{
 		public int LayoutWidth;
 		
-		public ThemeData Theme;
-
-		public string ExternalTheme;
-
 		public Dictionary<string, ButtonData> Buttons;
 	}
 }

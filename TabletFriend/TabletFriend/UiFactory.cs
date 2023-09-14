@@ -18,7 +18,7 @@ namespace TabletFriend
 		public static void CreateUi(LayoutModel layout, MainWindow window)
 		{
 			ToggleManager.ClearButtons();
-			var theme = layout.Theme;
+			var theme = AppState.CurrentTheme;
 
 			window.MainCanvas.Children.Clear();
 
@@ -160,7 +160,7 @@ namespace TabletFriend
 			Vector2 offset
 		)
 		{
-			var theme = layout.Theme;
+			var theme = AppState.CurrentTheme;
 
 			ButtonBase uiButton;
 			var isToggle = button.Action is ToggleAction;
@@ -188,17 +188,17 @@ namespace TabletFriend
 			var font = button.Font;
 			if (font == null)
 			{
-				font = layout.Theme.DefaultFont;
+				font = AppState.CurrentTheme.DefaultFont;
 			}
 			var fontSize = button.FontSize;
 			if (fontSize == 0)
 			{
-				fontSize = layout.Theme.DefaultFontSize;
+				fontSize = AppState.CurrentTheme.DefaultFontSize;
 			}
 			var fontWeight = button.FontWeight;
 			if (fontWeight == 0)
 			{
-				fontWeight = layout.Theme.DefaultFontWeight;
+				fontWeight = AppState.CurrentTheme.DefaultFontWeight;
 			}
 
 			var text = new TextBlock();

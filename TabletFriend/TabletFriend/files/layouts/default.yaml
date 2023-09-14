@@ -1,7 +1,4 @@
 ﻿layout_width: 6
-external_theme: files/themes/default.yaml
-theme:
-	button_size: 14
 
 buttons:
 

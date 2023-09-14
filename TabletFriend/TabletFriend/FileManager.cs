@@ -26,20 +26,22 @@ namespace TabletFriend
 			_watcher.EnableRaisingEvents = true;
 			_watcher.IncludeSubdirectories = true;
 
-			RefreshLayoutList();
+			RefreshLists();
 		}
 
 
 		private void OnChanged(object sender, FileSystemEventArgs args)
 		{
-			RefreshLayoutList();
+			RefreshLists();
 			EventBeacon.SendEvent("files_changed", sender, args);
 		}
 
 
-		private void RefreshLayoutList()
+		private void RefreshLists()
 		{
-			AppState.Layouts = Directory.GetFiles(AppState.LayoutRoot, AppState.LayoutExtension);
+			AppState.Layouts = Directory.GetFiles(AppState.LayoutsRoot, AppState.LayoutExtension);
+			AppState.Themes = Directory.GetFiles(AppState.ThemesRoot, AppState.LayoutExtension);
+			EventBeacon.SendEvent("update_theme_list");
 			EventBeacon.SendEvent("update_layout_list");
 		}
 	}
