@@ -1,7 +1,6 @@
 layout_width: 6
-external_theme: files/themes/default.yaml
-theme:
-	button_size: 14
+button_size: 14
+margin: 8
 
 buttons:
 	escape_button:

@@ -1,11 +1,6 @@
 ﻿layout_width: 11
-external_theme: files/themes/default.yaml
-theme:
-	button_size: 32
-	margin: 8
-	rounding: 8
-	default_style: default
-	min_opacity: 0.9
+button_size: 32
+margin: 8
 
 buttons:
 	q:

@@ -1,4 +1,6 @@
 ﻿layout_width: 6
+button_size: 14
+margin: 8
 
 buttons:
 

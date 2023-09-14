@@ -51,17 +51,17 @@ namespace TabletFriend
 				}
 			}
 
-			var titlebarHeight = TitlebarManager.GetTitlebarHeight(theme);
+			var titlebarHeight = TitlebarManager.GetTitlebarHeight(layout);
 
 			if (rotateLayout)
 			{
-				window.Height = size.X * theme.CellSize + theme.Margin + titlebarHeight;
-				window.Width = size.Y * theme.CellSize + theme.Margin;
+				window.Height = size.X * layout.CellSize + layout.Margin + titlebarHeight;
+				window.Width = size.Y * layout.CellSize + layout.Margin;
 			}
 			else
 			{
-				window.Width = size.X * theme.CellSize + theme.Margin;
-				window.Height = size.Y * theme.CellSize + theme.Margin + titlebarHeight;
+				window.Width = size.X * layout.CellSize + layout.Margin;
+				window.Height = size.Y * layout.CellSize + layout.Margin + titlebarHeight;
 			}
 
 			var offset = Vector2.Zero;
@@ -148,7 +148,7 @@ namespace TabletFriend
 			}
 
 
-			TitlebarManager.CreateTitlebar(window, theme);
+			TitlebarManager.CreateTitlebar(window, theme, layout);
 		}
 
 		private static void CreateButton(
@@ -182,8 +182,8 @@ namespace TabletFriend
 					uiButton = new Button();
 				}
 			}
-			uiButton.Width = theme.CellSize * size.X - theme.Margin;
-			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
+			uiButton.Width = layout.CellSize * size.X - layout.Margin;
+			uiButton.Height = layout.CellSize * size.Y - layout.Margin;
 
 			var font = button.Font;
 			if (font == null)
@@ -267,8 +267,8 @@ namespace TabletFriend
 				uiButton.Click += (e, o) => _ = button.Action.Invoke();
 			}
 
-			Canvas.SetTop(uiButton, theme.CellSize * position.Y + theme.Margin + offset.Y);
-			Canvas.SetLeft(uiButton, theme.CellSize * position.X + theme.Margin + offset.X);
+			Canvas.SetTop(uiButton, layout.CellSize * position.Y + layout.Margin + offset.Y);
+			Canvas.SetLeft(uiButton, layout.CellSize * position.X + layout.Margin + offset.X);
 			window.MainCanvas.Children.Add(uiButton);
 		}
 	}
