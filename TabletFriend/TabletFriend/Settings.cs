@@ -49,6 +49,7 @@ namespace TabletFriend
 		{
 			FirstLaunch = false;
 			Layout = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentLayoutPath);
+			Theme = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentThemePath);
 			if (!double.IsNaN(Application.Current.MainWindow.Left))
 			{
 				WindowX = Application.Current.MainWindow.Left;

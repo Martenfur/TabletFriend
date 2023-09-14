@@ -41,7 +41,7 @@ namespace TabletFriend
 							Header = Path.GetFileNameWithoutExtension(theme).Replace("_", " "),
 							DataContext = theme,
 							IsCheckable = true,
-							IsChecked = theme == AppState.CurrentLayoutPath
+							IsChecked = theme == AppState.CurrentThemePath
 						};
 						Menu.Items.Add(item);
 						item.Click += OnClick;
