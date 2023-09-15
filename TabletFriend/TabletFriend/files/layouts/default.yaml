@@ -7,7 +7,7 @@ buttons:
 	hide:
 		action: hide
 		size: 4,1
-		icon: minus
+		icon: minus 
 		style: shy
 		text: "hide"
 		visibility: docked
@@ -117,22 +117,27 @@ buttons:
 		visibility: docked
 		size: 4,1
 
-
-	left:
-		action: repeat left
-		size: 1,2
-		icon: chevron_left
+	docked_spacer_arrows_1:
+		spacer: true
 		visibility: docked
+		size: 1,1
 	up:
 		action: repeat up
 		size: 2,1
 		icon: chevron_up
 		visibility: docked
+	left:
+		action: repeat left
+		size: 2,2
+		icon: chevron_left
 	right:
 		action: repeat right
-		size: 1,2
+		size: 2,2
 		icon: chevron_right
+	docked_spacer_arrows_2:
+		spacer: true
 		visibility: docked
+		size: 1,1
 	down:
 		action: repeat down
 		size: 2,1
@@ -140,33 +145,6 @@ buttons:
 		visibility: docked
 
 	docked_spacer5:
-		spacer: true
-		visibility: docked
-		size: 4,1
-
-	dock_left:
-		action: win+left
-		size: 2,2
-		icon: dock_left
-		visibility: docked
-	dock_right:
-		action: win+right
-		size: 2,2
-		icon: dock_right
-		visibility: docked
-	dock_up:
-		action: win+up
-		size: 2,2
-		icon: dock_top
-		visibility: docked
-	dock_down:
-		action: win+down
-		size: 2,2
-		icon: dock_bottom
-		visibility: docked
-
-
-	docked_spacer6:
 		spacer: true
 		visibility: docked
 		size: 4,1
@@ -195,21 +173,41 @@ buttons:
 		visibility: docked
 		size: 4,1
 
-
-	docked_spacer6:
-		spacer: true
-		visibility: docked
-		size: 4,1
-
 	save:
 		action: ctrl+s
 		size: 2,2
 		style: outlined
 		icon: content_save
 		text: save
+		visibility: docked
 	new:
 		action: ctrl+n
 		size: 2,2
 		style: outlined
 		icon: file
 		text: new
+		visibility: docked
+
+	undock_toolbar:
+		icon: dock_top
+		action: undock
+		text: undock
+		style: default
+		visibility: docked
+		size: 4,2
+
+	dock_toolbar_left:
+		icon: dock_left
+		action: dock left
+		text: dock left
+		style: default
+		visibility: undocked
+		size: 2,2
+
+	dock_toolbar_right:
+		icon: dock_right
+		action: dock right
+		text: dock right
+		style: default
+		visibility: undocked
+		size: 2,2

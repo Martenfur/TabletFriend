@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using WpfAppBar;
 
 namespace TabletFriend
@@ -45,6 +46,10 @@ namespace TabletFriend
 				AppState.CurrentLayout.Dispose();
 			}
 			var layout = Importer.ImportLayout(path);
+			if (layout == null) 
+			{ 
+				layout = Importer.ImportLayout(Path.GetDirectoryName(path) + "/default.yaml");
+			}
 
 			if (layout == null)
 			{

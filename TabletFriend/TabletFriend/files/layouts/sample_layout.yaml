@@ -154,6 +154,31 @@ buttons:
 		text: "hide"
 		visibility: docked
 
+	# dock and undock actions will allow you to dock with a button instead of going through menus.
+	undock_toolbar:
+		icon: dock_top
+		action: undock
+		text: undock
+		style: default
+		visibility: docked
+		size: 4,2
+
+	dock_toolbar_left:
+		icon: dock_left
+		action: dock left
+		text: dock left
+		style: default
+		visibility: undocked
+		size: 2,2
+
+	dock_toolbar_right:
+		icon: dock_right
+		action: dock right
+		text: dock right
+		style: default
+		visibility: undocked
+		size: 2,2
+
 	swap:
 		# This button will load a different layout.
 		action: layout files/layouts/sample_layout2.yaml

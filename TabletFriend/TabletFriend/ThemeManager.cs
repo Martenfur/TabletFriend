@@ -20,7 +20,7 @@ namespace TabletFriend
 			Application.Current.Dispatcher.Invoke(
 				delegate
 				{
-					//LoadTheme(AppState.CurrentThemePath);
+					LoadTheme(AppState.CurrentThemePath);
 				}
 			);
 		}
