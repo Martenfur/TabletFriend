@@ -16,6 +16,9 @@ namespace TabletFriend.Actions
 		private const string _repeatKeyword = "repeat ";
 		private const string _hideKeyword = "hide";
 
+		private const string _dockKeyword = "dock";
+		private const string _undockKeyword = "undock";
+
 
 		public static ButtonAction Resolve(string actionString)
 		{
@@ -61,6 +64,14 @@ namespace TabletFriend.Actions
 			{
 				return ResolveHideAction();
 			}
+			if (actionString.StartsWith(_dockKeyword))
+			{
+				return ResolveDockAction(actionString.Substring(_dockKeyword.Length));
+			}
+			if (actionString.StartsWith(_undockKeyword))
+			{
+				return ResolveUndockAction();
+			}
 
 			return new KeyAction(StringToKeyCode(actionString));
 		}
@@ -91,6 +102,12 @@ namespace TabletFriend.Actions
 		
 		private static ButtonAction ResolveHideAction() =>
 			new HideAction();
+		
+		private static ButtonAction ResolveDockAction(string actionString) =>
+			new DockAction(actionString);
+		
+		private static ButtonAction ResolveUndockAction() =>
+			new UndockAction();
 
 
 		public static ButtonAction[] Resolve(string[] actionStrings)
