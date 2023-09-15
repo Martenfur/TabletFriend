@@ -40,7 +40,7 @@ namespace TabletFriend.Models
 
 			foreach (var button in data.Buttons)
 			{
-				Buttons.Add(new ButtonModel(button.Value));
+				Buttons.Add(new ButtonModel(button.Key, button.Value));
 			}
 		}
 

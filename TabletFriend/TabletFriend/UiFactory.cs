@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Windows;
@@ -265,6 +264,9 @@ namespace TabletFriend
 			if (button.Action != null)
 			{
 				uiButton.Click += (e, o) => _ = button.Action.Invoke();
+
+				if (button.Action is ClickAction)
+					ClickAction.AddDragAndDropEventHandlers(uiButton, button.Key);
 			}
 
 			Canvas.SetTop(uiButton, layout.CellSize * position.Y + layout.Margin + offset.Y);
