@@ -57,12 +57,14 @@ namespace TabletFriend
 			EventBeacon.SendEvent("change_layout", AppState.CurrentLayoutPath);
 		}
 
-		
-		public MenuItem[] CloneMenu()
+
+		public MenuItem CloneMenu()
 		{
+			var menu = new MenuItem() { Header = "themes" };
+
 			var items = new List<MenuItem>();
 
-			foreach(MenuItem item in Menu.Items)
+			foreach (MenuItem item in Menu.Items)
 			{
 				var newItem = new MenuItem()
 				{
@@ -71,11 +73,11 @@ namespace TabletFriend
 					IsCheckable = item.IsCheckable,
 					IsChecked = item.IsChecked,
 				};
-				items.Add(newItem);
+				menu.Items.Add(newItem);
 				newItem.Click += OnClick;
 			}
 
-			return items.ToArray();
+			return menu;
 		}
 	}
 }

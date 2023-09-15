@@ -57,7 +57,7 @@ namespace TabletFriend
 		}
 
 		
-		public MenuItem[] CloneMenu()
+		public MenuItem[] GetClonedItems()
 		{
 			var items = new List<MenuItem>();
 
@@ -75,6 +75,28 @@ namespace TabletFriend
 			}
 
 			return items.ToArray();
+		}
+
+		public MenuItem CloneMenu()
+		{
+			var menu = new MenuItem() { Header = "layouts" };
+
+			var items = new List<MenuItem>();
+
+			foreach (MenuItem item in Menu.Items)
+			{
+				var newItem = new MenuItem()
+				{
+					Header = item.Header,
+					DataContext = item.DataContext,
+					IsCheckable = item.IsCheckable,
+					IsChecked = item.IsChecked,
+				};
+				menu.Items.Add(newItem);
+				newItem.Click += OnClick;
+			}
+			
+			return menu;
 		}
 	}
 }

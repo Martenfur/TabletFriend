@@ -121,7 +121,7 @@ namespace TabletFriend
 					ContextMenu.Items.Clear();
 					DockingMenuFactory.CreateDockingMenu(ContextMenu);
 					
-					var items = _layoutList.CloneMenu();
+					var items = _layoutList.GetClonedItems();
 					foreach (var item in items)
 					{
 						ContextMenu.Items.Add(item);
