@@ -9,9 +9,6 @@ namespace TabletFriend.Models
 		
 		public double Rounding = 16;
 		
-		public double MinOpacity = 0.2;
-		public double MaxOpacity = 0.9;
-
 		public string DefaultStyle = "default";
 
 		
@@ -33,14 +30,6 @@ namespace TabletFriend.Models
 			if (data.Rounding != null)
 			{
 				Rounding = double.Parse(data.Rounding, CultureInfo.InvariantCulture);
-			}
-			if (data.MinOpacity != null)
-			{
-				MinOpacity = double.Parse(data.MinOpacity, CultureInfo.InvariantCulture);
-			}
-			if (data.MaxOpacity != null)
-			{
-				MaxOpacity = double.Parse(data.MaxOpacity, CultureInfo.InvariantCulture);
 			}
 
 			if (data.PrimaryColor != null)

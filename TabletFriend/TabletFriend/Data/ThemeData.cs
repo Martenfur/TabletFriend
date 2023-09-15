@@ -4,8 +4,6 @@ namespace TabletFriend.Data
 	public class ThemeData
 	{
 		public string Rounding;
-		public string MinOpacity;
-		public string MaxOpacity;
 		public string DefaultStyle;
 
 		public string PrimaryColor;
@@ -22,8 +20,6 @@ namespace TabletFriend.Data
 		public void Merge(ThemeData data)
 		{
 			Rounding = Rounding ?? data.Rounding;
-			MinOpacity = MinOpacity ?? data.MinOpacity;
-			MaxOpacity = MaxOpacity ?? data.MaxOpacity;
 			DefaultStyle = DefaultStyle ?? data.DefaultStyle;
 
 			PrimaryColor = PrimaryColor ?? data.PrimaryColor;

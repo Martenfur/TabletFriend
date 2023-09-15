@@ -83,15 +83,15 @@ namespace TabletFriend
 
 			if (AppState.Settings.DockingMode != DockingMode.None)
 			{
-				window.MinOpacity = theme.MaxOpacity;
+				window.MinOpacity = layout.MaxOpacity;
 			}
 			else
 			{
-				window.MinOpacity = theme.MinOpacity;
+				window.MinOpacity = layout.MinOpacity;
 			}
-			window.MaxOpacity = theme.MaxOpacity;
+			window.MaxOpacity = layout.MaxOpacity;
 			window.BeginAnimation(UIElement.OpacityProperty, null);
-			window.Opacity = theme.MaxOpacity;
+			window.Opacity = layout.MaxOpacity;
 			if (window.IsMouseOver)
 			{
 				window.BeginAnimation(UIElement.OpacityProperty, window.FadeIn);

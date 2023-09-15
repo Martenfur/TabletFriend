@@ -10,7 +10,7 @@ buttons:
 		size: 4,1
 
 	kot1:
-		# You an use png icons if you're not happy with built-in ones.
+		# You сan use png icons if you're not happy with built-in ones.
 		icon: files/icons/kot.png
 		style: accent
 		size: 4,2

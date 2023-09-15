@@ -6,5 +6,3 @@ default_font_weight: 800
 primary_color: "#ffab91"
 secondary_color: "#333"
 background_color: "#ffddc1"
-min_opacity: 0.2
-max_opacity: 0.9

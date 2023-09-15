@@ -1,4 +1,4 @@
-﻿layout_width: 6
+﻿layout_width: 4
 button_size: 14
 margin: 8
 
@@ -6,7 +6,7 @@ buttons:
 
 	hide:
 		action: hide
-		size: 6,1
+		size: 4,1
 		icon: minus
 		style: shy
 		text: "hide"
@@ -14,26 +14,26 @@ buttons:
 
 	prev_desktop:
 		action: win+ctrl+left
-		size: 3,1
+		size: 2,1
 		icon: chevron_triple_left
 		style: shy
 		text: previous desktop
 	next_desktop:
 		action: win+ctrl+right
-		size: 3,1
+		size: 2,1
 		icon: chevron_triple_right
 		style: shy 
 		text: next desktop
 
 	undo:
 		action: ctrl+z
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: undo
 		text: undo
 	redo:
 		action: ctrl+y
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: redo
 		text: redo
@@ -41,8 +41,8 @@ buttons:
 	docked_spacer1:
 		spacer: true
 		visibility: docked
-		size: 6,1
-
+		size: 4,1
+	
 	copy:
 		action: ctrl+c
 		size: 2,2
@@ -62,118 +62,102 @@ buttons:
 		style: outlined
 		icon: content_cut
 		text: cut
+	select_all:
+		action: ctrl+a
+		size: 2,2
+		icon: card_text
+		text: select all
+		style: outlined
+
+	docked_spacer2:
+		spacer: true
+		visibility: docked
+		size: 4,1
 
 	enter:
 		action: enter
-		size: 3,2
+		size: 2,2
 		style: outlined
 		icon: subdirectory_arrow_left
 	escape:
 		font_weight: 500
 		action: escape
-		size: 3,2
+		size: 2,2
 		style: outlined
 		text: Esc
 
-	spacer1:
-		size: 6,1
+	docked_spacer3:
 		spacer: true
+		visibility: docked
+		size: 4,1
+
 	shift:
 		action: toggle shift
-		size: 3,2
+		size: 2,2
 		text: toggle shift
 		icon: apple_keyboard_shift
 	space:
 		action: toggle space
-		size: 3,2
+		size: 2,2
 		text: toggle space
 		icon: keyboard_space
 	ctrl:
 		action: toggle ctrl
-		size: 3,2
+		size: 2,2
 		text: toggle ctrl
 		icon: apple_keyboard_control
 	alt:
 		action: toggle alt
-		size: 3,2
+		size: 2,2
 		text: toggle alt
 		icon: apple_keyboard_option
-	spacer2:
-		size: 6,1
-		spacer: true
 
+	docked_spacer4:
+		spacer: true
+		visibility: docked
+		size: 4,1
 
 
 	left:
 		action: repeat left
-		size: 2,2
+		size: 1,2
 		icon: chevron_left
-		visibility: undocked
+		visibility: docked
 	up:
 		action: repeat up
 		size: 2,1
 		icon: chevron_up
-		visibility: undocked
+		visibility: docked
 	right:
 		action: repeat right
-		size: 2,2
+		size: 1,2
 		icon: chevron_right
-		visibility: undocked
+		visibility: docked
 	down:
 		action: repeat down
 		size: 2,1
 		icon: chevron_down
-		visibility: undocked
-
-
-	arrows_spacer1:
-		spacer: true
-		size: 2,2
-		visibility: docked
-	docked_up:
-		action: repeat up
-		size: 2,2
-		icon: chevron_up
-		visibility: docked
-	arrows_spacer2:
-		spacer: true
-		size: 2,2
-		visibility: docked
-	docked_left:
-		action: repeat left
-		size: 2,2
-		icon: chevron_left
-		visibility: docked
-	docked_down:
-		action: repeat down
-		size: 2,2
-		icon: chevron_down
-		visibility: docked
-	docked_right:
-		action: repeat right
-		size: 2,2
-		icon: chevron_right
 		visibility: docked
 
-	docked_spacer2:
+	docked_spacer5:
 		spacer: true
 		visibility: docked
-		size: 6,1
+		size: 4,1
 
 	dock_left:
 		action: win+left
-		size: 2,4
+		size: 2,2
 		icon: dock_left
+		visibility: docked
+	dock_right:
+		action: win+right
+		size: 2,2
+		icon: dock_right
 		visibility: docked
 	dock_up:
 		action: win+up
 		size: 2,2
 		icon: dock_top
-		visibility: docked
-	dock_right:
-		action: win+right
-		size: 2,4
-		icon: dock_right
 		visibility: docked
 	dock_down:
 		action: win+down
@@ -181,39 +165,42 @@ buttons:
 		icon: dock_bottom
 		visibility: docked
 
-	docked_spacer3:
+
+	docked_spacer6:
 		spacer: true
 		visibility: docked
-		size: 6,1
+		size: 4,1
 
+	play_pause:
+		action: media_play_pause
+		size: 4,2
+		style: outlined
+		icon: play_pause
+		visibility: docked
 	prev_track:
 		action: media_previous_track
 		size: 2,2
-		style: shy
+		style: outlined
 		icon: skip_previous
-		visibility: docked
-	play_pause:
-		action: media_play_pause
-		size: 2,2
-		style: circular_accent
-		icon: play_pause
 		visibility: docked
 	next_track:
 		action: media_next_track
 		size: 2,2
-		style: shy
+		style: outlined
 		icon: skip_next
 		visibility: docked
 
-	spacer5:
-		size: 6,1
+	docked_spacer7:
 		spacer: true
-	select_all:
-		action: ctrl+a
-		size: 2,2
-		icon: card_text
-		text: select all
-		style: outlined
+		visibility: docked
+		size: 4,1
+
+
+	docked_spacer6:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
 	save:
 		action: ctrl+s
 		size: 2,2
@@ -226,13 +213,3 @@ buttons:
 		style: outlined
 		icon: file
 		text: new
-
-	spacer_bottom:
-		size: 2,1
-		spacer: true
-	default_mini:
-		action: layout files/layouts/default_mini.yaml
-		size: 2,1
-		icon: menu_up
-		style: shy
-		text: switch to mini

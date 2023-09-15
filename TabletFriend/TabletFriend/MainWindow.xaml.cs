@@ -158,17 +158,17 @@ namespace TabletFriend
 
 			if (side != DockingMode.None)
 			{
-				MinOpacity = AppState.CurrentTheme.MaxOpacity;
-				MaxOpacity = AppState.CurrentTheme.MaxOpacity;
+				MinOpacity = AppState.CurrentLayout.MaxOpacity;
+				MaxOpacity = AppState.CurrentLayout.MaxOpacity;
 				BeginAnimation(OpacityProperty, null);
-				Opacity = AppState.CurrentTheme.MaxOpacity;
+				Opacity = AppState.CurrentLayout.MaxOpacity;
 			}
 			else
 			{
-				MinOpacity = AppState.CurrentTheme.MinOpacity;
-				MaxOpacity = AppState.CurrentTheme.MaxOpacity;
+				MinOpacity = AppState.CurrentLayout.MinOpacity;
+				MaxOpacity = AppState.CurrentLayout.MaxOpacity;
 				BeginAnimation(OpacityProperty, null);
-				Opacity = AppState.CurrentTheme.MaxOpacity;
+				Opacity = AppState.CurrentLayout.MaxOpacity;
 				BeginAnimation(OpacityProperty, FadeOut);
 			}
 

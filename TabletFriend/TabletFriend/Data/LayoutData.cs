@@ -8,7 +8,9 @@ namespace TabletFriend.Data
 
 		public int? ButtonSize;
 		public int? Margin;
-		
+		public string MinOpacity;
+		public string MaxOpacity;
+
 		public Dictionary<string, ButtonData> Buttons;
 	}
 }
