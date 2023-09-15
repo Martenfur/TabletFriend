@@ -1,0 +1,273 @@
+﻿layout_width: 3
+button_size: 32
+margin: 8
+
+buttons:
+
+ copy:
+	 action: ctrl+c
+	 size: 1,1
+	 style: default
+	 icon: content_copy
+	 text: copy
+
+ cut:
+	 action: ctrl+x
+	 size: 1,1
+	 style: default
+	 icon: content_cut
+	 text: cut	 
+
+ paste:
+	 action: ctrl+v
+   size: 1,1
+	 style: default
+	 icon: content_paste
+	 text: paste
+
+ spacer0a:
+   spacer: true
+	 size: 1,1
+
+ save:
+   action: ctrl+s
+	 icon: content-save
+	 style: shy
+	 text: save
+
+ spacer0b:
+   spacer: true
+	 size: 1,1
+
+ new-layer:
+   action: ctrl+shift+n
+	 icon: layers-plus
+	 style: accent
+	 text: create new layer
+
+ duplicate:
+   action: ctrl+j
+	 icon: content-duplicate
+	 style: accent
+	 text: duplicate layer
+
+ merge:
+   action: ctrl+e
+	 icon: palette-swatch-outline
+	 style: accent
+	 text: merge with layer below
+
+ spacer1:
+   spacer: true
+	 size: 3,1
+ 
+ transform:
+   action: ctrl+t
+   size: 1,1
+	 style: circular
+	 icon: vector-rectangle
+	 text: transform
+
+ M:
+   action: m
+	 size: 1,2
+	 style: outlined 
+	 icon: select
+	 text: select (M)
+
+ select all:
+   action: ctrl+a
+	 size: 1,1
+	 style: circular
+	 icon: checkbox-blank
+	 text: select all
+
+ enter:
+	 action: enter
+   size: 1,1
+	 icon: arrow-left-bottom-bold
+	 style: shy
+	 text: enter
+
+ deselect:
+   action: ctrl+d
+	 size: 1,1
+	 style: circular
+	 icon: checkbox-blank-off-outline
+	 text: deselect all
+
+ undo:
+   action: ctrl+z
+	 icon: undo
+   style: shy
+	 text: undo
+
+ V:
+   action: v
+	 size: 1,1
+	 style: outlined
+	 icon: cursor-default
+	 text: click (V)
+
+ redo:
+   action: ctrl+y
+	 icon: redo
+	 style: shy
+	 text: redo
+ 
+ B:
+   action: b
+   size: 1,2
+   style: outlined
+   icon: brush
+	 text: brush (B)
+
+ brush-size:
+   actions: 
+	 - toggle alt
+   - wait 2000
+	 - toggle alt
+   icon: plus-minus
+	 size: 1,1
+	 style: circular_accent
+	 text: brush size/ hardness
+	 #left click: eyedropper
+	 #right click: brush size/hardness
+
+ invert-colors:
+   action: x
+	 icon: invert-colors
+	 style: circular_accent
+	 text: switch colors
+
+ color-pick:
+   actions: 
+	 - toggle alt
+	 - toggle shift
+	 - wait 2000
+	 - toggle alt
+	 - toggle shift
+	 text: col
+	 icon: palette
+	 style: circular_accent
+	 text: color wheel
+	 #must click with right
+
+
+ G:
+   action: g
+   size: 1,1
+	 icon: format-color-fill
+	 style: outlined
+	 text: fill (G)
+
+ E:
+   action: e
+   size: 1,1
+	 style: outlined
+   icon: eraser
+	 text: erase (E)
+ 
+ 0:
+   action: 0
+	 text: 0
+	 size: 2,1
+	 font_weight: 700
+	 style: circular	 
+	 icon: numeric-0-box
+
+ 1:
+   action: 1
+	 text: 1
+	 style: circular
+	 icon: numeric-1-box
+
+ 2:
+   action: 2
+	 text: 2
+	 style: circular	 
+	 icon: numeric-2-box
+
+ 3:
+   action: 3
+	 text: 3
+	 style: circular	 
+	 icon: numeric-3-box
+
+ 4:
+   action: 4
+	 text: 4
+	 style: circular	 
+	 icon: numeric-4-box
+
+ 5:
+   action: 5
+	 text: 5
+	 style: circular	 
+	 icon: numeric-5-box
+
+ 6: 
+   action: 6
+	 text: 6
+   style: circular	 
+	 icon: numeric-6-box
+ 7:
+   action: 7
+	 text: 7
+	 style: circular	 
+	 icon: numeric-7-box
+
+ 8:
+   action: 8
+	 text: 8
+	 style: circular	 
+	 icon: numeric-8-box
+	
+ 9:
+   action: 9
+	 text: 9
+	 style: circular	 
+	 icon: numeric-9-box
+
+ T:
+   action: t
+	 icon: format-title
+	 style: outlined
+	 text: add text (T)
+
+ keyboard:
+   action: ctrl+win+o
+	 size: 2,1
+	 icon: keyboard
+	 style: outlined
+	 text: open keyboard
+
+ spacer2:
+   spacer: true
+	 size: 3,1
+	
+ ctrl:
+   action: toggle ctrl
+	 text: Ctrl
+	 font_size: 16
+
+ shift:
+		action: toggle shift
+		text: toggle shift
+		icon: apple_keyboard_shift
+
+ alt:
+		action: toggle alt
+		text: Alt
+		font_size: 16
+
+ spacer3:
+   spacer: true
+	 size: 3,1
+
+ hide:
+   action: hide
+	 size: 3,1
+	 icon: eye-off
+	 style: default
+	 text: hide toolbar

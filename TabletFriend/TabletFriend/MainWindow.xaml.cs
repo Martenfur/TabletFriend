@@ -18,7 +18,9 @@ namespace TabletFriend
 	public partial class MainWindow : Window, INotifyPropertyChanged
 	{
 		private LayoutManager _layout;
+		private ThemeManager _theme;
 		private LayoutListManager _layoutList;
+		private ThemeListManager _themeList;
 		private TrayManager _tray;
 		private FileManager _file;
 
@@ -44,6 +46,7 @@ namespace TabletFriend
 
 			ToggleManager.Init();
 
+			_theme = new ThemeManager(this);
 			_layout = new LayoutManager(this);
 			Settings.Load();
 
@@ -53,12 +56,13 @@ namespace TabletFriend
 
 
 			_layoutList = new LayoutListManager();
+			_themeList = new ThemeListManager();
 			ContextMenu = new System.Windows.Controls.ContextMenu();
 
 			OnUpdateLayoutList();
 
 
-			_tray = new TrayManager(_layoutList);
+			_tray = new TrayManager(_layoutList, _themeList);
 
 			
 
@@ -110,12 +114,14 @@ namespace TabletFriend
 
 		private void OnUpdateLayoutList(object[] obj = null)
 		{
+			// Secondary quick access context menu.
 			Application.Current.Dispatcher.Invoke(
 				() =>
 				{
 					ContextMenu.Items.Clear();
 					DockingMenuFactory.CreateDockingMenu(ContextMenu);
-					var items = _layoutList.CloneMenu();
+					
+					var items = _layoutList.GetClonedItems();
 					foreach (var item in items)
 					{
 						ContextMenu.Items.Add(item);
@@ -152,17 +158,17 @@ namespace TabletFriend
 
 			if (side != DockingMode.None)
 			{
-				MinOpacity = AppState.CurrentLayout.Theme.MaxOpacity;
-				MaxOpacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				MinOpacity = AppState.CurrentLayout.MaxOpacity;
+				MaxOpacity = AppState.CurrentLayout.MaxOpacity;
 				BeginAnimation(OpacityProperty, null);
-				Opacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				Opacity = AppState.CurrentLayout.MaxOpacity;
 			}
 			else
 			{
-				MinOpacity = AppState.CurrentLayout.Theme.MinOpacity;
-				MaxOpacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				MinOpacity = AppState.CurrentLayout.MinOpacity;
+				MaxOpacity = AppState.CurrentLayout.MaxOpacity;
 				BeginAnimation(OpacityProperty, null);
-				Opacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				Opacity = AppState.CurrentLayout.MaxOpacity;
 				BeginAnimation(OpacityProperty, FadeOut);
 			}
 

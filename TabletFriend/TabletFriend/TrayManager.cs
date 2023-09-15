@@ -29,9 +29,14 @@ namespace TabletFriend
 		private MenuItem _autoUpdateMenuItem;
 		private readonly string _iconPathBlack = AppState.CurrentDirectory + "/files/icons/tray/tray_black.ico";
 		private readonly string _iconPathWhite = AppState.CurrentDirectory + "/files/icons/tray/tray_white.ico";
+		private readonly LayoutListManager _layoutList;
+		private readonly ThemeListManager _themeList;
 
-		public TrayManager(LayoutListManager layoutList)
+		public TrayManager(LayoutListManager layoutList, ThemeListManager themeList)
 		{
+			_layoutList = layoutList;
+			_themeList = themeList;
+
 			_icon = new TaskbarIcon();
 
 			if (_isLightTheme)
@@ -47,10 +52,33 @@ namespace TabletFriend
 			_icon.ContextMenu = new ContextMenu();
 			_icon.LeftClickCommand = new TrayCommand();
 
-			_icon.ContextMenu.Items.Add(layoutList.Menu);
+			CreateMenu();
+
+			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
+		}
+
+
+		private void OnUpdateLayoutList(object[] obj = null)
+		{
+			// Secondary quick access context menu.
+			Application.Current.Dispatcher.Invoke(
+				() =>
+				{
+					_icon.ContextMenu.Items.Clear();
+					_icon.ContextMenu = new ContextMenu();
+					CreateMenu();
+				}
+			);
+		}
+
+		private void CreateMenu()
+		{
+			
+			_icon.ContextMenu.Items.Add(_layoutList.CloneMenu());
+			_icon.ContextMenu.Items.Add(_themeList.CloneMenu());
 
 			DockingMenuFactory.CreateDockingMenu(_icon.ContextMenu);
-			
+
 			if (AppState.Settings.AddToAutostart)
 			{
 				_autostartMenuItem = AddMenuItem("remove from autostart", OnAutostartToggle);
@@ -111,7 +139,7 @@ namespace TabletFriend
 		{
 			var startInfo = new ProcessStartInfo()
 			{
-				Arguments = AppState.LayoutRoot,
+				Arguments = AppState.LayoutsRoot,
 				FileName = "http://github.com/Martenfur/TabletFriend",
 				UseShellExecute = true,
 			};
@@ -134,7 +162,7 @@ namespace TabletFriend
 		{
 			var startInfo = new ProcessStartInfo()
 			{
-				Arguments = AppState.LayoutRoot,
+				Arguments = AppState.LayoutsRoot,
 				FileName = "explorer.exe"
 			};
 			Process.Start(startInfo);

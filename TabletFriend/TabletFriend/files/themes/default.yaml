@@ -1,10 +1,22 @@
-button_size: 32
-margin: 8
+# Determines how round the window will be.
 rounding: 16
+
+# Default button style. Applied when the button has no 'style' property.
+# Allowed styles:
+# - default
+# - accent
+# - circular_accent
+# - circular
+# - outlined
+# - shy
+# - none
 default_style: accent
 
-primary_color: "#847979"
-secondary_color: "#f7f0f5"
+primary_color: "#847979" # Notice that color values are in quotes, since # is a comment character.
+secondary_color: "#f7f0f5" # You can also use words like 'red' for colors.
 background_color: "#323031"
-min_opacity: 0.2
-max_opacity: 0.9
+	
+default_font: consolas
+default_font_size: 14
+# Defines the boldness of the font. Allowed values are 1 to 999.
+default_font_weight: 500 

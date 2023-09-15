@@ -18,7 +18,7 @@ namespace TabletFriend
 		public static void CreateUi(LayoutModel layout, MainWindow window)
 		{
 			ToggleManager.ClearButtons();
-			var theme = layout.Theme;
+			var theme = AppState.CurrentTheme;
 
 			window.MainCanvas.Children.Clear();
 
@@ -51,17 +51,17 @@ namespace TabletFriend
 				}
 			}
 
-			var titlebarHeight = TitlebarManager.GetTitlebarHeight(theme);
+			var titlebarHeight = TitlebarManager.GetTitlebarHeight(layout);
 
 			if (rotateLayout)
 			{
-				window.Height = size.X * theme.CellSize + theme.Margin + titlebarHeight;
-				window.Width = size.Y * theme.CellSize + theme.Margin;
+				window.Height = size.X * layout.CellSize + layout.Margin + titlebarHeight;
+				window.Width = size.Y * layout.CellSize + layout.Margin;
 			}
 			else
 			{
-				window.Width = size.X * theme.CellSize + theme.Margin;
-				window.Height = size.Y * theme.CellSize + theme.Margin + titlebarHeight;
+				window.Width = size.X * layout.CellSize + layout.Margin;
+				window.Height = size.Y * layout.CellSize + layout.Margin + titlebarHeight;
 			}
 
 			var offset = Vector2.Zero;
@@ -83,15 +83,15 @@ namespace TabletFriend
 
 			if (AppState.Settings.DockingMode != DockingMode.None)
 			{
-				window.MinOpacity = theme.MaxOpacity;
+				window.MinOpacity = layout.MaxOpacity;
 			}
 			else
 			{
-				window.MinOpacity = theme.MinOpacity;
+				window.MinOpacity = layout.MinOpacity;
 			}
-			window.MaxOpacity = theme.MaxOpacity;
+			window.MaxOpacity = layout.MaxOpacity;
 			window.BeginAnimation(UIElement.OpacityProperty, null);
-			window.Opacity = theme.MaxOpacity;
+			window.Opacity = layout.MaxOpacity;
 			if (window.IsMouseOver)
 			{
 				window.BeginAnimation(UIElement.OpacityProperty, window.FadeIn);
@@ -148,7 +148,7 @@ namespace TabletFriend
 			}
 
 
-			TitlebarManager.CreateTitlebar(window, theme);
+			TitlebarManager.CreateTitlebar(window, theme, layout);
 		}
 
 		private static void CreateButton(
@@ -160,7 +160,7 @@ namespace TabletFriend
 			Vector2 offset
 		)
 		{
-			var theme = layout.Theme;
+			var theme = AppState.CurrentTheme;
 
 			ButtonBase uiButton;
 			var isToggle = button.Action is ToggleAction;
@@ -182,23 +182,23 @@ namespace TabletFriend
 					uiButton = new Button();
 				}
 			}
-			uiButton.Width = theme.CellSize * size.X - theme.Margin;
-			uiButton.Height = theme.CellSize * size.Y - theme.Margin;
+			uiButton.Width = layout.CellSize * size.X - layout.Margin;
+			uiButton.Height = layout.CellSize * size.Y - layout.Margin;
 
 			var font = button.Font;
 			if (font == null)
 			{
-				font = layout.Theme.DefaultFont;
+				font = AppState.CurrentTheme.DefaultFont;
 			}
 			var fontSize = button.FontSize;
 			if (fontSize == 0)
 			{
-				fontSize = layout.Theme.DefaultFontSize;
+				fontSize = AppState.CurrentTheme.DefaultFontSize;
 			}
 			var fontWeight = button.FontWeight;
 			if (fontWeight == 0)
 			{
-				fontWeight = layout.Theme.DefaultFontWeight;
+				fontWeight = AppState.CurrentTheme.DefaultFontWeight;
 			}
 
 			var text = new TextBlock();
@@ -267,8 +267,8 @@ namespace TabletFriend
 				uiButton.Click += (e, o) => _ = button.Action.Invoke();
 			}
 
-			Canvas.SetTop(uiButton, theme.CellSize * position.Y + theme.Margin + offset.Y);
-			Canvas.SetLeft(uiButton, theme.CellSize * position.X + theme.Margin + offset.X);
+			Canvas.SetTop(uiButton, layout.CellSize * position.Y + layout.Margin + offset.Y);
+			Canvas.SetLeft(uiButton, layout.CellSize * position.X + layout.Margin + offset.X);
 			window.MainCanvas.Children.Add(uiButton);
 		}
 	}

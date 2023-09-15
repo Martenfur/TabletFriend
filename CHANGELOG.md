@@ -4,8 +4,13 @@
 
 ### Changed
 
+- Layout properties `external_theme` and `theme` no longer work. Now, you must select a theme in the context menu independently from a layout. See "Migrating to 2.0" section for the full guide.
+- Theme properties `button_size`, `margin`, `min_opacity`, `max_opacity` have been moved directly to layout yaml. Themes can no longer influence these properties. See "Migrating to 2.0" section for the full guide.
 - Now the app will start in hidden mode.
 - Updated to .NET7
+
+### Fixed
+- Context menu color will now match theme color.
 
 ## [v1.2.0] - 24.10.2021
 

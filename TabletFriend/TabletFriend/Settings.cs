@@ -13,6 +13,7 @@ namespace TabletFriend
 		public double WindowX = 0;
 		public double WindowY = 0;
 		public string Layout = "files/layouts/default.yaml";
+		public string Theme = "files/themes/default.yaml";
 		public DockingMode DockingMode = DockingMode.None;
 		
 		public bool FirstLaunch = true;
@@ -20,6 +21,7 @@ namespace TabletFriend
 		public bool UpdateCheckingEnabled = true;
 
 		private string FullLayoutPath => Path.Combine(AppState.CurrentDirectory, Layout);
+		private string FullThemePath => Path.Combine(AppState.CurrentDirectory, Theme);
 
 		public Settings()
 		{
@@ -28,6 +30,10 @@ namespace TabletFriend
 
 		public void Apply()
 		{
+			if (AppState.CurrentTheme == null || FullThemePath != AppState.CurrentThemePath)
+			{
+				EventBeacon.SendEvent("change_theme", FullThemePath);
+			}
 			if (AppState.CurrentLayout == null || FullLayoutPath != AppState.CurrentLayoutPath)
 			{
 				EventBeacon.SendEvent("change_layout", FullLayoutPath);
@@ -43,6 +49,7 @@ namespace TabletFriend
 		{
 			FirstLaunch = false;
 			Layout = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentLayoutPath);
+			Theme = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentThemePath);
 			if (!double.IsNaN(Application.Current.MainWindow.Left))
 			{
 				WindowX = Application.Current.MainWindow.Left;

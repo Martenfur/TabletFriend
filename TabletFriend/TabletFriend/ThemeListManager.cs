@@ -5,21 +5,21 @@ using System.Windows.Controls;
 
 namespace TabletFriend
 {
-	public class LayoutListManager
+	public class ThemeListManager
 	{
 		public MenuItem Menu;
 
 
-		public LayoutListManager()
+		public ThemeListManager()
 		{
-			Menu = new MenuItem() { Header = "layouts" };
+			Menu = new MenuItem() { Header = "themes" };
 
-			OnUpdateLayoutList();
-			EventBeacon.Subscribe("change_layout", OnChangeLayout);
-			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
+			OnUpdateThemeList();
+			EventBeacon.Subscribe("change_theme", OnChangeTheme);
+			EventBeacon.Subscribe("update_theme_list", OnUpdateThemeList);
 		}
 
-		private void OnChangeLayout(object[] obj)
+		private void OnChangeTheme(object[] obj)
 		{
 			var path = Path.GetFullPath((string)obj[0]);
 			foreach (MenuItem otherItem in Menu.Items)
@@ -28,20 +28,20 @@ namespace TabletFriend
 			}
 		}
 
-		private void OnUpdateLayoutList(object[] obj = null)
+		private void OnUpdateThemeList(object[] obj = null)
 		{
 			Application.Current.Dispatcher.Invoke(
 				delegate
 				{
 					Menu.Items.Clear();
-					foreach (var layout in AppState.Layouts)
+					foreach (var theme in AppState.Themes)
 					{
 						var item = new MenuItem()
 						{
-							Header = Path.GetFileNameWithoutExtension(layout).Replace("_", " "),
-							DataContext = layout,
+							Header = Path.GetFileNameWithoutExtension(theme).Replace("_", " "),
+							DataContext = theme,
 							IsCheckable = true,
-							IsChecked = layout == AppState.CurrentLayoutPath
+							IsChecked = theme == AppState.CurrentThemePath
 						};
 						Menu.Items.Add(item);
 						item.Click += OnClick;
@@ -53,33 +53,14 @@ namespace TabletFriend
 		private void OnClick(object sender, RoutedEventArgs e)
 		{
 			var item = (MenuItem)sender;
-			EventBeacon.SendEvent("change_layout", item.DataContext);
+			EventBeacon.SendEvent("change_theme", item.DataContext);
+			EventBeacon.SendEvent("change_layout", AppState.CurrentLayoutPath);
 		}
 
-		
-		public MenuItem[] GetClonedItems()
-		{
-			var items = new List<MenuItem>();
-
-			foreach(MenuItem item in Menu.Items)
-			{
-				var newItem = new MenuItem()
-				{
-					Header = item.Header,
-					DataContext = item.DataContext,
-					IsCheckable = item.IsCheckable,
-					IsChecked = item.IsChecked,
-				};
-				items.Add(newItem);
-				newItem.Click += OnClick;
-			}
-
-			return items.ToArray();
-		}
 
 		public MenuItem CloneMenu()
 		{
-			var menu = new MenuItem() { Header = "layouts" };
+			var menu = new MenuItem() { Header = "themes" };
 
 			var items = new List<MenuItem>();
 
@@ -95,7 +76,7 @@ namespace TabletFriend
 				menu.Items.Add(newItem);
 				newItem.Click += OnClick;
 			}
-			
+
 			return menu;
 		}
 	}

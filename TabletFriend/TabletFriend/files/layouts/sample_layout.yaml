@@ -10,40 +10,15 @@
 # Max layout width measured in cells. The buttons do not have position properties - instead, they get stacked automatically
 # from left to right and from top to bottom. Layout width specifies how far left the buttons can be stacked. 
 layout_width: 2
-# External theme file. Contains the same fileds as 'theme' property. If 'theme' as any properties of its own, 
-# they override external theme.
-external_theme: files/themes/peach.yaml
-# Local theme.
-theme:
-	# 1x1 button size measured in pixels.
-	button_size: 40
-	# Space between the buttons measured in pixels.
-	margin: 8
-	# Determines how round the window will be.
-	rounding: 8
-	# Default button style. Applied when the button has no 'style' property.
-	# Allowed styles:
-	# - default
-	# - accent
-	# - circular_accent
-	# - circular
-	# - outlined
-	# - shy
-	# - none
-	default_style: default
 
-	# Toolbar opacity. 0 - fully transparent, 1 - fully opaque.
-	min_opacity: 0.2 # Used for when the window is unfocused.
-	max_opacity: 0.9 # Used for when the window is focued.
+# 1x1 button size measured in pixels.
+button_size: 40
+# Space between the buttons measured in pixels.
+margin: 8
 
-	background_color: "#111" # Notice that color values are in quotes, since # is a comment character.
-	primary_color: "#2a2" # You can also use words for colors.
-	secondary_color: "#ffffff"
-	
-	default_font: consolas
-	default_font_size: 14
-	# Defines the boldness of the font. Allowed values are from 1 to 999.
-	default_font_weight: 500 
+# Toolbar opacity. 0 - fully transparent, 1 - fully opaque.
+min_opacity: 0.2 # Used for when the window is unfocused.
+max_opacity: 0.9 # Used for when the window is focued.
 
 # Button list of the layout. Note that all buttons should have different 
 # names - otherwise you'll end up with missing buttons.
@@ -60,6 +35,15 @@ buttons:
 
 	copy:
 		action: ctrl+c
+
+		# Allowed styles:
+		# - default
+		# - accent
+		# - circular_accent
+		# - circular
+		# - outlined
+		# - shy
+		# - none
 		style: accent # This button will look different.
 		
 		# Instead of text, this button will have an icon.
@@ -78,7 +62,7 @@ buttons:
 		text: paste
 
 	# This is a spacer. The only property it can have is size.
-	# Since you cannot specity positions directly, spacers exist
+	# Since you cannot specify positions directly, spacers exist
 	# to create empty space between the buttons. This spacer will 
 	# occupy 2 cells.
 	spacer1:
@@ -111,7 +95,7 @@ buttons:
 
 
 	# Here's a bit of lesser known magic.
-	# There are actually 24 F keys, and if you cobine them with win key, inteseting stuff happens.
+	# There are actually 24 F keys, and if you combine them with win key, inteseting stuff happens.
 	pen_click:
 		actions: 
 			# win+f20 maps to your Surface Pen eraser button click.
@@ -142,7 +126,7 @@ buttons:
 		style: accent
 		text: docked
 		size: 2,1
-		# Makes the button be visible only in docked mode. 
+		# Makes the button visible only in docked mode. 
 		# Valid values:
 		# - always
 		# - undocked

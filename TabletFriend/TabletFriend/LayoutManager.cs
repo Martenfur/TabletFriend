@@ -44,7 +44,7 @@ namespace TabletFriend
 			{
 				AppState.CurrentLayout.Dispose();
 			}
-			var layout = LayoutImporter.Import(path);
+			var layout = Importer.ImportLayout(path);
 
 			if (layout == null)
 			{
