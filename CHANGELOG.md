@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added `dock` and `undock` actions that allow to perform toolbar docking with a button instead of a context menu.
+
 ### Changed
 
 - Layout properties `external_theme` and `theme` no longer work. Now, you must select a theme in the context menu independently from a layout. See "Migrating to 2.0" section for the full guide.
@@ -10,6 +14,7 @@
 - Updated to .NET7
 
 ### Fixed
+
 - Context menu color will now match theme color.
 
 ## [v1.2.0] - 24.10.2021
