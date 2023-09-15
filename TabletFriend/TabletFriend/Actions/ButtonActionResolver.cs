@@ -16,8 +16,8 @@ namespace TabletFriend.Actions
 		private const string _repeatKeyword = "repeat ";
 		private const string _hideKeyword = "hide";
 
-		private const string _dockKeyword = "dock";
-		private const string _undockKeyword = "undock";
+		private const string _dockKeyword = "dock ";
+		private const string _undockKeyword = "undock ";
 
 
 		public static ButtonAction Resolve(string actionString)
