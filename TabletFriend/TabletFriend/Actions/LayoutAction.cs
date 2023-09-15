@@ -11,7 +11,10 @@ namespace TabletFriend.Actions
 			_layout = layout;
 		}
 
-		public override async Task Invoke() =>
+		public override Task Invoke()
+		{
 			EventBeacon.SendEvent("change_layout", _layout);
+			return Task.CompletedTask;
+		}
 	}
 }
