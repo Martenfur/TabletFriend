@@ -32,7 +32,7 @@ namespace TabletFriend
 			{
 				window.MainBorder.CornerRadius = new CornerRadius(0);
 			}
-			var sizes = layout.Buttons.GetSizes(isDocked);
+			var sizes = layout.Buttons.GetSizes(AppState.Settings.DockingMode);
 			var positions = Packer.Pack(sizes, layout.LayoutWidth);
 
 			var size = Packer.GetSize(positions, sizes);
@@ -115,7 +115,7 @@ namespace TabletFriend
 
 			foreach (var button in layout.Buttons)
 			{
-				if (button.IsVisible(isDocked))
+				if (button.IsVisible(AppState.Settings.DockingMode))
 				{
 					visibleButtons.Add(button);
 				}

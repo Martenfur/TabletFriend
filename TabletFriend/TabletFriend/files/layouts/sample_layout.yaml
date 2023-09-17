@@ -139,6 +139,25 @@ buttons:
 		# Makes the button be visible only in undocked mode. 
 		visibility: undocked
 
+	docked_left:
+		style: accent
+		text: docked left
+		size: 2,1
+		# Makes the button be visible when toolbar is docked to the left. 
+		visibility: docked_left
+	docked_right:
+		style: accent
+		text: docked right
+		size: 2,1
+		# Makes the button be visible when toolbar is docked to the right. 
+		visibility: docked_right
+	docked_top:
+		style: accent
+		text: docked top
+		size: 2,1
+		# Makes the button be visible when toolbar is docked to the top. 
+		visibility: docked_top
+
 	left:
 		# repeat action will make the button trigger continiously when pressed and held down.
 		action: repeat left
@@ -161,7 +180,7 @@ buttons:
 		text: undock
 		style: default
 		visibility: docked
-		size: 4,2
+		size: 2,1
 
 	dock_toolbar_left:
 		icon: dock_left
@@ -169,7 +188,7 @@ buttons:
 		text: dock left
 		style: default
 		visibility: undocked
-		size: 2,2
+		size: 1,1
 
 	dock_toolbar_right:
 		icon: dock_right
@@ -177,11 +196,11 @@ buttons:
 		text: dock right
 		style: default
 		visibility: undocked
-		size: 2,2
+		size: 1,1
 
 	swap:
 		# This button will load a different layout.
 		action: layout files/layouts/sample_layout2.yaml
 		text: Second\nlayout # \n puts text on a new line.
-		size: 2,2
+		size: 2,1
 		style: default

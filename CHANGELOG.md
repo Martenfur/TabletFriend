@@ -5,6 +5,7 @@
 ### Added
 
 - Added `dock` and `undock` actions that allow to perform toolbar docking with a button instead of a context menu.
+- Added `docked_right`, `docked_left` and `docked_top` options to `visibility` property. Now, buttons can be shown only in some docking modes.
 
 ### Changed
 
