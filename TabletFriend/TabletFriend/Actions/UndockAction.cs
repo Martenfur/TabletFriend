@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
+using WpfAppBar;
 
 namespace TabletFriend.Actions
 {
-	public class HideAction : ButtonAction
+	public class UndockAction : ButtonAction
 	{
 		public override Task Invoke()
 		{
-			EventBeacon.SendEvent("toggle_minimize");
+			EventBeacon.SendEvent("docking_changed", DockingMode.None);
 			return Task.CompletedTask;
 		}
 	}

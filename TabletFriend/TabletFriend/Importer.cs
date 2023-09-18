@@ -22,6 +22,11 @@ namespace TabletFriend
 			{
 				var data = Import<LayoutData>(path);
 				
+				if (data == null)
+				{
+					throw new Exception("Layout import failed!");
+				}
+
 				return new LayoutModel(data);
 			}
 			catch (Exception e)

@@ -19,6 +19,7 @@ namespace TabletFriend
 		public bool FirstLaunch = true;
 
 		public bool UpdateCheckingEnabled = true;
+		public bool ToolbarAutohideEnabled = true;
 
 		private string FullLayoutPath => Path.Combine(AppState.CurrentDirectory, Layout);
 		private string FullThemePath => Path.Combine(AppState.CurrentDirectory, Theme);

@@ -12,7 +12,7 @@ namespace TabletFriend.Actions
 			_cmd = cmd;
 		}
 
-		public async override Task Invoke()
+		public override Task Invoke()
 		{
 			var process = new Process();
 			var startInfo = new ProcessStartInfo();
@@ -21,6 +21,7 @@ namespace TabletFriend.Actions
 			startInfo.Arguments = "/C " + _cmd;
 			process.StartInfo = startInfo;
 			process.Start();
+			return Task.CompletedTask;
 		}
 	}
 }
