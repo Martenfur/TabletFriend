@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using TabletFriend.Docking;
+using TabletFriend.TabletMode;
 using WpfAppBar;
 
 namespace TabletFriend
@@ -75,7 +76,10 @@ namespace TabletFriend
 				AutostartManager.ResetAutostart();
 			}
 
+			
 			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
+			EventBeacon.Subscribe("maximize", OnMaximize);
+			EventBeacon.Subscribe("minimize", OnMinimize);
 			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
 			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
 			EventBeacon.Subscribe("docking_changed", OnDockingChanged);
@@ -208,6 +212,24 @@ namespace TabletFriend
 			{
 				AppBarFunctions.SetAppBar(this, DockingMode.None);
 				Visibility = Visibility.Hidden;
+			}
+		}
+
+		private void OnMinimize(object[] obj)
+		{
+			if (Visibility == Visibility.Visible)
+			{
+				AppBarFunctions.SetAppBar(this, DockingMode.None);
+				Visibility = Visibility.Hidden;
+			}
+		}
+
+		private void OnMaximize(object[] obj)
+		{
+			if (Visibility == Visibility.Collapsed || Visibility == Visibility.Hidden)
+			{
+				Visibility = Visibility.Visible;
+				AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
 			}
 		}
 

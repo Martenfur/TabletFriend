@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using TabletFriend.Docking;
+using TabletFriend.TabletMode;
 using WpfAppBar;
 
 namespace TabletFriend
@@ -27,6 +28,7 @@ namespace TabletFriend
 		private TaskbarIcon _icon;
 		private MenuItem _autostartMenuItem;
 		private MenuItem _autoUpdateMenuItem;
+		private MenuItem _autohideMenuItem;
 		private readonly string _iconPathBlack = AppState.CurrentDirectory + "/files/icons/tray/tray_black.ico";
 		private readonly string _iconPathWhite = AppState.CurrentDirectory + "/files/icons/tray/tray_white.ico";
 		private readonly LayoutListManager _layoutList;
@@ -97,6 +99,17 @@ namespace TabletFriend
 				_autoUpdateMenuItem = AddMenuItem("check for updates", OnAutoUpdateToggle);
 			}
 
+			if (AppState.Settings.ToolbarAutohideEnabled)
+			{
+				_autohideMenuItem = AddMenuItem("disable toolbar autohide", OnAutohideToggle);
+				ToolbarAutohider.StartWatching();
+			}
+			else
+			{
+				_autohideMenuItem = AddMenuItem("enable toolbar autohide", OnAutohideToggle);
+				ToolbarAutohider.StopWatching();
+			}
+
 			AddMenuItem("open layouts directory...", OnOpenLayoutsDirectory);
 			AddMenuItem("about", OnAbout);
 			AddMenuItem("quit", OnQuit);
@@ -131,6 +144,23 @@ namespace TabletFriend
 			else
 			{
 				_autoUpdateMenuItem.Header = "check for updates";
+			}
+			EventBeacon.SendEvent("update_settings");
+		}
+
+		private void OnAutohideToggle(object sender, RoutedEventArgs e)
+		{
+			AppState.Settings.ToolbarAutohideEnabled = !AppState.Settings.ToolbarAutohideEnabled;
+
+			if (AppState.Settings.ToolbarAutohideEnabled)
+			{
+				_autohideMenuItem.Header = "disable toolbar autohide";
+				ToolbarAutohider.StartWatching();
+			}
+			else
+			{
+				_autohideMenuItem.Header = "enable toolbar autohide";
+				ToolbarAutohider.StopWatching();
 			}
 			EventBeacon.SendEvent("update_settings");
 		}
