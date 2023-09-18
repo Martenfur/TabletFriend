@@ -33,7 +33,7 @@ namespace TabletFriend
 		private void OnChanged(object sender, FileSystemEventArgs args)
 		{
 			RefreshLists();
-			EventBeacon.SendEvent("files_changed", sender, args);
+			EventBeacon.SendEvent(Events.FilesChanged, sender, args);
 		}
 
 
@@ -41,8 +41,8 @@ namespace TabletFriend
 		{
 			AppState.Layouts = Directory.GetFiles(AppState.LayoutsRoot, AppState.LayoutExtension);
 			AppState.Themes = Directory.GetFiles(AppState.ThemesRoot, AppState.LayoutExtension);
-			EventBeacon.SendEvent("update_theme_list");
-			EventBeacon.SendEvent("update_layout_list");
+			EventBeacon.SendEvent(Events.UpdateThemeList);
+			EventBeacon.SendEvent(Events.UpdateLayoutList);
 		}
 	}
 }

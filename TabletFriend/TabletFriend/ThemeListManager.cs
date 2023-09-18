@@ -15,8 +15,8 @@ namespace TabletFriend
 			Menu = new MenuItem() { Header = "themes" };
 
 			OnUpdateThemeList();
-			EventBeacon.Subscribe("change_theme", OnChangeTheme);
-			EventBeacon.Subscribe("update_theme_list", OnUpdateThemeList);
+			EventBeacon.Subscribe(Events.ChangeTheme, OnChangeTheme);
+			EventBeacon.Subscribe(Events.UpdateThemeList, OnUpdateThemeList);
 		}
 
 		private void OnChangeTheme(object[] obj)
@@ -53,8 +53,8 @@ namespace TabletFriend
 		private void OnClick(object sender, RoutedEventArgs e)
 		{
 			var item = (MenuItem)sender;
-			EventBeacon.SendEvent("change_theme", item.DataContext);
-			EventBeacon.SendEvent("change_layout", AppState.CurrentLayoutPath);
+			EventBeacon.SendEvent(Events.ChangeTheme, item.DataContext);
+			EventBeacon.SendEvent(Events.ChangeLayout, AppState.CurrentLayoutPath);
 		}
 
 

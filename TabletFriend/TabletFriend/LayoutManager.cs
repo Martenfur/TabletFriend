@@ -11,8 +11,8 @@ namespace TabletFriend
 		public LayoutManager(MainWindow window)
 		{
 			_window = window;
-			EventBeacon.Subscribe("files_changed", OnFilesChanged);
-			EventBeacon.Subscribe("change_layout", OnChangeLayout);
+			EventBeacon.Subscribe(Events.FilesChanged, OnFilesChanged);
+			EventBeacon.Subscribe(Events.ChangeLayout, OnChangeLayout);
 		}
 
 
@@ -34,7 +34,7 @@ namespace TabletFriend
 			LoadLayout(path);
 			if (!firstLoad)
 			{
-				EventBeacon.SendEvent("update_settings");
+				EventBeacon.SendEvent(Events.UpdateSettings);
 			}
 		}
 
@@ -59,7 +59,7 @@ namespace TabletFriend
 			AppState.CurrentLayout = layout;
 			UiFactory.CreateUi(AppState.CurrentLayout, _window);
 			AppState.CurrentLayoutPath = path;
-			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
+			EventBeacon.SendEvent(Events.DockingChanged, AppState.Settings.DockingMode);
 		}
 
 	}

@@ -76,12 +76,12 @@ namespace TabletFriend
 			}
 
 			
-			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
-			EventBeacon.Subscribe("maximize", OnMaximize);
-			EventBeacon.Subscribe("minimize", OnMinimize);
-			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
-			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
-			EventBeacon.Subscribe("docking_changed", OnDockingChanged);
+			EventBeacon.Subscribe(Events.ToggleMinimize, OnToggleMinimize);
+			EventBeacon.Subscribe(Events.Maximize, OnMaximize);
+			EventBeacon.Subscribe(Events.Minimize, OnMinimize);
+			EventBeacon.Subscribe(Events.UpdateLayoutList, OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.ChangeLayout, OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.DockingChanged, OnDockingChanged);
 		}
 
 
@@ -176,7 +176,7 @@ namespace TabletFriend
 			}
 
 
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 		}
 
 
@@ -192,7 +192,7 @@ namespace TabletFriend
 				GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE
 			);
 
-			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
+			EventBeacon.SendEvent(Events.DockingChanged, AppState.Settings.DockingMode);
 		}
 
 
@@ -245,7 +245,7 @@ namespace TabletFriend
 		protected override void OnClosing(CancelEventArgs e)
 		{
 			base.OnClosing(e);
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 			AppBarFunctions.SetAppBar(this, DockingMode.None);
 			Environment.Exit(0);
 		}

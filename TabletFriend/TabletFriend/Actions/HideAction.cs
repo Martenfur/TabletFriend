@@ -6,7 +6,7 @@ namespace TabletFriend.Actions
 	{
 		public override Task Invoke()
 		{
-			EventBeacon.SendEvent("toggle_minimize");
+			EventBeacon.SendEvent(Events.ToggleMinimize);
 			return Task.CompletedTask;
 		}
 	}

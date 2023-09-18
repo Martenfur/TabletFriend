@@ -10,8 +10,8 @@ namespace TabletFriend
 		public ThemeManager(MainWindow window)
 		{
 			_window = window;
-			EventBeacon.Subscribe("files_changed", OnFilesChanged);
-			EventBeacon.Subscribe("change_theme", OnChangeTheme);
+			EventBeacon.Subscribe(Events.FilesChanged, OnFilesChanged);
+			EventBeacon.Subscribe(Events.ChangeTheme, OnChangeTheme);
 		}
 
 
@@ -33,7 +33,7 @@ namespace TabletFriend
 			LoadTheme(path);
 			if (!firstLoad)
 			{
-				EventBeacon.SendEvent("update_settings");
+				EventBeacon.SendEvent(Events.UpdateSettings);
 			}
 		}
 

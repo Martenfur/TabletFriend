@@ -23,7 +23,7 @@ namespace TabletFriend
 			// Why do we need an entire class instead of an event handler? No fucking idea.
 			public event EventHandler CanExecuteChanged;
 			public bool CanExecute(object parameter) => true;
-			public void Execute(object parameter) => EventBeacon.SendEvent("toggle_minimize");
+			public void Execute(object parameter) => EventBeacon.SendEvent(Events.ToggleMinimize);
 		}
 
 
@@ -61,7 +61,7 @@ namespace TabletFriend
 
 			CreateMenu();
 
-			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.ChangeLayout, OnUpdateLayoutList);
 		}
 
 
@@ -146,7 +146,7 @@ namespace TabletFriend
 				AutostartManager.ResetAutostart();
 				_autostartMenuItem.Header = "add to autostart";
 			}
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 		}
 
 		private void OnAutoUpdateToggle(object sender, RoutedEventArgs e)
@@ -161,7 +161,7 @@ namespace TabletFriend
 			{
 				_autoUpdateMenuItem.Header = "check for updates";
 			}
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 		}
 
 		private void OnAutohideToggle(object sender, RoutedEventArgs e)
@@ -178,7 +178,7 @@ namespace TabletFriend
 				_autohideMenuItem.Header = "enable toolbar autohide";
 				ToolbarAutohider.StopWatching();
 			}
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 		}
 
 		private void OnAbout(object sender, RoutedEventArgs e)

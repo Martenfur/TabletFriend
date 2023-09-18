@@ -15,8 +15,8 @@ namespace TabletFriend
 			Menu = new MenuItem() { Header = "layouts" };
 
 			OnUpdateLayoutList();
-			EventBeacon.Subscribe("change_layout", OnChangeLayout);
-			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.ChangeLayout, OnChangeLayout);
+			EventBeacon.Subscribe(Events.UpdateLayoutList, OnUpdateLayoutList);
 		}
 
 		private void OnChangeLayout(object[] obj)
@@ -53,7 +53,7 @@ namespace TabletFriend
 		private void OnClick(object sender, RoutedEventArgs e)
 		{
 			var item = (MenuItem)sender;
-			EventBeacon.SendEvent("change_layout", item.DataContext);
+			EventBeacon.SendEvent(Events.ChangeLayout, item.DataContext);
 		}
 
 		

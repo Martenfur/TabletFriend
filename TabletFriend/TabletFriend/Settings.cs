@@ -26,23 +26,23 @@ namespace TabletFriend
 
 		public Settings()
 		{
-			EventBeacon.Subscribe("update_settings", OnUpdateSettings);
+			EventBeacon.Subscribe(Events.UpdateSettings, OnUpdateSettings);
 		}
 
 		public void Apply()
 		{
 			if (AppState.CurrentTheme == null || FullThemePath != AppState.CurrentThemePath)
 			{
-				EventBeacon.SendEvent("change_theme", FullThemePath);
+				EventBeacon.SendEvent(Events.ChangeTheme, FullThemePath);
 			}
 			if (AppState.CurrentLayout == null || FullLayoutPath != AppState.CurrentLayoutPath)
 			{
-				EventBeacon.SendEvent("change_layout", FullLayoutPath);
+				EventBeacon.SendEvent(Events.ChangeLayout, FullLayoutPath);
 			}
 			Application.Current.MainWindow.Left = WindowX;
 			Application.Current.MainWindow.Top = WindowY;
 			
-			EventBeacon.SendEvent("docking_changed", DockingMode);
+			EventBeacon.SendEvent(Events.DockingChanged, DockingMode);
 		}
 
 

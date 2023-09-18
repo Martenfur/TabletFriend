@@ -13,7 +13,7 @@ namespace TabletFriend.Actions
 
 		public override Task Invoke()
 		{
-			EventBeacon.SendEvent("change_layout", _layout);
+			EventBeacon.SendEvent(Events.ChangeLayout, _layout);
 			return Task.CompletedTask;
 		}
 	}
