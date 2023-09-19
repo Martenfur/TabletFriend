@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 
 namespace TabletFriend.Actions
 {
@@ -13,7 +14,7 @@ namespace TabletFriend.Actions
 
 		public override Task Invoke()
 		{
-			EventBeacon.SendEvent(Events.ChangeLayout, _layout);
+			EventBeacon.SendEvent(Events.ChangeLayout, Path.GetFileNameWithoutExtension(_layout));
 			return Task.CompletedTask;
 		}
 	}

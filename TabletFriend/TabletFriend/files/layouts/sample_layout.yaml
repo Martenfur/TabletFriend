@@ -200,7 +200,7 @@ buttons:
 
 	swap:
 		# This button will load a different layout.
-		action: layout files/layouts/sample_layout2.yaml
+		action: layout sample_layout2
 		text: Second\nlayout # \n puts text on a new line.
 		size: 2,1
 		style: default

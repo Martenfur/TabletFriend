@@ -20,7 +20,7 @@ namespace TabletFriend
 			Application.Current.Dispatcher.Invoke(
 				delegate
 				{
-					LoadTheme(AppState.CurrentThemePath);
+					LoadTheme(AppState.CurrentThemeName);
 				}
 			);
 		}
@@ -40,7 +40,7 @@ namespace TabletFriend
 
 		public void LoadTheme(string path)
 		{
-			var theme = Importer.ImportTheme(path);
+			var theme = AppState.Themes[path];
 
 			if (theme == null)
 			{
@@ -48,7 +48,7 @@ namespace TabletFriend
 			}
 
 			AppState.CurrentTheme = theme;
-			AppState.CurrentThemePath = path;
+			AppState.CurrentThemeName = path;
 		}
 
 	}

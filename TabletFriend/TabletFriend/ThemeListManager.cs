@@ -34,14 +34,14 @@ namespace TabletFriend
 				delegate
 				{
 					Menu.Items.Clear();
-					foreach (var theme in AppState.Themes)
+					foreach (var theme in AppState.Themes.Keys)
 					{
 						var item = new MenuItem()
 						{
 							Header = Path.GetFileNameWithoutExtension(theme).Replace("_", " "),
 							DataContext = theme,
 							IsCheckable = true,
-							IsChecked = theme == AppState.CurrentThemePath
+							IsChecked = theme == AppState.CurrentThemeName
 						};
 						Menu.Items.Add(item);
 						item.Click += OnClick;
@@ -54,7 +54,7 @@ namespace TabletFriend
 		{
 			var item = (MenuItem)sender;
 			EventBeacon.SendEvent(Events.ChangeTheme, item.DataContext);
-			EventBeacon.SendEvent(Events.ChangeLayout, AppState.CurrentLayoutPath);
+			EventBeacon.SendEvent(Events.ChangeLayout, AppState.CurrentLayoutName);
 		}
 
 

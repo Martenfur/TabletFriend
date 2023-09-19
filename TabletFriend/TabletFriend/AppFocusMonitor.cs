@@ -7,7 +7,7 @@ namespace TabletFriend
 {
 	public class AppFocusMonitor : IDisposable
 	{
-		public HashSet<string> IgnoredApps = new HashSet<string> 
+		public HashSet<string> IgnoredApps = new HashSet<string>
 		{
 			"TabletFriend",
 			"explorer" // Explorer takes over when you click the taskbar. 
@@ -25,18 +25,23 @@ namespace TabletFriend
 
 		private void OnFocusChanged(object sender, AutomationFocusChangedEventArgs e)
 		{
-			var focusedElement = (AutomationElement)sender;
-			if (focusedElement != null)
+			try
 			{
-				using (var process = Process.GetProcessById(focusedElement.Current.ProcessId))
+				var focusedElement = (AutomationElement)sender;
+				if (focusedElement != null)
 				{
-					if (!IgnoredApps.Contains(process.ProcessName) && FocusedApp != process.ProcessName)
+					using (var process = Process.GetProcessById(focusedElement.Current.ProcessId))
 					{
-						FocusedApp = process.ProcessName;
-						OnAppChanged?.Invoke(FocusedApp);
+						if (!IgnoredApps.Contains(process.ProcessName) && FocusedApp != process.ProcessName)
+						{
+							FocusedApp = process.ProcessName;
+							OnAppChanged?.Invoke(FocusedApp);
+						}
 					}
 				}
 			}
+			catch
+			{ }
 		}
 
 

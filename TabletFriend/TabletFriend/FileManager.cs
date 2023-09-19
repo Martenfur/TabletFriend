@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Windows;
 
 namespace TabletFriend
 {
@@ -10,7 +11,7 @@ namespace TabletFriend
 		{
 			_watcher = new FileSystemWatcher();
 			_watcher.Path = AppState.FilesRoot;
-			_watcher.NotifyFilter = NotifyFilters.FileName 
+			_watcher.NotifyFilter = NotifyFilters.FileName
 				| NotifyFilters.DirectoryName
 				| NotifyFilters.Attributes
 				| NotifyFilters.Size
@@ -39,8 +40,13 @@ namespace TabletFriend
 
 		private void RefreshLists()
 		{
-			AppState.Layouts = Directory.GetFiles(AppState.LayoutsRoot, AppState.LayoutExtension);
-			AppState.Themes = Directory.GetFiles(AppState.ThemesRoot, AppState.LayoutExtension);
+			Application.Current.Dispatcher.Invoke(
+				delegate
+				{
+					AppState.Layouts = Importer.ImportLayouts();
+					AppState.Themes = Importer.ImportThemes();
+				}
+			);
 			EventBeacon.SendEvent(Events.UpdateThemeList);
 			EventBeacon.SendEvent(Events.UpdateLayoutList);
 		}

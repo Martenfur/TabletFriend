@@ -21,7 +21,7 @@ namespace TabletFriend
 			Application.Current.Dispatcher.Invoke(
 				delegate
 				{
-					LoadLayout(AppState.CurrentLayoutPath);
+					LoadLayout(AppState.CurrentLayoutName);
 				}
 			);
 		}
@@ -45,10 +45,10 @@ namespace TabletFriend
 			{
 				AppState.CurrentLayout.Dispose();
 			}
-			var layout = Importer.ImportLayout(path);
+			var layout = AppState.Layouts[path];
 			if (layout == null) 
 			{ 
-				layout = Importer.ImportLayout(Path.GetDirectoryName(path) + "/default.yaml");
+				layout = AppState.Layouts["default"];
 			}
 
 			if (layout == null)
@@ -58,7 +58,7 @@ namespace TabletFriend
 
 			AppState.CurrentLayout = layout;
 			UiFactory.CreateUi(AppState.CurrentLayout, _window);
-			AppState.CurrentLayoutPath = path;
+			AppState.CurrentLayoutName = Path.GetFileNameWithoutExtension(path);
 			EventBeacon.SendEvent(Events.DockingChanged, AppState.Settings.DockingMode);
 		}
 

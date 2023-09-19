@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using TabletFriend.Models;
 
@@ -12,16 +13,16 @@ namespace TabletFriend
 		public static readonly string LayoutsRoot = Path.Combine(CurrentDirectory, "files\\layouts");
 		public static readonly string ThemesRoot = Path.Combine(CurrentDirectory, "files\\themes");
 
-		public const string LayoutExtension = "*.yaml";
+		public const string ConfigExtension = "*.yaml";
 
-		public static string[] Layouts;
-		public static string[] Themes;
+		public static Dictionary<string, LayoutModel> Layouts;
+		public static Dictionary<string, ThemeModel> Themes;
 
 		public static LayoutModel CurrentLayout;
-		public static string CurrentLayoutPath;
+		public static string CurrentLayoutName;
 
 		public static ThemeModel CurrentTheme;
-		public static string CurrentThemePath;
+		public static string CurrentThemeName;
 
 		public static Settings Settings;
 	}

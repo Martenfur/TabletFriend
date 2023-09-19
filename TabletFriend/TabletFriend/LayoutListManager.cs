@@ -34,14 +34,14 @@ namespace TabletFriend
 				delegate
 				{
 					Menu.Items.Clear();
-					foreach (var layout in AppState.Layouts)
+					foreach (var layout in AppState.Layouts.Keys)
 					{
 						var item = new MenuItem()
 						{
 							Header = Path.GetFileNameWithoutExtension(layout).Replace("_", " "),
 							DataContext = layout,
 							IsCheckable = true,
-							IsChecked = layout == AppState.CurrentLayoutPath
+							IsChecked = layout == AppState.CurrentLayoutName
 						};
 						Menu.Items.Add(item);
 						item.Click += OnClick;

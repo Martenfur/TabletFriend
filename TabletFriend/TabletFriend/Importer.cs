@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using TabletFriend.Data;
 using TabletFriend.Models;
 using YamlDotNet.Serialization;
@@ -16,12 +19,35 @@ namespace TabletFriend
 			.IgnoreUnmatchedProperties()
 			.Build();
 
-		public static LayoutModel ImportLayout(string path)
+
+		public static Dictionary<string, LayoutModel> ImportLayouts()
+		{
+			var items = new Dictionary<string, LayoutModel>();
+			foreach (var file in Directory.GetFiles(AppState.LayoutsRoot, AppState.ConfigExtension))
+			{
+				items.Add(Path.GetFileNameWithoutExtension(file), ImportLayout(file));
+			}
+
+			return items;
+		}
+
+		public static Dictionary<string, ThemeModel> ImportThemes()
+		{
+			var items = new Dictionary<string, ThemeModel>();
+			foreach (var file in Directory.GetFiles(AppState.ThemesRoot, AppState.ConfigExtension))
+			{
+				items.Add(Path.GetFileNameWithoutExtension(file), ImportTheme(file));
+			}
+
+			return items;
+		}
+
+		private static LayoutModel ImportLayout(string path)
 		{
 			try
 			{
 				var data = Import<LayoutData>(path);
-				
+
 				if (data == null)
 				{
 					throw new Exception("Layout import failed!");
@@ -41,7 +67,7 @@ namespace TabletFriend
 			return null;
 		}
 
-		public static ThemeModel ImportTheme(string path)
+		private static ThemeModel ImportTheme(string path)
 		{
 			try
 			{
@@ -84,7 +110,11 @@ namespace TabletFriend
 				{
 					layout = File.ReadAllText(path)
 						.Replace("\t", "  "); // The thing doesn't like tabs.
-					break;
+
+					if (!string.IsNullOrEmpty(layout))
+					{
+						break;
+					}
 				}
 				catch
 				{
