@@ -13,6 +13,7 @@ using System.Windows.Threading;
 using TabletFriend.Docking;
 using TabletFriend.TabletMode;
 using WpfAppBar;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TabletFriend
 {
@@ -86,39 +87,45 @@ namespace TabletFriend
 
 			DockingMenuFactory.CreateDockingMenu(_icon.ContextMenu);
 
+			var settings = new MenuItem() { Header = "settings" };
+
 			if (AppState.Settings.AddToAutostart)
 			{
-				_autostartMenuItem = AddMenuItem("remove from autostart", OnAutostartToggle);
+				_autostartMenuItem = AddSubmenuItem(settings, "remove from autostart", OnAutostartToggle);
 			}
 			else
 			{
-				_autostartMenuItem = AddMenuItem("add to autostart", OnAutostartToggle);
+				_autostartMenuItem = AddSubmenuItem(settings, "add to autostart", OnAutostartToggle);
 			}
 
 			if (AppState.Settings.UpdateCheckingEnabled)
 			{
-				_autoUpdateMenuItem = AddMenuItem("don't check for updates", OnAutoUpdateToggle);
+				_autoUpdateMenuItem = AddSubmenuItem(settings, "don't check for updates", OnAutoUpdateToggle);
 			}
 			else
 			{
-				_autoUpdateMenuItem = AddMenuItem("check for updates", OnAutoUpdateToggle);
+				_autoUpdateMenuItem = AddSubmenuItem(settings, "check for updates", OnAutoUpdateToggle);
 			}
 
 			if (AppState.Settings.ToolbarAutohideEnabled)
 			{
-				_autohideMenuItem = AddMenuItem("disable toolbar autohide", OnAutohideToggle);
+				_autohideMenuItem = AddSubmenuItem(settings, "disable toolbar autohide", OnAutohideToggle);
 				ToolbarAutohider.StartWatching();
 			}
 			else
 			{
-				_autohideMenuItem = AddMenuItem("enable toolbar autohide", OnAutohideToggle);
+				_autohideMenuItem = AddSubmenuItem(settings, "enable toolbar autohide", OnAutohideToggle);
 				ToolbarAutohider.StopWatching();
 			}
 
-			AddMenuItem("open layouts directory...", OnOpenLayoutsDirectory);
-			AddMenuItem("about", OnAbout);
-			_focusedApp = AddMenuItem("focused app: none");
+
+			AddSubmenuItem(settings, "open layouts directory...", OnOpenLayoutsDirectory);
+			_focusedApp = AddSubmenuItem(settings, "focused app: none");
 			_focusMonitor.OnAppChanged += OnAppChanged;
+			_icon.ContextMenu.Items.Add(settings);
+
+			_icon.ContextMenu.Items.Add(new Separator());
+			AddMenuItem("about", OnAbout);
 			AddMenuItem("quit", OnQuit);
 		}
 
@@ -207,12 +214,26 @@ namespace TabletFriend
 			return item;
 		}
 
+		private MenuItem AddSubmenuItem(MenuItem menu, string header, RoutedEventHandler click = null)
+		{
+			var item = new MenuItem() { Header = header };
+			if (click != null)
+			{
+				item.Click += click;
+			}
+			else
+			{
+				item.IsEnabled = false;
+			}
+			menu.Items.Add(item);
+			return item;
+		}
 
 		private void OnOpenLayoutsDirectory(object sender, RoutedEventArgs e)
 		{
 			var startInfo = new ProcessStartInfo()
 			{
-				Arguments = AppState.LayoutsRoot,
+				Arguments = Path.Combine(AppState.CurrentDirectory, "files"),
 				FileName = "explorer.exe"
 			};
 			Process.Start(startInfo);

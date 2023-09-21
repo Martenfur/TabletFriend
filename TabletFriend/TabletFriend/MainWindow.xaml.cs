@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using TabletFriend.Docking;
@@ -35,7 +36,8 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
-			var focusMonitor = new AppFocusMonitor();
+			var focusMonitor = new AppFocusMonitor(); // Has to be at the very top or else it hangs on starup. Why? No idea. 
+
 			SystemEvents.DisplaySettingsChanged += OnSizeChanged;
 
 			Directory.SetCurrentDirectory(AppState.CurrentDirectory);
@@ -123,7 +125,8 @@ namespace TabletFriend
 				{
 					ContextMenu.Items.Clear();
 					DockingMenuFactory.CreateDockingMenu(ContextMenu);
-					
+
+					ContextMenu.Items.Add(new Separator());
 					var items = _layoutList.GetClonedItems();
 					foreach (var item in items)
 					{
