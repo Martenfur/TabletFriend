@@ -35,6 +35,7 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
+			var focusMonitor = new AppFocusMonitor();
 			SystemEvents.DisplaySettingsChanged += OnSizeChanged;
 
 			Directory.SetCurrentDirectory(AppState.CurrentDirectory);
@@ -62,7 +63,6 @@ namespace TabletFriend
 
 			OnUpdateLayoutList();
 
-			var focusMonitor = new AppFocusMonitor();
 			_tray = new TrayManager(_layoutList, _themeList, focusMonitor);
 
 
