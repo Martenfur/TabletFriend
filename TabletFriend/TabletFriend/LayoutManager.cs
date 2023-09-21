@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using WpfAppBar;
 
@@ -41,6 +42,7 @@ namespace TabletFriend
 
 		public void LoadLayout(string path)
 		{
+			Debug.WriteLine("Loading " + path);
 			if (AppState.CurrentLayout != null)
 			{
 				AppState.CurrentLayout.Dispose();
@@ -51,10 +53,11 @@ namespace TabletFriend
 				layout = AppState.Layouts["default"];
 			}
 
-			if (layout == null)
+			if (layout == null)// || layout == AppState.CurrentLayout)
 			{
 				return;
 			}
+
 
 			AppState.CurrentLayout = layout;
 			UiFactory.CreateUi(AppState.CurrentLayout, _window);

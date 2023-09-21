@@ -11,6 +11,8 @@ namespace TabletFriend.Data
 		public string MinOpacity;
 		public string MaxOpacity;
 
+		public string App;
+
 		public Dictionary<string, ButtonData> Buttons;
 	}
 }

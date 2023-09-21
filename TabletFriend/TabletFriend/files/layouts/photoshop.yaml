@@ -2,8 +2,9 @@
 button_size: 32
 margin: 8
 
-buttons:
+app: krita
 
+buttons:
  copy:
 	 action: ctrl+c
 	 size: 1,1

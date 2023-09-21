@@ -23,6 +23,7 @@ namespace TabletFriend
 		private ThemeManager _theme;
 		private LayoutListManager _layoutList;
 		private ThemeListManager _themeList;
+		private AutomaticLayoutSwitcher _layoutSwitcher;
 		private TrayManager _tray;
 		private FileManager _file;
 
@@ -65,6 +66,8 @@ namespace TabletFriend
 
 			OnUpdateLayoutList();
 
+
+			_layoutSwitcher = new AutomaticLayoutSwitcher(focusMonitor);
 			_tray = new TrayManager(_layoutList, _themeList, focusMonitor);
 
 
