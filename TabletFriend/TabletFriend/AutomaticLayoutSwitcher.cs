@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using TabletFriend.Models;
 
 namespace TabletFriend
 {
@@ -19,11 +14,12 @@ namespace TabletFriend
 			_monitor = monitor;
 			_monitor.OnAppChanged += OnAppChanged;
 
+			OnUpdateLayoutList();
 			EventBeacon.Subscribe(Events.UpdateLayoutList, OnUpdateLayoutList);
 		}
 
 
-		private void OnUpdateLayoutList(object[] obj)
+		private void OnUpdateLayoutList(params object[] obj)
 		{
 			_appSpecificLayouts.Clear();
 
@@ -44,7 +40,14 @@ namespace TabletFriend
 				{
 					if (_appSpecificLayouts.TryGetValue(app, out var key))
 					{
-						EventBeacon.SendEvent(Events.ChangeLayout, key);
+						EventBeacon.SendEvent(Events.ChangeLayout, key, LayoutChangeMethod.Automatic);
+					}
+					else
+					{
+						if (AppState.LastManuallySetLayout != null)
+						{
+							EventBeacon.SendEvent(Events.ChangeLayout, AppState.LastManuallySetLayout, LayoutChangeMethod.Automatic);
+						}
 					}
 				}
 			);

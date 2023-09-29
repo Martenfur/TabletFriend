@@ -46,7 +46,14 @@ namespace TabletFriend
 		private void OnUpdateSettings(object[] obj)
 		{
 			FirstLaunch = false;
-			Layout = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentLayoutName);
+			if (AppState.LastManuallySetLayout == null)
+			{
+				Layout = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentLayoutName);
+			}
+			else
+			{
+				Layout = Path.GetRelativePath(AppState.CurrentDirectory, AppState.LastManuallySetLayout);
+			}
 			Theme = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentThemeName);
 			if (!double.IsNaN(Application.Current.MainWindow.Left))
 			{

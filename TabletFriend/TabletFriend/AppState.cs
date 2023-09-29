@@ -21,6 +21,11 @@ namespace TabletFriend
 		public static LayoutModel CurrentLayout;
 		public static string CurrentLayoutName;
 
+		/// <summary>
+		/// Keeps track of which layout was set by user and not autoswitched to.
+		/// </summary>
+		public static string LastManuallySetLayout;
+
 		public static ThemeModel CurrentTheme;
 		public static string CurrentThemeName;
 

@@ -32,6 +32,21 @@ namespace TabletFriend
 			var firstLoad = AppState.CurrentLayout == null;
 			var path = (string)obj[0];
 
+			var isManual = true;
+			if (obj.Length > 1)
+			{
+				var method = (LayoutChangeMethod)obj[1];
+				if (method == LayoutChangeMethod.Automatic)
+				{
+					isManual = false;
+				}
+			}
+
+            if (isManual)
+            {
+				AppState.LastManuallySetLayout = path;				
+			}
+
 			LoadLayout(path);
 			if (!firstLoad)
 			{
