@@ -75,7 +75,7 @@ namespace TabletFriend
 
 
 			AppState.CurrentLayout = layout;
-			UiFactory.CreateUi(AppState.CurrentLayout, _window);
+			//UiFactory.CreateUi(AppState.CurrentLayout, _window);
 			AppState.CurrentLayoutName = Path.GetFileNameWithoutExtension(path);
 			EventBeacon.SendEvent(Events.DockingChanged, AppState.Settings.DockingMode);
 		}

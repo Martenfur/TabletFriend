@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,7 @@ namespace TabletFriend
 	{
 		public static void CreateUi(LayoutModel layout, MainWindow window)
 		{
+			Debug.WriteLine("UI created!");
 			ToggleManager.ClearButtons();
 			var theme = AppState.CurrentTheme;
 
@@ -53,15 +55,26 @@ namespace TabletFriend
 
 			var titlebarHeight = TitlebarManager.GetTitlebarHeight(layout);
 
+			var newWidth = window.Width;
+			var newHeight = window.Height;
+
 			if (rotateLayout)
 			{
-				window.Height = size.X * layout.CellSize + layout.Margin + titlebarHeight;
-				window.Width = size.Y * layout.CellSize + layout.Margin;
+				newHeight = size.X * layout.CellSize + layout.Margin + titlebarHeight;
+				newWidth = size.Y * layout.CellSize + layout.Margin;
 			}
 			else
 			{
-				window.Width = size.X * layout.CellSize + layout.Margin;
-				window.Height = size.Y * layout.CellSize + layout.Margin + titlebarHeight;
+				newWidth = size.X * layout.CellSize + layout.Margin;
+				newHeight = size.Y * layout.CellSize + layout.Margin + titlebarHeight;
+			}
+
+			var windowSizeChanged = newWidth != window.Width || newHeight != window.Height;
+
+			if (windowSizeChanged)
+			{
+				window.Width = newWidth;
+				window.Height = newHeight;
 			}
 
 			var offset = Vector2.Zero;

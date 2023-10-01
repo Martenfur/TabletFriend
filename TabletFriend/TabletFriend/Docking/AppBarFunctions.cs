@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -93,10 +94,18 @@ namespace WpfAppBar
 
 		}
 
+		private static DockingMode _currentEdge = DockingMode.None;
+
 		public static void SetAppBar(Window appbarWindow, DockingMode edge)
 		{
+			if (_currentEdge == edge)
+			{
+				return;
+			}
+
 			var info = GetRegisterInfo(appbarWindow);
 			info.Edge = edge;
+			_currentEdge = edge;
 
 			var abd = new Interop.APPBARDATA();
 			abd.cbSize = Marshal.SizeOf(abd);
