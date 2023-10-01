@@ -10,6 +10,7 @@
 
 ### Changed
 
+- `layout` action now only needs layout name to be specified instead of its full path (for example, `action layout foxe` instead of `action layout files/layouts/foxe.yaml`). Paths will still work as long as the layout specified is in the `files/layouts` directory.
 - Layout properties `external_theme` and `theme` no longer work. Now, you must select a theme in the context menu independently from a layout. See "Migrating to 2.0" section for the full guide.
 - Theme properties `button_size`, `margin`, `min_opacity`, `max_opacity` have been moved directly to layout yaml. Themes can no longer influence these properties. See "Migrating to 2.0" section for the full guide.
 - Now the app will start in hidden mode.

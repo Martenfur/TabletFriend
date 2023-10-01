@@ -38,11 +38,11 @@ namespace TabletFriend.TabletMode
 						}
 						if (tabletMode)
 						{
-							EventBeacon.SendEvent("maximize");
+							EventBeacon.SendEvent(Events.Maximize);
 						}
 						else
 						{
-							EventBeacon.SendEvent("minimize");
+							EventBeacon.SendEvent(Events.Minimize);
 						}
 					}
 				);

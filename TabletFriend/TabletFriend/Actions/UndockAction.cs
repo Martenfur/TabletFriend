@@ -7,7 +7,7 @@ namespace TabletFriend.Actions
 	{
 		public override Task Invoke()
 		{
-			EventBeacon.SendEvent("docking_changed", DockingMode.None);
+			EventBeacon.SendEvent(Events.DockingChanged, DockingMode.None);
 			return Task.CompletedTask;
 		}
 	}

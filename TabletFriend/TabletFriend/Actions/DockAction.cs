@@ -19,7 +19,7 @@ namespace TabletFriend.Actions
 
 		public override Task Invoke()
 		{
-			EventBeacon.SendEvent("docking_changed", _side);
+			EventBeacon.SendEvent(Events.DockingChanged, _side);
 			return Task.CompletedTask;
 		}
 	}

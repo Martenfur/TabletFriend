@@ -1,9 +1,8 @@
 ﻿layout_width: 4
-external_theme: files/themes/peach.yaml
 
 buttons:
 	swap:
-		action: layout files/layouts/sample_layout.yaml
+		action: layout sample_layout
 		icon: arrow_left_circle
 		text: go back
 		style: none

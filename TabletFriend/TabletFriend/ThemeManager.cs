@@ -10,8 +10,8 @@ namespace TabletFriend
 		public ThemeManager(MainWindow window)
 		{
 			_window = window;
-			EventBeacon.Subscribe("files_changed", OnFilesChanged);
-			EventBeacon.Subscribe("change_theme", OnChangeTheme);
+			EventBeacon.Subscribe(Events.FilesChanged, OnFilesChanged);
+			EventBeacon.Subscribe(Events.ChangeTheme, OnChangeTheme);
 		}
 
 
@@ -20,7 +20,7 @@ namespace TabletFriend
 			Application.Current.Dispatcher.Invoke(
 				delegate
 				{
-					LoadTheme(AppState.CurrentThemePath);
+					LoadTheme(AppState.CurrentThemeName);
 				}
 			);
 		}
@@ -33,14 +33,14 @@ namespace TabletFriend
 			LoadTheme(path);
 			if (!firstLoad)
 			{
-				EventBeacon.SendEvent("update_settings");
+				EventBeacon.SendEvent(Events.UpdateSettings);
 			}
 		}
 
 
 		public void LoadTheme(string path)
 		{
-			var theme = Importer.ImportTheme(path);
+			var theme = AppState.Themes[path];
 
 			if (theme == null)
 			{
@@ -48,7 +48,7 @@ namespace TabletFriend
 			}
 
 			AppState.CurrentTheme = theme;
-			AppState.CurrentThemePath = path;
+			AppState.CurrentThemeName = path;
 		}
 
 	}

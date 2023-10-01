@@ -23,11 +23,14 @@ namespace TabletFriend.Models
 
 		public int CellSize => ButtonSize + Margin;
 		
+		public string App;
+
 		public LayoutModel(LayoutData data)
 		{
 			ButtonSize = Math.Max(data.ButtonSize ?? ButtonSize, MinButtonSize);
 			Margin = Math.Max(data.Margin ?? Margin, MinMargin);
 			LayoutWidth = Math.Max(data.LayoutWidth, MinLayoutWidth);
+			App = data.App;
 
 			if (data.MinOpacity != null)
 			{

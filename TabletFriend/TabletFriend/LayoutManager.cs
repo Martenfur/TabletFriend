@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using WpfAppBar;
 
@@ -11,8 +12,8 @@ namespace TabletFriend
 		public LayoutManager(MainWindow window)
 		{
 			_window = window;
-			EventBeacon.Subscribe("files_changed", OnFilesChanged);
-			EventBeacon.Subscribe("change_layout", OnChangeLayout);
+			EventBeacon.Subscribe(Events.FilesChanged, OnFilesChanged);
+			EventBeacon.Subscribe(Events.ChangeLayout, OnChangeLayout);
 		}
 
 
@@ -21,7 +22,7 @@ namespace TabletFriend
 			Application.Current.Dispatcher.Invoke(
 				delegate
 				{
-					LoadLayout(AppState.CurrentLayoutPath);
+					LoadLayout(AppState.CurrentLayoutName);
 				}
 			);
 		}
@@ -31,35 +32,52 @@ namespace TabletFriend
 			var firstLoad = AppState.CurrentLayout == null;
 			var path = (string)obj[0];
 
+			var isManual = true;
+			if (obj.Length > 1)
+			{
+				var method = (LayoutChangeMethod)obj[1];
+				if (method == LayoutChangeMethod.Automatic)
+				{
+					isManual = false;
+				}
+			}
+
+            if (isManual)
+            {
+				AppState.LastManuallySetLayout = path;				
+			}
+
 			LoadLayout(path);
 			if (!firstLoad)
 			{
-				EventBeacon.SendEvent("update_settings");
+				EventBeacon.SendEvent(Events.UpdateSettings);
 			}
 		}
 
 
 		public void LoadLayout(string path)
 		{
+			Debug.WriteLine("Loading " + path);
 			if (AppState.CurrentLayout != null)
 			{
 				AppState.CurrentLayout.Dispose();
 			}
-			var layout = Importer.ImportLayout(path);
+			var layout = AppState.Layouts[path];
 			if (layout == null) 
 			{ 
-				layout = Importer.ImportLayout(Path.GetDirectoryName(path) + "/default.yaml");
+				layout = AppState.Layouts["default"];
 			}
 
-			if (layout == null)
+			if (layout == null)// || layout == AppState.CurrentLayout)
 			{
 				return;
 			}
 
+
 			AppState.CurrentLayout = layout;
 			UiFactory.CreateUi(AppState.CurrentLayout, _window);
-			AppState.CurrentLayoutPath = path;
-			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
+			AppState.CurrentLayoutName = Path.GetFileNameWithoutExtension(path);
+			EventBeacon.SendEvent(Events.DockingChanged, AppState.Settings.DockingMode);
 		}
 
 	}

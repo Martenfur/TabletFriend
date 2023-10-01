@@ -4,13 +4,16 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Security.Cryptography.Pkcs;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using TabletFriend.Docking;
 using TabletFriend.TabletMode;
 using WpfAppBar;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TabletFriend
 {
@@ -21,7 +24,7 @@ namespace TabletFriend
 			// Why do we need an entire class instead of an event handler? No fucking idea.
 			public event EventHandler CanExecuteChanged;
 			public bool CanExecute(object parameter) => true;
-			public void Execute(object parameter) => EventBeacon.SendEvent("toggle_minimize");
+			public void Execute(object parameter) => EventBeacon.SendEvent(Events.ToggleMinimize);
 		}
 
 
@@ -34,10 +37,13 @@ namespace TabletFriend
 		private readonly LayoutListManager _layoutList;
 		private readonly ThemeListManager _themeList;
 
-		public TrayManager(LayoutListManager layoutList, ThemeListManager themeList)
+		private AppFocusMonitor _focusMonitor;
+		private MenuItem _focusedApp;
+		public TrayManager(LayoutListManager layoutList, ThemeListManager themeList, AppFocusMonitor focusMonitor)
 		{
 			_layoutList = layoutList;
 			_themeList = themeList;
+			_focusMonitor = focusMonitor;
 
 			_icon = new TaskbarIcon();
 
@@ -56,7 +62,7 @@ namespace TabletFriend
 
 			CreateMenu();
 
-			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.ChangeLayout, OnUpdateLayoutList);
 		}
 
 
@@ -81,40 +87,57 @@ namespace TabletFriend
 
 			DockingMenuFactory.CreateDockingMenu(_icon.ContextMenu);
 
+			var settings = new MenuItem() { Header = "settings" };
+
 			if (AppState.Settings.AddToAutostart)
 			{
-				_autostartMenuItem = AddMenuItem("remove from autostart", OnAutostartToggle);
+				_autostartMenuItem = AddSubmenuItem(settings, "remove from autostart", OnAutostartToggle);
 			}
 			else
 			{
-				_autostartMenuItem = AddMenuItem("add to autostart", OnAutostartToggle);
+				_autostartMenuItem = AddSubmenuItem(settings, "add to autostart", OnAutostartToggle);
 			}
 
 			if (AppState.Settings.UpdateCheckingEnabled)
 			{
-				_autoUpdateMenuItem = AddMenuItem("don't check for updates", OnAutoUpdateToggle);
+				_autoUpdateMenuItem = AddSubmenuItem(settings, "don't check for updates", OnAutoUpdateToggle);
 			}
 			else
 			{
-				_autoUpdateMenuItem = AddMenuItem("check for updates", OnAutoUpdateToggle);
+				_autoUpdateMenuItem = AddSubmenuItem(settings, "check for updates", OnAutoUpdateToggle);
 			}
 
 			if (AppState.Settings.ToolbarAutohideEnabled)
 			{
-				_autohideMenuItem = AddMenuItem("disable toolbar autohide", OnAutohideToggle);
+				_autohideMenuItem = AddSubmenuItem(settings, "disable toolbar autohide", OnAutohideToggle);
 				ToolbarAutohider.StartWatching();
 			}
 			else
 			{
-				_autohideMenuItem = AddMenuItem("enable toolbar autohide", OnAutohideToggle);
+				_autohideMenuItem = AddSubmenuItem(settings, "enable toolbar autohide", OnAutohideToggle);
 				ToolbarAutohider.StopWatching();
 			}
 
-			AddMenuItem("open layouts directory...", OnOpenLayoutsDirectory);
+
+			AddSubmenuItem(settings, "open layouts directory...", OnOpenLayoutsDirectory);
+			_focusedApp = AddSubmenuItem(settings, "focused app: none");
+			_focusMonitor.OnAppChanged += OnAppChanged;
+			_icon.ContextMenu.Items.Add(settings);
+
+			_icon.ContextMenu.Items.Add(new Separator());
 			AddMenuItem("about", OnAbout);
 			AddMenuItem("quit", OnQuit);
 		}
 
+		private void OnAppChanged(string app)
+		{
+			_focusedApp.Dispatcher.Invoke(
+				() =>
+				{
+					_focusedApp.Header = "focused app: " + app;
+				}
+			);	
+		}
 
 		private void OnAutostartToggle(object sender, RoutedEventArgs e)
 		{
@@ -130,7 +153,7 @@ namespace TabletFriend
 				AutostartManager.ResetAutostart();
 				_autostartMenuItem.Header = "add to autostart";
 			}
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 		}
 
 		private void OnAutoUpdateToggle(object sender, RoutedEventArgs e)
@@ -145,7 +168,7 @@ namespace TabletFriend
 			{
 				_autoUpdateMenuItem.Header = "check for updates";
 			}
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 		}
 
 		private void OnAutohideToggle(object sender, RoutedEventArgs e)
@@ -162,7 +185,7 @@ namespace TabletFriend
 				_autohideMenuItem.Header = "enable toolbar autohide";
 				ToolbarAutohider.StopWatching();
 			}
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 		}
 
 		private void OnAbout(object sender, RoutedEventArgs e)
@@ -183,16 +206,34 @@ namespace TabletFriend
 			{
 				item.Click += click;
 			}
+			else
+			{
+				item.IsEnabled = false;
+			}
 			_icon.ContextMenu.Items.Add(item);
 			return item;
 		}
 
+		private MenuItem AddSubmenuItem(MenuItem menu, string header, RoutedEventHandler click = null)
+		{
+			var item = new MenuItem() { Header = header };
+			if (click != null)
+			{
+				item.Click += click;
+			}
+			else
+			{
+				item.IsEnabled = false;
+			}
+			menu.Items.Add(item);
+			return item;
+		}
 
 		private void OnOpenLayoutsDirectory(object sender, RoutedEventArgs e)
 		{
 			var startInfo = new ProcessStartInfo()
 			{
-				Arguments = AppState.LayoutsRoot,
+				Arguments = Path.Combine(AppState.CurrentDirectory, "files"),
 				FileName = "explorer.exe"
 			};
 			Process.Start(startInfo);

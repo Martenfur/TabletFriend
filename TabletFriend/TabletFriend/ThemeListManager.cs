@@ -15,13 +15,13 @@ namespace TabletFriend
 			Menu = new MenuItem() { Header = "themes" };
 
 			OnUpdateThemeList();
-			EventBeacon.Subscribe("change_theme", OnChangeTheme);
-			EventBeacon.Subscribe("update_theme_list", OnUpdateThemeList);
+			EventBeacon.Subscribe(Events.ChangeTheme, OnChangeTheme);
+			EventBeacon.Subscribe(Events.UpdateThemeList, OnUpdateThemeList);
 		}
 
 		private void OnChangeTheme(object[] obj)
 		{
-			var path = Path.GetFullPath((string)obj[0]);
+			var path = (string)obj[0];
 			foreach (MenuItem otherItem in Menu.Items)
 			{
 				otherItem.IsChecked = (string)otherItem.DataContext == path;
@@ -34,14 +34,14 @@ namespace TabletFriend
 				delegate
 				{
 					Menu.Items.Clear();
-					foreach (var theme in AppState.Themes)
+					foreach (var theme in AppState.Themes.Keys)
 					{
 						var item = new MenuItem()
 						{
 							Header = Path.GetFileNameWithoutExtension(theme).Replace("_", " "),
 							DataContext = theme,
 							IsCheckable = true,
-							IsChecked = theme == AppState.CurrentThemePath
+							IsChecked = theme == AppState.CurrentThemeName
 						};
 						Menu.Items.Add(item);
 						item.Click += OnClick;
@@ -53,8 +53,8 @@ namespace TabletFriend
 		private void OnClick(object sender, RoutedEventArgs e)
 		{
 			var item = (MenuItem)sender;
-			EventBeacon.SendEvent("change_theme", item.DataContext);
-			EventBeacon.SendEvent("change_layout", AppState.CurrentLayoutPath);
+			EventBeacon.SendEvent(Events.ChangeTheme, item.DataContext);
+			EventBeacon.SendEvent(Events.ChangeLayout, AppState.CurrentLayoutName);
 		}
 
 

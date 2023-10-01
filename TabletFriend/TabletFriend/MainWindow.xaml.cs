@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using TabletFriend.Docking;
@@ -22,6 +23,7 @@ namespace TabletFriend
 		private ThemeManager _theme;
 		private LayoutListManager _layoutList;
 		private ThemeListManager _themeList;
+		private AutomaticLayoutSwitcher _layoutSwitcher;
 		private TrayManager _tray;
 		private FileManager _file;
 
@@ -35,6 +37,8 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
+			var focusMonitor = new AppFocusMonitor(); // Has to be at the very top or else it hangs on starup. Why? No idea. 
+
 			SystemEvents.DisplaySettingsChanged += OnSizeChanged;
 
 			Directory.SetCurrentDirectory(AppState.CurrentDirectory);
@@ -63,9 +67,9 @@ namespace TabletFriend
 			OnUpdateLayoutList();
 
 
-			_tray = new TrayManager(_layoutList, _themeList);
+			_layoutSwitcher = new AutomaticLayoutSwitcher(focusMonitor);
+			_tray = new TrayManager(_layoutList, _themeList, focusMonitor);
 
-			
 
 			if (AppState.Settings.AddToAutostart)
 			{
@@ -77,12 +81,12 @@ namespace TabletFriend
 			}
 
 			
-			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
-			EventBeacon.Subscribe("maximize", OnMaximize);
-			EventBeacon.Subscribe("minimize", OnMinimize);
-			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
-			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
-			EventBeacon.Subscribe("docking_changed", OnDockingChanged);
+			EventBeacon.Subscribe(Events.ToggleMinimize, OnToggleMinimize);
+			EventBeacon.Subscribe(Events.Maximize, OnMaximize);
+			EventBeacon.Subscribe(Events.Minimize, OnMinimize);
+			EventBeacon.Subscribe(Events.UpdateLayoutList, OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.ChangeLayout, OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.DockingChanged, OnDockingChanged);
 		}
 
 
@@ -124,7 +128,8 @@ namespace TabletFriend
 				{
 					ContextMenu.Items.Clear();
 					DockingMenuFactory.CreateDockingMenu(ContextMenu);
-					
+
+					ContextMenu.Items.Add(new Separator());
 					var items = _layoutList.GetClonedItems();
 					foreach (var item in items)
 					{
@@ -177,7 +182,7 @@ namespace TabletFriend
 			}
 
 
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 		}
 
 
@@ -193,7 +198,7 @@ namespace TabletFriend
 				GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE
 			);
 
-			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
+			EventBeacon.SendEvent(Events.DockingChanged, AppState.Settings.DockingMode);
 		}
 
 
@@ -246,7 +251,7 @@ namespace TabletFriend
 		protected override void OnClosing(CancelEventArgs e)
 		{
 			base.OnClosing(e);
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 			AppBarFunctions.SetAppBar(this, DockingMode.None);
 			Environment.Exit(0);
 		}
