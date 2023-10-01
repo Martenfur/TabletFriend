@@ -21,7 +21,7 @@ namespace TabletFriend
 
 		private void OnChangeLayout(object[] obj)
 		{
-			var path = Path.GetFullPath((string)obj[0]);
+			var path = (string)obj[0];
 			foreach (MenuItem otherItem in Menu.Items)
 			{
 				otherItem.IsChecked = (string)otherItem.DataContext == path;
