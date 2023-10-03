@@ -56,5 +56,11 @@ namespace TabletFriend.Models
 			}
 		}
 
+		public bool IsSameWidth(LayoutModel layout)
+		{
+			return ButtonSize == layout.ButtonSize 
+				&& Margin == layout.Margin
+				&& LayoutWidth == layout.LayoutWidth;
+		}
 	}
 }
