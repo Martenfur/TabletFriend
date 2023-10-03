@@ -5,6 +5,10 @@ namespace TabletFriend.Data
 	{
 		public string Action;
 		public string[] Actions;
+
+		public string ActionRelease;
+		public string[] ActionsRelease;
+
 		public string Text;
 		public string Icon;
 		public StretchData IconStretch;

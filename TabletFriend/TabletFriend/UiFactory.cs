@@ -262,9 +262,43 @@ namespace TabletFriend
 				}
 			}
 
-			if (button.Action != null)
+			if (button.ActionRelease == null)
 			{
-				uiButton.Click += (e, o) => _ = button.Action.Invoke();
+				// Default Click Action
+				if (button.Action != null)
+				{
+					uiButton.Click += (e, o) => _ = button.Action.Invoke();
+				}
+			}
+			else
+			{   // Separate actions for Pointer-Down and Pointer-Up
+
+				// disable long press context menu on button
+				uiButton.SetValue(Stylus.IsPressAndHoldEnabledProperty, false);
+
+				if (button.Action != null)
+				{
+					void downAction(object o, EventArgs e)
+					{
+						if (button.LastProcessedEvent == ButtonProcessedEvent.Down) return;   // invoke only once
+						button.LastProcessedEvent = ButtonProcessedEvent.Down;
+						button.Action.Invoke();
+					}
+					uiButton.TouchDown += downAction;
+					uiButton.PreviewMouseLeftButtonDown += downAction;
+
+				}
+				if (button.ActionRelease != null)
+				{
+					void releaseAction(object o, EventArgs e)
+					{
+						if (button.LastProcessedEvent == ButtonProcessedEvent.Up) return;
+						button.LastProcessedEvent = ButtonProcessedEvent.Up;
+						button.ActionRelease.Invoke();
+					};
+					uiButton.PreviewMouseLeftButtonUp += releaseAction;
+					uiButton.TouchUp += releaseAction;
+				}
 			}
 
 			Canvas.SetTop(uiButton, layout.CellSize * position.Y + layout.Margin + offset.Y);
