@@ -161,9 +161,9 @@ namespace TabletFriend
 			
 			AppState.Settings.DockingMode = side;
 
+			AppBarFunctions.SetAppBar(this, side);
 			UiFactory.CreateUi(AppState.CurrentLayout, this);
 
-			AppBarFunctions.SetAppBar(this, side);
 
 			if (side != DockingMode.None)
 			{

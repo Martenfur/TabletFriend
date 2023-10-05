@@ -58,6 +58,7 @@ namespace TabletFriend
 			var newWidth = window.Width;
 			var newHeight = window.Height;
 
+			
 			if (rotateLayout)
 			{
 				newHeight = size.X * layout.CellSize + layout.Margin + titlebarHeight;
@@ -69,12 +70,27 @@ namespace TabletFriend
 				newHeight = size.Y * layout.CellSize + layout.Margin + titlebarHeight;
 			}
 
+
 			var windowSizeChanged = newWidth != window.Width || newHeight != window.Height;
 
 			if (windowSizeChanged)
 			{
-				window.Width = newWidth;
-				window.Height = newHeight;
+				if (
+					   AppState.Settings.DockingMode == DockingMode.Left
+					|| AppState.Settings.DockingMode == DockingMode.Right
+					|| AppState.Settings.DockingMode == DockingMode.None
+				)
+				{
+					window.Width = newWidth;
+				}
+				if (
+					   AppState.Settings.DockingMode == DockingMode.Top
+					|| AppState.Settings.DockingMode == DockingMode.Bottom
+					|| AppState.Settings.DockingMode == DockingMode.None
+				)
+				{
+					window.Height = newHeight;
+				}
 			}
 
 			var offset = Vector2.Zero;
@@ -82,11 +98,11 @@ namespace TabletFriend
 			{
 				if (AppState.Settings.DockingMode == DockingMode.Top || AppState.Settings.DockingMode == DockingMode.Bottom)
 				{
-					offset.X = (float)(SystemParameters.PrimaryScreenWidth - window.Width) / 2;
+					offset.X = (float)(SystemParameters.PrimaryScreenWidth - newWidth) / 2;
 				}
 				else
 				{
-					offset.Y = (float)(SystemParameters.PrimaryScreenHeight - window.Height) / 2;
+					offset.Y = (float)(SystemParameters.PrimaryScreenHeight - newHeight) / 2;
 				}
 			}
 			else
