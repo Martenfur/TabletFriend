@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using WpfAppBar;
@@ -7,6 +8,8 @@ namespace TabletFriend
 {
 	public class LayoutManager
 	{
+		public LayoutLoadResult LastLoadResult;
+
 		private readonly MainWindow _window;
 
 		public LayoutManager(MainWindow window)
@@ -22,7 +25,9 @@ namespace TabletFriend
 			Application.Current.Dispatcher.Invoke(
 				delegate
 				{
+					// Full reload every time.
 					LoadLayout(AppState.CurrentLayoutName);
+					LastLoadResult = LayoutLoadResult.RequiresRedock;
 				}
 			);
 		}
@@ -48,6 +53,11 @@ namespace TabletFriend
 			}
 
 			LoadLayout(path);
+			if (firstLoad)
+			{
+				LastLoadResult = LayoutLoadResult.RequiresRedock;
+			}
+
 			if (!firstLoad)
 			{
 				EventBeacon.SendEvent(Events.UpdateSettings);
@@ -57,6 +67,8 @@ namespace TabletFriend
 
 		public void LoadLayout(string path)
 		{
+			LastLoadResult = LayoutLoadResult.Default;
+
 			Debug.WriteLine("Loading " + path);
 			if (AppState.CurrentLayout != null)
 			{
@@ -73,12 +85,21 @@ namespace TabletFriend
 				return;
 			}
 
-
+			if (AppState.CurrentLayout != null && !AppState.CurrentLayout.IsSameWidth(layout))
+			{
+				LastLoadResult = LayoutLoadResult.RequiresRedock;
+			}
 			AppState.CurrentLayout = layout;
 			//UiFactory.CreateUi(AppState.CurrentLayout, _window);
 			AppState.CurrentLayoutName = Path.GetFileNameWithoutExtension(path);
 			EventBeacon.SendEvent(Events.DockingChanged, AppState.Settings.DockingMode);
 		}
 
+	}
+
+	public enum LayoutLoadResult
+	{
+		Default,
+		RequiresRedock,
 	}
 }

@@ -165,7 +165,7 @@ namespace TabletFriend
 			
 			if (Visibility == Visibility.Visible)
 			{
-				AppBarFunctions.SetAppBar(this, side);
+				AppBarFunctions.SetAppBar(this, side, _layout.LastLoadResult == LayoutLoadResult.RequiresRedock);
 			}
 
 			if (side != DockingMode.None)

@@ -96,9 +96,9 @@ namespace WpfAppBar
 
 		private static DockingMode _currentEdge = DockingMode.None;
 
-		public static void SetAppBar(Window appbarWindow, DockingMode edge)
+		public static void SetAppBar(Window appbarWindow, DockingMode edge, bool forceRedock = false)
 		{
-			if (_currentEdge == edge)
+			if (_currentEdge == edge && !forceRedock)
 			{
 				return;
 			}
