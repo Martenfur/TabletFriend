@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,7 @@ namespace TabletFriend
 	{
 		public static void CreateUi(LayoutModel layout, MainWindow window)
 		{
+			Debug.WriteLine("UI created!");
 			ToggleManager.ClearButtons();
 			var theme = AppState.CurrentTheme;
 
@@ -53,15 +55,46 @@ namespace TabletFriend
 
 			var titlebarHeight = TitlebarManager.GetTitlebarHeight(layout);
 
+			var newWidth = window.Width;
+			var newHeight = window.Height;
+
+			
 			if (rotateLayout)
 			{
-				window.Height = size.X * layout.CellSize + layout.Margin + titlebarHeight;
-				window.Width = size.Y * layout.CellSize + layout.Margin;
+				newHeight = size.X * layout.CellSize + layout.Margin + titlebarHeight;
+				newWidth = size.Y * layout.CellSize + layout.Margin;
 			}
 			else
 			{
-				window.Width = size.X * layout.CellSize + layout.Margin;
-				window.Height = size.Y * layout.CellSize + layout.Margin + titlebarHeight;
+				newWidth = size.X * layout.CellSize + layout.Margin;
+				newHeight = size.Y * layout.CellSize + layout.Margin + titlebarHeight;
+			}
+
+
+			var windowSizeChanged = newWidth != window.Width || newHeight != window.Height;
+
+			var wasMinimized = TitlebarManager.Minimized;
+			if (windowSizeChanged)
+			{
+				if (
+					   AppState.Settings.DockingMode == DockingMode.Left
+					|| AppState.Settings.DockingMode == DockingMode.Right
+					|| AppState.Settings.DockingMode == DockingMode.None
+				)
+				{
+					window.Width = newWidth;
+				}
+				if (
+					   AppState.Settings.DockingMode == DockingMode.Top
+					|| AppState.Settings.DockingMode == DockingMode.Bottom
+					|| AppState.Settings.DockingMode == DockingMode.None
+				)
+				{
+					if (!wasMinimized)
+					{
+						window.Height = newHeight;
+					}
+				}
 			}
 
 			var offset = Vector2.Zero;
@@ -69,11 +102,11 @@ namespace TabletFriend
 			{
 				if (AppState.Settings.DockingMode == DockingMode.Top || AppState.Settings.DockingMode == DockingMode.Bottom)
 				{
-					offset.X = (float)(SystemParameters.PrimaryScreenWidth - window.Width) / 2;
+					offset.X = (float)(SystemParameters.PrimaryScreenWidth - newWidth) / 2;
 				}
 				else
 				{
-					offset.Y = (float)(SystemParameters.PrimaryScreenHeight - window.Height) / 2;
+					offset.Y = (float)(SystemParameters.PrimaryScreenHeight - newHeight) / 2;
 				}
 			}
 			else
@@ -148,7 +181,7 @@ namespace TabletFriend
 			}
 
 
-			TitlebarManager.CreateTitlebar(window, theme, layout);
+			TitlebarManager.CreateTitlebar(window, theme, layout, newHeight, wasMinimized);
 		}
 
 		private static void CreateButton(
