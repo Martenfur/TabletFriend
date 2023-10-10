@@ -35,6 +35,11 @@ namespace TabletFriend
 
 		private void OnAppChanged(string app)
 		{
+			if (Application.Current == null)
+			{ 
+				// Yep. Can happen.
+				return;
+			}
 			Application.Current.Dispatcher.Invoke(
 				delegate
 				{

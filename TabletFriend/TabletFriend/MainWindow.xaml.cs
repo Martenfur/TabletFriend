@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -255,6 +256,7 @@ namespace TabletFriend
 		{
 			base.OnClosing(e);
 			EventBeacon.SendEvent(Events.UpdateSettings);
+			Thread.Sleep(100);
 			AppBarFunctions.SetAppBar(this, DockingMode.None);
 			Environment.Exit(0);
 		}
