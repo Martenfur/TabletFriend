@@ -15,10 +15,12 @@
 - Theme properties `button_size`, `margin`, `min_opacity`, `max_opacity` have been moved directly to layout yaml. Themes can no longer influence these properties. See "Migrating to 2.0" section for the full guide.
 - Now the app will start in hidden mode.
 - Updated to .NET7
+- Optimized layout changing.
 
 ### Fixed
 
 - Context menu color will now match theme color.
+- Quit button doesn't hang the app anymore.
 
 ## [v1.2.0] - 24.10.2021
 

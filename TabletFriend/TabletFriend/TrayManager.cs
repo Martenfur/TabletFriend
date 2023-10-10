@@ -119,7 +119,7 @@ namespace TabletFriend
 			}
 
 
-			AddSubmenuItem(settings, "open layouts directory...", OnOpenLayoutsDirectory);
+			AddSubmenuItem(settings, "open files directory...", OnOpenLayoutsDirectory);
 			_focusedApp = AddSubmenuItem(settings, "focused app: none");
 			_focusMonitor.OnAppChanged += OnAppChanged;
 			_icon.ContextMenu.Items.Add(settings);
