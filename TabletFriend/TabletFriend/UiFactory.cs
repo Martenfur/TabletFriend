@@ -73,6 +73,7 @@ namespace TabletFriend
 
 			var windowSizeChanged = newWidth != window.Width || newHeight != window.Height;
 
+			var wasMinimized = TitlebarManager.Minimized;
 			if (windowSizeChanged)
 			{
 				if (
@@ -89,7 +90,10 @@ namespace TabletFriend
 					|| AppState.Settings.DockingMode == DockingMode.None
 				)
 				{
-					window.Height = newHeight;
+					if (!wasMinimized)
+					{
+						window.Height = newHeight;
+					}
 				}
 			}
 
@@ -177,7 +181,7 @@ namespace TabletFriend
 			}
 
 
-			TitlebarManager.CreateTitlebar(window, theme, layout);
+			TitlebarManager.CreateTitlebar(window, theme, layout, newHeight, wasMinimized);
 		}
 
 		private static void CreateButton(

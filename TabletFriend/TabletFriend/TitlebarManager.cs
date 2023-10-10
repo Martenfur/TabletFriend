@@ -17,6 +17,7 @@ namespace TabletFriend
 
 		private static bool _minimizedMode = false;
 		private static bool _minimized = false;
+		public static bool Minimized => _minimized;
 
 		private static PackIcon _ico;
 		private static MainWindow _window;
@@ -38,13 +39,14 @@ namespace TabletFriend
 			return 0;
 		}
 
-		public static void CreateTitlebar(MainWindow window, ThemeModel theme, LayoutModel layout)
+		public static void CreateTitlebar(MainWindow window, ThemeModel theme, LayoutModel layout, double maximizedWindowHeight, bool minimized)
 		{
-			_minimized = false;
+			_minimized = minimized;
+
 			_window = window;
 			_theme = theme;
 			_layout = layout;
-			_maximizedWindowHeight = _window.Height;
+			_maximizedWindowHeight = maximizedWindowHeight;
 
 			_window.MouseEnter -= OnMouseEnter;
 			_window.MouseLeave -= OnMouseLeave;
@@ -61,8 +63,11 @@ namespace TabletFriend
 			_window.MouseLeave += OnMouseLeave;
 
 			_grace = true;
-			
 
+			if (_minimized)
+			{
+				_window.Height = GetTitlebarHeight(_layout);
+			}
 		}
 
 
@@ -128,7 +133,7 @@ namespace TabletFriend
 			_minimizedMode = !_minimizedMode;
 		}
 
-		private static void Minimize()
+		public static void Minimize()
 		{
 			if (!_minimized)
 			{
@@ -138,7 +143,7 @@ namespace TabletFriend
 			}
 		}
 
-		private static void Maximize()
+		public static void Maximize()
 		{
 			if (_minimized)
 			{
