@@ -33,6 +33,8 @@ namespace TabletFriend.Models
 
 		public ButtonVisibility Visibility;
 
+		public ButtonModel() { }
+
 		public ButtonModel(ButtonData data)
 		{
 			if (data == null)

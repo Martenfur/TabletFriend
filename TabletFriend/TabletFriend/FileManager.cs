@@ -43,8 +43,16 @@ namespace TabletFriend
 			Application.Current.Dispatcher.Invoke(
 				delegate
 				{
-					AppState.Layouts = Importer.ImportLayouts();
-					AppState.Themes = Importer.ImportThemes();
+					var layouts = Importer.ImportLayouts();
+					if (AppState.Layouts == null || layouts.Count > 0)
+					{
+						AppState.Layouts = layouts;
+					}
+					var themes = Importer.ImportThemes();
+					if (AppState.Themes == null || themes.Count > 0)
+					{
+						AppState.Themes = themes;
+					}
 				}
 			);
 			EventBeacon.SendEvent(Events.UpdateThemeList);

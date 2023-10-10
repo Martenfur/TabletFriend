@@ -1,13 +1,31 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Numerics;
+using System.Printing;
 using System.Windows;
+using TabletFriend.Actions;
+using TabletFriend.Models;
+using WindowsInput.Events;
 using WpfAppBar;
 
 namespace TabletFriend
 {
 	public class LayoutManager
 	{
+		private static LayoutModel _fallbackLayout = new LayoutModel()
+		{
+			Buttons = {
+				new ButtonModel()
+				{
+					Text = "ERROR",
+					Action = new KeyAction(KeyCode.N),
+					Size = new Vector2(4, 2)
+				}
+			}
+		};
+
+
 		public LayoutLoadResult LastLoadResult;
 
 		private readonly MainWindow _window;
@@ -47,9 +65,9 @@ namespace TabletFriend
 				}
 			}
 
-            if (isManual)
-            {
-				AppState.LastManuallySetLayout = path;				
+			if (isManual)
+			{
+				AppState.LastManuallySetLayout = path;
 			}
 
 			LoadLayout(path);
@@ -67,17 +85,48 @@ namespace TabletFriend
 
 		public void LoadLayout(string path)
 		{
+			Debug.WriteLine("Loading " + path);
+
 			LastLoadResult = LayoutLoadResult.Default;
 
-			Debug.WriteLine("Loading " + path);
+			if (AppState.Layouts.Count == 0)
+			{
+				MessageBox.Show(
+					"No layouts found!",
+					"Load failure!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
+				return;
+			}
+			if (!AppState.Layouts.TryGetValue(path, out var layout)) // TODO: fix the check lul.
+			{
+				if (AppState.Layouts.ContainsKey("default"))
+				{
+					MessageBox.Show(
+						"Cannot load '" + path +"'! Trying to fall back to default layout.",
+						"Load failure!",
+						MessageBoxButton.OK,
+						MessageBoxImage.Error
+					);
+					layout = AppState.Layouts["default"];
+				}
+				else
+				{
+					MessageBox.Show(
+						"No default layout found! Make sure you have a valid layout named 'default.yaml'",
+						"Man you really screwed up",
+						MessageBoxButton.OK,
+						MessageBoxImage.Error
+					);
+					// Nothing to fall back on, we're fucked.
+					layout = _fallbackLayout;
+				}
+			}
+
 			if (AppState.CurrentLayout != null)
 			{
 				AppState.CurrentLayout.Dispose();
-			}
-			var layout = AppState.Layouts[path];
-			if (layout == null) 
-			{ 
-				layout = AppState.Layouts["default"];
 			}
 
 			if (layout == null)// || layout == AppState.CurrentLayout)

@@ -25,6 +25,7 @@ namespace TabletFriend.Models
 		
 		public string App;
 
+		public LayoutModel() { }
 		public LayoutModel(LayoutData data)
 		{
 			ButtonSize = Math.Max(data.ButtonSize ?? ButtonSize, MinButtonSize);

@@ -25,7 +25,11 @@ namespace TabletFriend
 			var items = new Dictionary<string, LayoutModel>();
 			foreach (var file in Directory.GetFiles(AppState.LayoutsRoot, AppState.ConfigExtension))
 			{
-				items.Add(Path.GetFileNameWithoutExtension(file), ImportLayout(file));
+				var layout = ImportLayout(file);
+				if (layout != null)
+				{
+					items.Add(Path.GetFileNameWithoutExtension(file), layout);				
+				}
 			}
 
 			return items;
@@ -36,7 +40,11 @@ namespace TabletFriend
 			var items = new Dictionary<string, ThemeModel>();
 			foreach (var file in Directory.GetFiles(AppState.ThemesRoot, AppState.ConfigExtension))
 			{
-				items.Add(Path.GetFileNameWithoutExtension(file), ImportTheme(file));
+				var theme = ImportTheme(file);
+				if (theme != null)
+				{
+					items.Add(Path.GetFileNameWithoutExtension(file), theme);
+				}
 			}
 
 			return items;

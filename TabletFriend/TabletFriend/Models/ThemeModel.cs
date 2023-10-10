@@ -20,6 +20,8 @@ namespace TabletFriend.Models
 		public int DefaultFontSize;
 		public int DefaultFontWeight;
 
+		public ThemeModel() { }
+
 		public ThemeModel(ThemeData data)
 		{
 			if (data == null)

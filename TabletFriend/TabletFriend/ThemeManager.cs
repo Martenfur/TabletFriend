@@ -1,10 +1,17 @@
 ﻿using System.Windows;
+using TabletFriend.Models;
 using WpfAppBar;
 
 namespace TabletFriend
 {
 	public class ThemeManager
 	{
+		/// <summary>
+		/// If all else fails, use this theme.
+		/// </summary>
+		private static ThemeModel FallbackTheme = new ThemeModel();
+
+
 		private readonly MainWindow _window;
 
 		public ThemeManager(MainWindow window)
@@ -40,7 +47,41 @@ namespace TabletFriend
 
 		public void LoadTheme(string path)
 		{
-			var theme = AppState.Themes[path];
+			
+			if (AppState.Themes.Count == 0)
+			{
+				MessageBox.Show(
+					"No themes found!",
+					"Load failure!",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error
+				);
+				return;
+			}
+			if (!AppState.Themes.TryGetValue(path, out var theme)) // TODO: fix the check lul.
+			{
+				if (AppState.Themes.ContainsKey("default"))
+				{
+					MessageBox.Show(
+						"Cannot load '" + path + "'! Trying to fall back to default theme.",
+						"Load failure!",
+						MessageBoxButton.OK,
+						MessageBoxImage.Error
+					);
+					theme = AppState.Themes["default"];
+				}
+				else
+				{
+					MessageBox.Show(
+						"No default theme found! Make sure you have a valid theme named 'default.yaml'",
+						"Man you really screwed up",
+						MessageBoxButton.OK,
+						MessageBoxImage.Error
+					);
+
+					theme = FallbackTheme;
+				}
+			}
 
 			if (theme == null)
 			{
