@@ -28,11 +28,8 @@ namespace TabletFriend
 
 		public LayoutLoadResult LastLoadResult;
 
-		private readonly MainWindow _window;
-
-		public LayoutManager(MainWindow window)
+		public LayoutManager()
 		{
-			_window = window;
 			EventBeacon.Subscribe(Events.FilesChanged, OnFilesChanged);
 			EventBeacon.Subscribe(Events.ChangeLayout, OnChangeLayout);
 		}

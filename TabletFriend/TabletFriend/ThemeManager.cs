@@ -9,14 +9,10 @@ namespace TabletFriend
 		/// <summary>
 		/// If all else fails, use this theme.
 		/// </summary>
-		private static ThemeModel FallbackTheme = new ThemeModel();
-
-
-		private readonly MainWindow _window;
-
-		public ThemeManager(MainWindow window)
+		private static ThemeModel _fallbackTheme = new ThemeModel();
+		
+		public ThemeManager()
 		{
-			_window = window;
 			EventBeacon.Subscribe(Events.FilesChanged, OnFilesChanged);
 			EventBeacon.Subscribe(Events.ChangeTheme, OnChangeTheme);
 		}
@@ -79,7 +75,7 @@ namespace TabletFriend
 						MessageBoxImage.Error
 					);
 
-					theme = FallbackTheme;
+					theme = _fallbackTheme;
 				}
 			}
 

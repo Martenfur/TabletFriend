@@ -52,8 +52,8 @@ namespace TabletFriend
 
 			ToggleManager.Init();
 
-			_theme = new ThemeManager(this);
-			_layout = new LayoutManager(this);
+			_theme = new ThemeManager();
+			_layout = new LayoutManager();
 			Settings.Load();
 
 			Installer.TryInstall();
