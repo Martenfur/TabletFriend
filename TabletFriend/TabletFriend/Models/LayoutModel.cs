@@ -45,6 +45,11 @@ namespace TabletFriend.Models
 			{
 				Buttons.Add(new ButtonModel(button.Value));
 			}
+
+			for(var i = 0; i < Buttons.Count; i += 1)
+			{
+				LayoutWidth = Math.Max(LayoutWidth, (int)Buttons[i].Size.X);
+			}
 		}
 
 
