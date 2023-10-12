@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace TabletFriend
@@ -7,7 +8,7 @@ namespace TabletFriend
 	{
 		private AppFocusMonitor _monitor;
 
-		private Dictionary<string, string> _appSpecificLayouts = new Dictionary<string, string>();
+		private Dictionary<string, string> _appSpecificLayouts = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
 		public AutomaticLayoutSwitcher(AppFocusMonitor monitor)
 		{
