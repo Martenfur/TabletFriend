@@ -27,6 +27,7 @@ namespace TabletFriend
 			{
 				if (!string.IsNullOrEmpty(layout.Value.App))
 				{
+					// TODO: More than one same app crash the app.
 					_appSpecificLayouts.Add(layout.Value.App, layout.Key);
 				}
 			}
