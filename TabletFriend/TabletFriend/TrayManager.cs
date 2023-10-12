@@ -1,33 +1,17 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
-using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Security.Cryptography.Pkcs;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using TabletFriend.Docking;
 using TabletFriend.TabletMode;
-using WpfAppBar;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TabletFriend
 {
 	public class TrayManager
 	{
-		private class TrayCommand : ICommand
-		{
-			// Why do we need an entire class instead of an event handler? No fucking idea.
-			public event EventHandler CanExecuteChanged;
-			public bool CanExecute(object parameter) => true;
-			public void Execute(object parameter) => EventBeacon.SendEvent(Events.ToggleMinimize);
-		}
-
-
 		private TaskbarIcon _icon;
 		private MenuItem _autostartMenuItem;
 		private MenuItem _autoUpdateMenuItem;
@@ -58,13 +42,16 @@ namespace TabletFriend
 
 			_icon.Visibility = Visibility.Visible;
 			_icon.ContextMenu = new ContextMenu();
-			_icon.LeftClickCommand = new TrayCommand();
-
+			_icon.TrayLeftMouseDown += MouseDown;
 			CreateMenu();
 
 			EventBeacon.Subscribe(Events.ChangeLayout, OnUpdateLayoutList);
 		}
 
+		private void MouseDown(object sender, RoutedEventArgs e)
+		{
+			EventBeacon.SendEvent(Events.ToggleMinimize);
+		}
 
 		private void OnUpdateLayoutList(object[] obj = null)
 		{
