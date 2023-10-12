@@ -36,6 +36,11 @@ namespace TabletFriend
 
 		private void OnAppChanged(string app)
 		{
+			if (!AppState.Settings.PerAppLayoutsEnabled)
+			{
+				return;
+			}
+
 			if (Application.Current == null)
 			{ 
 				// Yep. Can happen.

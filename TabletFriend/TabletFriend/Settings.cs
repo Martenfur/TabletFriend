@@ -20,6 +20,7 @@ namespace TabletFriend
 
 		public bool UpdateCheckingEnabled = true;
 		public bool ToolbarAutohideEnabled = true;
+		public bool PerAppLayoutsEnabled = true;
 
 		public Settings()
 		{

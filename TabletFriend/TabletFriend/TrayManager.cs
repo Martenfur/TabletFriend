@@ -16,6 +16,7 @@ namespace TabletFriend
 		private MenuItem _autostartMenuItem;
 		private MenuItem _autoUpdateMenuItem;
 		private MenuItem _autohideMenuItem;
+		private MenuItem _perAppLayoutsMenuItem;
 		private readonly string _iconPathBlack = AppState.CurrentDirectory + "/files/icons/tray/tray_black.ico";
 		private readonly string _iconPathWhite = AppState.CurrentDirectory + "/files/icons/tray/tray_white.ico";
 		private readonly LayoutListManager _layoutList;
@@ -105,6 +106,15 @@ namespace TabletFriend
 				ToolbarAutohider.StopWatching();
 			}
 
+			if (AppState.Settings.PerAppLayoutsEnabled)
+			{
+				_perAppLayoutsMenuItem = AddSubmenuItem(settings, "disable per-app layouts", OnPerAppLayoutsToggle);
+			}
+			else
+			{
+				_perAppLayoutsMenuItem = AddSubmenuItem(settings, "enable per-app layouts", OnPerAppLayoutsToggle);
+			}
+
 
 			AddSubmenuItem(settings, "open files directory...", OnOpenLayoutsDirectory);
 			_focusedApp = AddSubmenuItem(settings, "focused app: none");
@@ -174,6 +184,22 @@ namespace TabletFriend
 			}
 			EventBeacon.SendEvent(Events.UpdateSettings);
 		}
+
+		private void OnPerAppLayoutsToggle(object sender, RoutedEventArgs e)
+		{
+			AppState.Settings.PerAppLayoutsEnabled = !AppState.Settings.PerAppLayoutsEnabled;
+
+			if (AppState.Settings.PerAppLayoutsEnabled)
+			{
+				_perAppLayoutsMenuItem.Header = "disable per-app layouts";
+			}
+			else
+			{
+				_perAppLayoutsMenuItem.Header = "enable per-app layouts";
+			}
+			EventBeacon.SendEvent(Events.UpdateSettings);
+		}
+
 
 		private void OnAbout(object sender, RoutedEventArgs e)
 		{
