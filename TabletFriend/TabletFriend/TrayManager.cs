@@ -1,12 +1,15 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using TabletFriend.Docking;
 using TabletFriend.TabletMode;
+using WpfAppBar;
 
 namespace TabletFriend
 {
@@ -19,13 +22,15 @@ namespace TabletFriend
 		private MenuItem _perAppLayoutsMenuItem;
 		private readonly string _iconPathBlack = AppState.CurrentDirectory + "/files/icons/tray/tray_black.ico";
 		private readonly string _iconPathWhite = AppState.CurrentDirectory + "/files/icons/tray/tray_white.ico";
+		private readonly MainWindow _window;
 		private readonly LayoutListManager _layoutList;
 		private readonly ThemeListManager _themeList;
 
 		private AppFocusMonitor _focusMonitor;
 		private MenuItem _focusedApp;
-		public TrayManager(LayoutListManager layoutList, ThemeListManager themeList, AppFocusMonitor focusMonitor)
+		public TrayManager(MainWindow window, LayoutListManager layoutList, ThemeListManager themeList, AppFocusMonitor focusMonitor)
 		{
+			_window = window;
 			_layoutList = layoutList;
 			_themeList = themeList;
 			_focusMonitor = focusMonitor;
@@ -255,8 +260,10 @@ namespace TabletFriend
 
 		private void OnQuit(object sender, RoutedEventArgs e)
 		{
+			AppBarFunctions.SetAppBar(_window, DockingMode.None);
 			_icon.Dispose();
-			Application.Current.Shutdown();
+			EventBeacon.SendEvent(Events.UpdateSettings);
+			Process.GetCurrentProcess().Kill();
 		}
 
 		private bool _isLightTheme

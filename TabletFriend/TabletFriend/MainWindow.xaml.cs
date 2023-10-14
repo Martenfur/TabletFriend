@@ -69,7 +69,7 @@ namespace TabletFriend
 
 
 			_layoutSwitcher = new AutomaticLayoutSwitcher(focusMonitor);
-			_tray = new TrayManager(_layoutList, _themeList, focusMonitor);
+			_tray = new TrayManager(this, _layoutList, _themeList, focusMonitor);
 
 
 			if (AppState.Settings.AddToAutostart)
@@ -251,14 +251,5 @@ namespace TabletFriend
 
 		[DllImport("user32.dll")]
 		public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-
-		protected override void OnClosing(CancelEventArgs e)
-		{
-			base.OnClosing(e);
-			EventBeacon.SendEvent(Events.UpdateSettings);
-			Thread.Sleep(100);
-			AppBarFunctions.SetAppBar(this, DockingMode.None);
-			Environment.Exit(0);
-		}
 	}
 }
