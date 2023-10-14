@@ -52,6 +52,7 @@ namespace TabletFriend
 			CreateMenu();
 
 			EventBeacon.Subscribe(Events.ChangeLayout, OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.FilesChanged, OnUpdateLayoutList);
 		}
 
 		private void MouseDown(object sender, RoutedEventArgs e)
