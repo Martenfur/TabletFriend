@@ -121,7 +121,14 @@ It is **VERY IMPORTANT** that you use tab characters `	`  instead of spaces for 
 
 This, of course, are not all the features Tablet Friend offers. You can check out a more [advanced example](TabletFriend/TabletFriend/files/layouts/sample_layout.yaml) with all features listed.
 
+## Migrating to 2.0
 
+Starting with the version 2.0.0, layout-specific themes are no longer supported. Instead, you can choose a theme in the context menu that will be applied to all toolbars. 
+
+This means, the layout structure has changed a little bit. 
+
+- Layout properties `external_theme` and `theme` no longer work.
+- Theme properties `button_size`, `margin`, `min_opacity`, `max_opacity` have been moved directly to layout yaml. Themes can no longer influence these properties.
 
 ## Making Tablet Friend better
 
