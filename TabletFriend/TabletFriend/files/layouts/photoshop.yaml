@@ -5,206 +5,250 @@ margin: 8
 app: Photoshop
 
 buttons:
- copy:
-	 action: ctrl+c
-	 size: 2,2
-	 style: default
-	 icon: content_copy
-	 text: copy
+	undo:
+		action: ctrl+z
+		size: 2,2
+		style: accent
+		icon: undo
+		text: undo
+	redo:
+		action: ctrl+y
+		size: 2,2
+		style: accent
+		icon: redo
+		text: redo
 
- cut:
-	 action: ctrl+x
-	 size: 2,2
-	 style: default
-	 icon: content_cut
-	 text: cut	 
+	docked_spacer1:
+		spacer: true
+		visibility: docked
+		size: 4,1
 
- paste:
-	 action: ctrl+v
-   size: 2,2
-	 style: default
-	 icon: content_paste
-	 text: paste
+	copy:
+		action: ctrl+c
+		size: 2,2
+		style: default
+		icon: content_copy
+		text: copy
+	cut:
+		action: ctrl+x
+		size: 2,2
+		style: default
+		icon: content_cut
+		text: cut
+	paste:
+		action: ctrl+v
+		size: 2,2
+		style: default
+		icon: content_paste
+		text: paste
+	save:
+		action: ctrl+s
+		size: 2,2
+		icon: content-save
+		style: default
+		text: save
 
- save:
-   action: ctrl+s
-	 size: 2,2
-	 icon: content-save
-	 style: shy
-	 text: save
+	docked_spacer2:
+		spacer: true
+		visibility: docked
+		size: 4,1
 
- new-layer:
-   action: ctrl+shift+n
-	 size: 2,2
-	 icon: layers-plus
-	 style: accent
-	 text: create new layer
-
- duplicate:
-   action: ctrl+j
-   size: 2,2
-	 icon: content-duplicate
-	 style: accent
-	 text: duplicate layer
-
- merge:
-   action: ctrl+e
-   size: 2,2
-	 icon: palette-swatch-outline
-	 style: accent
-	 text: merge with layer below
-
- spacer1:
-   spacer: true
-	 size: 4,1
- 
- transform:
-   action: ctrl+t
-   size: 2,2
-	 style: circular
-	 icon: vector-rectangle
-	 text: transform
-
- M:
-   action: m
-	 size: 2,4
-	 style: outlined 
-	 icon: select
-	 text: select (M)
-
- select all:
-   action: ctrl+a
-	 size: 2,2
-	 style: circular
-	 icon: checkbox-blank
-	 text: select all
-
- enter:
-	 action: enter
-   size: 2,2
-	 icon: arrow-left-bottom-bold
-	 style: shy
-	 text: enter
-
- deselect:
-   action: ctrl+d
-	 size: 2,2
-	 style: circular
-	 icon: checkbox-blank-off-outline
-	 text: deselect all
-
- undo:
-   action: ctrl+z
-	 size: 2,2
-	 icon: undo
-   style: shy
-	 text: undo
-
- V:
-   action: v
-	 size: 2,2
-	 style: outlined
-	 icon: cursor-default
-	 text: click (V)
-
- redo:
-   action: ctrl+y
-	 size: 2,2
-	 icon: redo
-	 style: shy
-	 text: redo
- 
- B:
-   action: b
-   size: 2,4
-   style: outlined
-   icon: brush
-	 text: brush (B)
-
- brush-size:
-   actions: 
-	 - toggle alt
-   - wait 2000
-	 - toggle alt
-   icon: plus-minus
-	 size: 2,2
-	 style: circular_accent
-	 text: brush size/ hardness
-	 #left click: eyedropper
-	 #right click: brush size/hardness
-
- invert-colors:
-   action: x
-	 size: 2,2
-	 icon: invert-colors
-	 style: circular_accent
-	 text: switch colors
-
- color-pick:
-   actions: 
-	 - toggle alt
-	 - toggle shift
-	 - wait 2000
-	 - toggle alt
-	 - toggle shift
-	 size: 2,2
-	 text: col
-	 icon: palette
-	 style: circular_accent
-	 text: color wheel
-	 #must click with right
-
-
- G:
-   action: g
-   size: 2,2
-	 icon: format-color-fill
-	 style: outlined
-	 text: fill (G)
-
- E:
-   action: e
-   size: 2,2
-	 style: outlined
-   icon: eraser
-	 text: erase (E)
-
- T:
-   action: t
-	 size: 2,2
-	 icon: format-title
-	 style: outlined
-	 text: add text (T)
-
- spacer2:
-   spacer: true
-	 size: 4,2
-	
- ctrl:
-   action: toggle ctrl
-	 size: 2,2
-	 text: Ctrl
-	 font_size: 16
-
- shift:
+	shift:
 		action: toggle shift
 		size: 2,2
 		text: toggle shift
 		icon: apple_keyboard_shift
-
- alt:
+	space:
+		action: toggle space
+		size: 2,2
+		text: toggle space
+		icon: keyboard_space
+	ctrl:
+		action: toggle ctrl
+		size: 2,2
+		text: toggle ctrl
+		icon: apple_keyboard_control
+	alt:
 		action: toggle alt
 		size: 2,2
-		text: Alt
-		font_size: 16
+		text: toggle alt
+		icon: apple_keyboard_option
 
- spacer3:
-   spacer: true
-	 size: 4,1
+	docked_spacer3:
+		spacer: true
+		visibility: docked
+		size: 4,1
 
- hide:
-   action: hide
-	 size: 4,2
-	 icon: eye-off
-	 style: default
-	 text: hide toolbar
+	enter:
+		action: enter
+		size: 2,2
+		style: outlined
+		icon: subdirectory_arrow_left
+	escape:
+		font_weight: 500
+		action: escape
+		size: 2,2
+		style: outlined
+		text: Esc
+
+	docked_spacer4:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	new_layer:
+		action: ctrl+shift+n
+		size: 2,2
+		icon: layers-plus
+		style: accent
+		text: create new layer
+
+	duplicate:
+		action: ctrl+j
+		size: 2,2
+		icon: content-duplicate
+		style: accent
+		text: duplicate layer
+
+	merge:
+		action: ctrl+e
+		size: 4,2
+		icon: layers
+		style: accent
+		text: merge with layer below
+
+	spacer1:
+		spacer: true
+		size: 4,1
+ 
+	transform:
+		action: ctrl+t
+		size: 2,2
+		style: outlined
+		icon: vector-rectangle
+		text: transform
+
+	M:
+		action: m
+		size: 2,4
+		style: outlined 
+		icon: select
+		text: select (M)
+
+	select all:
+		action: ctrl+a
+		size: 2,2
+		style: outlined
+		icon: select-all
+		text: select all
+
+	deselect:
+		action: ctrl+d
+		size: 2,2
+		style: circular
+		icon: checkbox-blank-off-outline
+		text: deselect all
+
+	V:
+		action: v
+		size: 2,2
+		style: outlined
+		icon: cursor-default
+		text: click (V)
+
+	B:
+		action: b
+		size: 2,4
+		style: outlined
+		icon: brush
+		text: brush (B)
+
+	invert-colors:
+		action: x
+		size: 2,2
+		icon: invert-colors
+		style: circular_accent
+		text: switch colors
+
+	G:
+		action: g
+		size: 2,2
+		icon: format-color-fill
+		style: outlined
+		text: fill (G)
+
+	E:
+		action: e
+		size: 2,2
+		style: outlined
+		icon: eraser
+		text: erase (E)
+
+	T:
+		action: t
+		size: 2,2
+		icon: format-title
+		style: outlined
+		text: add text (T)
+
+	spacer2:
+		visibility: docked
+		spacer: true
+		size: 4,1
+
+# Docking ===============================
+
+	dock_toolbar_left1:
+		icon: dock_left
+		action: dock left
+		text: dock left
+		style: default
+		visibility: docked_right
+		size: 2,2
+
+	undock_toolbar:
+		icon: dock_top
+		action: undock
+		text: undock
+		style: default
+		visibility: docked
+		size: 2,2
+
+	dock_toolbar_right1:
+		icon: dock_right
+		action: dock right
+		text: dock right
+		style: default
+		visibility: docked_left
+		size: 2,2
+
+	dock_toolbar_left:
+		icon: dock_left
+		action: dock left
+		text: dock left
+		style: default
+		visibility: undocked
+		size: 2,2
+
+	dock_toolbar_right:
+		icon: dock_right
+		action: dock right
+		text: dock right
+		style: default
+		visibility: undocked
+		size: 2,2
+
+	docked_spacer_hide:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	hide:
+		action: hide
+		size: 4,1
+		icon: expand_more
+		style: shy
+		text: "hide"
+
+
+

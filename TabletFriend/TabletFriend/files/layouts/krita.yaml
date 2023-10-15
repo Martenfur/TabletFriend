@@ -5,15 +5,6 @@ margin: 8
 app: krita
 
 buttons:
-
-	hide:
-		action: hide
-		size: 4,1
-		icon: minus
-		style: shy
-		text: "hide"
-		visibility: docked
-
 	undo:
 		action: ctrl+z
 		size: 2,2
@@ -107,19 +98,19 @@ buttons:
 		size: 4,1
 
 	deselect:
-		icon: tab_unselected
+		icon: checkbox-blank-off-outline
 		font_weight: 500
 		action: ctrl+shift+a
 		size: 4,2
 		style: accent
-		text: deselect
+		text: deselect (Ctrl+Shift+A)
 	merge_layer:
 		icon: layers
 		font_weight: 500
 		action: ctrl+e
 		size: 4,2
 		style: accent
-		text: merge with layer below
+		text: merge with layer below (Ctrl+E)
 
 	reset_zoom:
 		icon: search
@@ -168,13 +159,31 @@ buttons:
 		icon: file
 		text: new
 
+# Docking ===============================
+
+	dock_toolbar_left1:
+		icon: dock_left
+		action: dock left
+		text: dock left
+		style: default
+		visibility: docked_right
+		size: 2,2
+
 	undock_toolbar:
 		icon: dock_top
 		action: undock
 		text: undock
 		style: default
 		visibility: docked
-		size: 4,2
+		size: 2,2
+
+	dock_toolbar_right1:
+		icon: dock_right
+		action: dock right
+		text: dock right
+		style: default
+		visibility: docked_left
+		size: 2,2
 
 	dock_toolbar_left:
 		icon: dock_left
@@ -191,3 +200,15 @@ buttons:
 		style: default
 		visibility: undocked
 		size: 2,2
+
+	docked_spacer_hide:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	hide:
+		action: hide
+		size: 4,1
+		icon: expand_more
+		style: shy
+		text: "hide"

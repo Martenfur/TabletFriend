@@ -3,15 +3,6 @@ button_size: 14
 margin: 8
 
 buttons:
-
-	hide:
-		action: hide
-		size: 4,1
-		icon: minus 
-		style: shy
-		text: "hide"
-		visibility: docked
-
 	prev_desktop:
 		action: win+ctrl+left
 		size: 2,1
@@ -173,20 +164,30 @@ buttons:
 		visibility: docked
 		size: 4,1
 
-	save:
-		action: ctrl+s
-		size: 2,2
+	language_toggle:
 		style: outlined
-		icon: content_save
-		text: save
-		visibility: docked
-	new:
-		action: ctrl+n
+		action: shift+alt
 		size: 2,2
+		text: toggle keyboard layout
+		icon: translate
+
+	explorer:
 		style: outlined
-		icon: file
-		text: new
-		visibility: docked
+		action: win+e
+		size: 2,2
+		text: new explorer window
+		icon: folder_open
+
+
+# Docking ===============================
+
+	dock_toolbar_left1:
+		icon: dock_left
+		action: dock left
+		text: dock left
+		style: default
+		visibility: docked_right
+		size: 2,2
 
 	undock_toolbar:
 		icon: dock_top
@@ -194,7 +195,15 @@ buttons:
 		text: undock
 		style: default
 		visibility: docked
-		size: 4,2
+		size: 2,2
+
+	dock_toolbar_right1:
+		icon: dock_right
+		action: dock right
+		text: dock right
+		style: default
+		visibility: docked_left
+		size: 2,2
 
 	dock_toolbar_left:
 		icon: dock_left
@@ -211,3 +220,15 @@ buttons:
 		style: default
 		visibility: undocked
 		size: 2,2
+
+	docked_spacer_hide:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	hide:
+		action: hide
+		size: 4,1
+		icon: expand_more
+		style: shy
+		text: "hide"
