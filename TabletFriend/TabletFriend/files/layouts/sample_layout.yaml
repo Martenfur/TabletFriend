@@ -9,10 +9,10 @@
 
 # Max layout width measured in cells. The buttons do not have position properties - instead, they get stacked automatically
 # from left to right and from top to bottom. Layout width specifies how far left the buttons can be stacked. 
-layout_width: 2
+layout_width: 4
 
 # 1x1 button size measured in pixels.
-button_size: 40
+button_size: 14
 # Space between the buttons measured in pixels.
 margin: 8
 
@@ -29,7 +29,7 @@ buttons:
 		# See docs/keys.md for the full list of allowed key names.
 		action: ctrl+z
 		# This button is 2 cells wide and 1 cell tall. 
-		size: 2,1
+		size: 4,2
 		# This text will be displayed on the button.
 		text: undo
 
@@ -54,12 +54,14 @@ buttons:
 		# Since we already have an icon, text will be displayed as a tooltip.
 		# If you don't want tooltips, simply remove the text property.
 		text: copy
+		size: 2,2
 
 	paste:
 		action: ctrl+v
 		style: shy
 		icon: content_paste
 		text: paste
+		size: 2,2
 
 	# This is a spacer. The only property it can have is size.
 	# Since you cannot specify positions directly, spacers exist
@@ -67,14 +69,14 @@ buttons:
 	# occupy 2 cells.
 	spacer1:
 		spacer: true
-		size: 2,1
+		size: 4,2
 
 	shift:
 		action: toggle shift # Instead of pressing once, this button will be on toggle.
 		style: outlined
 		icon: apple_keyboard_shift
 		text: shift
-		size: 2,1
+		size: 4,2
 
 	type:
 		actions: # Typing "actions" instead of "action" will make the button chain multiple actions. Any action can be used.
@@ -87,11 +89,14 @@ buttons:
 		- release shift
 		style: circular_accent
 		text: type
+		size: 2,2
+
 
 	calc:
 		action: cmd calc.exe # cmd executes a command line command. For example, calc.exe will launch calculator app.
 		icon: calculator
 		style: circular
+		size: 2,2
 
 
 	# Here's a bit of lesser known magic.
@@ -103,6 +108,8 @@ buttons:
 		style: accent
 		icon: pencil_box
 		text: bluetooth button\nsingle click
+		size: 2,2
+
 	pen_double_click:
 		actions: 
 			# win+f10 maps to your Surface Pen eraser button double click.
@@ -110,6 +117,8 @@ buttons:
 		style: accent
 		icon: pencil_box_multiple
 		text: bluetooth button\ndouble click
+		size: 2,2
+
 	pen_hold:
 		actions: 
 			# win+f18 maps to your Surface Pen eraser button hold.
@@ -117,7 +126,7 @@ buttons:
 		style: accent
 		icon: pencil
 		text: bluetooth button\nhold
-		size: 2,1
+		size: 4,2
 
 	docked_spacer:
 		spacer: true
@@ -125,7 +134,7 @@ buttons:
 	docked:
 		style: accent
 		text: docked
-		size: 2,1
+		size: 4,2
 		# Makes the button visible only in docked mode. 
 		# Valid values:
 		# - always
@@ -135,26 +144,26 @@ buttons:
 	undocked:
 		style: accent
 		text: undocked
-		size: 2,1
+		size: 4,2
 		# Makes the button be visible only in undocked mode. 
 		visibility: undocked
 
 	docked_left:
 		style: accent
 		text: docked left
-		size: 2,1
+		size: 4,2
 		# Makes the button be visible when toolbar is docked to the left. 
 		visibility: docked_left
 	docked_right:
 		style: accent
 		text: docked right
-		size: 2,1
+		size: 4,2
 		# Makes the button be visible when toolbar is docked to the right. 
 		visibility: docked_right
 	docked_top:
 		style: accent
 		text: docked top
-		size: 2,1
+		size: 4,2
 		# Makes the button be visible when toolbar is docked to the top. 
 		visibility: docked_top
 
@@ -162,14 +171,16 @@ buttons:
 		# repeat action will make the button trigger continiously when pressed and held down.
 		action: repeat left
 		icon: chevron_left
+		size: 2,2
 	right:
 		action: repeat right
 		icon: chevron_right
+		size: 2,2
 
 	hide:
 		# Hides the toolbar just like the tray icon press.
 		action: hide
-		size: 2,1
+		size: 4,2
 		text: "hide"
 		visibility: docked
 
@@ -180,7 +191,7 @@ buttons:
 		text: undock
 		style: default
 		visibility: docked
-		size: 2,1
+		size: 4,2
 
 	dock_toolbar_left:
 		icon: dock_left
@@ -188,7 +199,7 @@ buttons:
 		text: dock left
 		style: default
 		visibility: undocked
-		size: 1,1
+		size: 2,2
 
 	dock_toolbar_right:
 		icon: dock_right
@@ -196,11 +207,11 @@ buttons:
 		text: dock right
 		style: default
 		visibility: undocked
-		size: 1,1
+		size: 2,2
 
 	swap:
 		# This button will load a different layout.
 		action: layout sample_layout2
 		text: Second\nlayout # \n puts text on a new line.
-		size: 2,1
+		size: 4,2
 		style: default
