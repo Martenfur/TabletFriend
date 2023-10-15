@@ -128,45 +128,6 @@ buttons:
 		text: bluetooth button\nhold
 		size: 4,2
 
-	docked_spacer:
-		spacer: true
-		visibility: docked
-	docked:
-		style: accent
-		text: docked
-		size: 4,2
-		# Makes the button visible only in docked mode. 
-		# Valid values:
-		# - always
-		# - undocked
-		# - docked
-		visibility: docked
-	undocked:
-		style: accent
-		text: undocked
-		size: 4,2
-		# Makes the button be visible only in undocked mode. 
-		visibility: undocked
-
-	docked_left:
-		style: accent
-		text: docked left
-		size: 4,2
-		# Makes the button be visible when toolbar is docked to the left. 
-		visibility: docked_left
-	docked_right:
-		style: accent
-		text: docked right
-		size: 4,2
-		# Makes the button be visible when toolbar is docked to the right. 
-		visibility: docked_right
-	docked_top:
-		style: accent
-		text: docked top
-		size: 4,2
-		# Makes the button be visible when toolbar is docked to the top. 
-		visibility: docked_top
-
 	left:
 		# repeat action will make the button trigger continiously when pressed and held down.
 		action: repeat left
@@ -190,6 +151,15 @@ buttons:
 		action: undock
 		text: undock
 		style: default
+		# Makes the button visible only in docked mode. 
+		# Valid values:
+		# - always
+		# - undocked
+		# - docked
+		# - docked_left
+		# - docked_right
+		# - docked_top
+
 		visibility: docked
 		size: 4,2
 
@@ -211,7 +181,50 @@ buttons:
 
 	swap:
 		# This button will load a different layout.
-		action: layout sample_layout2
-		text: Second\nlayout # \n puts text on a new line.
+		action: layout default
+		text: Default\nlayout # \n puts text on a new line.
 		size: 4,2
 		style: default
+
+	kot1:
+		# You сan use png icons if you're not happy with built-in ones.
+		icon: files/icons/kot.png
+		style: accent
+		size: 2,2
+		icon_stretch: fit
+	kot3:
+		icon: files/icons/kot.png
+		style: accent
+		size: 2,2
+		icon_stretch: none
+	kot2:
+		icon: files/icons/kot.png
+		style: accent
+		size: 4,2
+		icon_stretch: fill
+
+	font:
+		text: K
+		# The full list of fonts is available here: http://www.microsoft.com/typography/fonts/
+		font: wingdings
+		font_size: 
+		size: 2,4
+
+	bold:
+		font_size: 14
+		font_weight: 999 
+		text: bold
+		size: 2,2
+
+	thin:
+		font_size: 14
+		font_weight: 1
+		text: thin
+		size: 2,2
+
+
+	honk:
+		action: cmd rundll32 user32.dll,MessageBeep
+		font: comic sans ms
+		text: honk :)
+		size: 4,2
