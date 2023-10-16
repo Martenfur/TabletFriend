@@ -178,6 +178,12 @@ buttons:
 		text: new explorer window
 		icon: folder_open
 
+	reopen_browser_tab:
+		icon: tab
+		action: ctrl+shift+t
+		text: reopen closed browser tab
+		style: accent
+		size: 4,2
 
 # Docking ===============================
 
