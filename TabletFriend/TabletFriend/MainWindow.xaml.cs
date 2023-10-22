@@ -205,6 +205,7 @@ namespace TabletFriend
 			EventBeacon.SendEvent(Events.DockingChanged, AppState.Settings.DockingMode);
 		}
 
+		private static bool _firstToggle = true;
 
 		private void OnToggleMinimize(object[] obj)
 		{
@@ -215,7 +216,21 @@ namespace TabletFriend
 			if (Visibility == Visibility.Collapsed || Visibility == Visibility.Hidden)
 			{
 				Visibility = Visibility.Visible;
-				AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
+				if (!_firstToggle)
+				{				
+					AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
+				}
+				else
+				{
+					// On first launch the toolbar spergs out. This seems to fix it. Maybe. Mostly. :(
+					Thread.Sleep(500);
+					AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
+					Thread.Sleep(100);
+					AppBarFunctions.SetAppBar(this, DockingMode.None);
+					Thread.Sleep(100);
+					AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
+					_firstToggle = false;
+				}
 			}
 			else
 			{
