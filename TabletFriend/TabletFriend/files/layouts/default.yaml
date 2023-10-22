@@ -1,4 +1,6 @@
-﻿layout_width: 4
+﻿# This is the general use layout that is good for most tasks.
+
+layout_width: 4
 button_size: 14
 margin: 8
 

@@ -20,6 +20,14 @@ margin: 8
 min_opacity: 0.2 # Used for when the window is unfocused.
 max_opacity: 0.9 # Used for when the window is focued.
 
+# You can set a layout to automatically open if a specific app is in focus.
+# You can use wildcards in app names if you want to match something more generic.
+# Note that app names are not case-sensitive.
+# For example:
+#app: app_name     # Will match only app_name exactly.
+#app: app_name*    # Will match any app name that starts with app_name. For example, app_name_v_1.0
+#app: "*app_name*" # Will match any app name that contains app_name. Note that if you're putting a * symbol in the beginning, you need to use quotes. 
+
 # Button list of the layout. Note that all buttons should have different 
 # names - otherwise you'll end up with missing buttons.
 buttons:
