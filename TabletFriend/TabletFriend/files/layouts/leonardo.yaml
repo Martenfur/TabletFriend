@@ -2,7 +2,7 @@ layout_width: 4
 button_size: 14
 margin: 8
 
-app: leonardo
+app: leonardo*
 
 buttons:
 	undo:
