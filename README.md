@@ -142,6 +142,8 @@ If you switch to an app that doesn't have an app-spesific layout, it will switch
 
 You can also disable automatic switching altogether by going into `settings` and pressing the `disable per-app layouts` button.
 
+**NOTE**: In order for transition between layouts to be smooth and quick, `layout_width`, `button_size` and `margin` should be exactly the same between layouts.
+
 This, of course, are not all the features Tablet Friend offers. You can check out a more [advanced example](TabletFriend/TabletFriend/files/layouts/sample_layout.yaml) with all features listed.
 
 ## Migrating to 2.0
