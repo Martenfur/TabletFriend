@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added default Krita, Photoshop, ArtRage and Leonardo layouts.
 - Now, the toolbar will automatically show up when you enter tablet mode, and hide when you enter desktop mode. This can be disabled in the settings.
 - Added `dock` and `undock` actions that allow to perform toolbar docking with a button instead of a context menu.
 - Added `docked_right`, `docked_left` and `docked_top` options to `visibility` property. Now, buttons can be shown only in some docking modes.

@@ -240,17 +240,9 @@ buttons:
 		visibility: undocked
 		size: 2,2
 
-	docked_spacer_hide:
-		spacer: true
-		visibility: docked
-		size: 4,1
-
 	hide:
 		action: hide
 		size: 4,1
 		icon: expand_more
 		style: shy
 		text: "hide"
-
-
-
