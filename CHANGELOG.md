@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [v2.0.0] - 25.10.2023
+
 ### Added
 
 - Added default Krita, Photoshop, ArtRage and Leonardo layouts.
