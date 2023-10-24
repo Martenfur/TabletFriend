@@ -39,6 +39,6 @@ namespace TabletFriend.Docking
 		}
 
 		private static void OnDocking(DockingMode side) =>
-			EventBeacon.SendEvent("docking_changed", side);
+			EventBeacon.SendEvent(Events.DockingChanged, side);
 	}
 }

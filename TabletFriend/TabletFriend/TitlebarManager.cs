@@ -17,10 +17,12 @@ namespace TabletFriend
 
 		private static bool _minimizedMode = false;
 		private static bool _minimized = false;
+		public static bool Minimized => _minimized;
 
 		private static PackIcon _ico;
 		private static MainWindow _window;
 		private static ThemeModel _theme;
+		private static LayoutModel _layout;
 
 		private static double _maximizedWindowHeight;
 
@@ -28,21 +30,23 @@ namespace TabletFriend
 		/// Blocks the first minimize to make the feel a little bit nicer.
 		/// </summary>
 		private static bool _grace = false;
-		public static double GetTitlebarHeight(ThemeModel theme)
+		public static double GetTitlebarHeight(LayoutModel layout)
 		{
 			if (AppState.Settings.DockingMode == DockingMode.None)
 			{
-				return _baseTitlebarHeight + theme.Margin * 2;
+				return _baseTitlebarHeight + layout.Margin * 2;
 			}
 			return 0;
 		}
 
-		public static void CreateTitlebar(MainWindow window, ThemeModel theme)
+		public static void CreateTitlebar(MainWindow window, ThemeModel theme, LayoutModel layout, double maximizedWindowHeight, bool minimized)
 		{
-			_minimized = false;
+			_minimized = minimized;
+
 			_window = window;
 			_theme = theme;
-			_maximizedWindowHeight = _window.Height;
+			_layout = layout;
+			_maximizedWindowHeight = maximizedWindowHeight;
 
 			_window.MouseEnter -= OnMouseEnter;
 			_window.MouseLeave -= OnMouseLeave;
@@ -59,8 +63,11 @@ namespace TabletFriend
 			_window.MouseLeave += OnMouseLeave;
 
 			_grace = true;
-			
 
+			if (_minimized)
+			{
+				_window.Height = GetTitlebarHeight(_layout);
+			}
 		}
 
 
@@ -69,7 +76,7 @@ namespace TabletFriend
 			var uiButton = new Button();
 
 			uiButton.Width = 32;
-			uiButton.Height = GetTitlebarHeight(_theme);
+			uiButton.Height = GetTitlebarHeight(_layout);
 
 			uiButton.Style = Application.Current.Resources["shy"] as Style;
 			_ico = new PackIcon();
@@ -126,17 +133,17 @@ namespace TabletFriend
 			_minimizedMode = !_minimizedMode;
 		}
 
-		private static void Minimize()
+		public static void Minimize()
 		{
 			if (!_minimized)
 			{
 				_minimized = true;
 				_maximizedWindowHeight = _window.Height;
-				_window.Height = GetTitlebarHeight(_theme);
+				_window.Height = GetTitlebarHeight(_layout);
 			}
 		}
 
-		private static void Maximize()
+		public static void Maximize()
 		{
 			if (_minimized)
 			{

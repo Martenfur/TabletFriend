@@ -1,0 +1,216 @@
+﻿# This is the layout that is used with Krita: https://krita.org/
+
+layout_width: 4
+button_size: 14
+margin: 8
+
+app: krita
+
+buttons:
+	undo:
+		action: ctrl+z
+		size: 2,2
+		style: accent
+		icon: undo
+		text: undo
+	redo:
+		action: ctrl+shift+z
+		size: 2,2
+		style: accent
+		icon: redo
+		text: redo
+
+	docked_spacer1:
+		spacer: true
+		visibility: docked
+		size: 4,1
+	
+	copy:
+		action: ctrl+c
+		size: 2,2
+		style: outlined
+		icon: content_copy
+		text: copy
+	shift:
+		action: toggle shift
+		size: 2,2
+		text: toggle shift
+		icon: apple_keyboard_shift
+	paste:
+		action: ctrl+v
+		size: 2,2
+		style: outlined
+		icon: content_paste
+		text: paste
+	ctrl:
+		action: toggle ctrl
+		size: 2,2
+		text: toggle ctrl
+		icon: apple_keyboard_control
+	cut:
+		action: ctrl+x
+		size: 2,2
+		icon_stretch: none
+		style: outlined
+		icon: content_cut
+		text: cut
+	alt:
+		action: toggle alt
+		size: 2,2
+		text: toggle alt
+		icon: apple_keyboard_option
+
+	docked_spacer2:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	enter:
+		action: enter
+		size: 2,2
+		style: outlined
+		icon: subdirectory_arrow_left
+	escape:
+		font_weight: 500
+		action: escape
+		size: 2,2
+		style: outlined
+		text: Esc
+
+	backspace:
+		icon: backspace
+		font_weight: 500
+		action: backspace
+		size: 2,2
+		style: outlined
+		text: backspace
+
+	delete:
+		icon: delete
+		font_weight: 500
+		action: delete
+		size: 2,2
+		style: outlined
+		text: delete
+
+
+	docked_spacer3:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	deselect:
+		icon: checkbox-blank-off-outline
+		font_weight: 500
+		action: ctrl+shift+a
+		size: 4,2
+		style: accent
+		text: deselect (Ctrl+Shift+A)
+	merge_layer:
+		icon: layers
+		font_weight: 500
+		action: ctrl+e
+		size: 4,2
+		style: accent
+		text: merge with layer below (Ctrl+E)
+
+	reset_zoom:
+		icon: search
+		font_weight: 500
+		action: 1
+		size: 2,2
+		style: accent
+		text: reset zoom
+	reset_rotation:
+		icon: lock_reset
+		font_weight: 500
+		action: 5
+		size: 2,2
+		style: accent
+		text: reset rotation
+	rotate_left:
+		icon: rotate_left
+		font_weight: 500
+		action: repeat 4
+		size: 2,2
+		style: accent
+		text: rotate left
+	rotate_right:
+		icon: rotate_right
+		font_weight: 500
+		action: repeat 6
+		size: 2,2
+		style: accent
+		text: rotate left
+
+	docked_spacer5:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	save:
+		action: ctrl+s
+		size: 2,2
+		style: outlined
+		icon: content_save
+		text: save
+	new:
+		action: ctrl+n
+		size: 2,2
+		style: outlined
+		icon: file
+		text: new
+
+# Docking ===============================
+
+	dock_toolbar_left1:
+		icon: dock_left
+		action: dock left
+		text: dock left
+		style: default
+		visibility: docked_right
+		size: 2,2
+
+	undock_toolbar:
+		icon: dock_top
+		action: undock
+		text: undock
+		style: default
+		visibility: docked
+		size: 2,2
+
+	dock_toolbar_right1:
+		icon: dock_right
+		action: dock right
+		text: dock right
+		style: default
+		visibility: docked_left
+		size: 2,2
+
+	dock_toolbar_left:
+		icon: dock_left
+		action: dock left
+		text: dock left
+		style: default
+		visibility: undocked
+		size: 2,2
+
+	dock_toolbar_right:
+		icon: dock_right
+		action: dock right
+		text: dock right
+		style: default
+		visibility: undocked
+		size: 2,2
+
+	docked_spacer_hide:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	hide:
+		action: hide
+		size: 4,1
+		icon: expand_more
+		style: shy
+		text: "hide"

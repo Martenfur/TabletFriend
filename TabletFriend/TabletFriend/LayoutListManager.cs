@@ -15,13 +15,13 @@ namespace TabletFriend
 			Menu = new MenuItem() { Header = "layouts" };
 
 			OnUpdateLayoutList();
-			EventBeacon.Subscribe("change_layout", OnChangeLayout);
-			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.ChangeLayout, OnChangeLayout);
+			EventBeacon.Subscribe(Events.UpdateLayoutList, OnUpdateLayoutList);
 		}
 
 		private void OnChangeLayout(object[] obj)
 		{
-			var path = Path.GetFullPath((string)obj[0]);
+			var path = (string)obj[0];
 			foreach (MenuItem otherItem in Menu.Items)
 			{
 				otherItem.IsChecked = (string)otherItem.DataContext == path;
@@ -34,14 +34,14 @@ namespace TabletFriend
 				delegate
 				{
 					Menu.Items.Clear();
-					foreach (var layout in AppState.Layouts)
+					foreach (var layout in AppState.Layouts.Keys)
 					{
 						var item = new MenuItem()
 						{
 							Header = Path.GetFileNameWithoutExtension(layout).Replace("_", " "),
 							DataContext = layout,
 							IsCheckable = true,
-							IsChecked = layout == AppState.CurrentLayoutPath
+							IsChecked = layout == AppState.CurrentLayoutName
 						};
 						Menu.Items.Add(item);
 						item.Click += OnClick;
@@ -53,11 +53,11 @@ namespace TabletFriend
 		private void OnClick(object sender, RoutedEventArgs e)
 		{
 			var item = (MenuItem)sender;
-			EventBeacon.SendEvent("change_layout", item.DataContext);
+			EventBeacon.SendEvent(Events.ChangeLayout, item.DataContext);
 		}
 
 		
-		public MenuItem[] CloneMenu()
+		public MenuItem[] GetClonedItems()
 		{
 			var items = new List<MenuItem>();
 
@@ -75,6 +75,28 @@ namespace TabletFriend
 			}
 
 			return items.ToArray();
+		}
+
+		public MenuItem CloneMenu()
+		{
+			var menu = new MenuItem() { Header = "layouts" };
+
+			var items = new List<MenuItem>();
+
+			foreach (MenuItem item in Menu.Items)
+			{
+				var newItem = new MenuItem()
+				{
+					Header = item.Header,
+					DataContext = item.DataContext,
+					IsCheckable = item.IsCheckable,
+					IsChecked = item.IsChecked,
+				};
+				menu.Items.Add(newItem);
+				newItem.Click += OnClick;
+			}
+			
+			return menu;
 		}
 	}
 }

@@ -89,8 +89,7 @@ namespace TabletFriend
 				return;
 			}
 
-
-			Application.Current.Shutdown();
+			Process.GetCurrentProcess().Kill();
 		}
 
 		private static async Task DownloadUpdate(JObject response, string version)

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Windows;
 
 namespace TabletFriend
 {
@@ -10,7 +11,7 @@ namespace TabletFriend
 		{
 			_watcher = new FileSystemWatcher();
 			_watcher.Path = AppState.FilesRoot;
-			_watcher.NotifyFilter = NotifyFilters.FileName 
+			_watcher.NotifyFilter = NotifyFilters.FileName
 				| NotifyFilters.DirectoryName
 				| NotifyFilters.Attributes
 				| NotifyFilters.Size
@@ -26,21 +27,36 @@ namespace TabletFriend
 			_watcher.EnableRaisingEvents = true;
 			_watcher.IncludeSubdirectories = true;
 
-			RefreshLayoutList();
+			RefreshLists();
 		}
 
 
 		private void OnChanged(object sender, FileSystemEventArgs args)
 		{
-			RefreshLayoutList();
-			EventBeacon.SendEvent("files_changed", sender, args);
+			RefreshLists();
+			EventBeacon.SendEvent(Events.FilesChanged, sender, args);
 		}
 
 
-		private void RefreshLayoutList()
+		private void RefreshLists()
 		{
-			AppState.Layouts = Directory.GetFiles(AppState.LayoutRoot, AppState.LayoutExtension);
-			EventBeacon.SendEvent("update_layout_list");
+			Application.Current.Dispatcher.Invoke(
+				delegate
+				{
+					var layouts = Importer.ImportLayouts();
+					if (AppState.Layouts == null || layouts.Count > 0)
+					{
+						AppState.Layouts = layouts;
+					}
+					var themes = Importer.ImportThemes();
+					if (AppState.Themes == null || themes.Count > 0)
+					{
+						AppState.Themes = themes;
+					}
+				}
+			);
+			EventBeacon.SendEvent(Events.UpdateThemeList);
+			EventBeacon.SendEvent(Events.UpdateLayoutList);
 		}
 	}
 }

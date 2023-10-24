@@ -1,143 +1,203 @@
-layout_width: 6
-external_theme: files/themes/default.yaml
-theme:
-	button_size: 14
+# This is the layout that is used with Leonardo: https://www.getleonardo.com/
+
+layout_width: 4
+button_size: 14
+margin: 8
+
+app: leonardo*
 
 buttons:
-	escape_button:
-		action: escape
-		size: 6,2
-		style: outlined
-		text: esc
 	undo:
 		action: ctrl+z
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: undo
 		text: undo
 	redo:
 		action: ctrl+y
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: redo
 		text: redo
 	
 	spacer1:
-		size: 6,1
+		size: 4,1
 		spacer: true
 	
 	brush:
 		action: b
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: brush
 		text: brush
 	eraser:
 		action: e
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: eraser 
 		text: eraser
 	brush_angle:
 		action: toggle a 
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: angle-acute
 		text: brush angle
 	brush_size:
 		action: toggle d 
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: laser-pointer
 		text: brush size
 	
 	spacer4:
-		size: 6,1
+		visibility: docked
+		size: 4,1
 		spacer: true
 		
 	magic_wand:
 		action: w
-		size: 6,2
+		size: 4,2
 		style: accent
 		icon: auto-fix
 		text: magic wand tool
 	selection_tool:
 		action: k
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: selection-drag
 		text: rectangle selection tool
 	lasso:
 		action: l 
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: lasso
 		text: lasso selection tool
 	move:
 		action: v
-		size: 6,2
+		size: 4,2
 		style: accent
 		icon: cursor-move
 		text: move
 	
 	spacer6: 
-		size: 6,1
+		visibility: docked
+		size: 4,1
 		spacer: true
 	hand: 
 		action: h
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: hand
 		text: hand tool
 	rotate_tool:
 		action: o
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: crop-rotate
 		text: rotate tool
 		
 	spacer7:
-		size: 6,1
+		visibility: docked
+		size: 4,1
 		spacer: true
 	paint_bucket_tool: 
 		action: u
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: format-color-fill
 		text: paint bucket tool
 	gradient_tool:
 		action: g
-		size: 3,2
+		size: 2,2
 		style: accent
 		icon: gradient-horizontal
 		text: gradient tool
-	
+	escape_button:
+		action: escape
+		size: 4,2
+		style: outlined
+		text: esc
 	spacer2:
-		size: 6,1
+		visibility: docked
+		size: 4,1
 		spacer: true
+
 	shift:
 		action: toggle shift
-		size: 3,2
+		size: 2,2
 		text: toggle shift
 		icon: apple_keyboard_shift
-		style: shy
 	space:
-		action: space
-		size: 3,2
+		action: toggle space
+		size: 2,2
 		text: toggle space
 		icon: keyboard_space
-		style: shy
-	
-	spacer3:
-		size: 6,1
-		spacer: true
-
-
-
-	spacer5:
-		size: 6,1
-		spacer: true
+	ctrl:
+		action: toggle ctrl
+		size: 2,2
+		text: toggle ctrl
+		icon: apple_keyboard_control
+	alt:
+		action: toggle alt
+		size: 2,2
+		text: toggle alt
+		icon: apple_keyboard_option
 
 	spacer_bottom:
-		size: 2,1
+		visibility: docked
+		size: 4,1  
 		spacer: true
+
+# Docking ===============================
+
+	dock_toolbar_left1:
+		icon: dock_left
+		action: dock left
+		text: dock left
+		style: default
+		visibility: docked_right
+		size: 2,2
+
+	undock_toolbar:
+		icon: dock_top
+		action: undock
+		text: undock
+		style: default
+		visibility: docked
+		size: 2,2
+
+	dock_toolbar_right1:
+		icon: dock_right
+		action: dock right
+		text: dock right
+		style: default
+		visibility: docked_left
+		size: 2,2
+
+	dock_toolbar_left:
+		icon: dock_left
+		action: dock left
+		text: dock left
+		style: default
+		visibility: undocked
+		size: 2,2
+
+	dock_toolbar_right:
+		icon: dock_right
+		action: dock right
+		text: dock right
+		style: default
+		visibility: undocked
+		size: 2,2
+
+	docked_spacer_hide:
+		spacer: true
+		visibility: docked
+		size: 4,1
+
+	hide:
+		action: hide
+		size: 4,1
+		icon: expand_more
+		style: shy
+		text: "hide"

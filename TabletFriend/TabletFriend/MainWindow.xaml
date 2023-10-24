@@ -12,6 +12,7 @@
 		Background="Transparent"
 		UseLayoutRounding="True"
 		ResizeMode="NoResize"
+        Visibility="Hidden"
 		>
 	<Border Name="MainBorder">
 		<Canvas Name="MainCanvas"></Canvas>

@@ -2,6 +2,29 @@
 
 ## [Unreleased]
 
+## [v2.0.0] - 25.10.2023
+
+### Added
+
+- Added default Krita, Photoshop, ArtRage and Leonardo layouts.
+- Now, the toolbar will automatically show up when you enter tablet mode, and hide when you enter desktop mode. This can be disabled in the settings.
+- Added `dock` and `undock` actions that allow to perform toolbar docking with a button instead of a context menu.
+- Added `docked_right`, `docked_left` and `docked_top` options to `visibility` property. Now, buttons can be shown only in some docking modes.
+
+### Changed
+
+- `layout` action now only needs layout name to be specified instead of its full path (for example, `action layout foxe` instead of `action layout files/layouts/foxe.yaml`). Paths will still work as long as the layout specified is in the `files/layouts` directory.
+- Layout properties `external_theme` and `theme` no longer work. Now, you must select a theme in the context menu independently from a layout. See "Migrating to 2.0" section for the full guide.
+- Theme properties `button_size`, `margin`, `min_opacity`, `max_opacity` have been moved directly to layout yaml. Themes can no longer influence these properties. See "Migrating to 2.0" section for the full guide.
+- Now the app will start in hidden mode.
+- Updated to .NET7
+- Optimized layout changing.
+
+### Fixed
+
+- Context menu color will now match theme color.
+- Quit button doesn't hang the app anymore.
+
 ## [v1.2.0] - 24.10.2021
 
 ### Added

@@ -8,7 +8,7 @@ namespace TabletFriend.Actions
 	{
 		private readonly KeyCode[] _keys;
 
-		public KeyAction(KeyCode[] keys)
+		public KeyAction(params KeyCode[] keys)
 		{
 			_keys = keys;
 		}

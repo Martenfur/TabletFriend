@@ -1,21 +1,24 @@
-﻿# This is the general use layout that is good for most tasks.
+﻿# This is the layout that is used with ArtRage: https://www.artrage.com/
+# Made by captainflasmr: https://github.com/Martenfur/TabletFriend/issues/22
 
 layout_width: 4
 button_size: 14
 margin: 8
 
+app: artrage*
+
 buttons:
 	prev_desktop:
 		action: win+ctrl+left
 		size: 2,1
-		icon: chevron_triple_left
 		style: shy
+		icon: chevron_triple_left
 		text: previous desktop
 	next_desktop:
 		action: win+ctrl+right
 		size: 2,1
+		style: shy
 		icon: chevron_triple_right
-		style: shy 
 		text: next desktop
 
 	undo:
@@ -35,157 +38,140 @@ buttons:
 		spacer: true
 		visibility: docked
 		size: 4,1
-	
+		
 	copy:
 		action: ctrl+c
 		size: 2,2
-		style: outlined
+		style: shy
 		icon: content_copy
 		text: copy
 	paste:
 		action: ctrl+v
 		size: 2,2
-		style: outlined
+		style: shy
 		icon: content_paste
 		text: paste
+	flip:
+		action: toggle h
+		size: 2,2
+		style: shy
+		text: flip horizontal
+		icon: flip-horizontal
 	cut:
 		action: ctrl+x
 		size: 2,2
 		icon_stretch: none
-		style: outlined
+		style: shy
 		icon: content_cut
 		text: cut
-	select_all:
-		action: ctrl+a
-		size: 2,2
-		icon: card_text
-		text: select all
-		style: outlined
 
 	docked_spacer2:
 		spacer: true
 		visibility: docked
 		size: 4,1
 
-	enter:
-		action: enter
+	brush:
+		action: o
 		size: 2,2
-		style: outlined
-		icon: subdirectory_arrow_left
-	escape:
-		font_weight: 500
-		action: escape
+		text: brush
+		icon: brush
+
+	eraser:
+		action: e
 		size: 2,2
-		style: outlined
-		text: Esc
+		text: eraser
+		icon: eraser
+		
+	knife:
+		action: k
+		size: 2,2
+		text: palette knife
+		icon: knife
+
+	transform:
+		action: ctrl+shift+alt+t
+		size: 2,2
+		text: transform layer
+		icon: move-resize-variant		
+
+	select:
+		action: shift+s
+		size: 2,2
+		text: select
+		icon: selection
+
+	deselect:
+		action: ctrl+d
+		size: 2,2
+		text: deselect all
+		icon: selection-off
+		
+	eraser:
+		action: e
+		size: 2,2
+		text: eraser
+		icon: eraser
 
 	docked_spacer3:
 		spacer: true
 		visibility: docked
 		size: 4,1
 
-	shift:
-		action: toggle shift
-		size: 2,2
-		text: toggle shift
-		icon: apple_keyboard_shift
-	space:
-		action: toggle space
-		size: 2,2
-		text: toggle space
-		icon: keyboard_space
-	ctrl:
-		action: toggle ctrl
-		size: 2,2
-		text: toggle ctrl
-		icon: apple_keyboard_control
-	alt:
+	toggle_alt:
 		action: toggle alt
 		size: 2,2
 		text: toggle alt
 		icon: apple_keyboard_option
+	toggle_ctrl:
+		action: toggle ctrl
+		size: 2,2
+		text: toggle ctrl
+		icon: apple_keyboard_control
+	toggle_shift:
+		action: toggle shift
+		size: 2,2
+		text: toggle shift
+		icon: apple_keyboard_shift
+	toggle_space:
+		action: toggle space
+		size: 2,2
+		text: toggle space
+		icon: keyboard-space
 
 	docked_spacer4:
 		spacer: true
 		visibility: docked
 		size: 4,1
 
-	docked_spacer_arrows_1:
-		spacer: true
-		visibility: docked
-		size: 1,1
-	up:
-		action: repeat up
-		size: 2,1
-		icon: chevron_up
-		visibility: docked
-	left:
-		action: repeat left
+	shift:
+		actions:
+			- hold shift
+			- wait 1500
+			- release shift
 		size: 2,2
-		icon: chevron_left
-	right:
-		action: repeat right
+		text: resize brush
+		icon: circle-outline
+
+	alt:
+		actions:
+			- hold alt
+			- wait 1500
+			- release alt
 		size: 2,2
-		icon: chevron_right
-	docked_spacer_arrows_2:
-		spacer: true
-		visibility: docked
-		size: 1,1
-	down:
-		action: repeat down
-		size: 2,1
-		icon: chevron_down
-		visibility: docked
+		text: eyedropper
+		icon: eyedropper
 
-	docked_spacer5:
-		spacer: true
-		visibility: docked
-		size: 4,1
-
-	play_pause:
-		action: media_play_pause
-		size: 4,2
-		style: outlined
-		icon: play_pause
-		visibility: docked
-	prev_track:
-		action: media_previous_track
+	tab:
+		action: tab
 		size: 2,2
-		style: outlined
-		icon: skip_previous
-		visibility: docked
-	next_track:
-		action: media_next_track
+		text: warp
+		icon: aspect-ratio
+
+	warp:
+		action: ctrl+w
 		size: 2,2
-		style: outlined
-		icon: skip_next
-		visibility: docked
-
-	docked_spacer7:
-		spacer: true
-		visibility: docked
-		size: 4,1
-
-	language_toggle:
-		style: outlined
-		action: shift+alt
-		size: 2,2
-		text: toggle keyboard layout
-		icon: translate
-
-	explorer:
-		style: outlined
-		action: win+e
-		size: 2,2
-		text: new explorer window
-		icon: folder_open
-
-	reopen_browser_tab:
-		icon: tab
-		action: ctrl+shift+t
-		text: reopen closed browser tab
-		style: accent
-		size: 4,2
+		text: warp
+		icon: water-outline
 
 # Docking ===============================
 

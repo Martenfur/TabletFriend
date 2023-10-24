@@ -37,7 +37,7 @@ Grab the latest release from [this page](https://github.com/Martenfur/TabletFrie
 
 Let's be honest - the default toolbars will probably not be enough for you. But that's ok. It's you who knows best what you need, this is why Tablet Friend is a great toolbar constructor first and a great toolbar second.
 
-First, right-click the tray icon and press the 'open toolbar directory' button. 
+First, right-click the tray icon and press the 'open files directory' button. 
 
 ![menu](docs/pics/menu.png)
 
@@ -45,20 +45,20 @@ This will open a directory with a bunch of `.yaml` files. These are your toolbar
 
 Let's make a new toolbar - create a file named `my_toolbar.yaml` in the `toolbars` directory, open it and paste this inside:
 
- ```yaml
+```yaml
 buttons:
 	cut_button:
 		action: ctrl+x
 		text: cut
  ```
 
-Yes, it's that simple. Let's break down what we just wrote: `buttons` is a collection of buttons. This is where all your buttons will go. `cut_button` is the name of your button. **Note that all button names should be unique.** Its `action` is ctrl+x press. And it will display `text` that says "cut" on it. Now, right-click Tablet Friend toolbar and choose "my toolbar" from the list. You don't need to relaunch the program - it updates everything automatically. If you did everything correctly, you will see this:
+Yes, it's that simple. Let's break down what we just wrote: `buttons` is a collection of buttons. This is where all your buttons will go. `cut_button` is the name of your button. **Note that all button names should be unique.** Its `action` is a ctrl+x press. And it will display `text` that says "cut" on it. Now, right-click Tablet Friend toolbar and choose "my toolbar" from the list. You don't need to relaunch the program - it updates everything automatically. If you did everything correctly, you will see this:
 
 ![s1](docs/pics/s1.png)
 
-In just four lines, we got ourselves a working button! But obviously, this is not enough for a functional toolbar. Let's add some more:
+In just four lines, we got ourselves a working button! But obviously, this is not enough for a functional toolbar. Let's add some more and some cosmetics:
 
- ```yaml
+```yaml
 buttons:
 	cut_button:
 		action: ctrl+x
@@ -92,7 +92,7 @@ Because there is enough space now, all buttons can fit on the same line. You can
 
 However, what if you want to space out your buttons, or create a specific shape out of your buttons? For that, Tablet Friend has spacers. Change your config to look like this:
 
- ```yaml
+```yaml
 layout_width: 2
 buttons:
 	cut_button:
@@ -119,9 +119,71 @@ Press Ctrl+S and your toolbar will now have a line of space in-between the butto
 
 It is **VERY IMPORTANT** that you use tab characters `	`  instead of spaces for your indents. Indents do matter, since they tell the config what should go where. You *can* use spaces if you really want to, but keep in mind that all the default layouts use tabs, and tabs and spaces **should never mix** in one config. 
 
+### App-specific layouts
+
+Having a layout is great but what if you want to have one layout for your drawing app, another for note taking and a completely separate one for web browsing? You're in luck because since version 2.0, Tablet Friend has app-specific layout support!
+
+Simply add this line to the top of your layout config:
+```yaml 
+app: mspaint
+```
+And now, every time we open Microsoft Paint, the layout will automatically switch to this one. But how do we know what exact name an app has? 
+For this, you must focus on the app you want, right-click the Tablet Friend tray icon, select `settings` and look at the `focused app` label. It always tells the app you're focusing on. 
+![app_name](docs/pics/app_name.png)
+
+You can also use wildcards:
+```yaml
+app: app_name     # Will match only app_name exactly.
+app: app_name*    # Will match any app name that starts with app_name. For example, app_name_v_1.0
+app: "*app_name*" # Will match any app name that contains app_name. Note that if you're putting a * symbol in the beginning, you need to use quotes. 
+```
+
+If you switch to an app that doesn't have an app-spesific layout, it will switch to the last manually selected layout. 
+
+You can also disable automatic switching altogether by going into `settings` and pressing the `disable per-app layouts` button.
+
+**NOTE**: In order for transition between layouts to be smooth and quick, `layout_width`, `button_size` and `margin` should be exactly the same between layouts.
+
 This, of course, are not all the features Tablet Friend offers. You can check out a more [advanced example](TabletFriend/TabletFriend/files/layouts/sample_layout.yaml) with all features listed.
 
+## Migrating to 2.0
 
+Starting with the version 2.0.0, layout-specific themes are no longer supported. Instead, you can choose a theme in the context menu that will be applied to all toolbars. 
+
+![themes](docs/pics/themes.png)
+
+This means, the layout structure has changed a little bit. 
+
+- Layout properties `external_theme` and `theme` no longer work.
+- Theme properties `button_size`, `margin`, `min_opacity`, `max_opacity` have been moved directly to layout yaml. Themes can no longer influence these properties.
+
+An example of 1.0 to 2.0 migration for a layout:
+
+```yaml
+# old layout
+layout_width: 4
+external_theme: files/themes/default.yaml
+theme:
+	button_size: 14
+
+buttons:
+	hide:
+		action: a
+		text: "a"
+
+# new layout
+layout_width: 4
+button_size: 14
+margin: 8
+
+buttons:
+	hide:
+		action: a
+		text: "a"
+
+```
+
+Note that unmodified 1.0 layouts and themes will still function but may get rendered differently.
 
 ## Making Tablet Friend better
 

@@ -12,10 +12,10 @@ rounding: 16
 # - none
 default_style: accent
 
-primary_color: "#847979" # Notice that color values are in quotes, since # is a comment character.
-secondary_color: "#f7f0f5" # You can also use words like 'red' for colors.
-background_color: "#323031"
-	
+primary_color: "#eee" # Notice that color values are in quotes, since # is a comment character.
+secondary_color: "#777" # You can also use words like 'red' for colors.
+background_color: "#000"
+
 default_font: consolas
 default_font_size: 14
 # Defines the boldness of the font. Allowed values are 1 to 999.

@@ -3,11 +3,14 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using TabletFriend.Docking;
+using TabletFriend.TabletMode;
 using WpfAppBar;
 
 namespace TabletFriend
@@ -18,7 +21,10 @@ namespace TabletFriend
 	public partial class MainWindow : Window, INotifyPropertyChanged
 	{
 		private LayoutManager _layout;
+		private ThemeManager _theme;
 		private LayoutListManager _layoutList;
+		private ThemeListManager _themeList;
+		private AutomaticLayoutSwitcher _layoutSwitcher;
 		private TrayManager _tray;
 		private FileManager _file;
 
@@ -32,6 +38,8 @@ namespace TabletFriend
 
 		public MainWindow()
 		{
+			var focusMonitor = new AppFocusMonitor(); // Has to be at the very top or else it hangs on starup. Why? No idea. 
+
 			SystemEvents.DisplaySettingsChanged += OnSizeChanged;
 
 			Directory.SetCurrentDirectory(AppState.CurrentDirectory);
@@ -44,7 +52,8 @@ namespace TabletFriend
 
 			ToggleManager.Init();
 
-			_layout = new LayoutManager(this);
+			_theme = new ThemeManager();
+			_layout = new LayoutManager();
 			Settings.Load();
 
 			Installer.TryInstall();
@@ -53,14 +62,15 @@ namespace TabletFriend
 
 
 			_layoutList = new LayoutListManager();
+			_themeList = new ThemeListManager();
 			ContextMenu = new System.Windows.Controls.ContextMenu();
 
 			OnUpdateLayoutList();
 
 
-			_tray = new TrayManager(_layoutList);
+			_layoutSwitcher = new AutomaticLayoutSwitcher(focusMonitor);
+			_tray = new TrayManager(this, _layoutList, _themeList, focusMonitor);
 
-			
 
 			if (AppState.Settings.AddToAutostart)
 			{
@@ -71,10 +81,13 @@ namespace TabletFriend
 				AutostartManager.ResetAutostart();
 			}
 
-			EventBeacon.Subscribe("toggle_minimize", OnToggleMinimize);
-			EventBeacon.Subscribe("update_layout_list", OnUpdateLayoutList);
-			EventBeacon.Subscribe("change_layout", OnUpdateLayoutList);
-			EventBeacon.Subscribe("docking_changed", OnDockingChanged);
+			
+			EventBeacon.Subscribe(Events.ToggleMinimize, OnToggleMinimize);
+			EventBeacon.Subscribe(Events.Maximize, OnMaximize);
+			EventBeacon.Subscribe(Events.Minimize, OnMinimize);
+			EventBeacon.Subscribe(Events.UpdateLayoutList, OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.ChangeLayout, OnUpdateLayoutList);
+			EventBeacon.Subscribe(Events.DockingChanged, OnDockingChanged);
 		}
 
 
@@ -110,12 +123,15 @@ namespace TabletFriend
 
 		private void OnUpdateLayoutList(object[] obj = null)
 		{
+			// Secondary quick access context menu.
 			Application.Current.Dispatcher.Invoke(
 				() =>
 				{
 					ContextMenu.Items.Clear();
 					DockingMenuFactory.CreateDockingMenu(ContextMenu);
-					var items = _layoutList.CloneMenu();
+
+					ContextMenu.Items.Add(new Separator());
+					var items = _layoutList.GetClonedItems();
 					foreach (var item in items)
 					{
 						ContextMenu.Items.Add(item);
@@ -147,27 +163,30 @@ namespace TabletFriend
 			AppState.Settings.DockingMode = side;
 
 			UiFactory.CreateUi(AppState.CurrentLayout, this);
-
-			AppBarFunctions.SetAppBar(this, side);
+			
+			if (Visibility == Visibility.Visible)
+			{
+				AppBarFunctions.SetAppBar(this, side, _layout.LastLoadResult == LayoutLoadResult.RequiresRedock);
+			}
 
 			if (side != DockingMode.None)
 			{
-				MinOpacity = AppState.CurrentLayout.Theme.MaxOpacity;
-				MaxOpacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				MinOpacity = AppState.CurrentLayout.MaxOpacity;
+				MaxOpacity = AppState.CurrentLayout.MaxOpacity;
 				BeginAnimation(OpacityProperty, null);
-				Opacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				Opacity = AppState.CurrentLayout.MaxOpacity;
 			}
 			else
 			{
-				MinOpacity = AppState.CurrentLayout.Theme.MinOpacity;
-				MaxOpacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				MinOpacity = AppState.CurrentLayout.MinOpacity;
+				MaxOpacity = AppState.CurrentLayout.MaxOpacity;
 				BeginAnimation(OpacityProperty, null);
-				Opacity = AppState.CurrentLayout.Theme.MaxOpacity;
+				Opacity = AppState.CurrentLayout.MaxOpacity;
 				BeginAnimation(OpacityProperty, FadeOut);
 			}
 
 
-			EventBeacon.SendEvent("update_settings");
+			EventBeacon.SendEvent(Events.UpdateSettings);
 		}
 
 
@@ -183,25 +202,58 @@ namespace TabletFriend
 				GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE
 			);
 
-			EventBeacon.SendEvent("docking_changed", AppState.Settings.DockingMode);
+			EventBeacon.SendEvent(Events.DockingChanged, AppState.Settings.DockingMode);
 		}
 
+		private static bool _firstToggle = true;
 
 		private void OnToggleMinimize(object[] obj)
 		{
-			// Regular minimize doesn't work without the taaskbar icon.
+			// Regular minimize doesn't work without the taskbar icon.
 			// The window just derps out and stays at the bottom left corner.
-			// There are workarounds, btu they make an icon flash in the taskbar
+			// There are workarounds, but they make an icon flash in the taskbar
 			// for a split second. This is the best solution I found.
-			if (Visibility == Visibility.Collapsed)
+			if (Visibility == Visibility.Collapsed || Visibility == Visibility.Hidden)
 			{
 				Visibility = Visibility.Visible;
-				AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
+				if (!_firstToggle)
+				{				
+					AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
+				}
+				else
+				{
+					// On first launch the toolbar spergs out. This seems to fix it. Maybe. Mostly. :(
+					Thread.Sleep(500);
+					AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
+					Thread.Sleep(100);
+					AppBarFunctions.SetAppBar(this, DockingMode.None);
+					Thread.Sleep(100);
+					AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
+					_firstToggle = false;
+				}
 			}
 			else
 			{
 				AppBarFunctions.SetAppBar(this, DockingMode.None);
-				Visibility = Visibility.Collapsed;
+				Visibility = Visibility.Hidden;
+			}
+		}
+
+		private void OnMinimize(object[] obj)
+		{
+			if (Visibility == Visibility.Visible)
+			{
+				AppBarFunctions.SetAppBar(this, DockingMode.None);
+				Visibility = Visibility.Hidden;
+			}
+		}
+
+		private void OnMaximize(object[] obj)
+		{
+			if (Visibility == Visibility.Collapsed || Visibility == Visibility.Hidden)
+			{
+				Visibility = Visibility.Visible;
+				AppBarFunctions.SetAppBar(this, AppState.Settings.DockingMode);
 			}
 		}
 
@@ -214,13 +266,5 @@ namespace TabletFriend
 
 		[DllImport("user32.dll")]
 		public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-
-		protected override void OnClosing(CancelEventArgs e)
-		{
-			base.OnClosing(e);
-			EventBeacon.SendEvent("update_settings");
-			AppBarFunctions.SetAppBar(this, DockingMode.None);
-			Environment.Exit(0);
-		}
 	}
 }

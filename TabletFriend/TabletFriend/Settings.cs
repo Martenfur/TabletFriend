@@ -12,37 +12,50 @@ namespace TabletFriend
 		public bool AddToAutostart = true;
 		public double WindowX = 0;
 		public double WindowY = 0;
-		public string Layout = "files/layouts/default.yaml";
+		public string Layout = "default";
+		public string Theme = "default";
 		public DockingMode DockingMode = DockingMode.None;
 		
 		public bool FirstLaunch = true;
 
 		public bool UpdateCheckingEnabled = true;
-
-		private string FullLayoutPath => Path.Combine(AppState.CurrentDirectory, Layout);
+		public bool ToolbarAutohideEnabled = true;
+		public bool PerAppLayoutsEnabled = true;
 
 		public Settings()
 		{
-			EventBeacon.Subscribe("update_settings", OnUpdateSettings);
+			EventBeacon.Subscribe(Events.UpdateSettings, OnUpdateSettings);
 		}
 
 		public void Apply()
 		{
-			if (AppState.CurrentLayout == null || FullLayoutPath != AppState.CurrentLayoutPath)
+			if (AppState.CurrentTheme == null || Theme != AppState.CurrentThemeName)
 			{
-				EventBeacon.SendEvent("change_layout", FullLayoutPath);
+				EventBeacon.SendEvent(Events.ChangeTheme, Theme);
+			}
+			if (AppState.CurrentLayout == null || Layout != AppState.CurrentLayoutName)
+			{
+				EventBeacon.SendEvent(Events.ChangeLayout, Layout);
 			}
 			Application.Current.MainWindow.Left = WindowX;
 			Application.Current.MainWindow.Top = WindowY;
 			
-			EventBeacon.SendEvent("docking_changed", DockingMode);
+			EventBeacon.SendEvent(Events.DockingChanged, DockingMode);
 		}
 
 
 		private void OnUpdateSettings(object[] obj)
 		{
 			FirstLaunch = false;
-			Layout = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentLayoutPath);
+			if (AppState.LastManuallySetLayout == null)
+			{
+				Layout = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentLayoutName);
+			}
+			else
+			{
+				Layout = Path.GetRelativePath(AppState.CurrentDirectory, AppState.LastManuallySetLayout);
+			}
+			Theme = Path.GetRelativePath(AppState.CurrentDirectory, AppState.CurrentThemeName);
 			if (!double.IsNaN(Application.Current.MainWindow.Left))
 			{
 				WindowX = Application.Current.MainWindow.Left;
@@ -96,6 +109,11 @@ namespace TabletFriend
 			{
 				AppState.Settings = new Settings();
 			}
+
+			// Maintaining backwards compatibility.
+			AppState.Settings.Layout = Path.GetFileNameWithoutExtension(AppState.Settings.Layout);
+			AppState.Settings.Theme = Path.GetFileNameWithoutExtension(AppState.Settings.Theme);
+
 			AppState.Settings.Apply();
 		}
 	}

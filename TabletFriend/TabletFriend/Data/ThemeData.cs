@@ -3,11 +3,7 @@ namespace TabletFriend.Data
 {
 	public class ThemeData
 	{
-		public int? ButtonSize;
-		public int? Margin;
 		public string Rounding;
-		public string MinOpacity;
-		public string MaxOpacity;
 		public string DefaultStyle;
 
 		public string PrimaryColor;
@@ -22,12 +18,8 @@ namespace TabletFriend.Data
 		/// Merges another theme into the current theme.
 		/// </summary>
 		public void Merge(ThemeData data)
-		{ 
-			ButtonSize = ButtonSize ?? data.ButtonSize;
-			Margin = Margin ?? data.Margin;
+		{
 			Rounding = Rounding ?? data.Rounding;
-			MinOpacity = MinOpacity ?? data.MinOpacity;
-			MaxOpacity = MaxOpacity ?? data.MaxOpacity;
 			DefaultStyle = DefaultStyle ?? data.DefaultStyle;
 
 			PrimaryColor = PrimaryColor ?? data.PrimaryColor;

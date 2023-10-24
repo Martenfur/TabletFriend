@@ -21,9 +21,8 @@ namespace TabletFriend
 				return;
 			}
 			var result = MessageBox.Show(
-				"Welcome to Tablet Friend! It seems that you are running from a regular directory. "
-				+ "Would you like Tablet Friend to move itself to AppData?",
-				"Hi!",
+				"Welcome to Tablet Friend! See the https://github.com/Martenfur/TabletFriend#readme if you have any questions. Would you like to move Tablet Friend to AppData?",
+				"Hello",
 				MessageBoxButton.YesNo,
 				MessageBoxImage.Question
 			);
@@ -35,7 +34,10 @@ namespace TabletFriend
 					{
 						MessageBox.Show(
 							"Another version of Tablet Friend detected. 'files' directory will be overwritten. " +
-							"Previous version's layouts, themes and icons will be moved to 'files.backup'",
+							"Previous version's layouts, themes and icons will be moved to 'files.backup'. " +
+							Environment.NewLine +
+							"WARNING: If you are updating from 1.0 to 2.0, layout and theme structure has been changed. " +
+							"If you have your own layouts you will need to update them manually. See https://github.com/Martenfur/TabletFriend#readme for the instructions.",
 							"Update",
 							MessageBoxButton.OK
 						);
@@ -51,7 +53,6 @@ namespace TabletFriend
 					DirectoryCopy(AppState.CurrentDirectory, _preferredDirectory, "*.exe");
 					DirectoryCopy(AppState.CurrentDirectory, _preferredDirectory, "*.json");
 					Process.Start(Path.Combine(_preferredDirectory, "TabletFriend.exe"));
-					Application.Current.Shutdown();
 				}
 				catch (Exception e)
 				{
@@ -61,8 +62,9 @@ namespace TabletFriend
 						MessageBoxButton.OK,
 						MessageBoxImage.Error
 					);
-					Environment.Exit(0);
 				}
+				Process.GetCurrentProcess().Kill();
+				Environment.Exit(0);
 			}
 		}
 
