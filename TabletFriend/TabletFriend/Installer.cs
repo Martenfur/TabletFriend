@@ -36,7 +36,7 @@ namespace TabletFriend
 							"Another version of Tablet Friend detected. 'files' directory will be overwritten. " +
 							"Previous version's layouts, themes and icons will be moved to 'files.backup'. " +
 							Environment.NewLine +
-							"WARNING: If you are updating from 1.0 to 2.0, layout an theme structure has been changed. " +
+							"WARNING: If you are updating from 1.0 to 2.0, layout and theme structure has been changed. " +
 							"If you have your own layouts you will need to update them manually. See https://github.com/Martenfur/TabletFriend#readme for the instructions.",
 							"Update",
 							MessageBoxButton.OK
@@ -53,7 +53,6 @@ namespace TabletFriend
 					DirectoryCopy(AppState.CurrentDirectory, _preferredDirectory, "*.exe");
 					DirectoryCopy(AppState.CurrentDirectory, _preferredDirectory, "*.json");
 					Process.Start(Path.Combine(_preferredDirectory, "TabletFriend.exe"));
-					Process.GetCurrentProcess().Kill();
 				}
 				catch (Exception e)
 				{
@@ -63,8 +62,9 @@ namespace TabletFriend
 						MessageBoxButton.OK,
 						MessageBoxImage.Error
 					);
-					Process.GetCurrentProcess().Kill();
 				}
+				Process.GetCurrentProcess().Kill();
+				Environment.Exit(0);
 			}
 		}
 
